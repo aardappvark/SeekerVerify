@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +15,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -55,6 +60,35 @@ import com.seekerverify.app.ui.viewmodel.PredictorViewModel
 import java.text.NumberFormat
 import java.util.Locale
 
+// The 5 displayable tiers in order (excluding DEVELOPER)
+private val DISPLAY_TIERS = listOf(
+    AirdropTier.SCOUT,
+    AirdropTier.PROSPECTOR,
+    AirdropTier.VANGUARD,
+    AirdropTier.LUMINARY,
+    AirdropTier.SOVEREIGN
+)
+
+// Approximate activity score thresholds to reach each tier
+// Derived from PredictorEngine's percentile-to-tier mapping
+private val TIER_SCORE_THRESHOLDS = mapOf(
+    AirdropTier.SCOUT to 0,
+    AirdropTier.PROSPECTOR to 13,
+    AirdropTier.VANGUARD to 53,
+    AirdropTier.LUMINARY to 71,
+    AirdropTier.SOVEREIGN to 79
+)
+
+// Season 1 distribution ranges
+private val TIER_PERCENTILE_RANGES = mapOf(
+    AirdropTier.SCOUT to "Bottom 19.5% of wallets",
+    AirdropTier.PROSPECTOR to "64.2% of wallets",
+    AirdropTier.VANGUARD to "11.9% of wallets",
+    AirdropTier.LUMINARY to "4.0% of wallets",
+    AirdropTier.SOVEREIGN to "Top 0.4% of wallets"
+)
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PredictorScreen(
     walletAddress: String,
@@ -70,247 +104,228 @@ fun PredictorScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
-            .padding(16.dp)
+            .padding(vertical = 16.dp)
     ) {
         Text(
             text = "Season 2 Predictor",
             style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.padding(horizontal = 16.dp)
         )
         Text(
-            text = "Estimate your potential Season 2 airdrop tier",
+            text = "Swipe to explore all airdrop tiers",
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 16.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (result == null && !isLoading) {
-            // Not yet run — show prompt
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
-                ),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+        // --- Swipeable Tier Cards ---
+        val prediction = result
+        val predictedTier = prediction?.predictedTier
+        val initialPage = if (predictedTier != null) {
+            DISPLAY_TIERS.indexOf(predictedTier).coerceAtLeast(0)
+        } else {
+            1 // Default to Prospector (most common)
+        }
+
+        val pagerState = rememberPagerState(
+            initialPage = initialPage,
+            pageCount = { DISPLAY_TIERS.size }
+        )
+
+        HorizontalPager(
+            state = pagerState,
+            contentPadding = PaddingValues(horizontal = 40.dp),
+            pageSpacing = 12.dp,
+            modifier = Modifier.fillMaxWidth()
+        ) { page ->
+            val tier = DISPLAY_TIERS[page]
+            val isUserTier = tier == predictedTier
+            TierCard(
+                tier = tier,
+                isUserPrediction = isUserTier,
+                userScore = if (isUserTier) prediction?.compositeScore else null,
+                confidence = if (isUserTier) prediction?.confidence else null
+            )
+        }
+
+        // Page indicator dots
+        Spacer(modifier = Modifier.height(12.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            DISPLAY_TIERS.forEachIndexed { index, tier ->
+                val isSelected = pagerState.currentPage == index
+                val isUserTier = tier == predictedTier
+                Box(
+                    modifier = Modifier
+                        .padding(horizontal = 4.dp)
+                        .size(if (isSelected) 10.dp else 7.dp)
+                        .clip(CircleShape)
+                        .background(
+                            when {
+                                isSelected && isUserTier -> SolanaGreen
+                                isSelected -> SeekerBlue
+                                isUserTier -> SolanaGreen.copy(alpha = 0.5f)
+                                else -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
+                            }
+                        )
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // --- Run Prediction / Results Section ---
+        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+
+            if (prediction == null && !isLoading) {
+                Button(
+                    onClick = { viewModel.runPrediction(walletAddress, rpcUrl) },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.TrendingUp,
                         contentDescription = null,
-                        modifier = Modifier.size(48.dp),
-                        tint = SeekerBlue
+                        modifier = Modifier.size(18.dp)
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Analyze Your On-Chain Activity",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "We'll scan your transaction history, token holdings, staking activity, and more to predict your Season 2 airdrop tier.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Button(
-                        onClick = { viewModel.runPrediction(walletAddress, rpcUrl) },
-                        colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.TrendingUp,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Run Prediction", fontWeight = FontWeight.Bold)
-                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Run Prediction", fontWeight = FontWeight.Bold)
                 }
-            }
-        }
-
-        if (isLoading) {
-            Spacer(modifier = Modifier.height(32.dp))
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(color = SeekerBlue, modifier = Modifier.size(48.dp))
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Analyzing on-chain activity...",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Text(
-                    text = "This may take a moment",
+                    text = "Analyze your on-chain activity to see which tier matches your profile",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
-        }
 
-        result?.let { prediction ->
-            // Predicted Tier Card
-            val tierColor = getTierColor(prediction.predictedTier)
-
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = tierColor),
-                shape = RoundedCornerShape(16.dp)
-            ) {
+            if (isLoading) {
+                Spacer(modifier = Modifier.height(16.dp))
                 Column(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = "PREDICTED TIER",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = Color.White.copy(alpha = 0.7f)
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = prediction.predictedTier.displayName,
-                        style = MaterialTheme.typography.displaySmall.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        color = Color.White
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "${NumberFormat.getNumberInstance(Locale.US).format(prediction.predictedTier.skrDisplay.toLong())} SKR",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = Color.White.copy(alpha = 0.9f)
-                    )
+                    CircularProgressIndicator(color = SeekerBlue, modifier = Modifier.size(40.dp))
                     Spacer(modifier = Modifier.height(12.dp))
-
-                    // Confidence badge
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(Color.White.copy(alpha = 0.2f))
-                            .padding(horizontal = 12.dp, vertical = 4.dp)
-                    ) {
-                        Text(
-                            text = "${prediction.confidence} Confidence",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                    Text(
+                        text = "Analyzing on-chain activity...",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Score & Percentile Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
-                ),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(modifier = Modifier.padding(20.dp)) {
-                    Text(
-                        text = "Activity Score",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Bottom
-                    ) {
+            prediction?.let { pred ->
+                // Activity Score Card
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(modifier = Modifier.padding(20.dp)) {
                         Text(
-                            text = String.format("%.0f", prediction.compositeScore),
-                            style = MaterialTheme.typography.displayMedium.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            color = SeekerBlue
+                            text = "Your Activity Score",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
-                        Column(horizontalAlignment = Alignment.End) {
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Bottom
+                        ) {
                             Text(
-                                text = "Top ${String.format("%.1f", 100 - prediction.percentile)}%",
-                                style = MaterialTheme.typography.titleMedium.copy(
+                                text = String.format("%.0f", pred.compositeScore),
+                                style = MaterialTheme.typography.displayMedium.copy(
                                     fontWeight = FontWeight.Bold
                                 ),
-                                color = SolanaGreen
+                                color = SeekerBlue
                             )
-                            Text(
-                                text = "of all Seekers",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                            Column(horizontalAlignment = Alignment.End) {
+                                Text(
+                                    text = "Top ${String.format("%.1f", 100 - pred.percentile)}%",
+                                    style = MaterialTheme.typography.titleMedium.copy(
+                                        fontWeight = FontWeight.Bold
+                                    ),
+                                    color = SolanaGreen
+                                )
+                                Text(
+                                    text = "of all Seekers",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        val animatedProgress by animateFloatAsState(
+                            targetValue = (pred.compositeScore / 100.0).toFloat(),
+                            animationSpec = tween(durationMillis = 1200),
+                            label = "score"
+                        )
+
+                        LinearProgressIndicator(
+                            progress = { animatedProgress },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(8.dp)
+                                .clip(RoundedCornerShape(4.dp)),
+                            color = SeekerBlue,
+                            trackColor = SeekerBlue.copy(alpha = 0.15f)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Score Breakdown Card
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(modifier = Modifier.padding(20.dp)) {
+                        Text(
+                            text = "Score Breakdown",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        pred.breakdown.entries.sortedByDescending { it.value }.forEach { (metric, score) ->
+                            MetricRow(name = metric, score = score)
+                            Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    val animatedProgress by animateFloatAsState(
-                        targetValue = (prediction.compositeScore / 100.0).toFloat(),
-                        animationSpec = tween(durationMillis = 1200),
-                        label = "score"
-                    )
-
-                    LinearProgressIndicator(
-                        progress = { animatedProgress },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(4.dp)),
-                        color = SeekerBlue,
-                        trackColor = SeekerBlue.copy(alpha = 0.15f)
-                    )
                 }
-            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            // Score Breakdown Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
-                ),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(modifier = Modifier.padding(20.dp)) {
-                    Text(
-                        text = "Score Breakdown",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    prediction.breakdown.entries.sortedByDescending { it.value }.forEach { (metric, score) ->
-                        MetricRow(name = metric, score = score)
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
+                // Re-run button
+                Button(
+                    onClick = { viewModel.runPrediction(walletAddress, rpcUrl) },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Re-run Prediction")
                 }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Re-run button
-            Button(
-                onClick = { viewModel.runPrediction(walletAddress, rpcUrl) },
-                modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("Re-run Prediction")
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -332,25 +347,152 @@ fun PredictorScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "This prediction is based on observable on-chain activity and Season 1 tier distribution patterns. Actual Season 2 criteria may differ. Not financial advice.",
+                    text = "Predictions based on on-chain activity and Season 1 distribution. Actual Season 2 criteria may differ. Not financial advice.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-        }
 
-        error?.let {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = it,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+            error?.let {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
+        }
+    }
+}
+
+@Composable
+private fun TierCard(
+    tier: AirdropTier,
+    isUserPrediction: Boolean,
+    userScore: Double?,
+    confidence: String?
+) {
+    val tierColor = getTierColor(tier)
+    val skrAmount = NumberFormat.getNumberInstance(Locale.US).format(tier.skrDisplay.toLong())
+    val scoreThreshold = TIER_SCORE_THRESHOLDS[tier] ?: 0
+    val percentileRange = TIER_PERCENTILE_RANGES[tier] ?: ""
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(280.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isUserPrediction) tierColor else tierColor.copy(alpha = 0.6f)
+        ),
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            // Top badge
+            if (isUserPrediction) {
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.White.copy(alpha = 0.25f))
+                        .padding(horizontal = 12.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "YOUR PREDICTION",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            } else {
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color.White.copy(alpha = 0.15f))
+                        .padding(horizontal = 12.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "SEASON 1 TIER",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.White.copy(alpha = 0.7f),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+
+            // Center: Tier name and SKR
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = tier.displayName,
+                    style = MaterialTheme.typography.headlineLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = Color.White
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "$skrAmount SKR",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color.White.copy(alpha = 0.9f)
+                )
+            }
+
+            // Bottom: Stats
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = percentileRange,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.White.copy(alpha = 0.7f)
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+
+                if (isUserPrediction && userScore != null) {
+                    Row(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.White.copy(alpha = 0.2f))
+                            .padding(horizontal = 12.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Score: ${String.format("%.0f", userScore)}",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                        confidence?.let {
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "$it Confidence",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = Color.White.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.White.copy(alpha = 0.15f))
+                            .padding(horizontal = 12.dp, vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = "Score needed: ~$scoreThreshold+",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color.White.copy(alpha = 0.8f)
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
