@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.seekerverify.app.rpc.PriceClient
 import com.seekerverify.app.rpc.SkrRpcClient
+import com.seekerverify.app.rpc.SolRpcClient
 import com.seekerverify.app.rpc.StakingRpcClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +15,16 @@ import kotlinx.coroutines.launch
 
 class PortfolioViewModel(application: Application) : AndroidViewModel(application) {
 
+    // SOL Balance
+    private val _solBalance = MutableStateFlow(0.0)
+    val solBalance: StateFlow<Double> = _solBalance.asStateFlow()
+
+    private val _stakedSol = MutableStateFlow(0.0)
+    val stakedSol: StateFlow<Double> = _stakedSol.asStateFlow()
+
+    private val _stakeAccountCount = MutableStateFlow(0)
+    val stakeAccountCount: StateFlow<Int> = _stakeAccountCount.asStateFlow()
+
     // SKR Balance
     private val _skrBalance = MutableStateFlow(0.0)
     val skrBalance: StateFlow<Double> = _skrBalance.asStateFlow()
@@ -21,12 +32,12 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
     private val _skrRawBalance = MutableStateFlow(0L)
     val skrRawBalance: StateFlow<Long> = _skrRawBalance.asStateFlow()
 
-    // Staking
-    private val _stakedAmount = MutableStateFlow(0.0)
-    val stakedAmount: StateFlow<Double> = _stakedAmount.asStateFlow()
+    // SKR Staking
+    private val _stakedSkr = MutableStateFlow(0.0)
+    val stakedSkr: StateFlow<Double> = _stakedSkr.asStateFlow()
 
-    private val _stakingRewards = MutableStateFlow(0.0)
-    val stakingRewards: StateFlow<Double> = _stakingRewards.asStateFlow()
+    private val _cooldownSkr = MutableStateFlow(0.0)
+    val cooldownSkr: StateFlow<Double> = _cooldownSkr.asStateFlow()
 
     private val _isStaked = MutableStateFlow(false)
     val isStaked: StateFlow<Boolean> = _isStaked.asStateFlow()
@@ -59,7 +70,20 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
 
             Log.d(TAG, "Loading portfolio for ${walletAddress.take(8)}...")
 
-            // Fetch SKR balance, staking, and prices in parallel
+            // Fetch SOL, SKR balance, staking, and prices in parallel
+            val solJob = launch {
+                SolRpcClient.getSolBalance(walletAddress, rpcUrl).fold(
+                    onSuccess = { info ->
+                        _solBalance.value = info.solBalance
+                        _stakedSol.value = info.stakedSol
+                        _stakeAccountCount.value = info.stakeAccounts
+                    },
+                    onFailure = { e ->
+                        Log.e(TAG, "SOL balance fetch failed: ${e.message}")
+                    }
+                )
+            }
+
             val balanceJob = launch {
                 SkrRpcClient.getSkrBalance(walletAddress, rpcUrl).fold(
                     onSuccess = { result ->
@@ -67,7 +91,7 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
                         _skrRawBalance.value = result.rawAmount
                     },
                     onFailure = { e ->
-                        Log.e(TAG, "Balance fetch failed: ${e.message}")
+                        Log.e(TAG, "SKR balance fetch failed: ${e.message}")
                     }
                 )
             }
@@ -75,12 +99,12 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
             val stakingJob = launch {
                 StakingRpcClient.getStakingInfo(walletAddress, rpcUrl).fold(
                     onSuccess = { info ->
-                        _stakedAmount.value = info.stakedDisplay
-                        _stakingRewards.value = info.rewardsDisplay
+                        _stakedSkr.value = info.stakedDisplay
+                        _cooldownSkr.value = info.cooldownDisplay
                         _isStaked.value = info.isStaked
                     },
                     onFailure = { e ->
-                        Log.e(TAG, "Staking fetch failed: ${e.message}")
+                        Log.e(TAG, "SKR staking fetch failed: ${e.message}")
                     }
                 )
             }
@@ -96,19 +120,27 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
             }
 
             // Wait for all
+            solJob.join()
             balanceJob.join()
             stakingJob.join()
             priceJob.join()
 
             // Calculate total USD value
-            _skrPriceUsd.value?.let { price ->
-                val totalSkr = _skrBalance.value + _stakedAmount.value + _stakingRewards.value
-                _totalValueUsd.value = totalSkr * price
+            var totalUsd = 0.0
+            _solPriceUsd.value?.let { solPrice ->
+                totalUsd += (_solBalance.value + _stakedSol.value) * solPrice
+            }
+            _skrPriceUsd.value?.let { skrPrice ->
+                totalUsd += (_skrBalance.value + _stakedSkr.value + _cooldownSkr.value) * skrPrice
+            }
+            if (totalUsd > 0) {
+                _totalValueUsd.value = totalUsd
             }
 
             _isLoading.value = false
-            Log.d(TAG, "Portfolio loaded: ${_skrBalance.value} SKR liquid, " +
-                "${_stakedAmount.value} staked, $$${_totalValueUsd.value} total")
+            Log.d(TAG, "Portfolio loaded: ${_solBalance.value} SOL, ${_stakedSol.value} staked SOL, " +
+                "${_skrBalance.value} SKR liquid, ${_stakedSkr.value} SKR staked, " +
+                "$$${_totalValueUsd.value} total")
         }
     }
 

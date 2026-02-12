@@ -1,0 +1,169 @@
+publisher:
+  name: MidMightBit Games
+  website: https://aardappvark.github.io/SeekerVerify
+  email: midmightbit@proton.me
+  support_email: midmightbit@proton.me
+  media:
+    - purpose: icon
+      uri: assets/icon_512x512.png
+
+app:
+  name: Seeker Verify
+  address: ''
+  android_package: com.seekerverify.app
+  urls:
+    license_url: https://aardappvark.github.io/SeekerVerify/terms.html
+    copyright_url: https://aardappvark.github.io/SeekerVerify/copyright.html
+    privacy_policy_url: https://aardappvark.github.io/SeekerVerify/privacy.html
+    website: https://aardappvark.github.io/SeekerVerify
+  media:
+    - purpose: icon
+      uri: assets/icon_512x512.png
+
+release:
+  address: ''
+  media:
+    - purpose: icon
+      uri: assets/icon_512x512.png
+    - purpose: banner
+      uri: assets/banner_1200x600.png
+    - purpose: screenshot
+      uri: assets/screenshot_1_identity.png
+    - purpose: screenshot
+      uri: assets/screenshot_2_portfolio.png
+    - purpose: screenshot
+      uri: assets/screenshot_3_predictor.png
+    - purpose: screenshot
+      uri: assets/screenshot_4_community.png
+  files:
+    - purpose: install
+      uri: app/build/outputs/apk/release/app-release.apk
+  catalog:
+    en-US:
+      name: Seeker Verify
+      short_description: Seeker device companion app
+      long_description: >-
+        Seeker Verify is your Seeker device companion app. Verify your Seeker
+        Genesis Token, track your SKR portfolio, and predict your Season 2
+        airdrop tier. Exclusively for Seeker owners.
+
+        IDENTITY:
+        - Verify SGT ownership on-chain via Token-2022 binary parsing
+        - See your Seeker member number and .skr domain
+        - Shareable identity card with daily check-in streak
+        - Gradient-bordered card shows your verified Seeker status
+
+        PORTFOLIO:
+        - Real-time SOL balance and native staking info
+        - SKR liquid balance and staked SKR with 20.7% APY display
+        - Live USD pricing via CoinGecko and Jupiter
+        - Cooldown tracking for unstaking positions
+
+        SEASON 2 PREDICTOR:
+        - On-device analysis of your on-chain activity
+        - 9 weighted metrics: transactions, programs, tokens, staking,
+          domains, NFTs, wallet age, dApp usage, Season 1 tier
+        - Predicts your Season 2 airdrop tier with confidence level
+        - Score breakdown with animated progress bars
+
+        COMMUNITY:
+        - See total Seeker fleet size and your position
+        - Percentile ranking among all Seekers
+        - Adopter tier badges from OG Seeker to Fleet Member
+
+        PRIVACY FIRST:
+        Zero server cost. All computation on-device. All data from on-chain.
+        No analytics, no tracking, no cloud database. Wallet public key stored
+        locally with AES-256 encryption. We have no servers.
+
+        TECHNICAL:
+        - Custom Token-2022 TLV binary parser for SGT verification
+        - AllDomains ANS protocol for .skr domain resolution
+        - Reverse-engineered SKR staking program (shares model)
+        - Rate-limited RPC calls with intelligent caching
+        - Open source: github.com/aardappvark/SeekerVerify
+
+        Built by MidMightBit Games for the Solana Seeker community.
+      new_in_version: Initial release v1.0.0
+      saga_features: >-
+        Exclusively for Solana Seeker device owners. Requires a Seeker Genesis
+        Token (SGT) to access. Verifies SGT on-chain via Token-2022 extensions.
+        Displays Seeker member number, SKR portfolio, staking info, and
+        predicted Season 2 airdrop tier. Connects via Mobile Wallet Adapter.
+        No blockchain transactions - read-only companion app.
+    es:
+      name: Seeker Verify
+      short_description: App companera para Seeker
+      long_description: >-
+        Seeker Verify es tu app companera del dispositivo Seeker. Verifica tu
+        Seeker Genesis Token, rastrea tu portafolio SKR y predice tu nivel de
+        airdrop de Temporada 2. Exclusivo para propietarios de Seeker.
+
+        IDENTIDAD:
+        - Verificacion SGT en cadena via Token-2022
+        - Numero de miembro Seeker y dominio .skr
+        - Tarjeta de identidad compartible con racha diaria
+
+        PORTAFOLIO:
+        - Balance SOL en tiempo real y staking nativo
+        - Balance SKR liquido y stakeado con 20.7% APY
+        - Precios USD en vivo via CoinGecko y Jupiter
+
+        PREDICTOR TEMPORADA 2:
+        - Analisis en dispositivo de actividad on-chain
+        - 9 metricas ponderadas para predecir tu nivel de airdrop
+
+        PRIVACIDAD PRIMERO:
+        Sin servidor. Todo en dispositivo. Sin analitica ni rastreo.
+      new_in_version: Lanzamiento inicial v1.0.0
+      saga_features: >-
+        Exclusivo para propietarios de Solana Seeker. Requiere Seeker Genesis
+        Token (SGT). Verifica SGT en cadena. App de solo lectura.
+    pt-BR:
+      name: Seeker Verify
+      short_description: App companheiro para Seeker
+      long_description: >-
+        Seeker Verify e seu app companheiro do dispositivo Seeker. Verifique
+        seu Seeker Genesis Token, acompanhe seu portfolio SKR e preveja seu
+        nivel de airdrop da Temporada 2. Exclusivo para donos de Seeker.
+
+        IDENTIDADE:
+        - Verificacao SGT on-chain via Token-2022
+        - Numero de membro Seeker e dominio .skr
+        - Cartao de identidade compartilhavel
+
+        PORTFOLIO:
+        - Saldo SOL em tempo real e staking nativo
+        - Saldo SKR liquido e staked com 20.7% APY
+        - Precos USD em tempo real
+
+        PREDITOR TEMPORADA 2:
+        - Analise no dispositivo da atividade on-chain
+        - 9 metricas ponderadas para prever seu nivel de airdrop
+
+        PRIVACIDADE EM PRIMEIRO:
+        Sem servidor. Tudo no dispositivo. Sem analise ou rastreamento.
+      new_in_version: Lancamento inicial v1.0.0
+      saga_features: >-
+        Exclusivo para proprietarios de Solana Seeker. Requer Seeker Genesis
+        Token (SGT). Verificacao SGT on-chain. App somente leitura.
+  android_details:
+    locales:
+      - en-US
+      - es
+      - pt-BR
+
+solana_mobile_dapp_publisher_portal:
+  google_store_package: ''
+  testing_instructions: >-
+    1. Install on Solana Seeker device (requires SGT to access).
+    2. Launch app and tap Connect Wallet - approve in your wallet app.
+    3. App verifies SGT ownership on-chain. If verified, main app loads.
+    4. Identity tab: Shows Seeker member number, wallet, SGT mint, check-in.
+    5. Portfolio tab: Shows SOL balance, SKR liquid/staked, USD values.
+    6. Predictor tab: Tap Run Prediction to analyze on-chain activity.
+    7. Community tab: Fleet position, percentile, adopter tier badge.
+    8. Settings tab: RPC toggle (public/Helius), cache status, disconnect.
+    9. No real transactions. Read-only app. All data from on-chain.
+    10. Test disconnect: Settings > Disconnect Wallet > clears all cached data.
+    Note: Wallet must hold a Seeker Genesis Token (SGT) to pass the gate.

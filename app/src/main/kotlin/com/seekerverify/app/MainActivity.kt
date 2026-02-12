@@ -112,43 +112,61 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
             errorMessage = connectError
         )
     } else {
-        // SGT Gate: verify before showing main app
-        when (sgtCheckState) {
-            SgtCheckState.Idle -> {
-                // Check if we have cached SGT status
+        // SGT Gate: handle Idle state transition via LaunchedEffect
+        // (must not mutate state during composition)
+        if (sgtCheckState is SgtCheckState.Idle) {
+            LaunchedEffect(Unit) {
                 if (prefs.hasSgt() && !prefs.shouldRecheckSgt()) {
+                    Log.d(TAG, "SGT cached, skipping recheck")
                     sgtCheckState = SgtCheckState.Verified
                 } else {
+                    Log.d(TAG, "SGT needs check")
                     sgtCheckState = SgtCheckState.Checking
                 }
+            }
+            // Show checking screen while we decide
+            SgtCheckingScreen()
+        }
+
+        when (sgtCheckState) {
+            SgtCheckState.Idle -> {
+                // Handled above
             }
 
             SgtCheckState.Checking -> {
                 SgtCheckingScreen()
                 LaunchedEffect(walletAddress) {
                     Log.d(TAG, "SGT gate check for ${walletAddress.take(8)}...")
-                    val result = SgtChecker.getWalletSgtInfo(walletAddress, rpcUrl)
-                    result.fold(
-                        onSuccess = { info ->
-                            if (info.hasSgt) {
-                                Log.d(TAG, "SGT verified: Seeker #${info.memberNumber}")
-                                prefs.setSgtStatus(true, info.memberNumber, info.sgtMintAddress)
-                                sgtCheckState = SgtCheckState.Verified
-                            } else {
-                                Log.w(TAG, "No SGT found")
-                                sgtCheckState = SgtCheckState.NoSgt
+                    try {
+                        val result = SgtChecker.getWalletSgtInfo(walletAddress, rpcUrl)
+                        result.fold(
+                            onSuccess = { info ->
+                                if (info.hasSgt) {
+                                    Log.d(TAG, "SGT verified: Seeker #${info.memberNumber}")
+                                    prefs.setSgtStatus(true, info.memberNumber, info.sgtMintAddress)
+                                    sgtCheckState = SgtCheckState.Verified
+                                } else {
+                                    Log.w(TAG, "No SGT found")
+                                    sgtCheckState = SgtCheckState.NoSgt
+                                }
+                            },
+                            onFailure = { e ->
+                                Log.e(TAG, "SGT check failed: ${e.message}", e)
+                                if (prefs.hasSgt()) {
+                                    sgtCheckState = SgtCheckState.Verified
+                                } else {
+                                    sgtCheckState = SgtCheckState.Error(e.message ?: "Unknown error")
+                                }
                             }
-                        },
-                        onFailure = { e ->
-                            Log.e(TAG, "SGT check failed: ${e.message}", e)
-                            // Fall back to cached if available
-                            if (prefs.hasSgt()) {
-                                sgtCheckState = SgtCheckState.Verified
-                            } else {
-                                sgtCheckState = SgtCheckState.Error(e.message ?: "Unknown error")
-                            }
+                        )
+                    } catch (e: Exception) {
+                        Log.e(TAG, "SGT check exception: ${e.message}", e)
+                        if (prefs.hasSgt()) {
+                            sgtCheckState = SgtCheckState.Verified
+                        } else {
+                            sgtCheckState = SgtCheckState.Error(e.message ?: "Unknown error")
                         }
-                    )
+                    }
                 }
             }
 

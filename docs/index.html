@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seeker Verify - Solana Seeker Companion App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1040 50%, #0a0e1a 100%);
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .hero h1 span { color: #0066ff; }
+        .hero .tagline {
+            font-size: 1.2em;
+            color: #9aa0b0;
+            margin-bottom: 30px;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0, 102, 255, 0.15);
+            color: #0066ff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 4px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        @media (max-width: 600px) {
+            .features { grid-template-columns: 1fr; }
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .feature-card h3 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .feature-card .icon { font-size: 1.5em; margin-bottom: 12px; }
+        .feature-card p { color: #9aa0b0; font-size: 0.95em; }
+        .privacy-banner {
+            background: rgba(20, 241, 149, 0.08);
+            border: 1px solid rgba(20, 241, 149, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .privacy-banner h3 { color: #14F195; margin-bottom: 8px; }
+        .privacy-banner p { color: #9aa0b0; }
+        nav {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        nav a {
+            color: #0066ff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.95em;
+        }
+        nav a:hover { text-decoration: underline; }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Seeker <span>Verify</span></h1>
+        <p class="tagline">Your Seeker device companion app</p>
+        <div>
+            <span class="badge">SGT Verification</span>
+            <span class="badge">SKR Portfolio</span>
+            <span class="badge">Season 2 Predictor</span>
+            <span class="badge">Zero Server Cost</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="features">
+            <div class="feature-card">
+                <div class="icon">🛡️</div>
+                <h3>Identity Card</h3>
+                <p>Verify your Seeker Genesis Token on-chain. See your member number, .skr domain, and shareable identity card.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💰</div>
+                <h3>SKR Portfolio</h3>
+                <p>Track your SKR token balance, staking position, rewards, APY, and USD value in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📈</div>
+                <h3>Season 2 Predictor</h3>
+                <p>On-device analysis of your on-chain activity to predict your Season 2 airdrop tier.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👥</div>
+                <h3>Community</h3>
+                <p>See the Seeker fleet, your position, percentile rank, and adopter tier badge.</p>
+            </div>
+        </div>
+
+        <div class="privacy-banner">
+            <h3>Privacy First. Zero Server Cost.</h3>
+            <p>All computation on-device. All data from on-chain. No server, no analytics, no tracking. Your data never leaves your device. Free RPC tiers only.</p>
+        </div>
+    </div>
+
+    <nav>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="copyright.html">Copyright</a>
+        <a href="https://github.com/aardappvark/SeekerVerify">GitHub</a>
+    </nav>
+
+    <div class="footer">
+        <p>MidMightBit Games | Australia | Built for the Solana Seeker Community</p>
+    </div>
+</body>
+</html>

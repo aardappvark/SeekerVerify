@@ -1,8 +1,7 @@
 package com.seekerverify.app.rpc
 
 import android.util.Log
-import com.midmightbit.sgt.Base58
-import com.seekerverify.app.AppConfig
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonArray
@@ -13,54 +12,104 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 /**
- * Fetches SKR staking info by reading the user's stake account
+ * Fetches SKR staking info by reading the user's UserStake PDA account
  * from the SKR staking program.
  *
- * The staking PDA is derived from the user's wallet address + SKR staking program.
- * We use getProgramAccounts with a memcmp filter on the wallet address bytes.
+ * The SKR staking program uses a shares model (similar to liquid staking):
+ * - UserStake account stores active_shares (not direct token amount)
+ * - StakeConfig stores the global share_price
+ * - staked_SKR = active_shares * share_price / 1_000_000_000 / 1_000_000
+ *
+ * Account layouts (Anchor discriminator-prefixed):
+ *
+ * UserStake (169 bytes):
+ *   [0-7]   discriminator (6635a36b098a5799)
+ *   [8]     bump (u8)
+ *   [9-40]  config pubkey (32 bytes)
+ *   [41-72] authority / owner wallet (32 bytes)
+ *   [73-104] delegation pubkey (32 bytes)
+ *   [105-112] active_shares (u64 LE)
+ *   [113-120] reserved (u64)
+ *   [121-128] cooldown_shares (u64 LE)
+ *   [129-136] cooldown_timestamp (u64 LE)
+ *   [137-168] reserved (32 bytes)
+ *
+ * StakeConfig (193 bytes):
+ *   [0-7]   discriminator (ee972b030b973fb0)
+ *   [8]     bump
+ *   [9-40]  authority
+ *   [41-72] mint
+ *   [73-104] stake_vault
+ *   [105-112] min_stake_amount (u64)
+ *   [113-120] cooldown_seconds (u64)
+ *   [121-128] total_shares (u64)
+ *   [129-136] reserved (u64)
+ *   [137-144] share_price (u64 LE) <-- key field
+ *   [145-192] remaining fields
  */
 object StakingRpcClient {
 
     private const val TAG = "SeekerVerify"
 
+    // Known addresses for the SKR staking program
+    private const val SKR_STAKING_PROGRAM = "SKRskrmtL83pcL4YqLWt6iPefDqwXQWHSw9S9vz94BZ"
+    private const val STAKE_CONFIG = "4HQy82s9CHTv1GsYKnANHMiHfhcqesYkK6sB3RDSYyqw"
+
+    // Share price precision divisor (shares * share_price / PRECISION = raw token amount)
+    private const val SHARE_PRICE_PRECISION = 1_000_000_000L
+
+    // SKR has 6 decimals
+    private const val SKR_DECIMALS = 1_000_000.0
+
     data class StakingInfo(
         val stakedAmount: Long,         // raw lamports (6 decimals)
-        val stakedDisplay: Double,      // human-readable
-        val rewardsAccrued: Long,       // estimated rewards
-        val rewardsDisplay: Double,
+        val stakedDisplay: Double,      // human-readable SKR
+        val rewardsAccrued: Long,       // estimated rewards in raw
+        val rewardsDisplay: Double,     // estimated rewards in SKR
+        val cooldownAmount: Long,       // raw amount in cooldown
+        val cooldownDisplay: Double,    // human-readable cooldown SKR
         val stakeAccountAddress: String?,
-        val isStaked: Boolean
+        val isStaked: Boolean,
+        val activeShares: Long,
+        val sharePrice: Long
     )
 
     /**
      * Get staking info for a wallet.
-     * Uses getProgramAccounts with a memcmp filter on the user's pubkey.
      *
-     * Account layout (estimated from on-chain data):
-     * - Bytes 0-7: discriminator
-     * - Bytes 8-39: owner (wallet) pubkey
-     * - Bytes 40-47: staked_amount (u64 LE)
-     * - Bytes 48-55: rewards_accrued (u64 LE)
+     * Strategy:
+     * 1. Fetch the StakeConfig account to get the current share_price
+     * 2. Use getProgramAccounts with memcmp filter on wallet at offset 41
+     *    and dataSize 169 to find the UserStake account
+     * 3. Read active_shares and cooldown_shares from the UserStake data
+     * 4. Calculate staked SKR = shares * share_price / 1B / 1M
      */
     suspend fun getStakingInfo(
         walletAddress: String,
         rpcUrl: String
     ): Result<StakingInfo> {
         return try {
-            // Query program accounts filtering by owner wallet at offset 8
+            // Step 1: Fetch share price from StakeConfig
+            val sharePrice = fetchSharePrice(rpcUrl)
+            Log.d(TAG, "Share price: $sharePrice")
+
+            // Step 2: Find UserStake account via getProgramAccounts
             val params = buildJsonArray {
-                add(kotlinx.serialization.json.JsonPrimitive(AppConfig.Tokens.SKR_STAKING_PROGRAM))
+                add(JsonPrimitive(SKR_STAKING_PROGRAM))
                 add(buildJsonObject {
                     put("encoding", "base64")
                     put("filters", buildJsonArray {
+                        // Filter by data size (UserStake = 169 bytes)
+                        add(buildJsonObject {
+                            put("dataSize", 169)
+                        })
+                        // Filter by wallet address at offset 41
+                        // (8 discriminator + 1 bump + 32 config = 41)
                         add(buildJsonObject {
                             put("memcmp", buildJsonObject {
-                                put("offset", 8)
+                                put("offset", 41)
                                 put("bytes", walletAddress)
                             })
-                        })
-                        add(buildJsonObject {
-                            put("dataSize", 120)  // expected account size
                         })
                     })
                 })
@@ -72,9 +121,9 @@ object StakingRpcClient {
                 onSuccess = { response ->
                     val accounts = response.jsonArray
                     if (accounts.isEmpty()) {
-                        Log.d(TAG, "No staking account found")
+                        Log.d(TAG, "No UserStake account found for wallet")
                         return Result.success(
-                            StakingInfo(0L, 0.0, 0L, 0.0, null, false)
+                            StakingInfo(0L, 0.0, 0L, 0.0, 0L, 0.0, null, false, 0L, sharePrice)
                         )
                     }
 
@@ -86,28 +135,68 @@ object StakingRpcClient {
 
                     if (dataBase64 != null) {
                         val data = android.util.Base64.decode(dataBase64, android.util.Base64.DEFAULT)
+                        Log.d(TAG, "UserStake account data size: ${data.size}")
+
+                        if (data.size < 137) {
+                            Log.w(TAG, "UserStake data too small: ${data.size}")
+                            return Result.success(
+                                StakingInfo(0L, 0.0, 0L, 0.0, 0L, 0.0, stakeAccount, false, 0L, sharePrice)
+                            )
+                        }
+
                         val buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
 
-                        val stakedAmount = if (data.size >= 48) buf.getLong(40) else 0L
-                        val rewardsAccrued = if (data.size >= 56) buf.getLong(48) else 0L
+                        // Read active_shares at offset 105
+                        val activeShares = buf.getLong(105)
+                        // Read cooldown_shares at offset 121
+                        val cooldownShares = if (data.size >= 129) buf.getLong(121) else 0L
 
-                        Log.d(TAG, "Staking: ${stakedAmount / 1_000_000.0} SKR staked, " +
-                            "${rewardsAccrued / 1_000_000.0} rewards")
+                        Log.d(TAG, "Active shares: $activeShares, Cooldown shares: $cooldownShares")
+
+                        // Calculate staked amount: shares * share_price / 1B
+                        // This gives raw token amount (6 decimals)
+                        val stakedRaw = if (sharePrice > 0) {
+                            (activeShares.toBigInteger() * sharePrice.toBigInteger() /
+                                SHARE_PRICE_PRECISION.toBigInteger()).toLong()
+                        } else {
+                            0L
+                        }
+
+                        val cooldownRaw = if (sharePrice > 0) {
+                            (cooldownShares.toBigInteger() * sharePrice.toBigInteger() /
+                                SHARE_PRICE_PRECISION.toBigInteger()).toLong()
+                        } else {
+                            0L
+                        }
+
+                        // Estimate rewards: the difference between current value and principal
+                        // Since share price grows over time, rewards = current_value - original_stake
+                        // We can't know the original stake, so we report 0 rewards separately
+                        // (rewards are compounded into the share price)
+                        val rewardsRaw = 0L // Rewards are compounded into share price
+
+                        Log.d(TAG, "Staking: ${stakedRaw / SKR_DECIMALS} SKR staked " +
+                            "(${activeShares} shares @ price ${sharePrice}), " +
+                            "${cooldownRaw / SKR_DECIMALS} SKR in cooldown")
 
                         Result.success(
                             StakingInfo(
-                                stakedAmount = stakedAmount,
-                                stakedDisplay = stakedAmount / 1_000_000.0,
-                                rewardsAccrued = rewardsAccrued,
-                                rewardsDisplay = rewardsAccrued / 1_000_000.0,
+                                stakedAmount = stakedRaw,
+                                stakedDisplay = stakedRaw / SKR_DECIMALS,
+                                rewardsAccrued = rewardsRaw,
+                                rewardsDisplay = rewardsRaw / SKR_DECIMALS,
+                                cooldownAmount = cooldownRaw,
+                                cooldownDisplay = cooldownRaw / SKR_DECIMALS,
                                 stakeAccountAddress = stakeAccount,
-                                isStaked = stakedAmount > 0
+                                isStaked = activeShares > 0,
+                                activeShares = activeShares,
+                                sharePrice = sharePrice
                             )
                         )
                     } else {
-                        Log.w(TAG, "Staking account has no parseable data")
+                        Log.w(TAG, "UserStake account has no parseable data")
                         Result.success(
-                            StakingInfo(0L, 0.0, 0L, 0.0, stakeAccount, false)
+                            StakingInfo(0L, 0.0, 0L, 0.0, 0L, 0.0, stakeAccount, false, 0L, sharePrice)
                         )
                     }
                 },
@@ -123,8 +212,67 @@ object StakingRpcClient {
     }
 
     /**
-     * Estimate APY based on current inflation program data.
-     * For now we use a static value from on-chain research.
+     * Fetch the current share price from the StakeConfig account.
+     * share_price is at offset 137 in StakeConfig (193 bytes).
      */
-    fun estimateApy(): Double = 20.7 // ~20.7% from Solscan observation
+    private suspend fun fetchSharePrice(rpcUrl: String): Long {
+        return try {
+            val params = buildJsonArray {
+                add(JsonPrimitive(STAKE_CONFIG))
+                add(buildJsonObject {
+                    put("encoding", "base64")
+                })
+            }
+
+            val result = RpcProvider.call(rpcUrl, "getAccountInfo", params)
+
+            result.fold(
+                onSuccess = { response ->
+                    val value = response.jsonObject["value"]
+                    if (value == null || value.toString() == "null") {
+                        Log.w(TAG, "StakeConfig account not found, using fallback share price")
+                        return FALLBACK_SHARE_PRICE
+                    }
+
+                    val dataArray = value.jsonObject["data"]?.jsonArray
+                    val dataBase64 = dataArray?.firstOrNull()?.jsonPrimitive?.content
+
+                    if (dataBase64 != null) {
+                        val data = android.util.Base64.decode(dataBase64, android.util.Base64.DEFAULT)
+                        Log.d(TAG, "StakeConfig data size: ${data.size}")
+
+                        if (data.size >= 145) {
+                            val buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN)
+                            val price = buf.getLong(137)
+                            Log.d(TAG, "StakeConfig share_price: $price")
+                            price
+                        } else {
+                            Log.w(TAG, "StakeConfig data too small: ${data.size}")
+                            FALLBACK_SHARE_PRICE
+                        }
+                    } else {
+                        FALLBACK_SHARE_PRICE
+                    }
+                },
+                onFailure = {
+                    Log.e(TAG, "Failed to fetch StakeConfig: ${it.message}")
+                    FALLBACK_SHARE_PRICE
+                }
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "Share price fetch error: ${e.message}", e)
+            FALLBACK_SHARE_PRICE
+        }
+    }
+
+    /**
+     * Estimate APY based on current inflation program data.
+     * SKR inflation starts at 10% annually, decaying 25% per year to 2% terminal.
+     * After first year (~Feb 2027), effective staking APY is ~20.7% based on
+     * current staking participation rate.
+     */
+    fun estimateApy(): Double = 20.7
+
+    // Fallback share price if StakeConfig can't be read (~1.015 as of Feb 2026)
+    private const val FALLBACK_SHARE_PRICE = 1_015_000_000L
 }

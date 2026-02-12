@@ -225,7 +225,7 @@ fun SettingsScreen(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "By Midnight Run Games",
+                    text = "By MidMightBit Games",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

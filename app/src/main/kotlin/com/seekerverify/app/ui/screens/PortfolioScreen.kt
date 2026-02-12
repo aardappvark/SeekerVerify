@@ -17,9 +17,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
+import androidx.compose.material.icons.filled.CurrencyExchange
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Savings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,14 +35,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.seekerverify.app.ui.theme.SeekerBlue
 import com.seekerverify.app.ui.theme.SeekerGold
-import com.seekerverify.app.ui.theme.SeekerGreen
 import com.seekerverify.app.ui.theme.SolanaGreen
+import com.seekerverify.app.ui.theme.SolanaPurple
 import com.seekerverify.app.ui.viewmodel.PortfolioViewModel
 import java.text.NumberFormat
 import java.util.Locale
@@ -52,12 +54,15 @@ fun PortfolioScreen(
     rpcUrl: String,
     viewModel: PortfolioViewModel = viewModel()
 ) {
+    val solBalance by viewModel.solBalance.collectAsState()
+    val stakedSol by viewModel.stakedSol.collectAsState()
     val skrBalance by viewModel.skrBalance.collectAsState()
-    val stakedAmount by viewModel.stakedAmount.collectAsState()
-    val stakingRewards by viewModel.stakingRewards.collectAsState()
+    val stakedSkr by viewModel.stakedSkr.collectAsState()
+    val cooldownSkr by viewModel.cooldownSkr.collectAsState()
     val isStaked by viewModel.isStaked.collectAsState()
     val estimatedApy by viewModel.estimatedApy.collectAsState()
     val skrPriceUsd by viewModel.skrPriceUsd.collectAsState()
+    val solPriceUsd by viewModel.solPriceUsd.collectAsState()
     val totalValueUsd by viewModel.totalValueUsd.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val error by viewModel.error.collectAsState()
@@ -80,7 +85,7 @@ fun PortfolioScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "SKR Portfolio",
+                text = "Portfolio",
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -118,94 +123,80 @@ fun PortfolioScreen(
                         modifier = Modifier.size(32.dp)
                     )
                 } else {
-                    val totalSkr = skrBalance + stakedAmount + stakingRewards
-                    Text(
-                        text = formatSkrAmount(totalSkr) + " SKR",
-                        style = MaterialTheme.typography.headlineLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-
                     totalValueUsd?.let { usd ->
-                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = formatUsd(usd),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                            style = MaterialTheme.typography.headlineLarge.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    } ?: run {
+                        // No USD price available, show token totals
+                        Text(
+                            text = "Portfolio",
+                            style = MaterialTheme.typography.headlineLarge.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
-                }
-
-                skrPriceUsd?.let { price ->
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "SKR Price: ${formatUsdSmall(price)}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.6f)
-                    )
                 }
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Liquid Balance Card
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            ),
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(44.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(SeekerBlue.copy(alpha = 0.15f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.AccountBalance,
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                        tint = SeekerBlue
-                    )
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Liquid Balance",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = formatSkrAmount(skrBalance) + " SKR",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-                skrPriceUsd?.let { price ->
-                    Text(
-                        text = formatUsd(skrBalance * price),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
+        // --- SOL Section ---
+        Text(
+            text = "SOL",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
+        )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        // SOL Liquid Balance Card
+        BalanceCard(
+            icon = Icons.Filled.CurrencyExchange,
+            iconTint = SolanaPurple,
+            label = "SOL Balance",
+            amount = formatSolAmount(solBalance) + " SOL",
+            usdValue = solPriceUsd?.let { formatUsd(solBalance * it) }
+        )
 
-        // Staking Card
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Staked SOL Card
+        BalanceCard(
+            icon = Icons.Filled.Lock,
+            iconTint = SolanaPurple,
+            label = "Staked SOL",
+            amount = formatSolAmount(stakedSol) + " SOL",
+            usdValue = solPriceUsd?.let { formatUsd(stakedSol * it) }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // --- SKR Section ---
+        Text(
+            text = "SKR",
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
+        )
+
+        // SKR Liquid Balance Card
+        BalanceCard(
+            icon = Icons.Filled.AccountBalance,
+            iconTint = SeekerBlue,
+            label = "Liquid Balance",
+            amount = formatSkrAmount(skrBalance) + " SKR",
+            usdValue = skrPriceUsd?.let { formatUsd(skrBalance * it) }
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // SKR Staking Card
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -226,7 +217,7 @@ fun PortfolioScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = Icons.Filled.Lock,
+                            imageVector = Icons.Filled.Savings,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp),
                             tint = SeekerGold
@@ -235,12 +226,12 @@ fun PortfolioScreen(
                     Spacer(modifier = Modifier.width(16.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Staked",
+                            text = "Staked SKR",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = formatSkrAmount(stakedAmount) + " SKR",
+                            text = formatSkrAmount(stakedSkr) + " SKR",
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold
                             ),
@@ -264,37 +255,48 @@ fun PortfolioScreen(
                 }
 
                 if (isStaked) {
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    // Rewards row
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(SeekerGreen.copy(alpha = 0.08f))
-                            .padding(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Star,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp),
-                            tint = SeekerGreen
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
+                    skrPriceUsd?.let { price ->
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Rewards: ",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = formatSkrAmount(stakingRewards) + " SKR",
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            color = SeekerGreen
+                            text = formatUsd(stakedSkr * price),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(start = 60.dp)
                         )
                     }
+
+                    // Cooldown row (if any SKR in cooldown)
+                    if (cooldownSkr > 0) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(SeekerGold.copy(alpha = 0.08f))
+                                .padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Unstaking: ",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = formatSkrAmount(cooldownSkr) + " SKR",
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                color = SeekerGold
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Rewards compound automatically via share price appreciation.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 } else if (!isLoading) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
@@ -303,6 +305,21 @@ fun PortfolioScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
+            }
+        }
+
+        // Price info row
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            solPriceUsd?.let { price ->
+                PriceChip(label = "SOL", price = formatUsdSmall(price))
+            }
+            skrPriceUsd?.let { price ->
+                PriceChip(label = "SKR", price = formatUsdSmall(price))
             }
         }
 
@@ -322,10 +339,94 @@ fun PortfolioScreen(
     }
 }
 
+@Composable
+private fun BalanceCard(
+    icon: ImageVector,
+    iconTint: androidx.compose.ui.graphics.Color,
+    label: String,
+    amount: String,
+    usdValue: String?
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(iconTint.copy(alpha = 0.15f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    tint = iconTint
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = amount,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            usdValue?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun PriceChip(label: String, price: String) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        Text(
+            text = "$label: $price",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
 private fun formatSkrAmount(amount: Double): String {
     val nf = NumberFormat.getNumberInstance(Locale.US)
     nf.minimumFractionDigits = 0
     nf.maximumFractionDigits = if (amount < 1) 4 else 2
+    return nf.format(amount)
+}
+
+private fun formatSolAmount(amount: Double): String {
+    val nf = NumberFormat.getNumberInstance(Locale.US)
+    nf.minimumFractionDigits = 0
+    nf.maximumFractionDigits = if (amount < 0.01) 6 else if (amount < 1) 4 else 4
     return nf.format(amount)
 }
 
