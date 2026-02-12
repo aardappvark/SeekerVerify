@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -41,12 +40,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.seekerverify.app.model.AirdropTier
 import com.seekerverify.app.ui.theme.SeekerBlue
 import com.seekerverify.app.ui.theme.SeekerGold
-import com.seekerverify.app.ui.theme.SeekerGreen
 import com.seekerverify.app.ui.theme.SolanaGreen
 import com.seekerverify.app.ui.theme.SolanaPurple
 import com.seekerverify.app.ui.theme.TierLuminary
@@ -65,7 +62,6 @@ fun PredictorScreen(
     viewModel: PredictorViewModel = viewModel()
 ) {
     val result by viewModel.result.collectAsState()
-    val metrics by viewModel.metrics.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val error by viewModel.error.collectAsState()
 

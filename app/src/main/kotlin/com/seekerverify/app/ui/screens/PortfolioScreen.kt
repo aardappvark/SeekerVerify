@@ -38,13 +38,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.seekerverify.app.ui.theme.CardBackground
-import com.seekerverify.app.ui.theme.CardBorder
 import com.seekerverify.app.ui.theme.SeekerBlue
 import com.seekerverify.app.ui.theme.SeekerGold
 import com.seekerverify.app.ui.theme.SeekerGreen
 import com.seekerverify.app.ui.theme.SolanaGreen
-import com.seekerverify.app.ui.theme.SubtleText
 import com.seekerverify.app.ui.viewmodel.PortfolioViewModel
 import java.text.NumberFormat
 import java.util.Locale

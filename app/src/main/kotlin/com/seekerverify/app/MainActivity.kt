@@ -72,12 +72,12 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
     // SGT Gate state
     var sgtCheckState by remember { mutableStateOf<SgtCheckState>(SgtCheckState.Idle) }
 
-    // Determine RPC URL
+    // Determine RPC URL based on user preference
     val heliusApiKey = context.getString(R.string.helius_api_key)
-    val rpcUrl = if (heliusApiKey.isNotEmpty()) {
-        AppConfig.Rpc.heliusUrl(heliusApiKey)
-    } else {
-        SgtConstants.DEFAULT_RPC_URL
+    val rpcProvider = prefs.getRpcProvider()
+    val rpcUrl = when {
+        rpcProvider == "helius" && heliusApiKey.isNotEmpty() -> AppConfig.Rpc.heliusUrl(heliusApiKey)
+        else -> AppConfig.Rpc.PUBLIC_MAINNET
     }
 
     if (!isWalletConnected) {

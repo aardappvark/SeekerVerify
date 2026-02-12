@@ -31,7 +31,12 @@ object AppConfig {
 
     object Domains {
         const val ANS_PROGRAM_ID = "ALTNSZ46uaAUU7XUV6awvdorLGqAsPwa9shm7h4uP2FK"
+        const val TLD_HOUSE_PROGRAM_ID = "TLDHkysf5pCnKsVA4gXpNvmy7psXLPEu4LAdDJthT9S"
+        const val NAME_HOUSE_PROGRAM_ID = "NH3uX6FtVE2fNREAioP7hm5RaozotZxeL6khU1EHx51"
         const val SKR_TLD = ".skr"
+        const val SKR_TLD_NAME = "skr"
+        const val NAME_RECORD_HEADER_SIZE = 200 // bytes
+        const val HASH_PREFIX = "ALT Name Service"
     }
 
     object Cache {

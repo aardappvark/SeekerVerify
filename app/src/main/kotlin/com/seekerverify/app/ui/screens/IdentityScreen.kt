@@ -1,7 +1,6 @@
 package com.seekerverify.app.ui.screens
 
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -39,7 +37,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,22 +44,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.seekerverify.app.data.AppPreferences
 import com.seekerverify.app.model.CheckInStreak
-import com.seekerverify.app.ui.theme.CardBackground
-import com.seekerverify.app.ui.theme.CardBorder
 import com.seekerverify.app.ui.theme.SeekerBlue
-import com.seekerverify.app.ui.theme.SeekerDarkBlue
 import com.seekerverify.app.ui.theme.SeekerGold
-import com.seekerverify.app.ui.theme.SeekerGreen
 import com.seekerverify.app.ui.theme.SolanaGreen
-import com.seekerverify.app.ui.theme.SpaceBlack
 import com.seekerverify.app.ui.viewmodel.IdentityViewModel
-import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.Locale
@@ -75,10 +65,10 @@ fun IdentityScreen(
 ) {
     val context = LocalContext.current
     val prefs = remember { AppPreferences(context) }
-    val scope = rememberCoroutineScope()
 
     val memberNumber by viewModel.memberNumber.collectAsState()
     val sgtMintAddress by viewModel.sgtMintAddress.collectAsState()
+    val skrDomain by viewModel.skrDomain.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val error by viewModel.error.collectAsState()
 
@@ -151,6 +141,9 @@ fun IdentityScreen(
                             memberNumber?.let {
                                 append(" #${NumberFormat.getNumberInstance(Locale.US).format(it)}")
                             }
+                            skrDomain?.let {
+                                append(" ($it)")
+                            }
                             append(" \uD83D\uDE80\n")
                             append("Verified SGT holder on Solana Seeker\n")
                             append("#SeekerVerify #SolanaSeeker")
@@ -201,6 +194,31 @@ fun IdentityScreen(
                         ),
                         color = SeekerGold
                     )
+
+                    // .skr domain display
+                    skrDomain?.let { domain ->
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(SeekerBlue.copy(alpha = 0.12f))
+                                .padding(horizontal = 14.dp, vertical = 8.dp)
+                        ) {
+                            Text(
+                                text = "\uD83C\uDF10", // globe emoji
+                                fontSize = 16.sp
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = domain,
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                color = SeekerBlue
+                            )
+                        }
+                    }
 
                     Spacer(modifier = Modifier.height(20.dp))
 
