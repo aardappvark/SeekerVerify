@@ -1,11 +1,11 @@
 publisher:
   name: MidMightBit Games
   website: https://aardappvark.github.io/SeekerVerify
-  email: midmightbit@proton.me
-  support_email: midmightbit@proton.me
+  email: aardappvark@proton.me
+  support_email: aardappvark@proton.me
   media:
     - purpose: icon
-      uri: assets/icon_512x512.png
+      uri: assets/store/icon_512.png
 
 app:
   name: Seeker Verify
@@ -18,23 +18,23 @@ app:
     website: https://aardappvark.github.io/SeekerVerify
   media:
     - purpose: icon
-      uri: assets/icon_512x512.png
+      uri: assets/store/icon_512.png
 
 release:
   address: ''
   media:
     - purpose: icon
-      uri: assets/icon_512x512.png
+      uri: assets/store/icon_512.png
     - purpose: banner
-      uri: assets/banner_1200x600.png
+      uri: assets/store/banner_1200x600.png
     - purpose: screenshot
-      uri: assets/screenshot_1_identity.png
+      uri: assets/store/screenshots/01_identity.png
     - purpose: screenshot
-      uri: assets/screenshot_2_portfolio.png
+      uri: assets/store/screenshots/02_portfolio.png
     - purpose: screenshot
-      uri: assets/screenshot_3_predictor.png
+      uri: assets/store/screenshots/03_predictor.png
     - purpose: screenshot
-      uri: assets/screenshot_4_community.png
+      uri: assets/store/screenshots/04_community.png
   files:
     - purpose: install
       uri: app/build/outputs/apk/release/app-release.apk
@@ -152,6 +152,24 @@ release:
       - en-US
       - es
       - pt-BR
+      - zh-Hans
+      - zh-Hant
+      - ja
+      - ko
+      - fr
+      - de
+      - tr
+      - hi
+      - id
+      - vi
+      - th
+      - ru
+      - ar
+      - it
+      - nl
+      - pl
+      - uk
+      - ms
 
 solana_mobile_dapp_publisher_portal:
   google_store_package: ''

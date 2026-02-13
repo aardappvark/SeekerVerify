@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Processing Register - Seeker Verify</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #c8ccd8;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #0066ff; }
+        h1 { border-bottom: 2px solid #0066ff; padding-bottom: 10px; }
+        h2 { margin-top: 40px; }
+        h3 { color: #e0e0e0; margin-top: 25px; }
+        a { color: #0066ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        nav { margin-bottom: 30px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav a { margin-right: 20px; }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 6px; }
+        strong { color: #e0e0e0; }
+        .subtitle { font-size: 1.1em; margin-bottom: 30px; }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.9em; color: #555; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        th {
+            background: rgba(0, 102, 255, 0.15);
+            color: #0066ff;
+            text-align: left;
+            padding: 12px 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+        .info-box {
+            background: rgba(0, 102, 255, 0.08);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            table { font-size: 0.8em; }
+            td, th { padding: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="copyright.html">Copyright</a>
+            <a href="legitimate-interest-assessment.html">LIA</a>
+            <a href="data-processing-register.html">Processing Register</a>
+            <a href="risk-register.html">Risk Register</a>
+            <a href="incident-response-plan.html">Incident Response</a>
+        </nav>
+
+        <h1>Record of Processing Activities</h1>
+        <p class="subtitle"><strong>Seeker Verify</strong><br>
+        <strong>Version 1.0.0 | February 2026</strong><br>
+        GDPR Article 30 &mdash; Record of Processing Activities</p>
+
+        <h2>1. Controller Information</h2>
+        <div class="info-box">
+            <p><strong>Controller:</strong> MidMightBit Games</p>
+            <p><strong>Location:</strong> Australia</p>
+            <p><strong>Contact:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></p>
+            <p><strong>Data Protection Officer:</strong> Not required (small-scale processing, no special categories, no systematic monitoring)</p>
+            <p><strong>Representative in EU:</strong> Not appointed (processing is occasional, does not include large-scale special category data, and is unlikely to result in a risk to individuals)</p>
+        </div>
+
+        <h2>2. Processing Activities Register</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Processing Activity</th>
+                    <th>Data Category</th>
+                    <th>Legal Basis</th>
+                    <th>Data Subjects</th>
+                    <th>Recipients</th>
+                    <th>Retention</th>
+                    <th>Security Measures</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Wallet Connection</strong><br>User connects Solana wallet via Mobile Wallet Adapter to identify themselves on-chain</td>
+                    <td>Wallet public address (pseudonymous identifier)</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f)<br>See <a href="legitimate-interest-assessment.html">LIA</a></td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>None. Stored locally on device only.</td>
+                    <td>Until user disconnects wallet, clears app data, or uninstalls. Instant deletion on disconnect.</td>
+                    <td>AES-256 EncryptedSharedPreferences, Android Keystore-backed keys, no server storage</td>
+                </tr>
+                <tr>
+                    <td><strong>SGT Verification</strong><br>Query Solana blockchain to verify Seeker Genesis Token ownership and retrieve member number</td>
+                    <td>Wallet public address (sent to RPC), SGT member number (cached locally)</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f)</td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>Solana RPC endpoint (public or Helius) receives wallet address as part of on-chain query</td>
+                    <td>SGT data cached locally for 24 hours. Deleted on wallet disconnect.</td>
+                    <td>AES-256 encrypted local cache, HTTPS/TLS in transit, read-only RPC calls</td>
+                </tr>
+                <tr>
+                    <td><strong>Portfolio Display</strong><br>Fetch and display SKR balance, staking info, SOL balance, .skr domain from on-chain data</td>
+                    <td>Wallet public address (sent to RPC), on-chain balances (displayed, not persisted)</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f)</td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>Solana RPC endpoint receives wallet address as part of on-chain query</td>
+                    <td>Transient display only. Not persisted beyond current session. Re-fetched on each app open.</td>
+                    <td>HTTPS/TLS in transit, data held in memory only during display</td>
+                </tr>
+                <tr>
+                    <td><strong>Community Statistics</strong><br>Display fleet position, percentile rank, and adopter tier based on on-chain SGT data</td>
+                    <td>Wallet public address (sent to RPC), community position (derived on-device)</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f)</td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>Solana RPC endpoint receives query parameters</td>
+                    <td>Transient. Computed on-device per session. Not persisted.</td>
+                    <td>HTTPS/TLS in transit, on-device computation only</td>
+                </tr>
+                <tr>
+                    <td><strong>Predictor Analysis</strong><br>On-device analysis of on-chain activity to generate Season 2 airdrop tier prediction</td>
+                    <td>Wallet public address (sent to RPC), transaction history (processed on-device, not stored)</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f)</td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>Solana RPC endpoint receives wallet address for transaction history query</td>
+                    <td>Prediction result cached locally. Transaction data processed in memory only. Deleted on disconnect.</td>
+                    <td>HTTPS/TLS in transit, on-device computation only, AES-256 encrypted cache</td>
+                </tr>
+                <tr>
+                    <td><strong>Price Fetching</strong><br>Retrieve current USD prices for SOL and SKR tokens from third-party price APIs</td>
+                    <td>No personal data sent. Only token identifiers (SOL, SKR contract address) are included in API requests.</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f) (ancillary to portfolio display)</td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>CoinGecko API (SOL price), Jupiter Price API (SKR price). IP address exposed via standard HTTP.</td>
+                    <td>Price data cached briefly in memory. Not persisted to storage.</td>
+                    <td>HTTPS/TLS in transit, no personal data in request payload</td>
+                </tr>
+                <tr>
+                    <td><strong>Engagement Tracking</strong><br>Local daily check-in streak counter</td>
+                    <td>Streak count and last check-in date (no personal data)</td>
+                    <td>Legitimate interest &mdash; Art. 6(1)(f)</td>
+                    <td>App users (Seeker device owners)</td>
+                    <td>None. Stored locally on device only.</td>
+                    <td>Until user disconnects wallet, clears app data, or uninstalls.</td>
+                    <td>AES-256 EncryptedSharedPreferences, Android Keystore-backed keys</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Key Observations</h2>
+
+        <h3>3.1 No Server-Side Processing</h3>
+        <p>All processing activities occur locally on the user's device. MidMightBit Games does not operate any server infrastructure. There is no server-side database, no cloud storage, and no backend API. The App communicates directly with public blockchain infrastructure and third-party price APIs.</p>
+
+        <h3>3.2 No Data Processors</h3>
+        <p>As defined under GDPR Article 28, no data processors are engaged. Third-party RPC providers and price APIs receive only the minimum data necessary for their function (wallet address for RPC queries, token identifiers for price queries) and are independent controllers of any data they process (such as IP addresses in server logs).</p>
+
+        <h3>3.3 Cross-Border Transfers</h3>
+        <p>When making RPC calls, the user's wallet public address is transmitted to:</p>
+        <ul>
+            <li><strong>Solana public RPC:</strong> Decentralised infrastructure, various jurisdictions</li>
+            <li><strong>Helius RPC:</strong> United States</li>
+            <li><strong>CoinGecko API:</strong> Various jurisdictions (IP address only)</li>
+            <li><strong>Jupiter Price API:</strong> Various jurisdictions (IP address only)</li>
+        </ul>
+        <p>The wallet public address is already publicly available on the Solana blockchain. For EU/UK users, the transfer is necessary for the provision of the service at the user's request (GDPR Article 49(1)(b)).</p>
+
+        <h3>3.4 Data Protection Impact Assessment (DPIA)</h3>
+        <p>A formal DPIA is not required because:</p>
+        <ul>
+            <li>The processing does not involve systematic and extensive profiling with significant effects</li>
+            <li>No special category data is processed at large scale</li>
+            <li>No systematic monitoring of publicly accessible areas occurs</li>
+            <li>The processing is minimal, local, and under the user's direct control</li>
+        </ul>
+        <p>This determination is consistent with the Article 29 Working Party guidelines on DPIAs (WP248 rev.01) and the OAIC's guidance on privacy impact assessments under the Australian Privacy Act.</p>
+
+        <h2>4. Review Schedule</h2>
+        <ul>
+            <li><strong>Last updated:</strong> February 2026</li>
+            <li><strong>Next review:</strong> February 2027 or upon significant change to processing activities</li>
+            <li><strong>Reviewer:</strong> MidMightBit Games</li>
+            <li><strong>Contact:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></li>
+        </ul>
+
+        <div class="footer">
+            <p>MidMightBit Games | Australia</p>
+        </div>
+    </div>
+</body>
+</html>

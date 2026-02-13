@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Seeker cihaz yardımcınız</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Cüzdan Bağla</string>
+    <string name="connecting_to_wallet">Cüzdana bağlanılıyor\u2026</string>
+    <string name="requires_sgt">Seeker Genesis Token (SGT) gerektirir</string>
+    <string name="wallet_consent_notice">Bağlanarak, genel cüzdan adresiniz zincir üstü verileri görüntülemek için bu cihazda yerel olarak saklanacaktır. Özel anahtarlara erişilmez. Solana RPC uç noktaları dışında harici sunuculara veri gönderilmez.</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="terms_of_service">Kullanım Koşulları</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token doğrulanıyor\u2026</string>
+    <string name="no_sgt_found">Seeker Genesis Token Bulunamadı</string>
+    <string name="no_sgt_message">Bu uygulama yalnızca Seeker cihaz sahiplerine özeldir. Devam etmek için Seeker Genesis Token (SGT) içeren bir cüzdan bağlayın.</string>
+    <string name="disconnect_try_another">Bağlantıyı Kes &amp; Başka Cüzdan Dene</string>
+    <string name="verification_error">Doğrulama Hatası</string>
+    <string name="retry_verification">Doğrulamayı Tekrarla</string>
+    <string name="disconnect_wallet">Cüzdan Bağlantısını Kes</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker Kimliği</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Doğrulanmış Seeker</string>
+    <string name="verified_seeker_cd">Doğrulanmış Seeker</string>
+    <string name="share_identity">Kimliği Paylaş</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Doğrulanmış Seeker Sahibi</string>
+    <string name="daily_check_in">Günlük Check-in</string>
+    <string name="current_label">Mevcut</string>
+    <string name="longest_label">En Uzun</string>
+    <string name="total_label">Toplam</string>
+    <string name="checked_in_today">Bugün check-in yapıldı!</string>
+    <string name="check_in">Check-in Yap</string>
+    <string name="days_suffix">%1$s gün</string>
+    <string name="share_text_prefix">Ben Seeker</string>
+    <string name="share_text_verified">Solana Seeker üzerinde doğrulanmış SGT sahibi</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s gün</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portföy</string>
+    <string name="refresh">Yenile</string>
+    <string name="total_value">TOPLAM DEĞER</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL Bakiyesi</string>
+    <string name="staked_sol">Stake Edilen SOL</string>
+    <string name="liquid_balance">Likit Bakiye</string>
+    <string name="staked_skr">Stake Edilen SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Unstaking: </string>
+    <string name="rewards_compound">Ödüller, pay fiyatı artışı yoluyla otomatik olarak bileşik kazanç sağlar.</string>
+    <string name="no_stake_found">Aktif stake bulunamadı. Ödül kazanmak için SKR stake edin.</string>
+    <string name="financial_disclaimer">Fiyatlar üçüncü taraf API\'lerden alınmıştır ve güncel piyasa değerlerini yansıtmayabilir. APY değişkendir, güncel zincir üstü verilere dayanır ve garanti edilmez. Bu bir yatırım tavsiyesi değildir.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker Filosu</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">filodaki cihazlar</string>
+    <string name="your_fleet_position">Filo Konumunuz</string>
+    <string name="position_format">#%1$s / %2$s</string>
+    <string name="earlier_than_percent">Seekers\'ın %1$s%%\'inden önce</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Erken Öncü \uD83C\uDF1F</string>
+    <string name="early_adopter">Erken Benimseyen \uD83D\uDE80</string>
+    <string name="fleet_member">Filo Üyesi \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Aktif Stakerlar</string>
+    <string name="skr_staked_label">Stake Edilen SKR</string>
+    <string name="fleet_data_note">Filo verileri zincir üstü kayıtlardan tahmin edilmekte ve periyodik olarak güncellenmektedir.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Airdrop Kademeleri</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">Season 1 airdrop konumunuz ve aktiviteniz</string>
+    <string name="s2_subtitle">Tahmin edilen Season 2 kademelerini keşfetmek için kaydırın</string>
+    <string name="detect_my_s1_tier">Season 1 Kadememi Tespit Et</string>
+    <string name="detect_s1_subtitle">Season 1 airdrop kademenizi ve aktivitenizi bulmak için zincir üstü geçmişi tarayın</string>
+    <string name="scanning_on_chain">Zincir üstü aktivite taranıyor\u2026</string>
+    <string name="run_prediction">Tahmin Çalıştır</string>
+    <string name="run_prediction_subtitle">Profilinize hangi kademenin uyduğunu görmek için zincir üstü aktivitenizi analiz edin</string>
+    <string name="analyzing_on_chain">Zincir üstü aktivite analiz ediliyor\u2026</string>
+    <string name="re_analyze">Yeniden Analiz Et</string>
+    <string name="re_run_prediction">Tahmini Yeniden Çalıştır</string>
+    <string name="your_tier_badge">SEVİYENİZ</string>
+    <string name="season_1_badge">SEZON 1</string>
+    <string name="your_prediction_badge">TAHMİNİNİZ</string>
+    <string name="season_2_badge">SEZON 2</string>
+    <string name="per_wallet">cüzdan başına</string>
+    <string name="of_wallets"> cüzdanların</string>
+    <string name="s1_wallets_label">S1: Cüzdanların %1$s%%\'i</string>
+    <string name="score_label">Puan: %1$s</string>
+    <string name="score_needed">Gereken puan: ~%1$s+</string>
+    <string name="top_percent">İlk %1$s%%</string>
+    <string name="score_format">Puan: %1$s</string>
+    <string name="score_needed_format">Gereken puan: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: Cüzdanların %1$s%%\'i</string>
+    <string name="your_s1_position">Season 1 Konumunuz</string>
+    <string name="skr_claimed_format">%1$s SKR talep edildi</string>
+    <string name="top_percent_format">İlk %1$s%%</string>
+    <string name="of_all_seekers">tüm Seekers arasında</string>
+    <string name="activity_score">Aktivite Puanı</string>
+    <string name="your_on_chain_activity">Zincir Üstü Aktiviteniz</string>
+    <string name="s1_claim_not_found">Bu cüzdanda Season 1 talebi bulunamadı. Bu, farklı bir cüzdandan talep ettiyseniz veya talep henüz işlenmediyse olabilir.</string>
+    <string name="activity_highlights">Aktivite Öne Çıkanları</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$s. %%</string>
+    <string name="season_1_distribution">Season 1 Dağılımı</string>
+    <string name="eligible_wallets">~140.000 uygun cüzdan</string>
+    <string name="your_activity_score">Aktivite Puanınız</string>
+    <string name="score_breakdown">Puan Dökümü</string>
+    <string name="speculative_notice">Yalnızca spekülatif tahmin. Season 1 kalıplarına dayalıdır \u2014 gerçek Season 2 kriterleri farklılık gösterebilir. Yatırım tavsiyesi değildir.</string>
+    <string name="s1_disclaimer">Season 1 kademesi zincir üstü talep geçmişinden tespit edilmiştir. Aktivite analizi mevcut cüzdan verilerine dayanmaktadır. Bu yalnızca genel bilgidir ve yatırım tavsiyesi değildir.</string>
+    <string name="s2_disclaimer">Bu tahmin, Season 1 kalıplarına ve zincir üstü aktiviteye dayanan spekülatif bir tahmindir. Gerçek Season 2 kriterleri açıklanmamıştır ve önemli ölçüde farklılık gösterebilir. Bu bir yatırım tavsiyesi değildir. Bu tahminlere dayanarak finansal kararlar almayın.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Puanlama Modeli İçgörüleri</string>
+    <string name="s1_model_subtitle">Zincir üstü aktivitenizin bu uygulamanın puanlama modeline nasıl eşlendiği. Bu model spekülatiftir ve gerçek kriterleri yansıtmayabilir.</string>
+    <string name="s2_model_subtitle">Aktivitenizin bu uygulamanın puanlama modeline nasıl eşlendiği. Bu model spekülatiftir ve gerçek Season 2 kriterlerini yansıtmayabilir. Yatırım tavsiyesi değildir.</string>
+    <string name="tx_count_low">İşlem Sayısı: Düşük</string>
+    <string name="tx_count_low_desc">Bu metrik zincir üstü işlemleri (takas, transfer, etkileşim) ölçer. S1 puanlama modelinde 30%% ağırlığa sahiptir.</string>
+    <string name="nft_none">NFT Varlıkları: Tespit edilmedi</string>
+    <string name="nft_none_desc">Bu metrik cüzdandaki NFT sahipliğini kontrol eder. Puanlama modelinde 10%% ağırlığa sahiptir.</string>
+    <string name="token_diversity_low">Token Çeşitliliği: Düşük</string>
+    <string name="token_diversity_low_desc">Bu metrik sahip olunan benzersiz SPL token sayısını sayar. Puanlama modelinde 15%% ağırlığa sahiptir.</string>
+    <string name="dapp_low">dApp Etkileşimleri: Düşük</string>
+    <string name="dapp_low_desc">Bu metrik benzersiz program etkileşimlerini takip eder. Puanlama modelinde 25%% ağırlığa sahiptir.</string>
+    <string name="wallet_age_recent">Cüzdan Yaşı: Yeni</string>
+    <string name="wallet_age_recent_desc">Bu metrik cüzdan yaşını ölçer. Puanlama modelinde 20%% ağırlığa sahiptir. Cüzdan yaşı zamanla doğal olarak artar.</string>
+    <string name="strong_activity_profile">Güçlü Aktivite Profili</string>
+    <string name="strong_activity_s1_desc">Season 1 zincir üstü aktiviteniz tüm ölçülen metriklerde iyi puan almaktadır.</string>
+    <string name="strong_activity_s2_desc">Zincir üstü aktiviteniz bu modeldeki tüm ölçülen metriklerde iyi puan almaktadır.</string>
+    <string name="staking_score_format">SKR Staking Puanı: %1$s/100</string>
+    <string name="staking_score_desc">Bu metrik SKR\'nin stake edilip edilmediğini kontrol eder. Puanlama modelinde 20%% ağırlığa sahiptir.</string>
+    <string name="s1_tier_not_detected">Season 1 Kademesi: Tespit edilmedi</string>
+    <string name="s1_tier_not_detected_desc">Bu metrik S1 airdrop kademenizi kullanır. 15%% ağırlığa sahiptir. Kademenizi tespit etmek için Season 1 sekmesini kullanın.</string>
+    <string name="tx_score_format">İşlem Puanı: %1$s/100</string>
+    <string name="tx_score_desc">Bu metrik zincir üstü işlemleri sayar. Puanlama modelinde 15%% ağırlığa sahiptir.</string>
+    <string name="dapp_score_format">dApp Kullanım Puanı: %1$s/100</string>
+    <string name="dapp_score_desc">Bu metrik benzersiz program etkileşimlerini takip eder. Puanlama modelinde 10%% ağırlığa sahiptir.</string>
+    <string name="programs_score_format">Program Puanı: %1$s/100</string>
+    <string name="programs_score_desc">Bu metrik etkileşimde bulunulan farklı Solana programlarını sayar. 12%% ağırlığa sahiptir.</string>
+    <string name="wallet_age_score_format">Cüzdan Yaşı Puanı: %1$s/100</string>
+    <string name="wallet_age_score_desc">Bu metrik cüzdan yaşını ölçer. 10%% ağırlığa sahiptir. Zamanla doğal olarak artar.</string>
+    <string name="skr_domain_not_detected">.skr Alan Adı: Tespit edilmedi</string>
+    <string name="skr_domain_desc">Bu metrik .skr alan adı sahipliğini kontrol eder. Puanlama modelinde 5%% ağırlığa sahiptir.</string>
+    <string name="token_diversity_score_format">Token Çeşitliliği Puanı: %1$s/100</string>
+    <string name="token_diversity_score_desc">Bu metrik sahip olunan benzersiz SPL token sayısını sayar. Puanlama modelinde 8%% ağırlığa sahiptir.</string>
+    <string name="nft_score_format">NFT Puanı: %1$s/100</string>
+    <string name="nft_score_desc">Bu metrik NFT sahipliğini kontrol eder. Puanlama modelinde 5%% ağırlığa sahiptir.</string>
+
+    <!-- Settings -->
+    <string name="settings">Ayarlar</string>
+    <string name="wallet_section">Cüzdan</string>
+    <string name="connected_wallet">Bağlı Cüzdan</string>
+    <string name="seeker_number">Seeker Numarası</string>
+    <string name="network_section">Ağ</string>
+    <string name="use_helius_rpc">Helius RPC Kullan</string>
+    <string name="helius_enabled_desc">Daha yüksek istek limitleri</string>
+    <string name="helius_disabled_desc">Genel RPC (hız sınırlı)</string>
+    <string name="helius_detail_on">Helius ücretsiz katmanı kullanılıyor (1M kredi/ay). Daha hızlı ve daha güvenilir.</string>
+    <string name="helius_detail_off">Genel Solana RPC kullanılıyor. Ücretsiz ancak ~5 istek/saniye ile sınırlı.</string>
+    <string name="data_section">Veri</string>
+    <string name="sgt_cache">SGT Önbellek</string>
+    <string name="sgt_cache_valid">Geçerli</string>
+    <string name="sgt_cache_needs_refresh">Yenileme gerekli</string>
+    <string name="sgt_cache_note">SGT doğrulaması, RPC çağrılarını en aza indirmek için 24 saat önbelleğe alınır.</string>
+    <string name="anonymous_insights">Anonim İçgörüler</string>
+    <string name="anonymous_insights_desc">Doğruluğu artırmak için anonimleştirilmiş tahmin verilerini paylaşın (yakında)</string>
+    <string name="about_section">Hakkında</string>
+    <string name="version_label">Sürüm</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Seeker cihaz yardımcınız. SGT sahipliğini doğrulayın, SKR portföyünüzü takip edin ve zincir üstü aktivite analizini görüntüleyin.</string>
+    <string name="about_publisher">MidMightBit Games (Avustralya) tarafından</string>
+    <string name="about_architecture">Sıfır sunucu maliyeti. Tüm veriler cihazda + zincir üstünde.</string>
+    <string name="regulatory_disclaimer">Solana Foundation, Solana Mobile Inc. veya herhangi bir token ihraççısı ile bağlantılı değildir. Herhangi bir mali düzenleyici tarafından yetkilendirilmemiş veya düzenlenmemiştir. Mali tavsiye sağlamaz.</string>
+    <string name="delete_all_data">Tüm Verileri Sil</string>
+    <string name="delete_all_data_desc">Bu cihazdan tüm önbelleğe alınmış verileri, tercihleri ve seri geçmişini kalıcı olarak siler.</string>
+    <string name="delete_all_data_title">Tüm Veriler Silinsin mi?</string>
+    <string name="delete_all_data_confirm_text">Bu işlem tüm önbelleğe alınmış verileri, tercihleri, seri geçmişini kalıcı olarak silecek ve cüzdanınızın bağlantısını kesecektir. Bu işlem geri alınamaz.</string>
+    <string name="delete_everything">Her Şeyi Sil</string>
+    <string name="cancel">İptal</string>
+    <string name="disconnecting_clears_data">Bağlantıyı kesmek tüm önbelleğe alınmış verileri silecektir.</string>
+</resources>

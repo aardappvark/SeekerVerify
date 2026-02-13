@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Tu compañero para dispositivos Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Conectar billetera</string>
+    <string name="connecting_to_wallet">Conectando a la billetera…</string>
+    <string name="requires_sgt">Requiere un Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">Al conectar, tu dirección pública de billetera se almacenará localmente en este dispositivo para mostrar datos on-chain. No se accede a claves privadas. No se envían datos a servidores externos más allá de los endpoints Solana RPC.</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="terms_of_service">Términos de servicio</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Verificando Seeker Genesis Token…</string>
+    <string name="no_sgt_found">No se encontró Seeker Genesis Token</string>
+    <string name="no_sgt_message">Esta aplicación es exclusiva para propietarios de dispositivos Seeker. Conecta una billetera que tenga un Seeker Genesis Token (SGT) para continuar.</string>
+    <string name="disconnect_try_another">Desconectar e intentar con otra billetera</string>
+    <string name="verification_error">Error de verificación</string>
+    <string name="retry_verification">Reintentar verificación</string>
+    <string name="disconnect_wallet">Desconectar billetera</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Identidad Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker verificado</string>
+    <string name="verified_seeker_cd">Seeker verificado</string>
+    <string name="share_identity">Compartir identidad</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Propietario Seeker verificado</string>
+    <string name="daily_check_in">Registro diario</string>
+    <string name="current_label">Actual</string>
+    <string name="longest_label">Más larga</string>
+    <string name="total_label">Total</string>
+    <string name="checked_in_today">¡Registrado hoy!</string>
+    <string name="check_in">Registrarse</string>
+    <string name="days_suffix">%1$s días</string>
+    <string name="share_text_prefix">Soy Seeker</string>
+    <string name="share_text_verified">Titular verificado de SGT en Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s días</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portafolio</string>
+    <string name="refresh">Actualizar</string>
+    <string name="total_value">VALOR TOTAL</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Saldo SOL</string>
+    <string name="staked_sol">SOL en staking</string>
+    <string name="liquid_balance">Saldo líquido</string>
+    <string name="staked_skr">SKR en staking</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Retirando staking: </string>
+    <string name="rewards_compound">Las recompensas se reinvierten automáticamente mediante la apreciación del precio de la participación.</string>
+    <string name="no_stake_found">No se encontró staking activo. Haz staking de SKR para ganar recompensas.</string>
+    <string name="financial_disclaimer">Los precios provienen de APIs de terceros y pueden no reflejar los valores actuales del mercado. El APY es variable, basado en datos on-chain actuales, y no está garantizado. Esto no es asesoramiento financiero.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Flota Seeker</string>
+    <string name="total_seekers">TOTAL DE SEEKERS</string>
+    <string name="devices_in_fleet">dispositivos en la flota</string>
+    <string name="your_fleet_position">Tu posición en la flota</string>
+    <string name="position_format">#%1$s de %2$s</string>
+    <string name="earlier_than_percent">Más temprano que el %1$s%% de los Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Pionero temprano \uD83C\uDF1F</string>
+    <string name="early_adopter">Adoptante temprano \uD83D\uDE80</string>
+    <string name="fleet_member">Miembro de la flota \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Stakers activos</string>
+    <string name="skr_staked_label">SKR en staking</string>
+    <string name="fleet_data_note">Los datos de la flota se aproximan a partir de registros on-chain y se actualizan periódicamente.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Niveles de airdrop</string>
+    <string name="season_1">Temporada 1</string>
+    <string name="season_2">Temporada 2</string>
+    <string name="s1_subtitle">Tu posición y actividad del airdrop de la Temporada 1</string>
+    <string name="s2_subtitle">Desliza para explorar los niveles predichos de la Temporada 2</string>
+    <string name="detect_my_s1_tier">Detectar mi nivel de Temporada 1</string>
+    <string name="detect_s1_subtitle">Escanear historial on-chain para encontrar tu nivel y actividad del airdrop de la Temporada 1</string>
+    <string name="scanning_on_chain">Escaneando actividad on-chain…</string>
+    <string name="run_prediction">Ejecutar predicción</string>
+    <string name="run_prediction_subtitle">Analizar tu actividad on-chain para ver qué nivel coincide con tu perfil</string>
+    <string name="analyzing_on_chain">Analizando actividad on-chain…</string>
+    <string name="re_analyze">Reanalizar</string>
+    <string name="re_run_prediction">Ejecutar predicción de nuevo</string>
+    <string name="your_tier_badge">TU NIVEL</string>
+    <string name="season_1_badge">TEMPORADA 1</string>
+    <string name="your_prediction_badge">TU PREDICCIÓN</string>
+    <string name="season_2_badge">TEMPORADA 2</string>
+    <string name="per_wallet">por billetera</string>
+    <string name="of_wallets"> de billeteras</string>
+    <string name="s1_wallets_label">S1: %1$s%% de billeteras</string>
+    <string name="score_label">Puntuación: %1$s</string>
+    <string name="score_needed">Puntuación necesaria: ~%1$s+</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="score_format">Puntuación: %1$s</string>
+    <string name="score_needed_format">Puntuación necesaria: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% de billeteras</string>
+    <string name="your_s1_position">Tu posición en la Temporada 1</string>
+    <string name="skr_claimed_format">%1$s SKR reclamados</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="of_all_seekers">de todos los Seekers</string>
+    <string name="activity_score">Puntuación de actividad</string>
+    <string name="your_on_chain_activity">Tu actividad on-chain</string>
+    <string name="s1_claim_not_found">No se encontró reclamo de la Temporada 1 en esta billetera. Esto puede ocurrir si reclamaste en otra billetera o si el reclamo aún no se ha procesado.</string>
+    <string name="activity_highlights">Aspectos destacados de actividad</string>
+    <string name="season_1_vs_season_2">Temporada 1 vs Temporada 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">Distribución de la Temporada 1</string>
+    <string name="eligible_wallets">~140,000 billeteras elegibles</string>
+    <string name="your_activity_score">Tu puntuación de actividad</string>
+    <string name="score_breakdown">Desglose de puntuación</string>
+    <string name="speculative_notice">Solo una estimación especulativa. Basada en patrones de la Temporada 1 \u2014 los criterios reales de la Temporada 2 pueden diferir. No es asesoramiento financiero.</string>
+    <string name="s1_disclaimer">Nivel de la Temporada 1 detectado a partir del historial de reclamos on-chain. Análisis de actividad basado en datos actuales de la billetera. Esta es información general y no constituye asesoramiento financiero.</string>
+    <string name="s2_disclaimer">Esta predicción es una estimación especulativa basada en patrones de la Temporada 1 y actividad on-chain. Los criterios reales de la Temporada 2 no han sido anunciados y pueden diferir significativamente. Esto no es asesoramiento financiero. No tomes decisiones financieras basándote en estas predicciones.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Perspectivas del modelo de puntuación</string>
+    <string name="s1_model_subtitle">Cómo tu actividad on-chain se mapea al modelo de puntuación de esta aplicación. Este modelo es especulativo y puede no reflejar los criterios reales.</string>
+    <string name="s2_model_subtitle">Cómo tu actividad se mapea al modelo de puntuación de esta aplicación. Este modelo es especulativo y puede no reflejar los criterios reales de la Temporada 2. No es asesoramiento financiero.</string>
+    <string name="tx_count_low">Cantidad de transacciones: Baja</string>
+    <string name="tx_count_low_desc">Esta métrica mide las transacciones on-chain (intercambios, transferencias, interacciones). Tiene un peso del 30%% en el modelo de puntuación S1.</string>
+    <string name="nft_none">Holdings de NFT: No se detectaron</string>
+    <string name="nft_none_desc">Esta métrica verifica la propiedad de NFT en la billetera. Tiene un peso del 10%% en el modelo de puntuación.</string>
+    <string name="token_diversity_low">Diversidad de tokens: Baja</string>
+    <string name="token_diversity_low_desc">Esta métrica cuenta los tokens SPL únicos en posesión. Tiene un peso del 15%% en el modelo de puntuación.</string>
+    <string name="dapp_low">Interacciones con dApps: Bajas</string>
+    <string name="dapp_low_desc">Esta métrica rastrea las interacciones únicas con programas. Tiene un peso del 25%% en el modelo de puntuación.</string>
+    <string name="wallet_age_recent">Antigüedad de la billetera: Reciente</string>
+    <string name="wallet_age_recent_desc">Esta métrica mide la antigüedad de la billetera. Tiene un peso del 20%% en el modelo de puntuación. La antigüedad de la billetera aumenta naturalmente con el tiempo.</string>
+    <string name="strong_activity_profile">Perfil de actividad sólido</string>
+    <string name="strong_activity_s1_desc">Tu actividad on-chain de la Temporada 1 puntúa bien en todas las métricas medidas.</string>
+    <string name="strong_activity_s2_desc">Tu actividad on-chain puntúa bien en todas las métricas medidas en este modelo.</string>
+    <string name="staking_score_format">Puntuación de staking de SKR: %1$s/100</string>
+    <string name="staking_score_desc">Esta métrica verifica si SKR está en staking. Tiene un peso del 20%% en el modelo de puntuación.</string>
+    <string name="s1_tier_not_detected">Nivel de Temporada 1: No detectado</string>
+    <string name="s1_tier_not_detected_desc">Esta métrica utiliza tu nivel de airdrop S1. Tiene un peso del 15%%. Usa la pestaña Temporada 1 para detectar tu nivel.</string>
+    <string name="tx_score_format">Puntuación de transacciones: %1$s/100</string>
+    <string name="tx_score_desc">Esta métrica cuenta las transacciones on-chain. Tiene un peso del 15%% en el modelo de puntuación.</string>
+    <string name="dapp_score_format">Puntuación de uso de dApps: %1$s/100</string>
+    <string name="dapp_score_desc">Esta métrica rastrea las interacciones únicas con programas. Tiene un peso del 10%% en el modelo de puntuación.</string>
+    <string name="programs_score_format">Puntuación de programas: %1$s/100</string>
+    <string name="programs_score_desc">Esta métrica cuenta los programas distintos de Solana con los que se interactuó. Tiene un peso del 12%%.</string>
+    <string name="wallet_age_score_format">Puntuación de antigüedad de billetera: %1$s/100</string>
+    <string name="wallet_age_score_desc">Esta métrica mide la antigüedad de la billetera. Tiene un peso del 10%%. Aumenta naturalmente con el tiempo.</string>
+    <string name="skr_domain_not_detected">Dominio .skr: No detectado</string>
+    <string name="skr_domain_desc">Esta métrica verifica la propiedad de un dominio .skr. Tiene un peso del 5%% en el modelo de puntuación.</string>
+    <string name="token_diversity_score_format">Puntuación de diversidad de tokens: %1$s/100</string>
+    <string name="token_diversity_score_desc">Esta métrica cuenta los tokens SPL únicos en posesión. Tiene un peso del 8%% en el modelo de puntuación.</string>
+    <string name="nft_score_format">Puntuación de NFT: %1$s/100</string>
+    <string name="nft_score_desc">Esta métrica verifica la propiedad de NFT. Tiene un peso del 5%% en el modelo de puntuación.</string>
+
+    <!-- Settings -->
+    <string name="settings">Configuración</string>
+    <string name="wallet_section">Billetera</string>
+    <string name="connected_wallet">Billetera conectada</string>
+    <string name="seeker_number">Número de Seeker</string>
+    <string name="network_section">Red</string>
+    <string name="use_helius_rpc">Usar Helius RPC</string>
+    <string name="helius_enabled_desc">Límites de tasa más altos</string>
+    <string name="helius_disabled_desc">RPC público (con límite de tasa)</string>
+    <string name="helius_detail_on">Usando nivel gratuito de Helius (1M créditos/mes). Más rápido y confiable.</string>
+    <string name="helius_detail_off">Usando RPC público de Solana. Gratuito pero limitado a ~5 solicitudes/segundo.</string>
+    <string name="data_section">Datos</string>
+    <string name="sgt_cache">Caché de SGT</string>
+    <string name="sgt_cache_valid">Válido</string>
+    <string name="sgt_cache_needs_refresh">Necesita actualización</string>
+    <string name="sgt_cache_note">La verificación de SGT se almacena en caché durante 24 horas para minimizar las llamadas RPC.</string>
+    <string name="anonymous_insights">Estadísticas anónimas</string>
+    <string name="anonymous_insights_desc">Compartir datos de predicción anonimizados para mejorar la precisión (próximamente)</string>
+    <string name="about_section">Acerca de</string>
+    <string name="version_label">Versión</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Tu compañero para dispositivos Seeker. Verifica la propiedad de SGT, rastrea el portafolio de SKR y consulta el análisis de actividad on-chain.</string>
+    <string name="about_publisher">Por MidMightBit Games (Australia)</string>
+    <string name="about_architecture">Sin costo de servidor. Todos los datos en el dispositivo + on-chain.</string>
+    <string name="regulatory_disclaimer">No afiliado con Solana Foundation, Solana Mobile Inc. ni ningún emisor de tokens. No autorizado ni regulado por ningún regulador financiero. No proporciona asesoramiento financiero.</string>
+    <string name="delete_all_data">Eliminar todos los datos</string>
+    <string name="delete_all_data_desc">Borra permanentemente todos los datos en caché, preferencias e historial de rachas de este dispositivo.</string>
+    <string name="delete_all_data_title">¿Eliminar todos los datos?</string>
+    <string name="delete_all_data_confirm_text">Esto borrará permanentemente todos los datos en caché, preferencias, historial de rachas y desconectará tu billetera. Esta acción no se puede deshacer.</string>
+    <string name="delete_everything">Eliminar todo</string>
+    <string name="cancel">Cancelar</string>
+    <string name="disconnecting_clears_data">Desconectar borrará todos los datos en caché.</string>
+</resources>

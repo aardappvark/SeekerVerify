@@ -44,16 +44,36 @@ object PredictorEngine {
         val breakdown: Map<String, Double>  // score per metric
     )
 
+    /**
+     * Projected prediction result — wraps current + projected predictions
+     * with pace tracking relative to season progress.
+     */
+    data class ProjectedPredictorResult(
+        val current: PredictorResult,
+        val projected: PredictorResult,
+        val paceStatus: PaceStatus,
+        val targetTierProgress: Double    // 0-100% progress toward projected tier threshold
+    )
+
+    enum class PaceStatus {
+        AHEAD,      // current score > expected at this point
+        ON_TRACK,   // current score within 10% of expected
+        BEHIND,     // current score < expected
+        TOO_EARLY   // < 10% of season complete
+    }
+
     // Metric weights (sum to 1.0)
+    // .skr domain reduced from 5% to 2% — all Seeker Genesis NFTs include one,
+    // so it's not a differentiator. Redistributed to TX, staking, dApp.
     private object Weights {
-        const val TRANSACTIONS = 0.15
+        const val TRANSACTIONS = 0.16
         const val PROGRAMS = 0.12
         const val TOKEN_DIVERSITY = 0.08
-        const val STAKING = 0.20
-        const val DOMAIN = 0.05
+        const val STAKING = 0.21
+        const val DOMAIN = 0.02
         const val NFTS = 0.05
         const val WALLET_AGE = 0.10
-        const val DAPP_INTERACTIONS = 0.10
+        const val DAPP_INTERACTIONS = 0.11
         const val SEASON1 = 0.15
     }
 
@@ -134,11 +154,11 @@ object PredictorEngine {
         // Map percentile to predicted tier
         val predictedTier = percentileToTier(percentile)
 
-        // Confidence level
+        // Data profile strength (how much on-chain data was available for scoring)
         val confidence = when {
-            metrics.season1Tier != null && metrics.totalTransactions > 100 -> "High"
-            metrics.totalTransactions > 50 || metrics.skrStaked -> "Medium"
-            else -> "Low"
+            metrics.season1Tier != null && metrics.totalTransactions > 100 -> "Strong Data"
+            metrics.totalTransactions > 50 || metrics.skrStaked -> "Moderate Data"
+            else -> "Limited Data"
         }
 
         Log.d(TAG, "Prediction: score=${"%.1f".format(composite)}, " +
@@ -205,5 +225,61 @@ object PredictorEngine {
             percentile >= 19.5 -> AirdropTier.PROSPECTOR
             else -> AirdropTier.SCOUT
         }
+    }
+
+    // Score thresholds per tier (used for pace tracking)
+    val TIER_SCORE_THRESHOLDS = mapOf(
+        AirdropTier.SCOUT to 0.0,
+        AirdropTier.PROSPECTOR to 13.0,
+        AirdropTier.VANGUARD to 53.0,
+        AirdropTier.LUMINARY to 71.0,
+        AirdropTier.SOVEREIGN to 79.0
+    )
+
+    /**
+     * Run prediction on both current and projected metrics.
+     * Computes pace status based on where the user's current score
+     * sits relative to their projected tier threshold, adjusted for
+     * season progress.
+     */
+    fun predictWithProjection(
+        currentMetrics: ActivityMetrics,
+        projectedMetrics: ActivityMetrics,
+        seasonFractionComplete: Double,
+        isSeasonReliable: Boolean
+    ): ProjectedPredictorResult {
+        val currentResult = predict(currentMetrics)
+        val projectedResult = predict(projectedMetrics)
+
+        // Pace: compare current score against expected score at this point
+        // "Expected" = projected tier threshold * fractionComplete
+        val projectedTierThreshold = TIER_SCORE_THRESHOLDS[projectedResult.predictedTier] ?: 0.0
+        val expectedAtThisPoint = projectedTierThreshold * seasonFractionComplete
+
+        val paceStatus = when {
+            !isSeasonReliable -> PaceStatus.TOO_EARLY
+            expectedAtThisPoint <= 0 -> PaceStatus.AHEAD
+            currentResult.compositeScore >= expectedAtThisPoint * 1.1 -> PaceStatus.AHEAD
+            currentResult.compositeScore >= expectedAtThisPoint * 0.9 -> PaceStatus.ON_TRACK
+            else -> PaceStatus.BEHIND
+        }
+
+        // How far the current score is toward the projected tier threshold
+        val targetProgress = if (projectedTierThreshold > 0) {
+            ((currentResult.compositeScore / projectedTierThreshold) * 100.0).coerceIn(0.0, 100.0)
+        } else {
+            100.0
+        }
+
+        Log.d(TAG, "Projected prediction: current=${"%.1f".format(currentResult.compositeScore)}, " +
+            "projected=${"%.1f".format(projectedResult.compositeScore)}, " +
+            "pace=$paceStatus, progress=${"%.0f".format(targetProgress)}%")
+
+        return ProjectedPredictorResult(
+            current = currentResult,
+            projected = projectedResult,
+            paceStatus = paceStatus,
+            targetTierProgress = targetProgress
+        )
     }
 }

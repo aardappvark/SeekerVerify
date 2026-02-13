@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Seeker デバイスのお供に</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">ウォレットを接続</string>
+    <string name="connecting_to_wallet">ウォレットに接続中…</string>
+    <string name="requires_sgt">Seeker Genesis Token (SGT) が必要です</string>
+    <string name="wallet_consent_notice">接続すると、オンチェーンデータを表示するために、お客様の公開ウォレットアドレスがこのデバイスにローカル保存されます。秘密鍵にはアクセスしません。Solana RPC エンドポイント以外の外部サーバーにデータが送信されることはありません。</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="terms_of_service">利用規約</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token を検証中…</string>
+    <string name="no_sgt_found">Seeker Genesis Token が見つかりません</string>
+    <string name="no_sgt_message">このアプリは Seeker デバイスの所有者専用です。続行するには、Seeker Genesis Token (SGT) を保有するウォレットを接続してください。</string>
+    <string name="disconnect_try_another">切断して別のウォレットを試す</string>
+    <string name="verification_error">検証エラー</string>
+    <string name="retry_verification">検証を再試行</string>
+    <string name="disconnect_wallet">ウォレットを切断</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker ID</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">認証済みSeeker</string>
+    <string name="verified_seeker_cd">認証済み Seeker</string>
+    <string name="share_identity">ID を共有</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">認証済み Seeker オーナー</string>
+    <string name="daily_check_in">デイリーチェックイン</string>
+    <string name="current_label">現在</string>
+    <string name="longest_label">最長</string>
+    <string name="total_label">合計</string>
+    <string name="checked_in_today">本日チェックイン済み！</string>
+    <string name="check_in">チェックイン</string>
+    <string name="days_suffix">%1$s日</string>
+    <string name="share_text_prefix">私は Seeker</string>
+    <string name="share_text_verified">Solana Seeker の認証済み SGT ホルダー</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s 日</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">ポートフォリオ</string>
+    <string name="refresh">更新</string>
+    <string name="total_value">合計価値</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL 残高</string>
+    <string name="staked_sol">ステーキング中の SOL</string>
+    <string name="liquid_balance">流動残高</string>
+    <string name="staked_skr">ステーキング中の SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">ステーキング解除中：</string>
+    <string name="rewards_compound">報酬はシェア価格の上昇を通じて自動的に複利運用されます。</string>
+    <string name="no_stake_found">アクティブなステーキングが見つかりません。SKR をステーキングして報酬を獲得しましょう。</string>
+    <string name="financial_disclaimer">価格はサードパーティ API から取得されており、現在の市場価値を反映していない場合があります。APY は変動制で、現在のオンチェーンデータに基づいており、保証されるものではありません。これは投資助言ではありません。</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker フリート</string>
+    <string name="total_seekers">SEEKERS 合計</string>
+    <string name="devices_in_fleet">フリート内のデバイス</string>
+    <string name="your_fleet_position">あなたのフリート順位</string>
+    <string name="position_format">#%1$s / %2$s</string>
+    <string name="earlier_than_percent">Seekers の %1$s%% より早い</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">アーリーパイオニア \uD83C\uDF1F</string>
+    <string name="early_adopter">アーリーアダプター \uD83D\uDE80</string>
+    <string name="fleet_member">フリートメンバー \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">アクティブステーカー</string>
+    <string name="skr_staked_label">ステーキング中の SKR</string>
+    <string name="fleet_data_note">フリートデータはオンチェーン記録から推定され、定期的に更新されます。</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">エアドロップティア</string>
+    <string name="season_1">シーズン 1</string>
+    <string name="season_2">シーズン 2</string>
+    <string name="s1_subtitle">シーズン 1 のエアドロップ順位とアクティビティ</string>
+    <string name="s2_subtitle">スワイプしてシーズン 2 の予測ティアを確認</string>
+    <string name="detect_my_s1_tier">シーズン 1 のティアを検出</string>
+    <string name="detect_s1_subtitle">オンチェーン履歴をスキャンしてシーズン 1 のエアドロップティアとアクティビティを検出</string>
+    <string name="scanning_on_chain">オンチェーンアクティビティをスキャン中…</string>
+    <string name="run_prediction">予測を実行</string>
+    <string name="run_prediction_subtitle">オンチェーンアクティビティを分析して、あなたのプロフィールに合うティアを確認</string>
+    <string name="analyzing_on_chain">オンチェーンアクティビティを分析中…</string>
+    <string name="re_analyze">再分析</string>
+    <string name="re_run_prediction">予測を再実行</string>
+    <string name="your_tier_badge">あなたのティア</string>
+    <string name="season_1_badge">シーズン1</string>
+    <string name="your_prediction_badge">あなたの予測</string>
+    <string name="season_2_badge">シーズン2</string>
+    <string name="per_wallet">ウォレットごと</string>
+    <string name="of_wallets">のウォレット</string>
+    <string name="s1_wallets_label">S1: ウォレットの%1$s%%</string>
+    <string name="score_label">スコア: %1$s</string>
+    <string name="score_needed">必要スコア: ~%1$s+</string>
+    <string name="top_percent">上位%1$s%%</string>
+    <string name="score_format">スコア：%1$s</string>
+    <string name="score_needed_format">必要スコア：~%1$s+</string>
+    <string name="s1_wallets_format">S1：ウォレットの %1$s%%</string>
+    <string name="your_s1_position">あなたのシーズン 1 順位</string>
+    <string name="skr_claimed_format">%1$s SKR 獲得済み</string>
+    <string name="top_percent_format">上位 %1$s%%</string>
+    <string name="of_all_seekers">全 Seekers 中</string>
+    <string name="activity_score">アクティビティスコア</string>
+    <string name="your_on_chain_activity">あなたのオンチェーンアクティビティ</string>
+    <string name="s1_claim_not_found">このウォレットでシーズン 1 の請求記録が見つかりませんでした。別のウォレットで請求した場合や、請求がまだ処理されていない可能性があります。</string>
+    <string name="activity_highlights">アクティビティハイライト</string>
+    <string name="season_1_vs_season_2">シーズン 1 vs シーズン 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">シーズン 1 の分配</string>
+    <string name="eligible_wallets">対象ウォレット約 140,000</string>
+    <string name="your_activity_score">あなたのアクティビティスコア</string>
+    <string name="score_breakdown">スコア内訳</string>
+    <string name="speculative_notice">推測的な見積もりです。シーズン 1 のパターンに基づいています \u2014 実際のシーズン 2 の基準は異なる場合があります。投資助言ではありません。</string>
+    <string name="s1_disclaimer">シーズン 1 のティアはオンチェーンの請求履歴から検出されました。アクティビティ分析は現在のウォレットデータに基づいています。これは一般的な情報であり、投資助言ではありません。</string>
+    <string name="s2_disclaimer">この予測はシーズン 1 のパターンとオンチェーンアクティビティに基づく推測的な見積もりです。実際のシーズン 2 の基準は発表されておらず、大きく異なる可能性があります。これは投資助言ではありません。これらの予測に基づいて投資判断を行わないでください。</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">スコアリングモデルの分析</string>
+    <string name="s1_model_subtitle">あなたのオンチェーンアクティビティがこのアプリのスコアリングモデルにどう対応するか。このモデルは推測的であり、実際の基準を反映していない場合があります。</string>
+    <string name="s2_model_subtitle">あなたのアクティビティがこのアプリのスコアリングモデルにどう対応するか。このモデルは推測的であり、実際のシーズン 2 の基準を反映していない場合があります。投資助言ではありません。</string>
+    <string name="tx_count_low">トランザクション数：低</string>
+    <string name="tx_count_low_desc">この指標はオンチェーントランザクション（スワップ、送金、インタラクション）を測定します。S1 スコアリングモデルで 30%% の重みがあります。</string>
+    <string name="nft_none">NFT 保有：検出されず</string>
+    <string name="nft_none_desc">この指標はウォレット内の NFT 所有を確認します。スコアリングモデルで 10%% の重みがあります。</string>
+    <string name="token_diversity_low">トークン多様性：低</string>
+    <string name="token_diversity_low_desc">この指標は保有するユニークな SPL トークン数をカウントします。スコアリングモデルで 15%% の重みがあります。</string>
+    <string name="dapp_low">dApp インタラクション：低</string>
+    <string name="dapp_low_desc">この指標はユニークなプログラムインタラクションを追跡します。スコアリングモデルで 25%% の重みがあります。</string>
+    <string name="wallet_age_recent">ウォレット年齢：新しい</string>
+    <string name="wallet_age_recent_desc">この指標はウォレットの年齢を測定します。スコアリングモデルで 20%% の重みがあります。ウォレット年齢は時間の経過とともに自然に増加します。</string>
+    <string name="strong_activity_profile">優秀なアクティビティプロフィール</string>
+    <string name="strong_activity_s1_desc">あなたのシーズン 1 のオンチェーンアクティビティは、測定されたすべての指標で高評価です。</string>
+    <string name="strong_activity_s2_desc">あなたのオンチェーンアクティビティは、このモデルの測定されたすべての指標で高評価です。</string>
+    <string name="staking_score_format">SKR ステーキングスコア：%1$s/100</string>
+    <string name="staking_score_desc">この指標は SKR がステーキングされているかを確認します。スコアリングモデルで 20%% の重みがあります。</string>
+    <string name="s1_tier_not_detected">シーズン 1 ティア：未検出</string>
+    <string name="s1_tier_not_detected_desc">この指標は S1 エアドロップティアを使用します。重みは 15%% です。シーズン 1 タブでティアを検出してください。</string>
+    <string name="tx_score_format">トランザクションスコア：%1$s/100</string>
+    <string name="tx_score_desc">この指標はオンチェーントランザクションをカウントします。スコアリングモデルで 15%% の重みがあります。</string>
+    <string name="dapp_score_format">dApp 使用スコア：%1$s/100</string>
+    <string name="dapp_score_desc">この指標はユニークなプログラムインタラクションを追跡します。スコアリングモデルで 10%% の重みがあります。</string>
+    <string name="programs_score_format">プログラムスコア：%1$s/100</string>
+    <string name="programs_score_desc">この指標はインタラクションした異なる Solana プログラム数をカウントします。重みは 12%% です。</string>
+    <string name="wallet_age_score_format">ウォレット年齢スコア：%1$s/100</string>
+    <string name="wallet_age_score_desc">この指標はウォレットの年齢を測定します。重みは 10%% です。時間の経過とともに自然に増加します。</string>
+    <string name="skr_domain_not_detected">.skr ドメイン：未検出</string>
+    <string name="skr_domain_desc">この指標は .skr ドメインの所有を確認します。スコアリングモデルで 5%% の重みがあります。</string>
+    <string name="token_diversity_score_format">トークン多様性スコア：%1$s/100</string>
+    <string name="token_diversity_score_desc">この指標は保有するユニークな SPL トークン数をカウントします。スコアリングモデルで 8%% の重みがあります。</string>
+    <string name="nft_score_format">NFT スコア：%1$s/100</string>
+    <string name="nft_score_desc">この指標は NFT の所有を確認します。スコアリングモデルで 5%% の重みがあります。</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="wallet_section">ウォレット</string>
+    <string name="connected_wallet">接続済みウォレット</string>
+    <string name="seeker_number">Seeker 番号</string>
+    <string name="network_section">ネットワーク</string>
+    <string name="use_helius_rpc">Helius RPC を使用</string>
+    <string name="helius_enabled_desc">より高いレート制限</string>
+    <string name="helius_disabled_desc">パブリック RPC（レート制限あり）</string>
+    <string name="helius_detail_on">Helius 無料枠を使用中（月間 1M クレジット）。より高速で安定。</string>
+    <string name="helius_detail_off">パブリック Solana RPC を使用中。無料ですが約 5 リクエスト/秒に制限。</string>
+    <string name="data_section">データ</string>
+    <string name="sgt_cache">SGT キャッシュ</string>
+    <string name="sgt_cache_valid">有効</string>
+    <string name="sgt_cache_needs_refresh">更新が必要</string>
+    <string name="sgt_cache_note">SGT 検証は RPC 呼び出しを最小限にするため 24 時間キャッシュされます。</string>
+    <string name="anonymous_insights">匿名統計</string>
+    <string name="anonymous_insights_desc">精度向上のため匿名化された予測データを共有（近日公開）</string>
+    <string name="about_section">アプリについて</string>
+    <string name="version_label">バージョン</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Seeker デバイスのお供に。SGT の所有確認、SKR ポートフォリオの追跡、オンチェーンアクティビティ分析の表示ができます。</string>
+    <string name="about_publisher">MidMightBit Games（オーストラリア）開発</string>
+    <string name="about_architecture">サーバーコストゼロ。すべてのデータはデバイス上＋オンチェーン。</string>
+    <string name="regulatory_disclaimer">Solana Foundation、Solana Mobile Inc.、またはいかなるトークン発行者とも提携していません。いかなる金融規制当局の認可・規制も受けていません。投資助言を提供するものではありません。</string>
+    <string name="delete_all_data">すべてのデータを削除</string>
+    <string name="delete_all_data_desc">このデバイスのすべてのキャッシュデータ、設定、連続記録を完全に消去します。</string>
+    <string name="delete_all_data_title">すべてのデータを削除しますか？</string>
+    <string name="delete_all_data_confirm_text">すべてのキャッシュデータ、設定、連続記録が完全に消去され、ウォレットが切断されます。この操作は元に戻せません。</string>
+    <string name="delete_everything">すべて削除</string>
+    <string name="cancel">キャンセル</string>
+    <string name="disconnecting_clears_data">切断するとすべてのキャッシュデータが消去されます。</string>
+</resources>

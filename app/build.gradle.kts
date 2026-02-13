@@ -35,9 +35,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../release-keystore.jks")
-            storePassword = localProperties.getProperty("RELEASE_STORE_PASSWORD")
-            keyAlias = localProperties.getProperty("RELEASE_KEY_ALIAS")
-            keyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD")
+            storePassword = "roaringtrades2026"
+            keyAlias = "roaringtrades"
+            keyPassword = "roaringtrades2026"
         }
     }
 

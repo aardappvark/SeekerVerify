@@ -6,6 +6,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.seekerverify.app.AppConfig
 import com.seekerverify.app.model.CheckInStreak
+import com.seekerverify.app.model.Season1Result
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -52,7 +53,15 @@ class AppPreferences(context: Context) {
             .remove(KEY_SGT_CHECKED_AT)
             .remove(KEY_SGT_MEMBER_NUMBER)
             .remove(KEY_SGT_MINT_ADDRESS)
+            .remove(KEY_CHECK_IN_STREAK)
+            .remove(KEY_SEASON1_RESULT)
+            .remove(KEY_SEASON1_CHECKED_AT)
             .apply()
+    }
+
+    /** Erase ALL stored data. Used by "Delete All Data" in Settings. */
+    fun deleteAllData() {
+        prefs.edit().clear().apply()
     }
 
     fun getShortWalletAddress(): String {
@@ -106,6 +115,30 @@ class AppPreferences(context: Context) {
             .apply()
     }
 
+    // --- Season 1 ---
+
+    fun getSeason1Result(): Season1Result? {
+        val resultJson = prefs.getString(KEY_SEASON1_RESULT, null) ?: return null
+        return try {
+            json.decodeFromString<Season1Result>(resultJson)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun saveSeason1Result(result: Season1Result) {
+        prefs.edit()
+            .putString(KEY_SEASON1_RESULT, json.encodeToString(result))
+            .putLong(KEY_SEASON1_CHECKED_AT, System.currentTimeMillis())
+            .apply()
+    }
+
+    fun shouldRecheckSeason1(): Boolean {
+        val lastCheck = prefs.getLong(KEY_SEASON1_CHECKED_AT, 0)
+        val elapsed = System.currentTimeMillis() - lastCheck
+        return elapsed > AppConfig.Cache.SEASON1_CACHE_HOURS * 3600 * 1000
+    }
+
     // --- Settings ---
 
     fun getRpcProvider(): String = prefs.getString(KEY_RPC_PROVIDER, "public") ?: "public"
@@ -130,6 +163,8 @@ class AppPreferences(context: Context) {
         private const val KEY_SGT_MEMBER_NUMBER = "sgt_member_number"
         private const val KEY_SGT_MINT_ADDRESS = "sgt_mint_address"
         private const val KEY_CHECK_IN_STREAK = "check_in_streak"
+        private const val KEY_SEASON1_RESULT = "season1_result"
+        private const val KEY_SEASON1_CHECKED_AT = "season1_checked_at"
         private const val KEY_RPC_PROVIDER = "rpc_provider"
         private const val KEY_OPTED_IN = "opted_in"
     }

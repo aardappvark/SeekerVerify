@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Pendamping perangkat Seeker Anda</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Hubungkan Dompet</string>
+    <string name="connecting_to_wallet">Menghubungkan ke dompet\u2026</string>
+    <string name="requires_sgt">Memerlukan Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">Dengan menghubungkan, alamat dompet publik Anda akan disimpan secara lokal di perangkat ini untuk menampilkan data on-chain. Tidak ada kunci pribadi yang diakses. Tidak ada data yang dikirim ke server eksternal selain endpoint Solana RPC.</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="terms_of_service">Ketentuan Layanan</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Memverifikasi Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">Seeker Genesis Token Tidak Ditemukan</string>
+    <string name="no_sgt_message">Aplikasi ini khusus untuk pemilik perangkat Seeker. Hubungkan dompet yang memiliki Seeker Genesis Token (SGT) untuk melanjutkan.</string>
+    <string name="disconnect_try_another">Putuskan &amp; Coba Dompet Lain</string>
+    <string name="verification_error">Kesalahan Verifikasi</string>
+    <string name="retry_verification">Coba Verifikasi Lagi</string>
+    <string name="disconnect_wallet">Putuskan Dompet</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Identitas Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker Terverifikasi</string>
+    <string name="verified_seeker_cd">Seeker Terverifikasi</string>
+    <string name="share_identity">Bagikan Identitas</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Pemilik Seeker Terverifikasi</string>
+    <string name="daily_check_in">Check-in Harian</string>
+    <string name="current_label">Saat Ini</string>
+    <string name="longest_label">Terpanjang</string>
+    <string name="total_label">Total</string>
+    <string name="checked_in_today">Sudah check-in hari ini!</string>
+    <string name="check_in">Check-in</string>
+    <string name="days_suffix">%1$s hari</string>
+    <string name="share_text_prefix">Saya Seeker</string>
+    <string name="share_text_verified">Pemegang SGT terverifikasi di Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s hari</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portofolio</string>
+    <string name="refresh">Segarkan</string>
+    <string name="total_value">TOTAL NILAI</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Saldo SOL</string>
+    <string name="staked_sol">SOL yang Di-stake</string>
+    <string name="liquid_balance">Saldo Likuid</string>
+    <string name="staked_skr">SKR yang Di-stake</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Unstaking: </string>
+    <string name="rewards_compound">Hadiah dikompoun secara otomatis melalui apresiasi harga saham.</string>
+    <string name="no_stake_found">Tidak ada stake aktif ditemukan. Stake SKR untuk mendapatkan hadiah.</string>
+    <string name="financial_disclaimer">Harga bersumber dari API pihak ketiga dan mungkin tidak mencerminkan nilai pasar saat ini. APY bervariasi, berdasarkan data on-chain saat ini, dan tidak dijamin. Ini bukan nasihat keuangan.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Armada Seeker</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">perangkat dalam armada</string>
+    <string name="your_fleet_position">Posisi Armada Anda</string>
+    <string name="position_format">#%1$s dari %2$s</string>
+    <string name="earlier_than_percent">Lebih awal dari %1$s%% Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Pelopor Awal \uD83C\uDF1F</string>
+    <string name="early_adopter">Pengadopsi Awal \uD83D\uDE80</string>
+    <string name="fleet_member">Anggota Armada \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Staker Aktif</string>
+    <string name="skr_staked_label">SKR yang Di-stake</string>
+    <string name="fleet_data_note">Data armada diperkirakan dari catatan on-chain dan diperbarui secara berkala.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Tingkatan Airdrop</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">Posisi dan aktivitas airdrop Season 1 Anda</string>
+    <string name="s2_subtitle">Geser untuk menjelajahi prediksi tingkatan Season 2</string>
+    <string name="detect_my_s1_tier">Deteksi Tingkatan Season 1 Saya</string>
+    <string name="detect_s1_subtitle">Pindai riwayat on-chain untuk menemukan tingkatan dan aktivitas airdrop Season 1 Anda</string>
+    <string name="scanning_on_chain">Memindai aktivitas on-chain\u2026</string>
+    <string name="run_prediction">Jalankan Prediksi</string>
+    <string name="run_prediction_subtitle">Analisis aktivitas on-chain Anda untuk melihat tingkatan mana yang sesuai dengan profil Anda</string>
+    <string name="analyzing_on_chain">Menganalisis aktivitas on-chain\u2026</string>
+    <string name="re_analyze">Analisis Ulang</string>
+    <string name="re_run_prediction">Jalankan Ulang Prediksi</string>
+    <string name="your_tier_badge">TINGKAT ANDA</string>
+    <string name="season_1_badge">MUSIM 1</string>
+    <string name="your_prediction_badge">PREDIKSI ANDA</string>
+    <string name="season_2_badge">MUSIM 2</string>
+    <string name="per_wallet">per dompet</string>
+    <string name="of_wallets"> dari dompet</string>
+    <string name="s1_wallets_label">S1: %1$s%% dompet</string>
+    <string name="score_label">Skor: %1$s</string>
+    <string name="score_needed">Skor dibutuhkan: ~%1$s+</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="score_format">Skor: %1$s</string>
+    <string name="score_needed_format">Skor dibutuhkan: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% dari dompet</string>
+    <string name="your_s1_position">Posisi Season 1 Anda</string>
+    <string name="skr_claimed_format">%1$s SKR diklaim</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="of_all_seekers">dari semua Seekers</string>
+    <string name="activity_score">Skor Aktivitas</string>
+    <string name="your_on_chain_activity">Aktivitas On-Chain Anda</string>
+    <string name="s1_claim_not_found">Klaim Season 1 tidak ditemukan di dompet ini. Ini mungkin terjadi jika Anda mengklaim di dompet lain, atau jika klaim belum diproses.</string>
+    <string name="activity_highlights">Sorotan Aktivitas</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$s %%</string>
+    <string name="season_1_distribution">Distribusi Season 1</string>
+    <string name="eligible_wallets">~140.000 dompet yang memenuhi syarat</string>
+    <string name="your_activity_score">Skor Aktivitas Anda</string>
+    <string name="score_breakdown">Rincian Skor</string>
+    <string name="speculative_notice">Perkiraan spekulatif saja. Berdasarkan pola Season 1 \u2014 kriteria aktual Season 2 mungkin berbeda. Bukan nasihat keuangan.</string>
+    <string name="s1_disclaimer">Tingkatan Season 1 terdeteksi dari riwayat klaim on-chain. Analisis aktivitas berdasarkan data dompet saat ini. Ini hanya informasi umum dan bukan nasihat keuangan.</string>
+    <string name="s2_disclaimer">Prediksi ini adalah perkiraan spekulatif berdasarkan pola Season 1 dan aktivitas on-chain. Kriteria aktual Season 2 belum diumumkan dan mungkin berbeda secara signifikan. Ini bukan nasihat keuangan. Jangan membuat keputusan keuangan berdasarkan prediksi ini.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Wawasan Model Penilaian</string>
+    <string name="s1_model_subtitle">Bagaimana aktivitas on-chain Anda dipetakan ke model penilaian aplikasi ini. Model ini bersifat spekulatif dan mungkin tidak mencerminkan kriteria aktual.</string>
+    <string name="s2_model_subtitle">Bagaimana aktivitas Anda dipetakan ke model penilaian aplikasi ini. Model ini bersifat spekulatif dan mungkin tidak mencerminkan kriteria aktual Season 2. Bukan nasihat keuangan.</string>
+    <string name="tx_count_low">Jumlah Transaksi: Rendah</string>
+    <string name="tx_count_low_desc">Metrik ini mengukur transaksi on-chain (swap, transfer, interaksi). Bobotnya 30%% dalam model penilaian S1.</string>
+    <string name="nft_none">Kepemilikan NFT: Tidak terdeteksi</string>
+    <string name="nft_none_desc">Metrik ini memeriksa kepemilikan NFT di dompet. Bobotnya 10%% dalam model penilaian.</string>
+    <string name="token_diversity_low">Keragaman Token: Rendah</string>
+    <string name="token_diversity_low_desc">Metrik ini menghitung token SPL unik yang dimiliki. Bobotnya 15%% dalam model penilaian.</string>
+    <string name="dapp_low">Interaksi dApp: Rendah</string>
+    <string name="dapp_low_desc">Metrik ini melacak interaksi program unik. Bobotnya 25%% dalam model penilaian.</string>
+    <string name="wallet_age_recent">Usia Dompet: Baru</string>
+    <string name="wallet_age_recent_desc">Metrik ini mengukur usia dompet. Bobotnya 20%% dalam model penilaian. Usia dompet bertambah secara alami seiring waktu.</string>
+    <string name="strong_activity_profile">Profil Aktivitas Kuat</string>
+    <string name="strong_activity_s1_desc">Aktivitas on-chain Season 1 Anda mendapat skor baik di semua metrik yang diukur.</string>
+    <string name="strong_activity_s2_desc">Aktivitas on-chain Anda mendapat skor baik di semua metrik yang diukur dalam model ini.</string>
+    <string name="staking_score_format">Skor Staking SKR: %1$s/100</string>
+    <string name="staking_score_desc">Metrik ini memeriksa apakah SKR di-stake. Bobotnya 20%% dalam model penilaian.</string>
+    <string name="s1_tier_not_detected">Tingkatan Season 1: Tidak terdeteksi</string>
+    <string name="s1_tier_not_detected_desc">Metrik ini menggunakan tingkatan airdrop S1 Anda. Bobotnya 15%%. Gunakan tab Season 1 untuk mendeteksi tingkatan Anda.</string>
+    <string name="tx_score_format">Skor Transaksi: %1$s/100</string>
+    <string name="tx_score_desc">Metrik ini menghitung transaksi on-chain. Bobotnya 15%% dalam model penilaian.</string>
+    <string name="dapp_score_format">Skor Penggunaan dApp: %1$s/100</string>
+    <string name="dapp_score_desc">Metrik ini melacak interaksi program unik. Bobotnya 10%% dalam model penilaian.</string>
+    <string name="programs_score_format">Skor Program: %1$s/100</string>
+    <string name="programs_score_desc">Metrik ini menghitung program Solana berbeda yang berinteraksi. Bobotnya 12%%.</string>
+    <string name="wallet_age_score_format">Skor Usia Dompet: %1$s/100</string>
+    <string name="wallet_age_score_desc">Metrik ini mengukur usia dompet. Bobotnya 10%%. Ini bertambah secara alami seiring waktu.</string>
+    <string name="skr_domain_not_detected">Domain .skr: Tidak terdeteksi</string>
+    <string name="skr_domain_desc">Metrik ini memeriksa kepemilikan domain .skr. Bobotnya 5%% dalam model penilaian.</string>
+    <string name="token_diversity_score_format">Skor Keragaman Token: %1$s/100</string>
+    <string name="token_diversity_score_desc">Metrik ini menghitung token SPL unik yang dimiliki. Bobotnya 8%% dalam model penilaian.</string>
+    <string name="nft_score_format">Skor NFT: %1$s/100</string>
+    <string name="nft_score_desc">Metrik ini memeriksa kepemilikan NFT. Bobotnya 5%% dalam model penilaian.</string>
+
+    <!-- Settings -->
+    <string name="settings">Pengaturan</string>
+    <string name="wallet_section">Dompet</string>
+    <string name="connected_wallet">Dompet Terhubung</string>
+    <string name="seeker_number">Nomor Seeker</string>
+    <string name="network_section">Jaringan</string>
+    <string name="use_helius_rpc">Gunakan Helius RPC</string>
+    <string name="helius_enabled_desc">Batas permintaan lebih tinggi</string>
+    <string name="helius_disabled_desc">RPC publik (dibatasi)</string>
+    <string name="helius_detail_on">Menggunakan paket gratis Helius (1 juta kredit/bulan). Lebih cepat dan lebih andal.</string>
+    <string name="helius_detail_off">Menggunakan RPC publik Solana. Gratis tetapi dibatasi ~5 permintaan/detik.</string>
+    <string name="data_section">Data</string>
+    <string name="sgt_cache">Cache SGT</string>
+    <string name="sgt_cache_valid">Valid</string>
+    <string name="sgt_cache_needs_refresh">Perlu disegarkan</string>
+    <string name="sgt_cache_note">Verifikasi SGT di-cache selama 24 jam untuk meminimalkan panggilan RPC.</string>
+    <string name="anonymous_insights">Wawasan Anonim</string>
+    <string name="anonymous_insights_desc">Bagikan data prediksi anonim untuk meningkatkan akurasi (segera hadir)</string>
+    <string name="about_section">Tentang</string>
+    <string name="version_label">Versi</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Pendamping perangkat Seeker Anda. Verifikasi kepemilikan SGT, pantau portofolio SKR, dan lihat analisis aktivitas on-chain.</string>
+    <string name="about_publisher">Oleh MidMightBit Games (Australia)</string>
+    <string name="about_architecture">Tanpa biaya server. Semua data di perangkat + on-chain.</string>
+    <string name="regulatory_disclaimer">Tidak berafiliasi dengan Solana Foundation, Solana Mobile Inc., atau penerbit token mana pun. Tidak diotorisasi atau diatur oleh regulator keuangan mana pun. Tidak memberikan nasihat keuangan.</string>
+    <string name="delete_all_data">Hapus Semua Data</string>
+    <string name="delete_all_data_desc">Menghapus secara permanen semua data cache, preferensi, dan riwayat streak dari perangkat ini.</string>
+    <string name="delete_all_data_title">Hapus Semua Data?</string>
+    <string name="delete_all_data_confirm_text">Ini akan menghapus secara permanen semua data cache, preferensi, riwayat streak, dan memutuskan dompet Anda. Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="delete_everything">Hapus Semuanya</string>
+    <string name="cancel">Batal</string>
+    <string name="disconnecting_clears_data">Memutuskan koneksi akan menghapus semua data cache.</string>
+</resources>

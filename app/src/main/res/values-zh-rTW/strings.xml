@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">您的 Seeker 裝置夥伴</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">連接錢包</string>
+    <string name="connecting_to_wallet">正在連接錢包…</string>
+    <string name="requires_sgt">需要 Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">連接後，您的公開錢包地址將儲存在本裝置上，用於顯示鏈上資料。不會存取私鑰。除 Solana RPC 端點外，不會向外部伺服器傳送任何資料。</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="terms_of_service">服務條款</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">正在驗證 Seeker Genesis Token…</string>
+    <string name="no_sgt_found">未找到 Seeker Genesis Token</string>
+    <string name="no_sgt_message">此應用程式僅供 Seeker 裝置持有者使用。請連接持有 Seeker Genesis Token (SGT) 的錢包以繼續。</string>
+    <string name="disconnect_try_another">中斷連接並嘗試其他錢包</string>
+    <string name="verification_error">驗證錯誤</string>
+    <string name="retry_verification">重試驗證</string>
+    <string name="disconnect_wallet">中斷錢包連接</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker 身分</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">已驗證的Seeker</string>
+    <string name="verified_seeker_cd">已驗證的 Seeker</string>
+    <string name="share_identity">分享身分</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">已驗證的 Seeker 持有者</string>
+    <string name="daily_check_in">每日簽到</string>
+    <string name="current_label">目前</string>
+    <string name="longest_label">最長</string>
+    <string name="total_label">總計</string>
+    <string name="checked_in_today">今日已簽到！</string>
+    <string name="check_in">簽到</string>
+    <string name="days_suffix">%1$s天</string>
+    <string name="share_text_prefix">我是 Seeker</string>
+    <string name="share_text_verified">Solana Seeker 上的已驗證 SGT 持有者</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s 天</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">投資組合</string>
+    <string name="refresh">重新整理</string>
+    <string name="total_value">總價值</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL 餘額</string>
+    <string name="staked_sol">質押 SOL</string>
+    <string name="liquid_balance">流動餘額</string>
+    <string name="staked_skr">質押 SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">解除質押中：</string>
+    <string name="rewards_compound">獎勵透過份額價格升值自動複投。</string>
+    <string name="no_stake_found">未找到活躍質押。質押 SKR 以獲取獎勵。</string>
+    <string name="financial_disclaimer">價格來源於第三方 API，可能無法反映目前市場價值。APY 為浮動值，基於目前鏈上資料，且不作保證。這不構成財務建議。</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker 艦隊</string>
+    <string name="total_seekers">SEEKERS 總數</string>
+    <string name="devices_in_fleet">艦隊中的裝置</string>
+    <string name="your_fleet_position">您的艦隊位置</string>
+    <string name="position_format">#%1$s / %2$s</string>
+    <string name="earlier_than_percent">早於 %1$s%% 的 Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">早期先驅 \uD83C\uDF1F</string>
+    <string name="early_adopter">早期採用者 \uD83D\uDE80</string>
+    <string name="fleet_member">艦隊成員 \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">活躍質押者</string>
+    <string name="skr_staked_label">已質押 SKR</string>
+    <string name="fleet_data_note">艦隊資料根據鏈上記錄估算，定期更新。</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">空投等級</string>
+    <string name="season_1">第 1 賽季</string>
+    <string name="season_2">第 2 賽季</string>
+    <string name="s1_subtitle">您的第 1 賽季空投位置和活動</string>
+    <string name="s2_subtitle">滑動瀏覽第 2 賽季預測等級</string>
+    <string name="detect_my_s1_tier">偵測我的第 1 賽季等級</string>
+    <string name="detect_s1_subtitle">掃描鏈上歷史以查找您的第 1 賽季空投等級和活動</string>
+    <string name="scanning_on_chain">正在掃描鏈上活動…</string>
+    <string name="run_prediction">執行預測</string>
+    <string name="run_prediction_subtitle">分析您的鏈上活動以查看哪個等級與您的資料匹配</string>
+    <string name="analyzing_on_chain">正在分析鏈上活動…</string>
+    <string name="re_analyze">重新分析</string>
+    <string name="re_run_prediction">重新執行預測</string>
+    <string name="your_tier_badge">你的等級</string>
+    <string name="season_1_badge">第1賽季</string>
+    <string name="your_prediction_badge">你的預測</string>
+    <string name="season_2_badge">第2賽季</string>
+    <string name="per_wallet">每個錢包</string>
+    <string name="of_wallets">的錢包</string>
+    <string name="s1_wallets_label">S1：%1$s%%的錢包</string>
+    <string name="score_label">分數：%1$s</string>
+    <string name="score_needed">所需分數：~%1$s+</string>
+    <string name="top_percent">前%1$s%%</string>
+    <string name="score_format">分數：%1$s</string>
+    <string name="score_needed_format">所需分數：~%1$s+</string>
+    <string name="s1_wallets_format">S1：%1$s%% 的錢包</string>
+    <string name="your_s1_position">您的第 1 賽季位置</string>
+    <string name="skr_claimed_format">已領取 %1$s SKR</string>
+    <string name="top_percent_format">前 %1$s%%</string>
+    <string name="of_all_seekers">所有 Seekers 中</string>
+    <string name="activity_score">活動分數</string>
+    <string name="your_on_chain_activity">您的鏈上活動</string>
+    <string name="s1_claim_not_found">未在此錢包上找到第 1 賽季領取記錄。這可能是因為您在其他錢包上領取了，或者領取尚未處理完成。</string>
+    <string name="activity_highlights">活動亮點</string>
+    <string name="season_1_vs_season_2">第 1 賽季 vs 第 2 賽季</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">第 1 賽季分配</string>
+    <string name="eligible_wallets">約 140,000 個符合條件的錢包</string>
+    <string name="your_activity_score">您的活動分數</string>
+    <string name="score_breakdown">分數明細</string>
+    <string name="speculative_notice">僅為推測性估算。基於第 1 賽季模式 \u2014 實際第 2 賽季標準可能不同。不構成財務建議。</string>
+    <string name="s1_disclaimer">第 1 賽季等級根據鏈上領取歷史偵測。活動分析基於目前錢包資料。這僅為一般資訊，不構成財務建議。</string>
+    <string name="s2_disclaimer">此預測是基於第 1 賽季模式和鏈上活動的推測性估算。實際第 2 賽季標準尚未公布，可能會有顯著差異。這不構成財務建議。請勿根據這些預測做出財務決策。</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">評分模型洞察</string>
+    <string name="s1_model_subtitle">您的鏈上活動如何對應到此應用程式的評分模型。此模型為推測性質，可能不反映實際標準。</string>
+    <string name="s2_model_subtitle">您的活動如何對應到此應用程式的評分模型。此模型為推測性質，可能不反映實際第 2 賽季標準。不構成財務建議。</string>
+    <string name="tx_count_low">交易數量：低</string>
+    <string name="tx_count_low_desc">此指標衡量鏈上交易（兌換、轉帳、互動）。在 S1 評分模型中權重為 30%%。</string>
+    <string name="nft_none">NFT 持有：未偵測到</string>
+    <string name="nft_none_desc">此指標檢查錢包中的 NFT 所有權。在評分模型中權重為 10%%。</string>
+    <string name="token_diversity_low">代幣多樣性：低</string>
+    <string name="token_diversity_low_desc">此指標統計持有的唯一 SPL 代幣數量。在評分模型中權重為 15%%。</string>
+    <string name="dapp_low">dApp 互動：低</string>
+    <string name="dapp_low_desc">此指標追蹤唯一程式互動。在評分模型中權重為 25%%。</string>
+    <string name="wallet_age_recent">錢包年齡：較新</string>
+    <string name="wallet_age_recent_desc">此指標衡量錢包年齡。在評分模型中權重為 20%%。錢包年齡會隨時間自然增長。</string>
+    <string name="strong_activity_profile">活動資料優秀</string>
+    <string name="strong_activity_s1_desc">您的第 1 賽季鏈上活動在所有衡量指標中表現良好。</string>
+    <string name="strong_activity_s2_desc">您的鏈上活動在此模型的所有衡量指標中表現良好。</string>
+    <string name="staking_score_format">SKR 質押分數：%1$s/100</string>
+    <string name="staking_score_desc">此指標檢查 SKR 是否已質押。在評分模型中權重為 20%%。</string>
+    <string name="s1_tier_not_detected">第 1 賽季等級：未偵測到</string>
+    <string name="s1_tier_not_detected_desc">此指標使用您的 S1 空投等級。權重為 15%%。使用第 1 賽季標籤頁來偵測您的等級。</string>
+    <string name="tx_score_format">交易分數：%1$s/100</string>
+    <string name="tx_score_desc">此指標統計鏈上交易。在評分模型中權重為 15%%。</string>
+    <string name="dapp_score_format">dApp 使用分數：%1$s/100</string>
+    <string name="dapp_score_desc">此指標追蹤唯一程式互動。在評分模型中權重為 10%%。</string>
+    <string name="programs_score_format">程式分數：%1$s/100</string>
+    <string name="programs_score_desc">此指標統計互動過的不同 Solana 程式數量。權重為 12%%。</string>
+    <string name="wallet_age_score_format">錢包年齡分數：%1$s/100</string>
+    <string name="wallet_age_score_desc">此指標衡量錢包年齡。權重為 10%%。會隨時間自然增長。</string>
+    <string name="skr_domain_not_detected">.skr 網域：未偵測到</string>
+    <string name="skr_domain_desc">此指標檢查 .skr 網域所有權。在評分模型中權重為 5%%。</string>
+    <string name="token_diversity_score_format">代幣多樣性分數：%1$s/100</string>
+    <string name="token_diversity_score_desc">此指標統計持有的唯一 SPL 代幣數量。在評分模型中權重為 8%%。</string>
+    <string name="nft_score_format">NFT 分數：%1$s/100</string>
+    <string name="nft_score_desc">此指標檢查 NFT 所有權。在評分模型中權重為 5%%。</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="wallet_section">錢包</string>
+    <string name="connected_wallet">已連接的錢包</string>
+    <string name="seeker_number">Seeker 編號</string>
+    <string name="network_section">網路</string>
+    <string name="use_helius_rpc">使用 Helius RPC</string>
+    <string name="helius_enabled_desc">更高的速率限制</string>
+    <string name="helius_disabled_desc">公共 RPC（有速率限制）</string>
+    <string name="helius_detail_on">使用 Helius 免費層（每月 1M 點數）。更快更可靠。</string>
+    <string name="helius_detail_off">使用公共 Solana RPC。免費但限速約 5 次請求/秒。</string>
+    <string name="data_section">資料</string>
+    <string name="sgt_cache">SGT 快取</string>
+    <string name="sgt_cache_valid">有效</string>
+    <string name="sgt_cache_needs_refresh">需要重新整理</string>
+    <string name="sgt_cache_note">SGT 驗證快取 24 小時以減少 RPC 呼叫。</string>
+    <string name="anonymous_insights">匿名統計</string>
+    <string name="anonymous_insights_desc">分享匿名預測資料以提高準確性（即將推出）</string>
+    <string name="about_section">關於</string>
+    <string name="version_label">版本</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">您的 Seeker 裝置夥伴。驗證 SGT 所有權、追蹤 SKR 投資組合並查看鏈上活動分析。</string>
+    <string name="about_publisher">由 MidMightBit Games（澳洲）開發</string>
+    <string name="about_architecture">零伺服器成本。所有資料儲存在裝置上及鏈上。</string>
+    <string name="regulatory_disclaimer">與 Solana Foundation、Solana Mobile Inc. 或任何代幣發行方無關聯。未獲任何金融監管機構授權或監管。不提供財務建議。</string>
+    <string name="delete_all_data">刪除所有資料</string>
+    <string name="delete_all_data_desc">永久刪除此裝置上的所有快取資料、偏好設定和連續簽到歷史。</string>
+    <string name="delete_all_data_title">刪除所有資料？</string>
+    <string name="delete_all_data_confirm_text">這將永久刪除所有快取資料、偏好設定、連續簽到歷史並中斷您的錢包連接。此操作無法復原。</string>
+    <string name="delete_everything">刪除全部</string>
+    <string name="cancel">取消</string>
+    <string name="disconnecting_clears_data">中斷連接將清除所有快取資料。</string>
+</resources>

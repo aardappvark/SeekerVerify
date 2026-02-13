@@ -9,14 +9,22 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.filled.LinkOff
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -87,11 +95,10 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
                 isConnecting = true
                 connectError = null
                 scope.launch {
-                    val adapter = WalletManager.createAdapter()
-                    val result = WalletManager.connect(adapter, activityResultSender)
+                    val result = WalletManager.signIn(activityResultSender)
                     result.fold(
                         onSuccess = { connectResult ->
-                            Log.d(TAG, "Wallet connected: ${connectResult.publicKeyBase58.take(8)}...")
+                            Log.d(TAG, "Wallet signed in: ${connectResult.publicKeyBase58.take(8)}...")
                             prefs.saveWalletConnection(
                                 connectResult.publicKeyBase58,
                                 connectResult.walletName
@@ -101,8 +108,8 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
                             sgtCheckState = SgtCheckState.Checking
                         },
                         onFailure = { e ->
-                            Log.e(TAG, "Wallet connect failed: ${e.message}", e)
-                            connectError = e.message ?: "Failed to connect wallet"
+                            Log.e(TAG, "Wallet sign-in failed: ${e.message}", e)
+                            connectError = e.message ?: "Failed to sign in with wallet"
                         }
                     )
                     isConnecting = false
@@ -184,11 +191,27 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
             }
 
             SgtCheckState.NoSgt -> {
-                NoSgtScreen()
+                NoSgtScreen(
+                    onDisconnect = {
+                        prefs.disconnectWallet()
+                        isWalletConnected = false
+                        walletAddress = ""
+                        sgtCheckState = SgtCheckState.Idle
+                    }
+                )
             }
 
             is SgtCheckState.Error -> {
-                SgtErrorScreen(message = (sgtCheckState as SgtCheckState.Error).message)
+                SgtErrorScreen(
+                    message = (sgtCheckState as SgtCheckState.Error).message,
+                    onRetry = { sgtCheckState = SgtCheckState.Checking },
+                    onDisconnect = {
+                        prefs.disconnectWallet()
+                        isWalletConnected = false
+                        walletAddress = ""
+                        sgtCheckState = SgtCheckState.Idle
+                    }
+                )
             }
         }
     }
@@ -224,7 +247,7 @@ private fun SgtCheckingScreen() {
 }
 
 @Composable
-private fun NoSgtScreen() {
+private fun NoSgtScreen(onDisconnect: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -254,11 +277,25 @@ private fun NoSgtScreen() {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(32.dp))
+        OutlinedButton(
+            onClick = onDisconnect,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Icon(Icons.Filled.LinkOff, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Disconnect & Try Another Wallet")
+        }
     }
 }
 
 @Composable
-private fun SgtErrorScreen(message: String) {
+private fun SgtErrorScreen(
+    message: String,
+    onRetry: () -> Unit,
+    onDisconnect: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -287,6 +324,27 @@ private fun SgtErrorScreen(message: String) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(32.dp))
+        Button(
+            onClick = onRetry,
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Retry Verification")
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        OutlinedButton(
+            onClick = onDisconnect,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Icon(Icons.Filled.LinkOff, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Disconnect Wallet")
+        }
     }
 }
 

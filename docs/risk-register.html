@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Register - Seeker Verify</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #c8ccd8;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #0066ff; }
+        h1 { border-bottom: 2px solid #0066ff; padding-bottom: 10px; }
+        h2 { margin-top: 40px; }
+        h3 { color: #e0e0e0; margin-top: 25px; }
+        a { color: #0066ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        nav { margin-bottom: 30px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav a { margin-right: 20px; }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 6px; }
+        strong { color: #e0e0e0; }
+        .subtitle { font-size: 1.1em; margin-bottom: 30px; }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.9em; color: #555; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        th {
+            background: rgba(0, 102, 255, 0.15);
+            color: #0066ff;
+            text-align: left;
+            padding: 12px 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+        .risk-low {
+            color: #14F195;
+            font-weight: 600;
+        }
+        .risk-medium {
+            color: #FFD700;
+            font-weight: 600;
+        }
+        .risk-high {
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+        .risk-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .risk-card h3 {
+            margin-top: 0;
+        }
+        .risk-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .risk-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .badge-low {
+            background: rgba(20, 241, 149, 0.15);
+            color: #14F195;
+            border: 1px solid rgba(20, 241, 149, 0.3);
+        }
+        .badge-medium {
+            background: rgba(255, 215, 0, 0.15);
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        @media (max-width: 768px) {
+            table { font-size: 0.8em; }
+            td, th { padding: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="copyright.html">Copyright</a>
+            <a href="legitimate-interest-assessment.html">LIA</a>
+            <a href="data-processing-register.html">Processing Register</a>
+            <a href="risk-register.html">Risk Register</a>
+            <a href="incident-response-plan.html">Incident Response</a>
+        </nav>
+
+        <h1>Risk Register</h1>
+        <p class="subtitle"><strong>Seeker Verify</strong><br>
+        <strong>Version 1.0.0 | February 2026</strong></p>
+
+        <p>This risk register identifies, assesses, and documents the key risks associated with the Seeker Verify application's data processing activities, third-party dependencies, and operational environment. Each risk includes a description, likelihood and impact assessment, mitigation measures, and residual risk level.</p>
+
+        <h2>Risk Assessment Matrix</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Likelihood / Impact</th>
+                    <th>Low Impact</th>
+                    <th>Medium Impact</th>
+                    <th>High Impact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>High Likelihood</strong></td>
+                    <td class="risk-medium">Medium</td>
+                    <td class="risk-high">High</td>
+                    <td class="risk-high">High</td>
+                </tr>
+                <tr>
+                    <td><strong>Medium Likelihood</strong></td>
+                    <td class="risk-low">Low</td>
+                    <td class="risk-medium">Medium</td>
+                    <td class="risk-high">High</td>
+                </tr>
+                <tr>
+                    <td><strong>Low Likelihood</strong></td>
+                    <td class="risk-low">Low</td>
+                    <td class="risk-low">Low</td>
+                    <td class="risk-medium">Medium</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Identified Risks</h2>
+
+        <!-- Risk 1: Data Breach -->
+        <div class="risk-card">
+            <div class="risk-header">
+                <h3>R1: Local Data Breach</h3>
+                <span class="risk-badge badge-low">Residual Risk: LOW</span>
+            </div>
+            <p><strong>Description:</strong> Unauthorised access to locally stored wallet public address and cached SGT verification data on the user's device, through device theft, malware, or exploitation of an Android vulnerability.</p>
+            <table>
+                <tr>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Inherent Risk</th>
+                </tr>
+                <tr>
+                    <td><span class="risk-low">Low</span> &mdash; Requires physical device access or device-level compromise</td>
+                    <td><span class="risk-low">Low</span> &mdash; Exposed data (wallet public address) is already publicly visible on the blockchain. No private keys, credentials, or sensitive personal data are stored.</td>
+                    <td><span class="risk-low">Low</span></td>
+                </tr>
+            </table>
+            <h3>Mitigation Measures</h3>
+            <ul>
+                <li>All data encrypted at rest using AES-256 via Android EncryptedSharedPreferences</li>
+                <li>Encryption keys stored in Android Keystore (hardware-backed where available)</li>
+                <li>No server-side storage eliminates remote breach vector entirely</li>
+                <li>Minimal data footprint &mdash; only wallet address and cached SGT data</li>
+                <li>Data is automatically deleted on wallet disconnect or app uninstall</li>
+                <li>Even if breached, the wallet public address reveals no information beyond what is already public on-chain</li>
+            </ul>
+            <p><strong>Residual Risk:</strong> <span class="risk-low">LOW</span> &mdash; The combination of strong encryption and the inherently public nature of the stored data means that a breach would have negligible practical impact on the data subject.</p>
+        </div>
+
+        <!-- Risk 2: Third-Party RPC -->
+        <div class="risk-card">
+            <div class="risk-header">
+                <h3>R2: Third-Party RPC and API IP Exposure</h3>
+                <span class="risk-badge badge-medium">Residual Risk: MEDIUM</span>
+            </div>
+            <p><strong>Description:</strong> When the App makes network requests to Solana RPC endpoints (public or Helius), CoinGecko API, and Jupiter Price API, the user's IP address is transmitted as part of standard internet protocol. These third-party services may log IP addresses and could potentially correlate them with wallet addresses included in RPC queries.</p>
+            <table>
+                <tr>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Inherent Risk</th>
+                </tr>
+                <tr>
+                    <td><span class="risk-medium">Medium</span> &mdash; IP logging is standard practice for most web services</td>
+                    <td><span class="risk-medium">Medium</span> &mdash; IP-to-wallet correlation could reduce pseudonymity of blockchain activity</td>
+                    <td><span class="risk-medium">Medium</span></td>
+                </tr>
+            </table>
+            <h3>Mitigation Measures</h3>
+            <ul>
+                <li>All network communications use HTTPS/TLS encryption in transit</li>
+                <li>No cleartext traffic permitted by the App's network security configuration</li>
+                <li>Price API requests (CoinGecko, Jupiter) do not include wallet addresses &mdash; only generic token identifiers</li>
+                <li>Users can choose between public Solana RPC and Helius RPC in Settings, allowing informed choice</li>
+                <li>Third-party privacy policies are linked in the App's Privacy Policy for user review</li>
+                <li>IP address exposure is disclosed transparently in the Privacy Policy</li>
+                <li>Users who require enhanced privacy can use a VPN on their device</li>
+            </ul>
+            <p><strong>Residual Risk:</strong> <span class="risk-medium">MEDIUM</span> &mdash; IP exposure to third-party RPC providers is inherent in any blockchain application that queries on-chain data. This risk is mitigated by transparency, user choice of RPC provider, and the fact that wallet addresses are already public. The residual risk cannot be fully eliminated without introducing a proxy server (which would create its own centralisation and privacy risks).</p>
+        </div>
+
+        <!-- Risk 3: Regulatory -->
+        <div class="risk-card">
+            <div class="risk-header">
+                <h3>R3: Regulatory and Compliance Risk</h3>
+                <span class="risk-badge badge-medium">Residual Risk: LOW-MEDIUM</span>
+            </div>
+            <p><strong>Description:</strong> The regulatory landscape for cryptocurrency applications is evolving globally. Changes to regulations in Australia, the EU, the US, or other jurisdictions could impact the App's compliance status, require additional disclosures, or restrict certain functionality. Wallet public addresses may be classified differently under future regulations.</p>
+            <table>
+                <tr>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Inherent Risk</th>
+                </tr>
+                <tr>
+                    <td><span class="risk-medium">Medium</span> &mdash; Crypto regulation is actively evolving in multiple jurisdictions</td>
+                    <td><span class="risk-medium">Medium</span> &mdash; Could require App modifications, additional disclosures, or geographic restrictions</td>
+                    <td><span class="risk-medium">Medium</span></td>
+                </tr>
+            </table>
+            <h3>Mitigation Measures</h3>
+            <ul>
+                <li>Comprehensive governance documentation in place (Privacy Policy, Terms of Service, LIA, this Risk Register, Data Processing Register, Incident Response Plan)</li>
+                <li>Compliance with GDPR, Australian Privacy Act 1988, CCPA/CPRA, UK GDPR, and LGPD already implemented</li>
+                <li>App is read-only with no financial transactions, reducing exposure to financial services regulation</li>
+                <li>No custody of assets, no trading functionality, no financial advice</li>
+                <li>Minimal data collection posture reduces exposure to data protection regulatory changes</li>
+                <li>Annual review schedule for all governance documents</li>
+                <li>Monitoring of regulatory developments in key jurisdictions</li>
+            </ul>
+            <p><strong>Residual Risk:</strong> <span class="risk-medium">LOW-MEDIUM</span> &mdash; The App's minimal, read-only nature significantly limits regulatory exposure. However, the rapidly evolving crypto regulatory landscape means ongoing vigilance is required.</p>
+        </div>
+
+        <!-- Risk 4: Key Management -->
+        <div class="risk-card">
+            <div class="risk-header">
+                <h3>R4: Encryption Key Management Risk</h3>
+                <span class="risk-badge badge-low">Residual Risk: LOW</span>
+            </div>
+            <p><strong>Description:</strong> Compromise or loss of the AES-256 encryption keys used to protect locally stored data (wallet address, cached SGT data). This could occur through an Android Keystore vulnerability, a compromised device, or a flaw in the EncryptedSharedPreferences implementation.</p>
+            <table>
+                <tr>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Inherent Risk</th>
+                </tr>
+                <tr>
+                    <td><span class="risk-low">Low</span> &mdash; Android Keystore is a mature, well-audited security component</td>
+                    <td><span class="risk-low">Low</span> &mdash; Even with key compromise, the exposed data is a publicly available wallet address</td>
+                    <td><span class="risk-low">Low</span></td>
+                </tr>
+            </table>
+            <h3>Mitigation Measures</h3>
+            <ul>
+                <li>Encryption keys generated and stored in Android Keystore, which is hardware-backed (TEE/StrongBox) on supported devices</li>
+                <li>Using Google's Jetpack Security library (EncryptedSharedPreferences) which is well-maintained and widely audited</li>
+                <li>AES-256-GCM for value encryption and AES-256-SIV for key encryption &mdash; industry-standard algorithms</li>
+                <li>Keys are non-exportable from the Android Keystore</li>
+                <li>App targets minSdk 26 (Android 8.0), which provides robust Keystore support</li>
+                <li>Even if encryption is bypassed, the data value (public wallet address) is not sensitive beyond its pseudonymous nature</li>
+            </ul>
+            <p><strong>Residual Risk:</strong> <span class="risk-low">LOW</span> &mdash; The Android Keystore provides strong key protection, and the low sensitivity of the encrypted data means that key compromise has minimal practical impact.</p>
+        </div>
+
+        <!-- Risk 5: Supply Chain -->
+        <div class="risk-card">
+            <div class="risk-header">
+                <h3>R5: Supply Chain and Dependency Risk</h3>
+                <span class="risk-badge badge-low">Residual Risk: LOW</span>
+            </div>
+            <p><strong>Description:</strong> The App depends on third-party libraries that could be compromised, contain vulnerabilities, or introduce malicious code through supply chain attacks. Key dependencies include Jetpack Compose, Solana Mobile Wallet Adapter, the seeker-verify library, Retrofit/OkHttp, and Kotlin coroutines.</p>
+            <table>
+                <tr>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Inherent Risk</th>
+                </tr>
+                <tr>
+                    <td><span class="risk-low">Low</span> &mdash; Dependencies are well-known, widely-used libraries maintained by Google, Solana Mobile, and established open-source communities</td>
+                    <td><span class="risk-medium">Medium</span> &mdash; A compromised dependency could potentially exfiltrate locally stored data or modify App behaviour</td>
+                    <td><span class="risk-low">Low</span></td>
+                </tr>
+            </table>
+            <h3>Mitigation Measures</h3>
+            <ul>
+                <li>All primary dependencies are from well-established sources: Google (Jetpack, AndroidX), Solana Mobile (MWA), Square (Retrofit/OkHttp)</li>
+                <li>The seeker-verify library is open source and maintained by the App developer</li>
+                <li>Dependencies are pinned to specific versions in build configuration</li>
+                <li>Gradle dependency verification can detect unexpected changes to published artifacts</li>
+                <li>Regular dependency updates reviewed before adoption</li>
+                <li>App source code is open source, enabling community review</li>
+                <li>The App's minimal data footprint limits the potential impact of a compromised dependency</li>
+            </ul>
+            <p><strong>Residual Risk:</strong> <span class="risk-low">LOW</span> &mdash; The use of well-established, widely-scrutinised libraries from reputable sources, combined with version pinning and the App's minimal data footprint, reduces supply chain risk to an acceptable level.</p>
+        </div>
+
+        <!-- Risk 6: RPC Endpoint Availability -->
+        <div class="risk-card">
+            <div class="risk-header">
+                <h3>R6: RPC Endpoint Availability</h3>
+                <span class="risk-badge badge-low">Residual Risk: LOW</span>
+            </div>
+            <p><strong>Description:</strong> The App relies on external Solana RPC endpoints and price APIs to function. If these services experience downtime, rate limiting, or are discontinued, the App's core functionality would be degraded or unavailable.</p>
+            <table>
+                <tr>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Inherent Risk</th>
+                </tr>
+                <tr>
+                    <td><span class="risk-medium">Medium</span> &mdash; Free-tier RPC endpoints may rate-limit or experience occasional downtime</td>
+                    <td><span class="risk-low">Low</span> &mdash; Temporary loss of functionality only; no data loss or privacy impact</td>
+                    <td><span class="risk-low">Low</span></td>
+                </tr>
+            </table>
+            <h3>Mitigation Measures</h3>
+            <ul>
+                <li>Users can switch between public Solana RPC and Helius RPC, providing fallback</li>
+                <li>Cached SGT verification data (24-hour cache) allows identity display during RPC outages</li>
+                <li>Graceful error handling in the App for network failures</li>
+                <li>No data loss occurs during an RPC outage &mdash; locally stored data remains intact</li>
+                <li>Price APIs (CoinGecko, Jupiter) failing results only in missing USD values, not core functionality loss</li>
+            </ul>
+            <p><strong>Residual Risk:</strong> <span class="risk-low">LOW</span> &mdash; RPC outages cause temporary functional degradation only, with no data loss, privacy impact, or security implications.</p>
+        </div>
+
+        <h2>Risk Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Risk ID</th>
+                    <th>Risk</th>
+                    <th>Inherent Risk</th>
+                    <th>Residual Risk</th>
+                    <th>Owner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>R1</td>
+                    <td>Local Data Breach</td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td>MidMightBit Games</td>
+                </tr>
+                <tr>
+                    <td>R2</td>
+                    <td>Third-Party RPC and API IP Exposure</td>
+                    <td><span class="risk-medium">Medium</span></td>
+                    <td><span class="risk-medium">Medium</span></td>
+                    <td>MidMightBit Games</td>
+                </tr>
+                <tr>
+                    <td>R3</td>
+                    <td>Regulatory and Compliance Risk</td>
+                    <td><span class="risk-medium">Medium</span></td>
+                    <td><span class="risk-medium">Low-Medium</span></td>
+                    <td>MidMightBit Games</td>
+                </tr>
+                <tr>
+                    <td>R4</td>
+                    <td>Encryption Key Management</td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td>MidMightBit Games</td>
+                </tr>
+                <tr>
+                    <td>R5</td>
+                    <td>Supply Chain and Dependencies</td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td>MidMightBit Games</td>
+                </tr>
+                <tr>
+                    <td>R6</td>
+                    <td>RPC Endpoint Availability</td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td><span class="risk-low">Low</span></td>
+                    <td>MidMightBit Games</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Review Schedule</h2>
+        <ul>
+            <li><strong>Last updated:</strong> February 2026</li>
+            <li><strong>Next review:</strong> February 2027 or upon significant change to the App, its dependencies, or the regulatory environment</li>
+            <li><strong>Reviewer:</strong> MidMightBit Games</li>
+            <li><strong>Contact:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></li>
+        </ul>
+
+        <div class="footer">
+            <p>MidMightBit Games | Australia</p>
+        </div>
+    </div>
+</body>
+</html>

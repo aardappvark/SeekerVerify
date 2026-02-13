@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">आपका Seeker डिवाइस साथी</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">वॉलेट कनेक्ट करें</string>
+    <string name="connecting_to_wallet">वॉलेट से कनेक्ट हो रहा है\u2026</string>
+    <string name="requires_sgt">Seeker Genesis Token (SGT) आवश्यक है</string>
+    <string name="wallet_consent_notice">कनेक्ट करने पर, ऑन-चेन डेटा प्रदर्शित करने के लिए आपका सार्वजनिक वॉलेट पता इस डिवाइस पर स्थानीय रूप से संग्रहीत किया जाएगा। किसी भी निजी कुंजी तक पहुँच नहीं की जाती। Solana RPC एंडपॉइंट के अलावा कोई डेटा बाहरी सर्वर को नहीं भेजा जाता।</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="terms_of_service">सेवा की शर्तें</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token सत्यापित हो रहा है\u2026</string>
+    <string name="no_sgt_found">कोई Seeker Genesis Token नहीं मिला</string>
+    <string name="no_sgt_message">यह ऐप विशेष रूप से Seeker डिवाइस मालिकों के लिए है। जारी रखने के लिए Seeker Genesis Token (SGT) वाला वॉलेट कनेक्ट करें।</string>
+    <string name="disconnect_try_another">डिस्कनेक्ट करें &amp; दूसरा वॉलेट आज़माएँ</string>
+    <string name="verification_error">सत्यापन त्रुटि</string>
+    <string name="retry_verification">सत्यापन पुनः प्रयास करें</string>
+    <string name="disconnect_wallet">वॉलेट डिस्कनेक्ट करें</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker पहचान</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">सत्यापित Seeker</string>
+    <string name="verified_seeker_cd">सत्यापित Seeker</string>
+    <string name="share_identity">पहचान साझा करें</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">सत्यापित Seeker मालिक</string>
+    <string name="daily_check_in">दैनिक चेक-इन</string>
+    <string name="current_label">वर्तमान</string>
+    <string name="longest_label">सबसे लंबा</string>
+    <string name="total_label">कुल</string>
+    <string name="checked_in_today">आज चेक-इन हो गया!</string>
+    <string name="check_in">चेक-इन करें</string>
+    <string name="days_suffix">%1$s दिन</string>
+    <string name="share_text_prefix">मैं Seeker हूँ</string>
+    <string name="share_text_verified">Solana Seeker पर सत्यापित SGT धारक</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s दिन</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">पोर्टफोलियो</string>
+    <string name="refresh">रीफ़्रेश करें</string>
+    <string name="total_value">कुल मूल्य</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL बैलेंस</string>
+    <string name="staked_sol">स्टेक किया SOL</string>
+    <string name="liquid_balance">लिक्विड बैलेंस</string>
+    <string name="staked_skr">स्टेक किया SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">अनस्टेकिंग: </string>
+    <string name="rewards_compound">शेयर मूल्य वृद्धि के माध्यम से पुरस्कार स्वचालित रूप से चक्रवृद्धि होते हैं।</string>
+    <string name="no_stake_found">कोई सक्रिय स्टेक नहीं मिला। पुरस्कार अर्जित करने के लिए SKR स्टेक करें।</string>
+    <string name="financial_disclaimer">कीमतें तृतीय-पक्ष API से प्राप्त हैं और वर्तमान बाज़ार मूल्यों को प्रतिबिंबित नहीं कर सकतीं। APY परिवर्तनशील है, वर्तमान ऑन-चेन डेटा पर आधारित है, और गारंटीकृत नहीं है। यह वित्तीय सलाह नहीं है।</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker फ़्लीट</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">फ़्लीट में डिवाइस</string>
+    <string name="your_fleet_position">आपकी फ़्लीट स्थिति</string>
+    <string name="position_format">#%1$s / %2$s में से</string>
+    <string name="earlier_than_percent">%1$s%% Seekers से पहले</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">अग्रणी पायनियर \uD83C\uDF1F</string>
+    <string name="early_adopter">अर्ली एडॉप्टर \uD83D\uDE80</string>
+    <string name="fleet_member">फ़्लीट सदस्य \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">सक्रिय स्टेकर</string>
+    <string name="skr_staked_label">स्टेक किया SKR</string>
+    <string name="fleet_data_note">फ़्लीट डेटा ऑन-चेन रिकॉर्ड से अनुमानित है और समय-समय पर अपडेट किया जाता है।</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">एयरड्रॉप स्तर</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">आपकी Season 1 एयरड्रॉप स्थिति और गतिविधि</string>
+    <string name="s2_subtitle">अनुमानित Season 2 स्तरों को देखने के लिए स्वाइप करें</string>
+    <string name="detect_my_s1_tier">मेरा Season 1 स्तर पता लगाएँ</string>
+    <string name="detect_s1_subtitle">अपना Season 1 एयरड्रॉप स्तर और गतिविधि खोजने के लिए ऑन-चेन इतिहास स्कैन करें</string>
+    <string name="scanning_on_chain">ऑन-चेन गतिविधि स्कैन हो रही है\u2026</string>
+    <string name="run_prediction">भविष्यवाणी चलाएँ</string>
+    <string name="run_prediction_subtitle">यह देखने के लिए अपनी ऑन-चेन गतिविधि का विश्लेषण करें कि कौन सा स्तर आपकी प्रोफ़ाइल से मेल खाता है</string>
+    <string name="analyzing_on_chain">ऑन-चेन गतिविधि का विश्लेषण हो रहा है\u2026</string>
+    <string name="re_analyze">पुनः विश्लेषण करें</string>
+    <string name="re_run_prediction">भविष्यवाणी फिर से चलाएँ</string>
+    <string name="your_tier_badge">आपका स्तर</string>
+    <string name="season_1_badge">सीज़न 1</string>
+    <string name="your_prediction_badge">आपकी भविष्यवाणी</string>
+    <string name="season_2_badge">सीज़न 2</string>
+    <string name="per_wallet">प्रति वॉलेट</string>
+    <string name="of_wallets"> वॉलेट में से</string>
+    <string name="s1_wallets_label">S1: वॉलेट का %1$s%%</string>
+    <string name="score_label">स्कोर: %1$s</string>
+    <string name="score_needed">आवश्यक स्कोर: ~%1$s+</string>
+    <string name="top_percent">शीर्ष %1$s%%</string>
+    <string name="score_format">स्कोर: %1$s</string>
+    <string name="score_needed_format">आवश्यक स्कोर: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% वॉलेट</string>
+    <string name="your_s1_position">आपकी Season 1 स्थिति</string>
+    <string name="skr_claimed_format">%1$s SKR दावा किया</string>
+    <string name="top_percent_format">शीर्ष %1$s%%</string>
+    <string name="of_all_seekers">सभी Seekers में से</string>
+    <string name="activity_score">गतिविधि स्कोर</string>
+    <string name="your_on_chain_activity">आपकी ऑन-चेन गतिविधि</string>
+    <string name="s1_claim_not_found">इस वॉलेट पर Season 1 का दावा नहीं मिला। यह तब हो सकता है जब आपने किसी अन्य वॉलेट पर दावा किया हो, या यदि दावा अभी तक संसाधित नहीं हुआ है।</string>
+    <string name="activity_highlights">गतिविधि की मुख्य बातें</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sवाँ %%</string>
+    <string name="season_1_distribution">Season 1 वितरण</string>
+    <string name="eligible_wallets">~1,40,000 पात्र वॉलेट</string>
+    <string name="your_activity_score">आपका गतिविधि स्कोर</string>
+    <string name="score_breakdown">स्कोर विवरण</string>
+    <string name="speculative_notice">केवल अनुमानित अनुमान। Season 1 पैटर्न पर आधारित \u2014 वास्तविक Season 2 मानदंड भिन्न हो सकते हैं। यह वित्तीय सलाह नहीं है।</string>
+    <string name="s1_disclaimer">Season 1 स्तर ऑन-चेन दावा इतिहास से पता लगाया गया। गतिविधि विश्लेषण वर्तमान वॉलेट डेटा पर आधारित। यह केवल सामान्य जानकारी है और वित्तीय सलाह नहीं है।</string>
+    <string name="s2_disclaimer">यह भविष्यवाणी Season 1 पैटर्न और ऑन-चेन गतिविधि पर आधारित एक अनुमानित अनुमान है। वास्तविक Season 2 मानदंड घोषित नहीं किए गए हैं और काफ़ी भिन्न हो सकते हैं। यह वित्तीय सलाह नहीं है। इन भविष्यवाणियों के आधार पर वित्तीय निर्णय न लें।</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">स्कोरिंग मॉडल अंतर्दृष्टि</string>
+    <string name="s1_model_subtitle">आपकी ऑन-चेन गतिविधि इस ऐप के स्कोरिंग मॉडल से कैसे मेल खाती है। यह मॉडल अनुमानित है और वास्तविक मानदंडों को प्रतिबिंबित नहीं कर सकता।</string>
+    <string name="s2_model_subtitle">आपकी गतिविधि इस ऐप के स्कोरिंग मॉडल से कैसे मेल खाती है। यह मॉडल अनुमानित है और वास्तविक Season 2 मानदंडों को प्रतिबिंबित नहीं कर सकता। वित्तीय सलाह नहीं है।</string>
+    <string name="tx_count_low">लेनदेन संख्या: कम</string>
+    <string name="tx_count_low_desc">यह मेट्रिक ऑन-चेन लेनदेन (स्वैप, ट्रांसफ़र, इंटरैक्शन) को मापता है। S1 स्कोरिंग मॉडल में इसका 30%% भार है।</string>
+    <string name="nft_none">NFT होल्डिंग: कोई नहीं पाया</string>
+    <string name="nft_none_desc">यह मेट्रिक वॉलेट में NFT स्वामित्व की जाँच करता है। स्कोरिंग मॉडल में इसका 10%% भार है।</string>
+    <string name="token_diversity_low">टोकन विविधता: कम</string>
+    <string name="token_diversity_low_desc">यह मेट्रिक रखे गए अद्वितीय SPL टोकन की गणना करता है। स्कोरिंग मॉडल में इसका 15%% भार है।</string>
+    <string name="dapp_low">dApp इंटरैक्शन: कम</string>
+    <string name="dapp_low_desc">यह मेट्रिक अद्वितीय प्रोग्राम इंटरैक्शन को ट्रैक करता है। स्कोरिंग मॉडल में इसका 25%% भार है।</string>
+    <string name="wallet_age_recent">वॉलेट आयु: नया</string>
+    <string name="wallet_age_recent_desc">यह मेट्रिक वॉलेट की आयु मापता है। स्कोरिंग मॉडल में इसका 20%% भार है। वॉलेट की आयु समय के साथ स्वाभाविक रूप से बढ़ती है।</string>
+    <string name="strong_activity_profile">मज़बूत गतिविधि प्रोफ़ाइल</string>
+    <string name="strong_activity_s1_desc">आपकी Season 1 ऑन-चेन गतिविधि सभी मापी गई मेट्रिक्स में अच्छा स्कोर करती है।</string>
+    <string name="strong_activity_s2_desc">आपकी ऑन-चेन गतिविधि इस मॉडल में सभी मापी गई मेट्रिक्स में अच्छा स्कोर करती है।</string>
+    <string name="staking_score_format">SKR स्टेकिंग स्कोर: %1$s/100</string>
+    <string name="staking_score_desc">यह मेट्रिक जाँचता है कि SKR स्टेक है या नहीं। स्कोरिंग मॉडल में इसका 20%% भार है।</string>
+    <string name="s1_tier_not_detected">Season 1 स्तर: पता नहीं चला</string>
+    <string name="s1_tier_not_detected_desc">यह मेट्रिक आपके S1 एयरड्रॉप स्तर का उपयोग करता है। इसका 15%% भार है। अपना स्तर पता लगाने के लिए Season 1 टैब का उपयोग करें।</string>
+    <string name="tx_score_format">लेनदेन स्कोर: %1$s/100</string>
+    <string name="tx_score_desc">यह मेट्रिक ऑन-चेन लेनदेन की गणना करता है। स्कोरिंग मॉडल में इसका 15%% भार है।</string>
+    <string name="dapp_score_format">dApp उपयोग स्कोर: %1$s/100</string>
+    <string name="dapp_score_desc">यह मेट्रिक अद्वितीय प्रोग्राम इंटरैक्शन को ट्रैक करता है। स्कोरिंग मॉडल में इसका 10%% भार है।</string>
+    <string name="programs_score_format">प्रोग्राम स्कोर: %1$s/100</string>
+    <string name="programs_score_desc">यह मेट्रिक इंटरैक्ट किए गए विभिन्न Solana प्रोग्रामों की गणना करता है। इसका 12%% भार है।</string>
+    <string name="wallet_age_score_format">वॉलेट आयु स्कोर: %1$s/100</string>
+    <string name="wallet_age_score_desc">यह मेट्रिक वॉलेट की आयु मापता है। इसका 10%% भार है। यह समय के साथ स्वाभाविक रूप से बढ़ता है।</string>
+    <string name="skr_domain_not_detected">.skr डोमेन: पता नहीं चला</string>
+    <string name="skr_domain_desc">यह मेट्रिक .skr डोमेन स्वामित्व की जाँच करता है। स्कोरिंग मॉडल में इसका 5%% भार है।</string>
+    <string name="token_diversity_score_format">टोकन विविधता स्कोर: %1$s/100</string>
+    <string name="token_diversity_score_desc">यह मेट्रिक रखे गए अद्वितीय SPL टोकन की गणना करता है। स्कोरिंग मॉडल में इसका 8%% भार है।</string>
+    <string name="nft_score_format">NFT स्कोर: %1$s/100</string>
+    <string name="nft_score_desc">यह मेट्रिक NFT स्वामित्व की जाँच करता है। स्कोरिंग मॉडल में इसका 5%% भार है।</string>
+
+    <!-- Settings -->
+    <string name="settings">सेटिंग्स</string>
+    <string name="wallet_section">वॉलेट</string>
+    <string name="connected_wallet">कनेक्टेड वॉलेट</string>
+    <string name="seeker_number">Seeker नंबर</string>
+    <string name="network_section">नेटवर्क</string>
+    <string name="use_helius_rpc">Helius RPC उपयोग करें</string>
+    <string name="helius_enabled_desc">उच्च दर सीमा</string>
+    <string name="helius_disabled_desc">सार्वजनिक RPC (दर सीमित)</string>
+    <string name="helius_detail_on">Helius मुफ़्त स्तर उपयोग में (1M क्रेडिट/माह)। तेज़ और अधिक विश्वसनीय।</string>
+    <string name="helius_detail_off">सार्वजनिक Solana RPC उपयोग में। मुफ़्त लेकिन ~5 अनुरोध/सेकंड तक सीमित।</string>
+    <string name="data_section">डेटा</string>
+    <string name="sgt_cache">SGT कैश</string>
+    <string name="sgt_cache_valid">मान्य</string>
+    <string name="sgt_cache_needs_refresh">रीफ़्रेश आवश्यक</string>
+    <string name="sgt_cache_note">RPC कॉल को कम करने के लिए SGT सत्यापन 24 घंटे के लिए कैश किया जाता है।</string>
+    <string name="anonymous_insights">गुमनाम अंतर्दृष्टि</string>
+    <string name="anonymous_insights_desc">सटीकता में सुधार के लिए गुमनाम भविष्यवाणी डेटा साझा करें (जल्द आ रहा है)</string>
+    <string name="about_section">के बारे में</string>
+    <string name="version_label">संस्करण</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">आपका Seeker डिवाइस साथी। SGT स्वामित्व सत्यापित करें, SKR पोर्टफोलियो ट्रैक करें, और ऑन-चेन गतिविधि विश्लेषण देखें।</string>
+    <string name="about_publisher">MidMightBit Games (ऑस्ट्रेलिया) द्वारा</string>
+    <string name="about_architecture">शून्य सर्वर लागत। सभी डेटा डिवाइस पर + ऑन-चेन।</string>
+    <string name="regulatory_disclaimer">Solana Foundation, Solana Mobile Inc., या किसी टोकन जारीकर्ता से संबद्ध नहीं। किसी भी वित्तीय नियामक द्वारा अधिकृत या विनियमित नहीं। वित्तीय सलाह प्रदान नहीं करता।</string>
+    <string name="delete_all_data">सभी डेटा हटाएँ</string>
+    <string name="delete_all_data_desc">इस डिवाइस से सभी कैश डेटा, प्राथमिकताएँ और स्ट्रीक इतिहास स्थायी रूप से मिटाता है।</string>
+    <string name="delete_all_data_title">सभी डेटा हटाएँ?</string>
+    <string name="delete_all_data_confirm_text">यह सभी कैश डेटा, प्राथमिकताएँ, स्ट्रीक इतिहास स्थायी रूप से मिटा देगा और आपके वॉलेट को डिस्कनेक्ट कर देगा। यह कार्रवाई पूर्ववत नहीं की जा सकती।</string>
+    <string name="delete_everything">सब कुछ हटाएँ</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="disconnecting_clears_data">डिस्कनेक्ट करने से सभी कैश डेटा साफ़ हो जाएगा।</string>
+</resources>

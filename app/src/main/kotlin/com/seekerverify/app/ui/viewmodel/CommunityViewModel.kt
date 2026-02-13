@@ -27,6 +27,16 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    // Staking stats
+    private val _activeStakers = MutableStateFlow<Int?>(null)
+    val activeStakers: StateFlow<Int?> = _activeStakers.asStateFlow()
+
+    private val _totalStakedDisplay = MutableStateFlow<Double?>(null)
+    val totalStakedDisplay: StateFlow<Double?> = _totalStakedDisplay.asStateFlow()
+
+    private val _stakingParticipation = MutableStateFlow<Double?>(null)
+    val stakingParticipation: StateFlow<Double?> = _stakingParticipation.asStateFlow()
+
     fun loadCommunity(walletAddress: String, rpcUrl: String) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -48,6 +58,18 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
                 },
                 onFailure = { e ->
                     Log.e(TAG, "Community load failed: ${e.message}")
+                }
+            )
+
+            // Fetch real staking stats from chain
+            CommunityRpcClient.getStakingStats(rpcUrl).fold(
+                onSuccess = { stats ->
+                    _activeStakers.value = stats.activeStakers
+                    _totalStakedDisplay.value = stats.totalStakedDisplay
+                    _stakingParticipation.value = stats.stakingParticipation
+                },
+                onFailure = { e ->
+                    Log.e(TAG, "Staking stats load failed: ${e.message}")
                 }
             )
 

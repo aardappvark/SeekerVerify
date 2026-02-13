@@ -59,6 +59,11 @@ fun CommunityScreen(
     val percentile by viewModel.percentile.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
+    // Staking stats
+    val activeStakers by viewModel.activeStakers.collectAsState()
+    val totalStakedDisplay by viewModel.totalStakedDisplay.collectAsState()
+    val stakingParticipation by viewModel.stakingParticipation.collectAsState()
+
     LaunchedEffect(walletAddress) {
         viewModel.loadCommunity(walletAddress, rpcUrl)
     }
@@ -223,23 +228,33 @@ fun CommunityScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Community Stats Grid
+        // Community Stats Grid — real on-chain data
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            val stakersText = activeStakers?.let { count ->
+                when {
+                    count >= 1000 -> "${numberFormat.format(count / 1000)}K"
+                    else -> numberFormat.format(count)
+                }
+            } ?: "..."
             StatCard(
                 modifier = Modifier.weight(1f),
                 icon = Icons.Filled.Groups,
                 label = "Active Stakers",
-                value = "~40K",
+                value = stakersText,
                 color = SeekerBlue
             )
+
+            val stakedText = stakingParticipation?.let { pct ->
+                "${String.format("%.1f", pct)}%"
+            } ?: "..."
             StatCard(
                 modifier = Modifier.weight(1f),
                 icon = Icons.Filled.Rocket,
                 label = "SKR Staked",
-                value = "~60%",
+                value = stakedText,
                 color = SolanaPurple
             )
         }

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Votre compagnon pour appareil Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Connecter le portefeuille</string>
+    <string name="connecting_to_wallet">Connexion au portefeuille\u2026</string>
+    <string name="requires_sgt">Nécessite un Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">En vous connectant, votre adresse de portefeuille publique sera stockée localement sur cet appareil pour afficher les données on-chain. Aucune clé privée n\u2019est consultée. Aucune donnée n\u2019est envoyée à des serveurs externes au-delà des points de terminaison Solana RPC.</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="terms_of_service">Conditions d\u2019utilisation</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Vérification du Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">Aucun Seeker Genesis Token trouvé</string>
+    <string name="no_sgt_message">Cette application est exclusivement réservée aux propriétaires d\u2019appareils Seeker. Connectez un portefeuille contenant un Seeker Genesis Token (SGT) pour continuer.</string>
+    <string name="disconnect_try_another">Déconnecter &amp; essayer un autre portefeuille</string>
+    <string name="verification_error">Erreur de vérification</string>
+    <string name="retry_verification">Réessayer la vérification</string>
+    <string name="disconnect_wallet">Déconnecter le portefeuille</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Identité Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker vérifié</string>
+    <string name="verified_seeker_cd">Seeker vérifié</string>
+    <string name="share_identity">Partager l\u2019identité</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Propriétaire Seeker vérifié</string>
+    <string name="daily_check_in">Check-in quotidien</string>
+    <string name="current_label">Actuel</string>
+    <string name="longest_label">Le plus long</string>
+    <string name="total_label">Total</string>
+    <string name="checked_in_today">Check-in effectué aujourd\u2019hui !</string>
+    <string name="check_in">Check-in</string>
+    <string name="days_suffix">%1$s jours</string>
+    <string name="share_text_prefix">Je suis Seeker</string>
+    <string name="share_text_verified">Détenteur SGT vérifié sur Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s jours</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portefeuille</string>
+    <string name="refresh">Actualiser</string>
+    <string name="total_value">VALEUR TOTALE</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Solde SOL</string>
+    <string name="staked_sol">SOL staké</string>
+    <string name="liquid_balance">Solde liquide</string>
+    <string name="staked_skr">SKR staké</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Unstaking : </string>
+    <string name="rewards_compound">Les récompenses se composent automatiquement via l\u2019appréciation du prix des parts.</string>
+    <string name="no_stake_found">Aucun staking actif trouvé. Stakez des SKR pour gagner des récompenses.</string>
+    <string name="financial_disclaimer">Les prix proviennent d\u2019API tierces et peuvent ne pas refléter les valeurs actuelles du marché. L\u2019APY est variable, basé sur les données on-chain actuelles, et non garanti. Ceci ne constitue pas un conseil financier.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Flotte Seeker</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">appareils dans la flotte</string>
+    <string name="your_fleet_position">Votre position dans la flotte</string>
+    <string name="position_format">#%1$s sur %2$s</string>
+    <string name="earlier_than_percent">Plus tôt que %1$s%% des Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Pionnier précoce \uD83C\uDF1F</string>
+    <string name="early_adopter">Adopteur précoce \uD83D\uDE80</string>
+    <string name="fleet_member">Membre de la flotte \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Stakers actifs</string>
+    <string name="skr_staked_label">SKR staké</string>
+    <string name="fleet_data_note">Les données de la flotte sont approximées à partir des enregistrements on-chain et actualisées périodiquement.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Niveaux d\u2019airdrop</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">Votre position et activité lors de l\u2019airdrop Season 1</string>
+    <string name="s2_subtitle">Glissez pour explorer les niveaux prédits de la Season 2</string>
+    <string name="detect_my_s1_tier">Détecter mon niveau Season 1</string>
+    <string name="detect_s1_subtitle">Analyser l\u2019historique on-chain pour trouver votre niveau et activité d\u2019airdrop Season 1</string>
+    <string name="scanning_on_chain">Analyse de l\u2019activité on-chain\u2026</string>
+    <string name="run_prediction">Lancer la prédiction</string>
+    <string name="run_prediction_subtitle">Analysez votre activité on-chain pour voir quel niveau correspond à votre profil</string>
+    <string name="analyzing_on_chain">Analyse de l\u2019activité on-chain\u2026</string>
+    <string name="re_analyze">Réanalyser</string>
+    <string name="re_run_prediction">Relancer la prédiction</string>
+    <string name="your_tier_badge">VOTRE NIVEAU</string>
+    <string name="season_1_badge">SAISON 1</string>
+    <string name="your_prediction_badge">VOTRE PRÉDICTION</string>
+    <string name="season_2_badge">SAISON 2</string>
+    <string name="per_wallet">par portefeuille</string>
+    <string name="of_wallets"> des portefeuilles</string>
+    <string name="s1_wallets_label">S1 : %1$s%% des portefeuilles</string>
+    <string name="score_label">Score : %1$s</string>
+    <string name="score_needed">Score requis : ~%1$s+</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="score_format">Score : %1$s</string>
+    <string name="score_needed_format">Score requis : ~%1$s+</string>
+    <string name="s1_wallets_format">S1 : %1$s%% des portefeuilles</string>
+    <string name="your_s1_position">Votre position Season 1</string>
+    <string name="skr_claimed_format">%1$s SKR réclamés</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="of_all_seekers">de tous les Seekers</string>
+    <string name="activity_score">Score d\u2019activité</string>
+    <string name="your_on_chain_activity">Votre activité on-chain</string>
+    <string name="s1_claim_not_found">Réclamation Season 1 non trouvée sur ce portefeuille. Cela peut se produire si vous avez réclamé sur un autre portefeuille, ou si la réclamation n\u2019a pas encore été traitée.</string>
+    <string name="activity_highlights">Points forts de l\u2019activité</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$se %%</string>
+    <string name="season_1_distribution">Distribution Season 1</string>
+    <string name="eligible_wallets">~140 000 portefeuilles éligibles</string>
+    <string name="your_activity_score">Votre score d\u2019activité</string>
+    <string name="score_breakdown">Détail du score</string>
+    <string name="speculative_notice">Estimation spéculative uniquement. Basée sur les modèles de la Season 1 \u2014 les critères réels de la Season 2 peuvent différer. Ceci ne constitue pas un conseil financier.</string>
+    <string name="s1_disclaimer">Niveau Season 1 détecté à partir de l\u2019historique des réclamations on-chain. Analyse d\u2019activité basée sur les données actuelles du portefeuille. Ceci est une information générale uniquement et ne constitue pas un conseil financier.</string>
+    <string name="s2_disclaimer">Cette prédiction est une estimation spéculative basée sur les modèles de la Season 1 et l\u2019activité on-chain. Les critères réels de la Season 2 n\u2019ont pas été annoncés et peuvent différer significativement. Ceci ne constitue pas un conseil financier. Ne prenez pas de décisions financières basées sur ces prédictions.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Aperçu du modèle de notation</string>
+    <string name="s1_model_subtitle">Comment votre activité on-chain correspond au modèle de notation de cette application. Ce modèle est spéculatif et peut ne pas refléter les critères réels.</string>
+    <string name="s2_model_subtitle">Comment votre activité correspond au modèle de notation de cette application. Ce modèle est spéculatif et peut ne pas refléter les critères réels de la Season 2. Ceci ne constitue pas un conseil financier.</string>
+    <string name="tx_count_low">Nombre de transactions : Faible</string>
+    <string name="tx_count_low_desc">Cette métrique mesure les transactions on-chain (échanges, transferts, interactions). Elle a un poids de 30%% dans le modèle de notation S1.</string>
+    <string name="nft_none">Détention de NFT : Aucune détectée</string>
+    <string name="nft_none_desc">Cette métrique vérifie la possession de NFT dans le portefeuille. Elle a un poids de 10%% dans le modèle de notation.</string>
+    <string name="token_diversity_low">Diversité des tokens : Faible</string>
+    <string name="token_diversity_low_desc">Cette métrique compte les tokens SPL uniques détenus. Elle a un poids de 15%% dans le modèle de notation.</string>
+    <string name="dapp_low">Interactions dApp : Faibles</string>
+    <string name="dapp_low_desc">Cette métrique suit les interactions uniques avec les programmes. Elle a un poids de 25%% dans le modèle de notation.</string>
+    <string name="wallet_age_recent">Âge du portefeuille : Récent</string>
+    <string name="wallet_age_recent_desc">Cette métrique mesure l\u2019âge du portefeuille. Elle a un poids de 20%% dans le modèle de notation. L\u2019âge du portefeuille augmente naturellement avec le temps.</string>
+    <string name="strong_activity_profile">Profil d\u2019activité solide</string>
+    <string name="strong_activity_s1_desc">Votre activité on-chain Season 1 obtient de bons résultats sur toutes les métriques mesurées.</string>
+    <string name="strong_activity_s2_desc">Votre activité on-chain obtient de bons résultats sur toutes les métriques mesurées dans ce modèle.</string>
+    <string name="staking_score_format">Score de staking SKR : %1$s/100</string>
+    <string name="staking_score_desc">Cette métrique vérifie si des SKR sont stakés. Elle a un poids de 20%% dans le modèle de notation.</string>
+    <string name="s1_tier_not_detected">Niveau Season 1 : Non détecté</string>
+    <string name="s1_tier_not_detected_desc">Cette métrique utilise votre niveau d\u2019airdrop S1. Elle a un poids de 15%%. Utilisez l\u2019onglet Season 1 pour détecter votre niveau.</string>
+    <string name="tx_score_format">Score de transactions : %1$s/100</string>
+    <string name="tx_score_desc">Cette métrique compte les transactions on-chain. Elle a un poids de 15%% dans le modèle de notation.</string>
+    <string name="dapp_score_format">Score d\u2019utilisation dApp : %1$s/100</string>
+    <string name="dapp_score_desc">Cette métrique suit les interactions uniques avec les programmes. Elle a un poids de 10%% dans le modèle de notation.</string>
+    <string name="programs_score_format">Score des programmes : %1$s/100</string>
+    <string name="programs_score_desc">Cette métrique compte les programmes Solana distincts avec lesquels vous avez interagi. Elle a un poids de 12%%.</string>
+    <string name="wallet_age_score_format">Score d\u2019âge du portefeuille : %1$s/100</string>
+    <string name="wallet_age_score_desc">Cette métrique mesure l\u2019âge du portefeuille. Elle a un poids de 10%%. Il augmente naturellement avec le temps.</string>
+    <string name="skr_domain_not_detected">Domaine .skr : Non détecté</string>
+    <string name="skr_domain_desc">Cette métrique vérifie la possession d\u2019un domaine .skr. Elle a un poids de 5%% dans le modèle de notation.</string>
+    <string name="token_diversity_score_format">Score de diversité des tokens : %1$s/100</string>
+    <string name="token_diversity_score_desc">Cette métrique compte les tokens SPL uniques détenus. Elle a un poids de 8%% dans le modèle de notation.</string>
+    <string name="nft_score_format">Score NFT : %1$s/100</string>
+    <string name="nft_score_desc">Cette métrique vérifie la possession de NFT. Elle a un poids de 5%% dans le modèle de notation.</string>
+
+    <!-- Settings -->
+    <string name="settings">Paramètres</string>
+    <string name="wallet_section">Portefeuille</string>
+    <string name="connected_wallet">Portefeuille connecté</string>
+    <string name="seeker_number">Numéro Seeker</string>
+    <string name="network_section">Réseau</string>
+    <string name="use_helius_rpc">Utiliser Helius RPC</string>
+    <string name="helius_enabled_desc">Limites de requêtes supérieures</string>
+    <string name="helius_disabled_desc">RPC public (limité en requêtes)</string>
+    <string name="helius_detail_on">Utilisation du niveau gratuit Helius (1M crédits/mois). Plus rapide et plus fiable.</string>
+    <string name="helius_detail_off">Utilisation du RPC public Solana. Gratuit mais limité à ~5 requêtes/seconde.</string>
+    <string name="data_section">Données</string>
+    <string name="sgt_cache">Cache SGT</string>
+    <string name="sgt_cache_valid">Valide</string>
+    <string name="sgt_cache_needs_refresh">Actualisation nécessaire</string>
+    <string name="sgt_cache_note">La vérification SGT est mise en cache pendant 24 heures pour minimiser les appels RPC.</string>
+    <string name="anonymous_insights">Statistiques anonymes</string>
+    <string name="anonymous_insights_desc">Partager des données de prédiction anonymisées pour améliorer la précision (bientôt disponible)</string>
+    <string name="about_section">À propos</string>
+    <string name="version_label">Version</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Votre compagnon pour appareil Seeker. Vérifiez la possession de SGT, suivez votre portefeuille SKR et consultez l\u2019analyse d\u2019activité on-chain.</string>
+    <string name="about_publisher">Par MidMightBit Games (Australie)</string>
+    <string name="about_architecture">Aucun coût serveur. Toutes les données sur l\u2019appareil + on-chain.</string>
+    <string name="regulatory_disclaimer">Non affilié à Solana Foundation, Solana Mobile Inc., ni à aucun émetteur de tokens. Non autorisé ni réglementé par aucun régulateur financier. Ne fournit pas de conseils financiers.</string>
+    <string name="delete_all_data">Supprimer toutes les données</string>
+    <string name="delete_all_data_desc">Efface définitivement toutes les données en cache, les préférences et l\u2019historique de séries depuis cet appareil.</string>
+    <string name="delete_all_data_title">Supprimer toutes les données ?</string>
+    <string name="delete_all_data_confirm_text">Cela effacera définitivement toutes les données en cache, les préférences, l\u2019historique de séries et déconnectera votre portefeuille. Cette action est irréversible.</string>
+    <string name="delete_everything">Tout supprimer</string>
+    <string name="cancel">Annuler</string>
+    <string name="disconnecting_clears_data">La déconnexion effacera toutes les données en cache.</string>
+</resources>

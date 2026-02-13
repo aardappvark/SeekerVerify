@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legitimate Interest Assessment - Seeker Verify</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #c8ccd8;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #0066ff; }
+        h1 { border-bottom: 2px solid #0066ff; padding-bottom: 10px; }
+        h2 { margin-top: 40px; }
+        h3 { color: #e0e0e0; margin-top: 25px; }
+        a { color: #0066ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        nav { margin-bottom: 30px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav a { margin-right: 20px; }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 6px; }
+        ol { padding-left: 25px; }
+        ol li { margin-bottom: 6px; }
+        strong { color: #e0e0e0; }
+        .subtitle { font-size: 1.1em; margin-bottom: 30px; }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.9em; color: #555; }
+        .outcome {
+            background: rgba(20, 241, 149, 0.08);
+            border: 1px solid rgba(20, 241, 149, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .outcome strong { color: #14F195; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="copyright.html">Copyright</a>
+            <a href="legitimate-interest-assessment.html">LIA</a>
+            <a href="data-processing-register.html">Processing Register</a>
+            <a href="risk-register.html">Risk Register</a>
+            <a href="incident-response-plan.html">Incident Response</a>
+        </nav>
+
+        <h1>Legitimate Interest Assessment</h1>
+        <p class="subtitle"><strong>Seeker Verify</strong><br>
+        <strong>Version 1.0.0 | February 2026</strong></p>
+
+        <p>This Legitimate Interest Assessment (LIA) documents the analysis conducted by MidMightBit Games to determine whether legitimate interest under GDPR Article 6(1)(f) is the appropriate legal basis for processing wallet public addresses within the Seeker Verify application.</p>
+
+        <h2>1. Purpose Test</h2>
+
+        <h3>1.1 What Is the Processing?</h3>
+        <p>Seeker Verify processes a single data element: the user's Solana wallet public address. This address is used to:</p>
+        <ul>
+            <li>Query the Solana blockchain to verify ownership of a Seeker Genesis Token (SGT)</li>
+            <li>Retrieve and display on-chain data including SKR token balance, staking position, rewards, and SOL balance</li>
+            <li>Resolve .skr domain names associated with the wallet</li>
+            <li>Calculate community fleet position and adopter tier based on publicly available on-chain data</li>
+            <li>Generate an on-device Season 2 airdrop prediction based on on-chain activity</li>
+            <li>Fetch USD price equivalents for SOL and SKR from third-party price APIs</li>
+        </ul>
+
+        <h3>1.2 What Is the Legitimate Interest?</h3>
+        <p>The legitimate interest is providing a companion app service that allows Seeker device owners to verify their SGT status and view their on-chain portfolio data in a convenient, unified interface. This serves both:</p>
+        <ul>
+            <li><strong>The controller's interest:</strong> Providing the core functionality of the App as described to users</li>
+            <li><strong>The user's interest:</strong> Easily accessing and understanding their own publicly available on-chain data without needing to navigate raw blockchain explorers</li>
+        </ul>
+
+        <h3>1.3 Is the Processing Necessary for That Purpose?</h3>
+        <p>Yes. The wallet public address is the sole identifier on the Solana blockchain. Without it, the App cannot query any on-chain data. There is no alternative identifier that could achieve the same purpose with less data. The wallet public address is the minimum data element required.</p>
+
+        <h2>2. Necessity Test</h2>
+
+        <h3>2.1 Is This the Least Intrusive Way to Achieve the Purpose?</h3>
+        <p>Yes, for the following reasons:</p>
+        <ul>
+            <li><strong>Minimal data collection:</strong> Only the wallet public address is collected. No name, email, device ID, location, or other personal information is requested or stored.</li>
+            <li><strong>Local-only storage:</strong> The wallet address is stored exclusively on the user's device using AES-256 encrypted SharedPreferences backed by the Android Keystore. No data is transmitted to any MidMightBit Games server.</li>
+            <li><strong>No server infrastructure:</strong> The App has zero server-side components. All processing occurs on-device.</li>
+            <li><strong>No analytics or tracking:</strong> No analytics SDKs, advertising SDKs, crash reporting, or telemetry of any kind are embedded in the App.</li>
+            <li><strong>Read-only operation:</strong> The App never creates blockchain transactions or modifies any on-chain state.</li>
+        </ul>
+
+        <h3>2.2 Could Consent Be Used Instead?</h3>
+        <p>While consent (Article 6(1)(a)) could theoretically be used, legitimate interest is more appropriate because:</p>
+        <ul>
+            <li>The user voluntarily initiates the wallet connection through an explicit action (tapping "Connect Wallet" and approving in their wallet app)</li>
+            <li>The processing is minimal, expected, and directly requested by the user</li>
+            <li>The data (wallet public address) is already publicly visible on the Solana blockchain</li>
+            <li>The power dynamic is balanced &mdash; the App is free, open source, and the user can disconnect at any time</li>
+            <li>Relying on consent for processing that is inherently expected by the user would create unnecessary friction without improving data protection</li>
+        </ul>
+
+        <h2>3. Balancing Test</h2>
+
+        <h3>3.1 Nature of the Data</h3>
+        <ul>
+            <li>The wallet public address is a pseudonymous identifier. It does not directly identify a natural person by name.</li>
+            <li>The address is already publicly visible on the Solana blockchain to anyone with an internet connection.</li>
+            <li>No special category data (Article 9) is processed.</li>
+            <li>No criminal offence data (Article 10) is processed.</li>
+        </ul>
+
+        <h3>3.2 Reasonable Expectations of the Data Subject</h3>
+        <ul>
+            <li>Users download a blockchain companion app and voluntarily connect their wallet. They reasonably expect the App to use their wallet address to query on-chain data.</li>
+            <li>The App's description on the Google Play Store clearly states its purpose: SGT verification and portfolio display.</li>
+            <li>The wallet connection flow requires explicit user action: tapping "Connect Wallet" and then approving the connection in their wallet app (e.g., Phantom, Solflare).</li>
+            <li>The processing aligns precisely with what the user expects when performing this action.</li>
+        </ul>
+
+        <h3>3.3 Impact on Data Subjects</h3>
+        <ul>
+            <li><strong>Positive impact:</strong> Users gain convenient access to their on-chain data, SGT verification, and community position.</li>
+            <li><strong>Negative impact:</strong> Minimal. The wallet address is already public. Local encrypted storage reduces risk compared to server-side storage. No profiling or automated decision-making occurs beyond what the user explicitly requests.</li>
+            <li><strong>Risk of harm:</strong> Low. Even in a worst-case device compromise, the exposed data (a public wallet address) is already available on public blockchain explorers.</li>
+        </ul>
+
+        <h3>3.4 Relationship Between Controller and Data Subject</h3>
+        <ul>
+            <li>Direct relationship: The user installs the App and actively connects their wallet.</li>
+            <li>No power imbalance: The App is free, has no premium tiers, and does not gatekeep any functionality behind data collection.</li>
+            <li>Full user control: The user can disconnect their wallet and delete all data at any time with a single tap.</li>
+        </ul>
+
+        <h3>3.5 Additional Factors</h3>
+        <ul>
+            <li>No data is shared with third parties beyond what is inherent in standard internet protocol (IP address exposure during RPC calls).</li>
+            <li>No data aggregation or cross-referencing with other data sources occurs.</li>
+            <li>No data is used for marketing, profiling, or any secondary purpose.</li>
+            <li>The App is open source, allowing full transparency into how data is handled.</li>
+        </ul>
+
+        <h2>4. Safeguards</h2>
+        <p>The following safeguards are in place to protect data subjects' rights and interests:</p>
+
+        <h3>4.1 Technical Safeguards</h3>
+        <ul>
+            <li><strong>AES-256 encryption:</strong> Wallet address stored using Android EncryptedSharedPreferences with AES-256-GCM (values) and AES-256-SIV (keys)</li>
+            <li><strong>Android Keystore:</strong> Encryption keys are hardware-backed where supported</li>
+            <li><strong>HTTPS/TLS:</strong> All network communications are encrypted in transit</li>
+            <li><strong>No cleartext traffic:</strong> The App enforces HTTPS for all connections</li>
+            <li><strong>No server-side storage:</strong> Zero server infrastructure eliminates server-side breach risk</li>
+        </ul>
+
+        <h3>4.2 Organisational Safeguards</h3>
+        <ul>
+            <li><strong>Privacy Policy:</strong> Comprehensive privacy policy accessible within the App and on the website</li>
+            <li><strong>Transparent processing:</strong> All data visible to the user within the App at all times</li>
+            <li><strong>Easy opt-out:</strong> One-tap wallet disconnect immediately deletes all stored data</li>
+            <li><strong>Data minimisation:</strong> Only the wallet public address is collected; all other displayed data is fetched on-demand from the blockchain</li>
+            <li><strong>Open source:</strong> Full source code available for inspection</li>
+        </ul>
+
+        <h3>4.3 Rights Facilitation</h3>
+        <ul>
+            <li><strong>Right to erasure:</strong> Disconnect Wallet or Delete All Data in Settings</li>
+            <li><strong>Right to access:</strong> All data visible in-app (Identity, Portfolio, Settings screens)</li>
+            <li><strong>Right to object:</strong> Disconnect wallet at any time</li>
+            <li><strong>Right to restriction:</strong> Disconnect wallet to cease all processing</li>
+            <li><strong>Right to portability:</strong> Wallet address is already in the user's possession</li>
+            <li><strong>Contact:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a> for any data protection requests</li>
+        </ul>
+
+        <h2>5. Conclusion</h2>
+
+        <div class="outcome">
+            <p><strong>Outcome: Legitimate interest is the appropriate legal basis.</strong></p>
+            <p>The processing of wallet public addresses under GDPR Article 6(1)(f) is justified because:</p>
+            <ul>
+                <li>The purpose is clear, specific, and directly serves the user's interest</li>
+                <li>The wallet public address is the minimum data necessary and is already publicly available on the blockchain</li>
+                <li>Users voluntarily initiate the processing and can cease it instantly</li>
+                <li>The impact on data subjects is minimal to positive</li>
+                <li>Robust technical and organisational safeguards are in place</li>
+                <li>The processing aligns precisely with the user's reasonable expectations</li>
+                <li>No data is transmitted to MidMightBit Games or any third-party for secondary purposes</li>
+            </ul>
+            <p>The legitimate interests of the controller and the data subjects are not overridden by the data subjects' rights, freedoms, or interests. This assessment will be reviewed annually or when significant changes are made to the App's data processing activities.</p>
+        </div>
+
+        <h2>6. Review Schedule</h2>
+        <ul>
+            <li><strong>Next review:</strong> February 2027 or upon significant change to processing activities</li>
+            <li><strong>Reviewer:</strong> MidMightBit Games</li>
+            <li><strong>Contact:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></li>
+        </ul>
+
+        <div class="footer">
+            <p>MidMightBit Games | Australia</p>
+        </div>
+    </div>
+</body>
+</html>

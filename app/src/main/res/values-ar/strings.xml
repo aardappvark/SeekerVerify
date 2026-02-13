@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">رفيقك لجهاز Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">ربط المحفظة</string>
+    <string name="connecting_to_wallet">جاري الاتصال بالمحفظة\u2026</string>
+    <string name="requires_sgt">يتطلب Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">بالاتصال، سيتم تخزين عنوان محفظتك العام محلياً على هذا الجهاز لعرض البيانات على السلسلة. لا يتم الوصول إلى المفاتيح الخاصة. لا يتم إرسال بيانات إلى خوادم خارجية بخلاف نقاط Solana RPC.</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_service">شروط الخدمة</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">جاري التحقق من Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">لم يتم العثور على Seeker Genesis Token</string>
+    <string name="no_sgt_message">هذا التطبيق حصري لمالكي أجهزة Seeker. قم بربط محفظة تحتوي على Seeker Genesis Token (SGT) للمتابعة.</string>
+    <string name="disconnect_try_another">قطع الاتصال وجرب محفظة أخرى</string>
+    <string name="verification_error">خطأ في التحقق</string>
+    <string name="retry_verification">إعادة محاولة التحقق</string>
+    <string name="disconnect_wallet">قطع اتصال المحفظة</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">هوية Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker موثّق</string>
+    <string name="verified_seeker_cd">Seeker موثّق</string>
+    <string name="share_identity">مشاركة الهوية</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">المحفظة</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">مالك Seeker موثّق</string>
+    <string name="daily_check_in">تسجيل الدخول اليومي</string>
+    <string name="current_label">الحالي</string>
+    <string name="longest_label">الأطول</string>
+    <string name="total_label">الإجمالي</string>
+    <string name="checked_in_today">تم التسجيل اليوم!</string>
+    <string name="check_in">تسجيل الدخول</string>
+    <string name="days_suffix">%1$s أيام</string>
+    <string name="share_text_prefix">أنا Seeker</string>
+    <string name="share_text_verified">حامل SGT موثّق على Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s أيام</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">المحفظة الاستثمارية</string>
+    <string name="refresh">تحديث</string>
+    <string name="total_value">القيمة الإجمالية</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">رصيد SOL</string>
+    <string name="staked_sol">SOL المُكدّس</string>
+    <string name="liquid_balance">الرصيد السائل</string>
+    <string name="staked_skr">SKR المُكدّس</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">إلغاء التكديس: </string>
+    <string name="rewards_compound">يتم إعادة استثمار المكافآت تلقائياً من خلال ارتفاع سعر الحصة.</string>
+    <string name="no_stake_found">لم يتم العثور على تكديس نشط. قم بتكديس SKR لكسب المكافآت.</string>
+    <string name="financial_disclaimer">الأسعار مصدرها واجهات برمجة تطبيقات خارجية وقد لا تعكس قيم السوق الحالية. العائد السنوي متغير، يعتمد على بيانات السلسلة الحالية، وغير مضمون. هذه ليست نصيحة مالية.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">أسطول Seeker</string>
+    <string name="total_seekers">إجمالي SEEKERS</string>
+    <string name="devices_in_fleet">أجهزة في الأسطول</string>
+    <string name="your_fleet_position">موقعك في الأسطول</string>
+    <string name="position_format">#%1$s من %2$s</string>
+    <string name="earlier_than_percent">أبكر من %1$s%% من Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">رائد مبكر \uD83C\uDF1F</string>
+    <string name="early_adopter">متبنّي مبكر \uD83D\uDE80</string>
+    <string name="fleet_member">عضو الأسطول \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">المُكدّسون النشطون</string>
+    <string name="skr_staked_label">SKR المُكدّس</string>
+    <string name="fleet_data_note">بيانات الأسطول تقريبية من سجلات السلسلة ويتم تحديثها دورياً.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">مستويات الإنزال الجوي</string>
+    <string name="season_1">الموسم 1</string>
+    <string name="season_2">الموسم 2</string>
+    <string name="s1_subtitle">موقعك ونشاطك في الإنزال الجوي للموسم 1</string>
+    <string name="s2_subtitle">اسحب لاستكشاف المستويات المتوقعة للموسم 2</string>
+    <string name="detect_my_s1_tier">اكتشف مستواي في الموسم 1</string>
+    <string name="detect_s1_subtitle">مسح سجل السلسلة للعثور على مستوى ونشاط الإنزال الجوي للموسم 1</string>
+    <string name="scanning_on_chain">جاري مسح النشاط على السلسلة\u2026</string>
+    <string name="run_prediction">تشغيل التوقع</string>
+    <string name="run_prediction_subtitle">تحليل نشاطك على السلسلة لمعرفة أي مستوى يتطابق مع ملفك</string>
+    <string name="analyzing_on_chain">جاري تحليل النشاط على السلسلة\u2026</string>
+    <string name="re_analyze">إعادة التحليل</string>
+    <string name="re_run_prediction">إعادة تشغيل التوقع</string>
+    <string name="your_tier_badge">مستواك</string>
+    <string name="season_1_badge">الموسم 1</string>
+    <string name="your_prediction_badge">توقعك</string>
+    <string name="season_2_badge">الموسم 2</string>
+    <string name="per_wallet">لكل محفظة</string>
+    <string name="of_wallets"> من المحافظ</string>
+    <string name="s1_wallets_label">S1: %1$s%% من المحافظ</string>
+    <string name="score_label">النقاط: %1$s</string>
+    <string name="score_needed">النقاط المطلوبة: ~%1$s+</string>
+    <string name="top_percent">أعلى %1$s%%</string>
+    <string name="score_format">النقاط: %1$s</string>
+    <string name="score_needed_format">النقاط المطلوبة: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% من المحافظ</string>
+    <string name="your_s1_position">موقعك في الموسم 1</string>
+    <string name="skr_claimed_format">تم المطالبة بـ %1$s SKR</string>
+    <string name="top_percent_format">أعلى %1$s%%</string>
+    <string name="of_all_seekers">من جميع Seekers</string>
+    <string name="activity_score">نقاط النشاط</string>
+    <string name="your_on_chain_activity">نشاطك على السلسلة</string>
+    <string name="s1_claim_not_found">لم يتم العثور على مطالبة الموسم 1 في هذه المحفظة. قد يحدث هذا إذا طالبت من محفظة أخرى أو إذا لم تتم معالجة المطالبة بعد.</string>
+    <string name="activity_highlights">أبرز الأنشطة</string>
+    <string name="season_1_vs_season_2">الموسم 1 مقابل الموسم 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">توزيع الموسم 1</string>
+    <string name="eligible_wallets">~140,000 محفظة مؤهلة</string>
+    <string name="your_activity_score">نقاط نشاطك</string>
+    <string name="score_breakdown">تفصيل النقاط</string>
+    <string name="speculative_notice">تقدير تخميني فقط. مبني على أنماط الموسم 1 \u2014 قد تختلف معايير الموسم 2 الفعلية. ليست نصيحة مالية.</string>
+    <string name="s1_disclaimer">تم اكتشاف مستوى الموسم 1 من سجل المطالبات على السلسلة. تحليل النشاط مبني على بيانات المحفظة الحالية. هذه معلومات عامة وليست نصيحة مالية.</string>
+    <string name="s2_disclaimer">هذا التوقع تقدير تخميني مبني على أنماط الموسم 1 ونشاط السلسلة. لم يتم الإعلان عن معايير الموسم 2 الفعلية وقد تختلف بشكل كبير. هذه ليست نصيحة مالية. لا تتخذ قرارات مالية بناءً على هذه التوقعات.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">رؤى نموذج التقييم</string>
+    <string name="s1_model_subtitle">كيف يتم تعيين نشاطك على السلسلة في نموذج التقييم لهذا التطبيق. هذا النموذج تخميني وقد لا يعكس المعايير الفعلية.</string>
+    <string name="s2_model_subtitle">كيف يتم تعيين نشاطك في نموذج التقييم لهذا التطبيق. هذا النموذج تخميني وقد لا يعكس معايير الموسم 2 الفعلية. ليست نصيحة مالية.</string>
+    <string name="tx_count_low">عدد المعاملات: منخفض</string>
+    <string name="tx_count_low_desc">يقيس هذا المقياس المعاملات على السلسلة (مبادلات، تحويلات، تفاعلات). له وزن 30%% في نموذج تقييم S1.</string>
+    <string name="nft_none">حيازات NFT: لم يتم اكتشافها</string>
+    <string name="nft_none_desc">يتحقق هذا المقياس من ملكية NFT في المحفظة. له وزن 10%% في نموذج التقييم.</string>
+    <string name="token_diversity_low">تنوع التوكنات: منخفض</string>
+    <string name="token_diversity_low_desc">يحصي هذا المقياس توكنات SPL الفريدة المملوكة. له وزن 15%% في نموذج التقييم.</string>
+    <string name="dapp_low">تفاعلات dApp: منخفضة</string>
+    <string name="dapp_low_desc">يتتبع هذا المقياس التفاعلات الفريدة مع البرامج. له وزن 25%% في نموذج التقييم.</string>
+    <string name="wallet_age_recent">عمر المحفظة: حديث</string>
+    <string name="wallet_age_recent_desc">يقيس هذا المقياس عمر المحفظة. له وزن 20%% في نموذج التقييم. يزداد عمر المحفظة طبيعياً مع الوقت.</string>
+    <string name="strong_activity_profile">ملف نشاط قوي</string>
+    <string name="strong_activity_s1_desc">نشاطك على السلسلة في الموسم 1 يسجل جيداً عبر جميع المقاييس المُقاسة.</string>
+    <string name="strong_activity_s2_desc">نشاطك على السلسلة يسجل جيداً عبر جميع المقاييس المُقاسة في هذا النموذج.</string>
+    <string name="staking_score_format">نقاط تكديس SKR: %1$s/100</string>
+    <string name="staking_score_desc">يتحقق هذا المقياس مما إذا كان SKR مُكدّساً. له وزن 20%% في نموذج التقييم.</string>
+    <string name="s1_tier_not_detected">مستوى الموسم 1: لم يتم اكتشافه</string>
+    <string name="s1_tier_not_detected_desc">يستخدم هذا المقياس مستوى الإنزال الجوي S1 الخاص بك. له وزن 15%%. استخدم تبويب الموسم 1 لاكتشاف مستواك.</string>
+    <string name="tx_score_format">نقاط المعاملات: %1$s/100</string>
+    <string name="tx_score_desc">يحصي هذا المقياس المعاملات على السلسلة. له وزن 15%% في نموذج التقييم.</string>
+    <string name="dapp_score_format">نقاط استخدام dApp: %1$s/100</string>
+    <string name="dapp_score_desc">يتتبع هذا المقياس التفاعلات الفريدة مع البرامج. له وزن 10%% في نموذج التقييم.</string>
+    <string name="programs_score_format">نقاط البرامج: %1$s/100</string>
+    <string name="programs_score_desc">يحصي هذا المقياس برامج Solana المميزة التي تم التفاعل معها. له وزن 12%%.</string>
+    <string name="wallet_age_score_format">نقاط عمر المحفظة: %1$s/100</string>
+    <string name="wallet_age_score_desc">يقيس هذا المقياس عمر المحفظة. له وزن 10%%. يزداد طبيعياً مع الوقت.</string>
+    <string name="skr_domain_not_detected">نطاق .skr: لم يتم اكتشافه</string>
+    <string name="skr_domain_desc">يتحقق هذا المقياس من ملكية نطاق .skr. له وزن 5%% في نموذج التقييم.</string>
+    <string name="token_diversity_score_format">نقاط تنوع التوكنات: %1$s/100</string>
+    <string name="token_diversity_score_desc">يحصي هذا المقياس توكنات SPL الفريدة المملوكة. له وزن 8%% في نموذج التقييم.</string>
+    <string name="nft_score_format">نقاط NFT: %1$s/100</string>
+    <string name="nft_score_desc">يتحقق هذا المقياس من ملكية NFT. له وزن 5%% في نموذج التقييم.</string>
+
+    <!-- Settings -->
+    <string name="settings">الإعدادات</string>
+    <string name="wallet_section">المحفظة</string>
+    <string name="connected_wallet">المحفظة المتصلة</string>
+    <string name="seeker_number">رقم Seeker</string>
+    <string name="network_section">الشبكة</string>
+    <string name="use_helius_rpc">استخدام Helius RPC</string>
+    <string name="helius_enabled_desc">حدود أعلى للطلبات</string>
+    <string name="helius_disabled_desc">RPC عام (محدود الطلبات)</string>
+    <string name="helius_detail_on">استخدام الطبقة المجانية من Helius (1 مليون رصيد/شهر). أسرع وأكثر موثوقية.</string>
+    <string name="helius_detail_off">استخدام RPC عام لـ Solana. مجاني لكن محدود بـ ~5 طلبات/ثانية.</string>
+    <string name="data_section">البيانات</string>
+    <string name="sgt_cache">ذاكرة التخزين المؤقت لـ SGT</string>
+    <string name="sgt_cache_valid">صالح</string>
+    <string name="sgt_cache_needs_refresh">يحتاج تحديث</string>
+    <string name="sgt_cache_note">يتم تخزين التحقق من SGT مؤقتاً لمدة 24 ساعة لتقليل استدعاءات RPC.</string>
+    <string name="anonymous_insights">رؤى مجهولة</string>
+    <string name="anonymous_insights_desc">مشاركة بيانات التوقع المجهولة لتحسين الدقة (قريباً)</string>
+    <string name="about_section">حول</string>
+    <string name="version_label">الإصدار</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">رفيقك لجهاز Seeker. تحقق من ملكية SGT، تتبع محفظة SKR، واعرض تحليل النشاط على السلسلة.</string>
+    <string name="about_publisher">بواسطة MidMightBit Games (أستراليا)</string>
+    <string name="about_architecture">بدون تكلفة خادم. جميع البيانات على الجهاز + على السلسلة.</string>
+    <string name="regulatory_disclaimer">غير تابع لمؤسسة Solana أو Solana Mobile Inc. أو أي جهة إصدار توكنات. غير مرخص أو منظم من قبل أي جهة رقابية مالية. لا يقدم نصائح مالية.</string>
+    <string name="delete_all_data">حذف جميع البيانات</string>
+    <string name="delete_all_data_desc">يمحو نهائياً جميع البيانات المخزنة مؤقتاً والتفضيلات وسجل السلاسل من هذا الجهاز.</string>
+    <string name="delete_all_data_title">حذف جميع البيانات؟</string>
+    <string name="delete_all_data_confirm_text">سيمحو هذا نهائياً جميع البيانات المخزنة مؤقتاً والتفضيلات وسجل السلاسل وسيقطع اتصال محفظتك. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="delete_everything">حذف الكل</string>
+    <string name="cancel">إلغاء</string>
+    <string name="disconnecting_clears_data">سيؤدي قطع الاتصال إلى مسح جميع البيانات المخزنة مؤقتاً.</string>
+</resources>

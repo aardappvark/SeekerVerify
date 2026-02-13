@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">แอปคู่หูสำหรับอุปกรณ์ Seeker ของคุณ</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">เชื่อมต่อกระเป๋าเงิน</string>
+    <string name="connecting_to_wallet">กำลังเชื่อมต่อกระเป๋าเงิน\u2026</string>
+    <string name="requires_sgt">ต้องมี Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">เมื่อเชื่อมต่อ ที่อยู่กระเป๋าเงินสาธารณะของคุณจะถูกจัดเก็บไว้ในอุปกรณ์นี้เพื่อแสดงข้อมูล on-chain จะไม่มีการเข้าถึงคีย์ส่วนตัวใด ๆ ไม่มีข้อมูลใดถูกส่งไปยังเซิร์ฟเวอร์ภายนอกนอกเหนือจากจุดปลายทาง Solana RPC</string>
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="terms_of_service">เงื่อนไขการให้บริการ</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">กำลังตรวจสอบ Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">ไม่พบ Seeker Genesis Token</string>
+    <string name="no_sgt_message">แอปนี้สำหรับเจ้าของอุปกรณ์ Seeker เท่านั้น เชื่อมต่อกระเป๋าเงินที่มี Seeker Genesis Token (SGT) เพื่อดำเนินการต่อ</string>
+    <string name="disconnect_try_another">ยกเลิกการเชื่อมต่อ &amp; ลองกระเป๋าเงินอื่น</string>
+    <string name="verification_error">ข้อผิดพลาดในการตรวจสอบ</string>
+    <string name="retry_verification">ลองตรวจสอบอีกครั้ง</string>
+    <string name="disconnect_wallet">ยกเลิกการเชื่อมต่อกระเป๋าเงิน</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">ตัวตน Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker ที่ยืนยันแล้ว</string>
+    <string name="verified_seeker_cd">Seeker ที่ยืนยันแล้ว</string>
+    <string name="share_identity">แชร์ตัวตน</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">เจ้าของ Seeker ที่ยืนยันแล้ว</string>
+    <string name="daily_check_in">เช็คอินประจำวัน</string>
+    <string name="current_label">ปัจจุบัน</string>
+    <string name="longest_label">ยาวที่สุด</string>
+    <string name="total_label">รวม</string>
+    <string name="checked_in_today">เช็คอินวันนี้แล้ว!</string>
+    <string name="check_in">เช็คอิน</string>
+    <string name="days_suffix">%1$s วัน</string>
+    <string name="share_text_prefix">ฉันคือ Seeker</string>
+    <string name="share_text_verified">ผู้ถือ SGT ที่ยืนยันแล้วบน Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s วัน</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">พอร์ตโฟลิโอ</string>
+    <string name="refresh">รีเฟรช</string>
+    <string name="total_value">มูลค่ารวม</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">ยอดคงเหลือ SOL</string>
+    <string name="staked_sol">SOL ที่ stake แล้ว</string>
+    <string name="liquid_balance">ยอดคงเหลือสภาพคล่อง</string>
+    <string name="staked_skr">SKR ที่ stake แล้ว</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">กำลัง unstake: </string>
+    <string name="rewards_compound">รางวัลจะถูกทบต้นโดยอัตโนมัติผ่านการเพิ่มขึ้นของราคาส่วนแบ่ง</string>
+    <string name="no_stake_found">ไม่พบ stake ที่ใช้งานอยู่ Stake SKR เพื่อรับรางวัล</string>
+    <string name="financial_disclaimer">ราคาได้มาจาก API ของบุคคลที่สามและอาจไม่สะท้อนมูลค่าตลาดปัจจุบัน APY เปลี่ยนแปลงได้ อิงจากข้อมูล on-chain ปัจจุบัน และไม่รับประกัน นี่ไม่ใช่คำแนะนำทางการเงิน</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">กองเรือ Seeker</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">อุปกรณ์ในกองเรือ</string>
+    <string name="your_fleet_position">ตำแหน่งกองเรือของคุณ</string>
+    <string name="position_format">#%1$s จาก %2$s</string>
+    <string name="earlier_than_percent">เร็วกว่า %1$s%% ของ Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">ผู้บุกเบิกรุ่นแรก \uD83C\uDF1F</string>
+    <string name="early_adopter">ผู้ใช้งานรุ่นแรก \uD83D\uDE80</string>
+    <string name="fleet_member">สมาชิกกองเรือ \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Staker ที่ใช้งานอยู่</string>
+    <string name="skr_staked_label">SKR ที่ stake แล้ว</string>
+    <string name="fleet_data_note">ข้อมูลกองเรือเป็นค่าประมาณจากบันทึก on-chain และอัปเดตเป็นระยะ</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">ระดับ Airdrop</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">ตำแหน่งและกิจกรรม airdrop Season 1 ของคุณ</string>
+    <string name="s2_subtitle">ปัดเพื่อสำรวจระดับที่คาดการณ์ของ Season 2</string>
+    <string name="detect_my_s1_tier">ตรวจหาระดับ Season 1 ของฉัน</string>
+    <string name="detect_s1_subtitle">สแกนประวัติ on-chain เพื่อค้นหาระดับและกิจกรรม airdrop Season 1 ของคุณ</string>
+    <string name="scanning_on_chain">กำลังสแกนกิจกรรม on-chain\u2026</string>
+    <string name="run_prediction">รันการคาดการณ์</string>
+    <string name="run_prediction_subtitle">วิเคราะห์กิจกรรม on-chain ของคุณเพื่อดูว่าระดับใดตรงกับโปรไฟล์ของคุณ</string>
+    <string name="analyzing_on_chain">กำลังวิเคราะห์กิจกรรม on-chain\u2026</string>
+    <string name="re_analyze">วิเคราะห์อีกครั้ง</string>
+    <string name="re_run_prediction">รันการคาดการณ์อีกครั้ง</string>
+    <string name="your_tier_badge">ระดับของคุณ</string>
+    <string name="season_1_badge">ซีซัน 1</string>
+    <string name="your_prediction_badge">การคาดการณ์ของคุณ</string>
+    <string name="season_2_badge">ซีซัน 2</string>
+    <string name="per_wallet">ต่อกระเป๋าเงิน</string>
+    <string name="of_wallets"> ของกระเป๋าเงิน</string>
+    <string name="s1_wallets_label">S1: %1$s%% ของกระเป๋า</string>
+    <string name="score_label">คะแนน: %1$s</string>
+    <string name="score_needed">คะแนนที่ต้องการ: ~%1$s+</string>
+    <string name="top_percent">อันดับ %1$s%% แรก</string>
+    <string name="score_format">คะแนน: %1$s</string>
+    <string name="score_needed_format">คะแนนที่ต้องการ: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% ของกระเป๋าเงิน</string>
+    <string name="your_s1_position">ตำแหน่ง Season 1 ของคุณ</string>
+    <string name="skr_claimed_format">%1$s SKR ที่รับแล้ว</string>
+    <string name="top_percent_format">อันดับ %1$s%% แรก</string>
+    <string name="of_all_seekers">ของ Seekers ทั้งหมด</string>
+    <string name="activity_score">คะแนนกิจกรรม</string>
+    <string name="your_on_chain_activity">กิจกรรม on-chain ของคุณ</string>
+    <string name="s1_claim_not_found">ไม่พบการรับ Season 1 บนกระเป๋าเงินนี้ อาจเกิดขึ้นหากคุณรับบนกระเป๋าเงินอื่น หรือหากการรับยังไม่ได้รับการประมวลผล</string>
+    <string name="activity_highlights">จุดเด่นของกิจกรรม</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$s %%</string>
+    <string name="season_1_distribution">การกระจาย Season 1</string>
+    <string name="eligible_wallets">~140,000 กระเป๋าเงินที่มีสิทธิ์</string>
+    <string name="your_activity_score">คะแนนกิจกรรมของคุณ</string>
+    <string name="score_breakdown">รายละเอียดคะแนน</string>
+    <string name="speculative_notice">การประมาณการเชิงคาดเดาเท่านั้น อิงจากรูปแบบ Season 1 \u2014 เกณฑ์จริงของ Season 2 อาจแตกต่าง ไม่ใช่คำแนะนำทางการเงิน</string>
+    <string name="s1_disclaimer">ระดับ Season 1 ตรวจพบจากประวัติการรับ on-chain การวิเคราะห์กิจกรรมอิงจากข้อมูลกระเป๋าเงินปัจจุบัน นี่เป็นข้อมูลทั่วไปเท่านั้นและไม่ใช่คำแนะนำทางการเงิน</string>
+    <string name="s2_disclaimer">การคาดการณ์นี้เป็นการประมาณการเชิงคาดเดาจากรูปแบบ Season 1 และกิจกรรม on-chain เกณฑ์จริงของ Season 2 ยังไม่ได้ประกาศและอาจแตกต่างอย่างมาก นี่ไม่ใช่คำแนะนำทางการเงิน อย่าตัดสินใจทางการเงินจากการคาดการณ์เหล่านี้</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">ข้อมูลเชิงลึกโมเดลการให้คะแนน</string>
+    <string name="s1_model_subtitle">กิจกรรม on-chain ของคุณสอดคล้องกับโมเดลการให้คะแนนของแอปนี้อย่างไร โมเดลนี้เป็นเชิงคาดเดาและอาจไม่สะท้อนเกณฑ์จริง</string>
+    <string name="s2_model_subtitle">กิจกรรมของคุณสอดคล้องกับโมเดลการให้คะแนนของแอปนี้อย่างไร โมเดลนี้เป็นเชิงคาดเดาและอาจไม่สะท้อนเกณฑ์จริงของ Season 2 ไม่ใช่คำแนะนำทางการเงิน</string>
+    <string name="tx_count_low">จำนวนธุรกรรม: ต่ำ</string>
+    <string name="tx_count_low_desc">ตัวชี้วัดนี้วัดธุรกรรม on-chain (แลกเปลี่ยน, โอน, การโต้ตอบ) มีน้ำหนัก 30%% ในโมเดลการให้คะแนน S1</string>
+    <string name="nft_none">การถือครอง NFT: ไม่พบ</string>
+    <string name="nft_none_desc">ตัวชี้วัดนี้ตรวจสอบการถือครอง NFT ในกระเป๋าเงิน มีน้ำหนัก 10%% ในโมเดลการให้คะแนน</string>
+    <string name="token_diversity_low">ความหลากหลายของ Token: ต่ำ</string>
+    <string name="token_diversity_low_desc">ตัวชี้วัดนี้นับ token SPL ที่ไม่ซ้ำกันที่ถืออยู่ มีน้ำหนัก 15%% ในโมเดลการให้คะแนน</string>
+    <string name="dapp_low">การโต้ตอบ dApp: ต่ำ</string>
+    <string name="dapp_low_desc">ตัวชี้วัดนี้ติดตามการโต้ตอบโปรแกรมที่ไม่ซ้ำกัน มีน้ำหนัก 25%% ในโมเดลการให้คะแนน</string>
+    <string name="wallet_age_recent">อายุกระเป๋าเงิน: ใหม่</string>
+    <string name="wallet_age_recent_desc">ตัวชี้วัดนี้วัดอายุกระเป๋าเงิน มีน้ำหนัก 20%% ในโมเดลการให้คะแนน อายุกระเป๋าเงินเพิ่มขึ้นตามธรรมชาติเมื่อเวลาผ่านไป</string>
+    <string name="strong_activity_profile">โปรไฟล์กิจกรรมแข็งแกร่ง</string>
+    <string name="strong_activity_s1_desc">กิจกรรม on-chain Season 1 ของคุณได้คะแนนดีในทุกตัวชี้วัดที่วัด</string>
+    <string name="strong_activity_s2_desc">กิจกรรม on-chain ของคุณได้คะแนนดีในทุกตัวชี้วัดที่วัดในโมเดลนี้</string>
+    <string name="staking_score_format">คะแนน Staking SKR: %1$s/100</string>
+    <string name="staking_score_desc">ตัวชี้วัดนี้ตรวจสอบว่า SKR ถูก stake หรือไม่ มีน้ำหนัก 20%% ในโมเดลการให้คะแนน</string>
+    <string name="s1_tier_not_detected">ระดับ Season 1: ไม่พบ</string>
+    <string name="s1_tier_not_detected_desc">ตัวชี้วัดนี้ใช้ระดับ airdrop S1 ของคุณ มีน้ำหนัก 15%% ใช้แท็บ Season 1 เพื่อตรวจหาระดับของคุณ</string>
+    <string name="tx_score_format">คะแนนธุรกรรม: %1$s/100</string>
+    <string name="tx_score_desc">ตัวชี้วัดนี้นับธุรกรรม on-chain มีน้ำหนัก 15%% ในโมเดลการให้คะแนน</string>
+    <string name="dapp_score_format">คะแนนการใช้งาน dApp: %1$s/100</string>
+    <string name="dapp_score_desc">ตัวชี้วัดนี้ติดตามการโต้ตอบโปรแกรมที่ไม่ซ้ำกัน มีน้ำหนัก 10%% ในโมเดลการให้คะแนน</string>
+    <string name="programs_score_format">คะแนนโปรแกรม: %1$s/100</string>
+    <string name="programs_score_desc">ตัวชี้วัดนี้นับโปรแกรม Solana ที่แตกต่างกันที่มีการโต้ตอบ มีน้ำหนัก 12%%</string>
+    <string name="wallet_age_score_format">คะแนนอายุกระเป๋าเงิน: %1$s/100</string>
+    <string name="wallet_age_score_desc">ตัวชี้วัดนี้วัดอายุกระเป๋าเงิน มีน้ำหนัก 10%% เพิ่มขึ้นตามธรรมชาติเมื่อเวลาผ่านไป</string>
+    <string name="skr_domain_not_detected">โดเมน .skr: ไม่พบ</string>
+    <string name="skr_domain_desc">ตัวชี้วัดนี้ตรวจสอบการเป็นเจ้าของโดเมน .skr มีน้ำหนัก 5%% ในโมเดลการให้คะแนน</string>
+    <string name="token_diversity_score_format">คะแนนความหลากหลายของ Token: %1$s/100</string>
+    <string name="token_diversity_score_desc">ตัวชี้วัดนี้นับ token SPL ที่ไม่ซ้ำกันที่ถืออยู่ มีน้ำหนัก 8%% ในโมเดลการให้คะแนน</string>
+    <string name="nft_score_format">คะแนน NFT: %1$s/100</string>
+    <string name="nft_score_desc">ตัวชี้วัดนี้ตรวจสอบการถือครอง NFT มีน้ำหนัก 5%% ในโมเดลการให้คะแนน</string>
+
+    <!-- Settings -->
+    <string name="settings">การตั้งค่า</string>
+    <string name="wallet_section">กระเป๋าเงิน</string>
+    <string name="connected_wallet">กระเป๋าเงินที่เชื่อมต่อ</string>
+    <string name="seeker_number">หมายเลข Seeker</string>
+    <string name="network_section">เครือข่าย</string>
+    <string name="use_helius_rpc">ใช้ Helius RPC</string>
+    <string name="helius_enabled_desc">ขีดจำกัดคำขอสูงกว่า</string>
+    <string name="helius_disabled_desc">RPC สาธารณะ (จำกัดอัตรา)</string>
+    <string name="helius_detail_on">ใช้แพ็กเกจฟรี Helius (1 ล้านเครดิต/เดือน) เร็วกว่าและน่าเชื่อถือกว่า</string>
+    <string name="helius_detail_off">ใช้ RPC สาธารณะ Solana ฟรีแต่จำกัดที่ ~5 คำขอ/วินาที</string>
+    <string name="data_section">ข้อมูล</string>
+    <string name="sgt_cache">แคช SGT</string>
+    <string name="sgt_cache_valid">ใช้ได้</string>
+    <string name="sgt_cache_needs_refresh">ต้องรีเฟรช</string>
+    <string name="sgt_cache_note">การตรวจสอบ SGT ถูกแคชไว้ 24 ชั่วโมงเพื่อลดการเรียก RPC</string>
+    <string name="anonymous_insights">ข้อมูลเชิงลึกแบบไม่ระบุตัวตน</string>
+    <string name="anonymous_insights_desc">แชร์ข้อมูลการคาดการณ์แบบไม่ระบุตัวตนเพื่อปรับปรุงความแม่นยำ (เร็ว ๆ นี้)</string>
+    <string name="about_section">เกี่ยวกับ</string>
+    <string name="version_label">เวอร์ชัน</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">แอปคู่หูสำหรับอุปกรณ์ Seeker ของคุณ ตรวจสอบความเป็นเจ้าของ SGT ติดตามพอร์ตโฟลิโอ SKR และดูการวิเคราะห์กิจกรรม on-chain</string>
+    <string name="about_publisher">โดย MidMightBit Games (ออสเตรเลีย)</string>
+    <string name="about_architecture">ไม่มีค่าใช้จ่ายเซิร์ฟเวอร์ ข้อมูลทั้งหมดอยู่บนอุปกรณ์ + on-chain</string>
+    <string name="regulatory_disclaimer">ไม่เกี่ยวข้องกับ Solana Foundation, Solana Mobile Inc. หรือผู้ออก token ใด ๆ ไม่ได้รับอนุญาตหรือกำกับดูแลโดยหน่วยงานกำกับดูแลทางการเงินใด ๆ ไม่ให้คำแนะนำทางการเงิน</string>
+    <string name="delete_all_data">ลบข้อมูลทั้งหมด</string>
+    <string name="delete_all_data_desc">ลบข้อมูลแคช การตั้งค่า และประวัติสตรีคทั้งหมดจากอุปกรณ์นี้อย่างถาวร</string>
+    <string name="delete_all_data_title">ลบข้อมูลทั้งหมด?</string>
+    <string name="delete_all_data_confirm_text">การดำเนินการนี้จะลบข้อมูลแคช การตั้งค่า ประวัติสตรีคทั้งหมดอย่างถาวร และยกเลิกการเชื่อมต่อกระเป๋าเงินของคุณ ไม่สามารถย้อนกลับได้</string>
+    <string name="delete_everything">ลบทุกอย่าง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="disconnecting_clears_data">การยกเลิกการเชื่อมต่อจะล้างข้อมูลแคชทั้งหมด</string>
+</resources>

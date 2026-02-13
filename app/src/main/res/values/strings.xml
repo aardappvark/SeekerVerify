@@ -1,4 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- General / App-wide -->
     <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Your Seeker device companion</string>
+
+    <!-- WalletConnectScreen -->
+    <string name="connect_wallet">Connect Wallet</string>
+    <string name="connecting_to_wallet">Connecting to wallet\u2026</string>
+    <string name="requires_sgt">Requires a Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">By connecting, your public wallet address will be stored locally on this device to display on-chain data. No private keys are accessed. No data is sent to external servers beyond Solana RPC endpoints.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+
+    <!-- MainActivity SGT Screens -->
+    <string name="verifying_sgt">Verifying Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">No Seeker Genesis Token Found</string>
+    <string name="no_sgt_message">This app is exclusively for Seeker device owners. Connect a wallet that holds a Seeker Genesis Token (SGT) to continue.</string>
+    <string name="disconnect_try_another">Disconnect &amp; Try Another Wallet</string>
+    <string name="verification_error">Verification Error</string>
+    <string name="retry_verification">Retry Verification</string>
+    <string name="disconnect_wallet">Disconnect Wallet</string>
+
+    <!-- IdentityScreen -->
+    <string name="seeker_identity">Seeker Identity</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Verified Seeker</string>
+    <string name="share_identity">Share Identity</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Verified Seeker Owner</string>
+    <string name="daily_check_in">Daily Check-In</string>
+    <string name="current_label">Current</string>
+    <string name="longest_label">Longest</string>
+    <string name="total_label">Total</string>
+    <string name="checked_in_today">Checked in today!</string>
+    <string name="check_in">Check In</string>
+    <string name="share_text_prefix">I\'m Seeker</string>
+    <string name="share_text_verified">Verified SGT holder on Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_suffix">%1$s days</string>
+
+    <!-- PortfolioScreen -->
+    <string name="portfolio">Portfolio</string>
+    <string name="refresh">Refresh</string>
+    <string name="total_value">TOTAL VALUE</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL Balance</string>
+    <string name="staked_sol">Staked SOL</string>
+    <string name="liquid_balance">Liquid Balance</string>
+    <string name="staked_skr">Staked SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Unstaking: </string>
+    <string name="rewards_compound">Rewards compound automatically via share price appreciation.</string>
+    <string name="no_stake_found">No active stake found. Stake SKR to earn rewards.</string>
+    <string name="financial_disclaimer">Prices sourced from third-party APIs and may not reflect current market values. APY is variable, based on current on-chain data, and not guaranteed. This is not financial advice.</string>
+
+    <!-- CommunityScreen -->
+    <string name="seeker_fleet">Seeker Fleet</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">devices in the fleet</string>
+    <string name="your_fleet_position">Your Fleet Position</string>
+    <string name="earlier_than_percent">Earlier than %1$s%% of Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Early Pioneer \uD83C\uDF1F</string>
+    <string name="early_adopter">Early Adopter \uD83D\uDE80</string>
+    <string name="fleet_member">Fleet Member \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Active Stakers</string>
+    <string name="skr_staked_label">SKR Staked</string>
+    <string name="fleet_data_note">Fleet data is approximated from on-chain records and refreshed periodically.</string>
+
+    <!-- PredictorScreen -->
+    <string name="airdrop_tiers">Airdrop Tiers</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">Your Season 1 airdrop position and activity</string>
+    <string name="s2_subtitle">Swipe to explore predicted Season 2 tiers</string>
+    <string name="detect_my_s1_tier">Detect My Season 1 Tier</string>
+    <string name="detect_s1_subtitle">Scan on-chain history to find your Season 1 airdrop tier and activity</string>
+    <string name="scanning_on_chain">Scanning on-chain activity\u2026</string>
+    <string name="run_prediction">Run Prediction</string>
+    <string name="run_prediction_subtitle">Analyze your on-chain activity to see which tier matches your profile</string>
+    <string name="analyzing_on_chain">Analyzing on-chain activity\u2026</string>
+    <string name="re_analyze">Re-analyze</string>
+    <string name="re_run_prediction">Re-run Prediction</string>
+    <string name="your_tier_badge">YOUR TIER</string>
+    <string name="season_1_badge">SEASON 1</string>
+    <string name="your_prediction_badge">YOUR PREDICTION</string>
+    <string name="season_2_badge">SEASON 2</string>
+    <string name="per_wallet">per wallet</string>
+    <string name="of_wallets"> of wallets</string>
+    <string name="score_label">Score: %1$s</string>
+    <string name="score_needed">Score needed: ~%1$s+</string>
+    <string name="s1_wallets_label">S1: %1$s%% of wallets</string>
+    <string name="your_s1_position">Your Season 1 Position</string>
+    <string name="skr_claimed_format">%1$s SKR claimed</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="of_all_seekers">of all Seekers</string>
+    <string name="activity_score">Activity Score</string>
+    <string name="your_on_chain_activity">Your On-Chain Activity</string>
+    <string name="s1_claim_not_found">Season 1 claim not found on this wallet. This may happen if you claimed on a different wallet, or if the claim hasn\'t been processed yet.</string>
+    <string name="activity_highlights">Activity Highlights</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">Season 1 Distribution</string>
+    <string name="eligible_wallets">~140,000 eligible wallets</string>
+    <string name="your_activity_score">Your Activity Score</string>
+    <string name="score_breakdown">Score Breakdown</string>
+    <string name="speculative_notice">Speculative estimate only. Based on Season 1 patterns \u2014 actual Season 2 criteria may differ. Not financial advice.</string>
+    <string name="s1_disclaimer">Season 1 tier detected from on-chain claim history. Activity analysis based on current wallet data. This is general information only and is not financial advice.</string>
+    <string name="s2_disclaimer">This prediction is a speculative estimate based on Season 1 patterns and on-chain activity. Actual Season 2 criteria have not been announced and may differ significantly. This is not financial advice. Do not make financial decisions based on these predictions.</string>
+
+    <!-- Predictor Activity Planner / Scoring Model Insights -->
+    <string name="scoring_model_insights">Scoring Model Insights</string>
+    <string name="s1_model_subtitle">How your on-chain activity maps to this app\u2019s scoring model. This model is speculative and may not reflect actual criteria.</string>
+    <string name="s2_model_subtitle">How your activity maps to this app\u2019s scoring model. This model is speculative and may not reflect actual Season 2 criteria. Not financial advice.</string>
+    <string name="tx_count_low">Transaction Count: Low</string>
+    <string name="tx_count_low_desc">This metric measures on-chain transactions (swaps, transfers, interactions). It has a 30%% weight in the S1 scoring model.</string>
+    <string name="nft_none">NFT Holdings: None detected</string>
+    <string name="nft_none_desc">This metric checks for NFT ownership in the wallet. It has a 10%% weight in the scoring model.</string>
+    <string name="token_diversity_low">Token Diversity: Low</string>
+    <string name="token_diversity_low_desc">This metric counts unique SPL tokens held. It has a 15%% weight in the scoring model.</string>
+    <string name="dapp_low">dApp Interactions: Low</string>
+    <string name="dapp_low_desc">This metric tracks unique program interactions. It has a 25%% weight in the scoring model.</string>
+    <string name="wallet_age_recent">Wallet Age: Recent</string>
+    <string name="wallet_age_recent_desc">This metric measures wallet age. It has a 20%% weight in the scoring model. Wallet age increases naturally over time.</string>
+    <string name="strong_activity_profile">Strong Activity Profile</string>
+    <string name="strong_activity_s1_desc">Your Season 1 on-chain activity scores well across all measured metrics.</string>
+    <string name="strong_activity_s2_desc">Your on-chain activity scores well across all measured metrics in this model.</string>
+    <string name="staking_score_format">SKR Staking Score: %1$s/100</string>
+    <string name="staking_score_desc">This metric checks whether SKR is staked. It has a 20%% weight in the scoring model.</string>
+    <string name="s1_tier_not_detected">Season 1 Tier: Not detected</string>
+    <string name="s1_tier_not_detected_desc">This metric uses your S1 airdrop tier. It has a 15%% weight. Use the Season 1 tab to detect your tier.</string>
+    <string name="tx_score_format">Transaction Score: %1$s/100</string>
+    <string name="tx_score_desc">This metric counts on-chain transactions. It has a 15%% weight in the scoring model.</string>
+    <string name="dapp_score_format">dApp Usage Score: %1$s/100</string>
+    <string name="dapp_score_desc">This metric tracks unique program interactions. It has a 10%% weight in the scoring model.</string>
+    <string name="programs_score_format">Programs Score: %1$s/100</string>
+    <string name="programs_score_desc">This metric counts distinct Solana programs interacted with. It has a 12%% weight.</string>
+    <string name="wallet_age_score_format">Wallet Age Score: %1$s/100</string>
+    <string name="wallet_age_score_desc">This metric measures wallet age. It has a 10%% weight. This increases naturally over time.</string>
+    <string name="skr_domain_not_detected">.skr Domain: Not detected</string>
+    <string name="skr_domain_desc">This metric checks for .skr domain ownership. It has a 5%% weight in the scoring model.</string>
+    <string name="token_diversity_score_format">Token Diversity Score: %1$s/100</string>
+    <string name="token_diversity_score_desc">This metric counts unique SPL tokens held. It has an 8%% weight in the scoring model.</string>
+    <string name="nft_score_format">NFT Score: %1$s/100</string>
+    <string name="nft_score_desc">This metric checks for NFT ownership. It has a 5%% weight in the scoring model.</string>
+
+    <!-- SettingsScreen -->
+    <string name="settings">Settings</string>
+    <string name="wallet_section">Wallet</string>
+    <string name="connected_wallet">Connected Wallet</string>
+    <string name="seeker_number">Seeker Number</string>
+    <string name="network_section">Network</string>
+    <string name="use_helius_rpc">Use Helius RPC</string>
+    <string name="helius_enabled_desc">Higher rate limits</string>
+    <string name="helius_disabled_desc">Public RPC (rate limited)</string>
+    <string name="helius_detail_on">Using Helius free tier (1M credits/month). Faster and more reliable.</string>
+    <string name="helius_detail_off">Using public Solana RPC. Free but rate-limited to ~5 requests/second.</string>
+    <string name="data_section">Data</string>
+    <string name="sgt_cache">SGT Cache</string>
+    <string name="sgt_cache_valid">Valid</string>
+    <string name="sgt_cache_needs_refresh">Needs refresh</string>
+    <string name="sgt_cache_note">SGT verification is cached for 24 hours to minimize RPC calls.</string>
+    <string name="anonymous_insights">Anonymous Insights</string>
+    <string name="anonymous_insights_desc">Share anonymized prediction data to improve accuracy (coming soon)</string>
+    <string name="about_section">About</string>
+    <string name="version_label">Version</string>
+    <string name="about_app_desc">Your Seeker device companion. Verify SGT ownership, track SKR portfolio, and view on-chain activity analysis.</string>
+    <string name="about_publisher">By MidMightBit Games (Australia)</string>
+    <string name="about_architecture">Zero server cost. All data on-device + on-chain.</string>
+    <string name="regulatory_disclaimer">Not affiliated with Solana Foundation, Solana Mobile Inc., or any token issuer. Not authorised or regulated by any financial regulator. Does not provide financial advice.</string>
+    <string name="delete_all_data">Delete All Data</string>
+    <string name="delete_all_data_desc">Permanently erases all cached data, preferences, and streak history from this device.</string>
+    <string name="delete_all_data_title">Delete All Data?</string>
+    <string name="delete_all_data_confirm_text">This will permanently erase all cached data, preferences, streak history, and disconnect your wallet. This action cannot be undone.</string>
+    <string name="delete_everything">Delete Everything</string>
+    <string name="cancel">Cancel</string>
+    <string name="disconnecting_clears_data">Disconnecting will clear all cached data.</string>
+
+    <!-- Aliases for translation key consistency -->
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="days_format">%1$s days</string>
+    <string name="position_format">#%1$s of %2$s</string>
+    <string name="s1_wallets_format">S1: %1$s%% of wallets</string>
+    <string name="score_format">Score: %1$s</string>
+    <string name="score_needed_format">Score needed: ~%1$s+</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="verified_seeker_cd">Verified Seeker</string>
+
 </resources>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Ứng dụng đồng hành cho thiết bị Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Kết nối ví</string>
+    <string name="connecting_to_wallet">Đang kết nối ví\u2026</string>
+    <string name="requires_sgt">Yêu cầu Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">Khi kết nối, địa chỉ ví công khai của bạn sẽ được lưu trữ cục bộ trên thiết bị này để hiển thị dữ liệu on-chain. Không có khóa riêng tư nào được truy cập. Không có dữ liệu nào được gửi đến máy chủ bên ngoài ngoài các điểm cuối Solana RPC.</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="terms_of_service">Điều khoản dịch vụ</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Đang xác minh Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">Không tìm thấy Seeker Genesis Token</string>
+    <string name="no_sgt_message">Ứng dụng này dành riêng cho chủ sở hữu thiết bị Seeker. Kết nối ví chứa Seeker Genesis Token (SGT) để tiếp tục.</string>
+    <string name="disconnect_try_another">Ngắt kết nối &amp; thử ví khác</string>
+    <string name="verification_error">Lỗi xác minh</string>
+    <string name="retry_verification">Thử lại xác minh</string>
+    <string name="disconnect_wallet">Ngắt kết nối ví</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Danh tính Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker đã xác minh</string>
+    <string name="verified_seeker_cd">Seeker đã xác minh</string>
+    <string name="share_identity">Chia sẻ danh tính</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Chủ sở hữu Seeker đã xác minh</string>
+    <string name="daily_check_in">Check-in hàng ngày</string>
+    <string name="current_label">Hiện tại</string>
+    <string name="longest_label">Dài nhất</string>
+    <string name="total_label">Tổng</string>
+    <string name="checked_in_today">Đã check-in hôm nay!</string>
+    <string name="check_in">Check-in</string>
+    <string name="days_suffix">%1$s ngày</string>
+    <string name="share_text_prefix">Tôi là Seeker</string>
+    <string name="share_text_verified">Người nắm giữ SGT đã xác minh trên Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s ngày</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Danh mục đầu tư</string>
+    <string name="refresh">Làm mới</string>
+    <string name="total_value">TỔNG GIÁ TRỊ</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Số dư SOL</string>
+    <string name="staked_sol">SOL đã stake</string>
+    <string name="liquid_balance">Số dư thanh khoản</string>
+    <string name="staked_skr">SKR đã stake</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Đang unstake: </string>
+    <string name="rewards_compound">Phần thưởng được tự động gộp lãi thông qua tăng giá cổ phần.</string>
+    <string name="no_stake_found">Không tìm thấy stake đang hoạt động. Stake SKR để nhận phần thưởng.</string>
+    <string name="financial_disclaimer">Giá được lấy từ API bên thứ ba và có thể không phản ánh giá trị thị trường hiện tại. APY thay đổi, dựa trên dữ liệu on-chain hiện tại và không được đảm bảo. Đây không phải lời khuyên tài chính.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Hạm đội Seeker</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">thiết bị trong hạm đội</string>
+    <string name="your_fleet_position">Vị trí hạm đội của bạn</string>
+    <string name="position_format">#%1$s / %2$s</string>
+    <string name="earlier_than_percent">Sớm hơn %1$s%% Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Người tiên phong sớm \uD83C\uDF1F</string>
+    <string name="early_adopter">Người chấp nhận sớm \uD83D\uDE80</string>
+    <string name="fleet_member">Thành viên hạm đội \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Staker đang hoạt động</string>
+    <string name="skr_staked_label">SKR đã stake</string>
+    <string name="fleet_data_note">Dữ liệu hạm đội được ước tính từ hồ sơ on-chain và được cập nhật định kỳ.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Cấp độ Airdrop</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">Vị trí và hoạt động airdrop Season 1 của bạn</string>
+    <string name="s2_subtitle">Vuốt để khám phá các cấp độ dự đoán Season 2</string>
+    <string name="detect_my_s1_tier">Phát hiện cấp độ Season 1 của tôi</string>
+    <string name="detect_s1_subtitle">Quét lịch sử on-chain để tìm cấp độ và hoạt động airdrop Season 1 của bạn</string>
+    <string name="scanning_on_chain">Đang quét hoạt động on-chain\u2026</string>
+    <string name="run_prediction">Chạy dự đoán</string>
+    <string name="run_prediction_subtitle">Phân tích hoạt động on-chain của bạn để xem cấp độ nào phù hợp với hồ sơ của bạn</string>
+    <string name="analyzing_on_chain">Đang phân tích hoạt động on-chain\u2026</string>
+    <string name="re_analyze">Phân tích lại</string>
+    <string name="re_run_prediction">Chạy lại dự đoán</string>
+    <string name="your_tier_badge">CẤP CỦA BẠN</string>
+    <string name="season_1_badge">MÙA 1</string>
+    <string name="your_prediction_badge">DỰ ĐOÁN CỦA BẠN</string>
+    <string name="season_2_badge">MÙA 2</string>
+    <string name="per_wallet">mỗi ví</string>
+    <string name="of_wallets"> trong số các ví</string>
+    <string name="s1_wallets_label">S1: %1$s%% ví</string>
+    <string name="score_label">Điểm: %1$s</string>
+    <string name="score_needed">Điểm cần đạt: ~%1$s+</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="score_format">Điểm: %1$s</string>
+    <string name="score_needed_format">Điểm cần thiết: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% số ví</string>
+    <string name="your_s1_position">Vị trí Season 1 của bạn</string>
+    <string name="skr_claimed_format">%1$s SKR đã nhận</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="of_all_seekers">trong tất cả Seekers</string>
+    <string name="activity_score">Điểm hoạt động</string>
+    <string name="your_on_chain_activity">Hoạt động on-chain của bạn</string>
+    <string name="s1_claim_not_found">Không tìm thấy yêu cầu Season 1 trên ví này. Điều này có thể xảy ra nếu bạn đã nhận trên ví khác, hoặc nếu yêu cầu chưa được xử lý.</string>
+    <string name="activity_highlights">Điểm nổi bật hoạt động</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$s %%</string>
+    <string name="season_1_distribution">Phân phối Season 1</string>
+    <string name="eligible_wallets">~140.000 ví đủ điều kiện</string>
+    <string name="your_activity_score">Điểm hoạt động của bạn</string>
+    <string name="score_breakdown">Chi tiết điểm</string>
+    <string name="speculative_notice">Chỉ là ước tính suy đoán. Dựa trên mẫu Season 1 \u2014 tiêu chí thực tế Season 2 có thể khác. Không phải lời khuyên tài chính.</string>
+    <string name="s1_disclaimer">Cấp độ Season 1 được phát hiện từ lịch sử nhận on-chain. Phân tích hoạt động dựa trên dữ liệu ví hiện tại. Đây chỉ là thông tin chung và không phải lời khuyên tài chính.</string>
+    <string name="s2_disclaimer">Dự đoán này là ước tính suy đoán dựa trên mẫu Season 1 và hoạt động on-chain. Tiêu chí thực tế Season 2 chưa được công bố và có thể khác biệt đáng kể. Đây không phải lời khuyên tài chính. Không đưa ra quyết định tài chính dựa trên các dự đoán này.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Thông tin mô hình chấm điểm</string>
+    <string name="s1_model_subtitle">Cách hoạt động on-chain của bạn tương ứng với mô hình chấm điểm của ứng dụng này. Mô hình này mang tính suy đoán và có thể không phản ánh tiêu chí thực tế.</string>
+    <string name="s2_model_subtitle">Cách hoạt động của bạn tương ứng với mô hình chấm điểm của ứng dụng này. Mô hình này mang tính suy đoán và có thể không phản ánh tiêu chí thực tế Season 2. Không phải lời khuyên tài chính.</string>
+    <string name="tx_count_low">Số lượng giao dịch: Thấp</string>
+    <string name="tx_count_low_desc">Chỉ số này đo lường giao dịch on-chain (hoán đổi, chuyển khoản, tương tác). Trọng số 30%% trong mô hình chấm điểm S1.</string>
+    <string name="nft_none">Nắm giữ NFT: Không phát hiện</string>
+    <string name="nft_none_desc">Chỉ số này kiểm tra quyền sở hữu NFT trong ví. Trọng số 10%% trong mô hình chấm điểm.</string>
+    <string name="token_diversity_low">Đa dạng token: Thấp</string>
+    <string name="token_diversity_low_desc">Chỉ số này đếm số token SPL duy nhất đang nắm giữ. Trọng số 15%% trong mô hình chấm điểm.</string>
+    <string name="dapp_low">Tương tác dApp: Thấp</string>
+    <string name="dapp_low_desc">Chỉ số này theo dõi các tương tác chương trình duy nhất. Trọng số 25%% trong mô hình chấm điểm.</string>
+    <string name="wallet_age_recent">Tuổi ví: Mới</string>
+    <string name="wallet_age_recent_desc">Chỉ số này đo tuổi ví. Trọng số 20%% trong mô hình chấm điểm. Tuổi ví tăng tự nhiên theo thời gian.</string>
+    <string name="strong_activity_profile">Hồ sơ hoạt động mạnh</string>
+    <string name="strong_activity_s1_desc">Hoạt động on-chain Season 1 của bạn đạt điểm cao trên tất cả các chỉ số được đo.</string>
+    <string name="strong_activity_s2_desc">Hoạt động on-chain của bạn đạt điểm cao trên tất cả các chỉ số được đo trong mô hình này.</string>
+    <string name="staking_score_format">Điểm staking SKR: %1$s/100</string>
+    <string name="staking_score_desc">Chỉ số này kiểm tra xem SKR có được stake hay không. Trọng số 20%% trong mô hình chấm điểm.</string>
+    <string name="s1_tier_not_detected">Cấp độ Season 1: Không phát hiện</string>
+    <string name="s1_tier_not_detected_desc">Chỉ số này sử dụng cấp độ airdrop S1 của bạn. Trọng số 15%%. Sử dụng tab Season 1 để phát hiện cấp độ của bạn.</string>
+    <string name="tx_score_format">Điểm giao dịch: %1$s/100</string>
+    <string name="tx_score_desc">Chỉ số này đếm giao dịch on-chain. Trọng số 15%% trong mô hình chấm điểm.</string>
+    <string name="dapp_score_format">Điểm sử dụng dApp: %1$s/100</string>
+    <string name="dapp_score_desc">Chỉ số này theo dõi các tương tác chương trình duy nhất. Trọng số 10%% trong mô hình chấm điểm.</string>
+    <string name="programs_score_format">Điểm chương trình: %1$s/100</string>
+    <string name="programs_score_desc">Chỉ số này đếm các chương trình Solana khác nhau đã tương tác. Trọng số 12%%.</string>
+    <string name="wallet_age_score_format">Điểm tuổi ví: %1$s/100</string>
+    <string name="wallet_age_score_desc">Chỉ số này đo tuổi ví. Trọng số 10%%. Tăng tự nhiên theo thời gian.</string>
+    <string name="skr_domain_not_detected">Tên miền .skr: Không phát hiện</string>
+    <string name="skr_domain_desc">Chỉ số này kiểm tra quyền sở hữu tên miền .skr. Trọng số 5%% trong mô hình chấm điểm.</string>
+    <string name="token_diversity_score_format">Điểm đa dạng token: %1$s/100</string>
+    <string name="token_diversity_score_desc">Chỉ số này đếm số token SPL duy nhất đang nắm giữ. Trọng số 8%% trong mô hình chấm điểm.</string>
+    <string name="nft_score_format">Điểm NFT: %1$s/100</string>
+    <string name="nft_score_desc">Chỉ số này kiểm tra quyền sở hữu NFT. Trọng số 5%% trong mô hình chấm điểm.</string>
+
+    <!-- Settings -->
+    <string name="settings">Cài đặt</string>
+    <string name="wallet_section">Ví</string>
+    <string name="connected_wallet">Ví đã kết nối</string>
+    <string name="seeker_number">Số Seeker</string>
+    <string name="network_section">Mạng</string>
+    <string name="use_helius_rpc">Sử dụng Helius RPC</string>
+    <string name="helius_enabled_desc">Giới hạn yêu cầu cao hơn</string>
+    <string name="helius_disabled_desc">RPC công khai (giới hạn tốc độ)</string>
+    <string name="helius_detail_on">Đang sử dụng gói miễn phí Helius (1 triệu tín dụng/tháng). Nhanh hơn và đáng tin cậy hơn.</string>
+    <string name="helius_detail_off">Đang sử dụng RPC công khai Solana. Miễn phí nhưng giới hạn ~5 yêu cầu/giây.</string>
+    <string name="data_section">Dữ liệu</string>
+    <string name="sgt_cache">Bộ nhớ đệm SGT</string>
+    <string name="sgt_cache_valid">Hợp lệ</string>
+    <string name="sgt_cache_needs_refresh">Cần làm mới</string>
+    <string name="sgt_cache_note">Xác minh SGT được lưu đệm trong 24 giờ để giảm thiểu cuộc gọi RPC.</string>
+    <string name="anonymous_insights">Thông tin ẩn danh</string>
+    <string name="anonymous_insights_desc">Chia sẻ dữ liệu dự đoán ẩn danh để cải thiện độ chính xác (sắp có)</string>
+    <string name="about_section">Giới thiệu</string>
+    <string name="version_label">Phiên bản</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Ứng dụng đồng hành cho thiết bị Seeker. Xác minh quyền sở hữu SGT, theo dõi danh mục SKR và xem phân tích hoạt động on-chain.</string>
+    <string name="about_publisher">Bởi MidMightBit Games (Úc)</string>
+    <string name="about_architecture">Không tốn chi phí máy chủ. Tất cả dữ liệu trên thiết bị + on-chain.</string>
+    <string name="regulatory_disclaimer">Không liên kết với Solana Foundation, Solana Mobile Inc., hoặc bất kỳ nhà phát hành token nào. Không được ủy quyền hoặc quản lý bởi bất kỳ cơ quan quản lý tài chính nào. Không cung cấp lời khuyên tài chính.</string>
+    <string name="delete_all_data">Xóa tất cả dữ liệu</string>
+    <string name="delete_all_data_desc">Xóa vĩnh viễn tất cả dữ liệu đệm, tùy chọn và lịch sử chuỗi ngày từ thiết bị này.</string>
+    <string name="delete_all_data_title">Xóa tất cả dữ liệu?</string>
+    <string name="delete_all_data_confirm_text">Thao tác này sẽ xóa vĩnh viễn tất cả dữ liệu đệm, tùy chọn, lịch sử chuỗi ngày và ngắt kết nối ví của bạn. Hành động này không thể hoàn tác.</string>
+    <string name="delete_everything">Xóa tất cả</string>
+    <string name="cancel">Hủy</string>
+    <string name="disconnecting_clears_data">Ngắt kết nối sẽ xóa tất cả dữ liệu đệm.</string>
+</resources>

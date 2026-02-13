@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Je Seeker apparaat metgezel</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Portemonnee verbinden</string>
+    <string name="connecting_to_wallet">Verbinden met portemonnee\u2026</string>
+    <string name="requires_sgt">Vereist een Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">Door te verbinden wordt je openbare portemonnee-adres lokaal op dit apparaat opgeslagen om on-chain gegevens te tonen. Er wordt geen toegang tot privésleutels verkregen. Er worden geen gegevens naar externe servers verzonden buiten Solana RPC-eindpunten.</string>
+    <string name="privacy_policy">Privacybeleid</string>
+    <string name="terms_of_service">Servicevoorwaarden</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token verifiëren\u2026</string>
+    <string name="no_sgt_found">Geen Seeker Genesis Token gevonden</string>
+    <string name="no_sgt_message">Deze app is exclusief voor Seeker-apparaatbezitters. Verbind een portemonnee die een Seeker Genesis Token (SGT) bevat om door te gaan.</string>
+    <string name="disconnect_try_another">Ontkoppelen &amp; andere portemonnee proberen</string>
+    <string name="verification_error">Verificatiefout</string>
+    <string name="retry_verification">Verificatie opnieuw proberen</string>
+    <string name="disconnect_wallet">Portemonnee ontkoppelen</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker Identiteit</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Geverifieerde Seeker</string>
+    <string name="verified_seeker_cd">Geverifieerde Seeker</string>
+    <string name="share_identity">Identiteit delen</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">PORTEMONNEE</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Geverifieerde Seeker-eigenaar</string>
+    <string name="daily_check_in">Dagelijkse check-in</string>
+    <string name="current_label">Huidig</string>
+    <string name="longest_label">Langst</string>
+    <string name="total_label">Totaal</string>
+    <string name="checked_in_today">Vandaag ingecheckt!</string>
+    <string name="check_in">Inchecken</string>
+    <string name="days_suffix">%1$s dagen</string>
+    <string name="share_text_prefix">Ik ben Seeker</string>
+    <string name="share_text_verified">Geverifieerde SGT-houder op Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s dagen</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portfolio</string>
+    <string name="refresh">Vernieuwen</string>
+    <string name="total_value">TOTALE WAARDE</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL-saldo</string>
+    <string name="staked_sol">Gestakete SOL</string>
+    <string name="liquid_balance">Liquide saldo</string>
+    <string name="staked_skr">Gestakete SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Unstaking: </string>
+    <string name="rewards_compound">Beloningen worden automatisch herbelegd via waardevermeerdering van het aandeel.</string>
+    <string name="no_stake_found">Geen actieve stake gevonden. Stake SKR om beloningen te verdienen.</string>
+    <string name="financial_disclaimer">Prijzen zijn afkomstig van API\'s van derden en weerspiegelen mogelijk niet de huidige marktwaarden. APY is variabel, gebaseerd op huidige on-chain gegevens, en niet gegarandeerd. Dit is geen financieel advies.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker Vloot</string>
+    <string name="total_seekers">TOTAAL SEEKERS</string>
+    <string name="devices_in_fleet">apparaten in de vloot</string>
+    <string name="your_fleet_position">Jouw vlootpositie</string>
+    <string name="position_format">#%1$s van %2$s</string>
+    <string name="earlier_than_percent">Eerder dan %1$s%% van de Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Vroege pionier \uD83C\uDF1F</string>
+    <string name="early_adopter">Vroege gebruiker \uD83D\uDE80</string>
+    <string name="fleet_member">Vlootlid \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Actieve stakers</string>
+    <string name="skr_staked_label">Gestakete SKR</string>
+    <string name="fleet_data_note">Vlootgegevens zijn benaderd op basis van on-chain records en worden periodiek vernieuwd.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Airdrop niveaus</string>
+    <string name="season_1">Seizoen 1</string>
+    <string name="season_2">Seizoen 2</string>
+    <string name="s1_subtitle">Jouw Seizoen 1 airdrop-positie en activiteit</string>
+    <string name="s2_subtitle">Veeg om de voorspelde Seizoen 2 niveaus te verkennen</string>
+    <string name="detect_my_s1_tier">Detecteer mijn Seizoen 1 niveau</string>
+    <string name="detect_s1_subtitle">Scan on-chain geschiedenis om je Seizoen 1 airdrop-niveau en activiteit te vinden</string>
+    <string name="scanning_on_chain">On-chain activiteit scannen\u2026</string>
+    <string name="run_prediction">Voorspelling uitvoeren</string>
+    <string name="run_prediction_subtitle">Analyseer je on-chain activiteit om te zien welk niveau bij je profiel past</string>
+    <string name="analyzing_on_chain">On-chain activiteit analyseren\u2026</string>
+    <string name="re_analyze">Opnieuw analyseren</string>
+    <string name="re_run_prediction">Voorspelling opnieuw uitvoeren</string>
+    <string name="your_tier_badge">JOUW NIVEAU</string>
+    <string name="season_1_badge">SEIZOEN 1</string>
+    <string name="your_prediction_badge">JOUW VOORSPELLING</string>
+    <string name="season_2_badge">SEIZOEN 2</string>
+    <string name="per_wallet">per portemonnee</string>
+    <string name="of_wallets"> van portemonnees</string>
+    <string name="s1_wallets_label">S1: %1$s%% van portemonnees</string>
+    <string name="score_label">Score: %1$s</string>
+    <string name="score_needed">Benodigde score: ~%1$s+</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="score_format">Score: %1$s</string>
+    <string name="score_needed_format">Benodigde score: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% van portemonnees</string>
+    <string name="your_s1_position">Jouw Seizoen 1 positie</string>
+    <string name="skr_claimed_format">%1$s SKR geclaimd</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="of_all_seekers">van alle Seekers</string>
+    <string name="activity_score">Activiteitsscore</string>
+    <string name="your_on_chain_activity">Jouw on-chain activiteit</string>
+    <string name="s1_claim_not_found">Seizoen 1 claim niet gevonden op deze portemonnee. Dit kan gebeuren als je via een andere portemonnee hebt geclaimd, of als de claim nog niet is verwerkt.</string>
+    <string name="activity_highlights">Activiteitshoogtepunten</string>
+    <string name="season_1_vs_season_2">Seizoen 1 vs Seizoen 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">Seizoen 1 verdeling</string>
+    <string name="eligible_wallets">~140.000 in aanmerking komende portemonnees</string>
+    <string name="your_activity_score">Jouw activiteitsscore</string>
+    <string name="score_breakdown">Score-uitsplitsing</string>
+    <string name="speculative_notice">Alleen een speculatieve schatting. Gebaseerd op Seizoen 1 patronen \u2014 werkelijke Seizoen 2 criteria kunnen afwijken. Geen financieel advies.</string>
+    <string name="s1_disclaimer">Seizoen 1 niveau gedetecteerd uit on-chain claimgeschiedenis. Activiteitsanalyse gebaseerd op huidige portemonneegegevens. Dit is alleen algemene informatie en geen financieel advies.</string>
+    <string name="s2_disclaimer">Deze voorspelling is een speculatieve schatting gebaseerd op Seizoen 1 patronen en on-chain activiteit. De werkelijke Seizoen 2 criteria zijn niet aangekondigd en kunnen aanzienlijk afwijken. Dit is geen financieel advies. Neem geen financiële beslissingen op basis van deze voorspellingen.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Inzichten in het scoremodel</string>
+    <string name="s1_model_subtitle">Hoe jouw on-chain activiteit wordt toegewezen in het scoremodel van deze app. Dit model is speculatief en weerspiegelt mogelijk niet de werkelijke criteria.</string>
+    <string name="s2_model_subtitle">Hoe jouw activiteit wordt toegewezen in het scoremodel van deze app. Dit model is speculatief en weerspiegelt mogelijk niet de werkelijke Seizoen 2 criteria. Geen financieel advies.</string>
+    <string name="tx_count_low">Aantal transacties: Laag</string>
+    <string name="tx_count_low_desc">Deze metriek meet on-chain transacties (swaps, overdrachten, interacties). Het heeft een gewicht van 30%% in het S1-scoremodel.</string>
+    <string name="nft_none">NFT-bezit: Geen gedetecteerd</string>
+    <string name="nft_none_desc">Deze metriek controleert NFT-eigendom in de portemonnee. Het heeft een gewicht van 10%% in het scoremodel.</string>
+    <string name="token_diversity_low">Token-diversiteit: Laag</string>
+    <string name="token_diversity_low_desc">Deze metriek telt unieke SPL-tokens in bezit. Het heeft een gewicht van 15%% in het scoremodel.</string>
+    <string name="dapp_low">dApp-interacties: Laag</string>
+    <string name="dapp_low_desc">Deze metriek volgt unieke programma-interacties. Het heeft een gewicht van 25%% in het scoremodel.</string>
+    <string name="wallet_age_recent">Portemonnee-leeftijd: Recent</string>
+    <string name="wallet_age_recent_desc">Deze metriek meet de leeftijd van de portemonnee. Het heeft een gewicht van 20%% in het scoremodel. De leeftijd van de portemonnee neemt natuurlijk toe met de tijd.</string>
+    <string name="strong_activity_profile">Sterk activiteitsprofiel</string>
+    <string name="strong_activity_s1_desc">Jouw Seizoen 1 on-chain activiteit scoort goed op alle gemeten metrieken.</string>
+    <string name="strong_activity_s2_desc">Jouw on-chain activiteit scoort goed op alle gemeten metrieken in dit model.</string>
+    <string name="staking_score_format">SKR Staking-score: %1$s/100</string>
+    <string name="staking_score_desc">Deze metriek controleert of SKR gestaked is. Het heeft een gewicht van 20%% in het scoremodel.</string>
+    <string name="s1_tier_not_detected">Seizoen 1 niveau: Niet gedetecteerd</string>
+    <string name="s1_tier_not_detected_desc">Deze metriek gebruikt jouw S1 airdrop-niveau. Het heeft een gewicht van 15%%. Gebruik het Seizoen 1 tabblad om je niveau te detecteren.</string>
+    <string name="tx_score_format">Transactiescore: %1$s/100</string>
+    <string name="tx_score_desc">Deze metriek telt on-chain transacties. Het heeft een gewicht van 15%% in het scoremodel.</string>
+    <string name="dapp_score_format">dApp-gebruiksscore: %1$s/100</string>
+    <string name="dapp_score_desc">Deze metriek volgt unieke programma-interacties. Het heeft een gewicht van 10%% in het scoremodel.</string>
+    <string name="programs_score_format">Programma\'s-score: %1$s/100</string>
+    <string name="programs_score_desc">Deze metriek telt afzonderlijke Solana-programma\'s waarmee is geïnterageerd. Het heeft een gewicht van 12%%.</string>
+    <string name="wallet_age_score_format">Portemonnee-leeftijdsscore: %1$s/100</string>
+    <string name="wallet_age_score_desc">Deze metriek meet de leeftijd van de portemonnee. Het heeft een gewicht van 10%%. Dit neemt natuurlijk toe met de tijd.</string>
+    <string name="skr_domain_not_detected">.skr Domein: Niet gedetecteerd</string>
+    <string name="skr_domain_desc">Deze metriek controleert .skr domein-eigendom. Het heeft een gewicht van 5%% in het scoremodel.</string>
+    <string name="token_diversity_score_format">Token-diversiteitsscore: %1$s/100</string>
+    <string name="token_diversity_score_desc">Deze metriek telt unieke SPL-tokens in bezit. Het heeft een gewicht van 8%% in het scoremodel.</string>
+    <string name="nft_score_format">NFT-score: %1$s/100</string>
+    <string name="nft_score_desc">Deze metriek controleert NFT-eigendom. Het heeft een gewicht van 5%% in het scoremodel.</string>
+
+    <!-- Settings -->
+    <string name="settings">Instellingen</string>
+    <string name="wallet_section">Portemonnee</string>
+    <string name="connected_wallet">Verbonden portemonnee</string>
+    <string name="seeker_number">Seeker-nummer</string>
+    <string name="network_section">Netwerk</string>
+    <string name="use_helius_rpc">Gebruik Helius RPC</string>
+    <string name="helius_enabled_desc">Hogere frequentielimieten</string>
+    <string name="helius_disabled_desc">Openbaar RPC (beperkte frequentie)</string>
+    <string name="helius_detail_on">Gebruikt Helius gratis tier (1M credits/maand). Sneller en betrouwbaarder.</string>
+    <string name="helius_detail_off">Gebruikt openbaar Solana RPC. Gratis maar beperkt tot ~5 verzoeken/seconde.</string>
+    <string name="data_section">Gegevens</string>
+    <string name="sgt_cache">SGT Cache</string>
+    <string name="sgt_cache_valid">Geldig</string>
+    <string name="sgt_cache_needs_refresh">Vernieuwing nodig</string>
+    <string name="sgt_cache_note">SGT-verificatie wordt 24 uur in de cache opgeslagen om RPC-aanroepen te minimaliseren.</string>
+    <string name="anonymous_insights">Anonieme inzichten</string>
+    <string name="anonymous_insights_desc">Deel geanonimiseerde voorspellingsgegevens om de nauwkeurigheid te verbeteren (binnenkort)</string>
+    <string name="about_section">Over</string>
+    <string name="version_label">Versie</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Je Seeker apparaat metgezel. Verifieer SGT-eigendom, volg je SKR-portfolio en bekijk on-chain activiteitsanalyse.</string>
+    <string name="about_publisher">Door MidMightBit Games (Australië)</string>
+    <string name="about_architecture">Geen serverkosten. Alle gegevens op het apparaat + on-chain.</string>
+    <string name="regulatory_disclaimer">Niet gelieerd aan Solana Foundation, Solana Mobile Inc. of enige token-uitgever. Niet geautoriseerd of gereguleerd door enige financiële toezichthouder. Biedt geen financieel advies.</string>
+    <string name="delete_all_data">Alle gegevens verwijderen</string>
+    <string name="delete_all_data_desc">Wist permanent alle in de cache opgeslagen gegevens, voorkeuren en streakgeschiedenis van dit apparaat.</string>
+    <string name="delete_all_data_title">Alle gegevens verwijderen?</string>
+    <string name="delete_all_data_confirm_text">Dit zal permanent alle in de cache opgeslagen gegevens, voorkeuren, streakgeschiedenis wissen en je portemonnee ontkoppelen. Deze actie kan niet ongedaan worden gemaakt.</string>
+    <string name="delete_everything">Alles verwijderen</string>
+    <string name="cancel">Annuleren</string>
+    <string name="disconnecting_clears_data">Ontkoppelen wist alle in de cache opgeslagen gegevens.</string>
+</resources>

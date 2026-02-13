@@ -18,6 +18,12 @@
     kotlinx.serialization.KSerializer serializer(...);
 }
 
+# Google Tink / Crypto (used by AndroidX Security Crypto)
+-dontwarn com.google.errorprone.annotations.**
+-dontwarn javax.annotation.**
+-dontwarn com.google.crypto.tink.**
+-keep class com.google.crypto.tink.** { *; }
+
 # OkHttp
 -dontwarn okhttp3.**
 -dontwarn okio.**
@@ -25,3 +31,9 @@
 
 # Solana Mobile Wallet Adapter
 -keep class com.solana.mobilewalletadapter.** { *; }
+
+# Strip debug and verbose logs from release builds
+-assumenosideeffects class android.util.Log {
+    public static int d(...);
+    public static int v(...);
+}

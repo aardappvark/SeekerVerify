@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Ваш компаньон для устройства Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Подключить кошелёк</string>
+    <string name="connecting_to_wallet">Подключение к кошельку\u2026</string>
+    <string name="requires_sgt">Требуется Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">При подключении ваш публичный адрес кошелька будет сохранён локально на этом устройстве для отображения данных on-chain. Доступ к приватным ключам не осуществляется. Данные не отправляются на внешние серверы за пределами конечных точек Solana RPC.</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_service">Условия использования</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Проверка Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">Seeker Genesis Token не найден</string>
+    <string name="no_sgt_message">Это приложение предназначено исключительно для владельцев устройств Seeker. Подключите кошелёк с Seeker Genesis Token (SGT), чтобы продолжить.</string>
+    <string name="disconnect_try_another">Отключить &amp; попробовать другой кошелёк</string>
+    <string name="verification_error">Ошибка проверки</string>
+    <string name="retry_verification">Повторить проверку</string>
+    <string name="disconnect_wallet">Отключить кошелёк</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Идентификация Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Подтверждённый Seeker</string>
+    <string name="verified_seeker_cd">Подтверждённый Seeker</string>
+    <string name="share_identity">Поделиться идентификацией</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Подтверждённый владелец Seeker</string>
+    <string name="daily_check_in">Ежедневная отметка</string>
+    <string name="current_label">Текущая</string>
+    <string name="longest_label">Самая длинная</string>
+    <string name="total_label">Всего</string>
+    <string name="checked_in_today">Отметка сделана сегодня!</string>
+    <string name="check_in">Отметиться</string>
+    <string name="days_suffix">%1$s дней</string>
+    <string name="share_text_prefix">Я Seeker</string>
+    <string name="share_text_verified">Подтверждённый держатель SGT на Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s дн.</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Портфель</string>
+    <string name="refresh">Обновить</string>
+    <string name="total_value">ОБЩАЯ СТОИМОСТЬ</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Баланс SOL</string>
+    <string name="staked_sol">SOL в стейкинге</string>
+    <string name="liquid_balance">Ликвидный баланс</string>
+    <string name="staked_skr">SKR в стейкинге</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Анстейкинг: </string>
+    <string name="rewards_compound">Вознаграждения автоматически реинвестируются через рост цены доли.</string>
+    <string name="no_stake_found">Активный стейкинг не найден. Застейкайте SKR, чтобы получать вознаграждения.</string>
+    <string name="financial_disclaimer">Цены получены из сторонних API и могут не отражать текущую рыночную стоимость. APY является переменным, основан на текущих данных on-chain и не гарантирован. Это не является финансовой рекомендацией.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Флот Seeker</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">устройств во флоте</string>
+    <string name="your_fleet_position">Ваша позиция во флоте</string>
+    <string name="position_format">#%1$s из %2$s</string>
+    <string name="earlier_than_percent">Раньше %1$s%% Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Ранний первопроходец \uD83C\uDF1F</string>
+    <string name="early_adopter">Ранний последователь \uD83D\uDE80</string>
+    <string name="fleet_member">Участник флота \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Активные стейкеры</string>
+    <string name="skr_staked_label">SKR в стейкинге</string>
+    <string name="fleet_data_note">Данные флота приблизительны на основе записей on-chain и обновляются периодически.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Уровни аирдропа</string>
+    <string name="season_1">Season 1</string>
+    <string name="season_2">Season 2</string>
+    <string name="s1_subtitle">Ваша позиция и активность в аирдропе Season 1</string>
+    <string name="s2_subtitle">Проведите, чтобы изучить прогнозируемые уровни Season 2</string>
+    <string name="detect_my_s1_tier">Определить мой уровень Season 1</string>
+    <string name="detect_s1_subtitle">Сканировать историю on-chain, чтобы найти ваш уровень и активность аирдропа Season 1</string>
+    <string name="scanning_on_chain">Сканирование активности on-chain\u2026</string>
+    <string name="run_prediction">Запустить прогноз</string>
+    <string name="run_prediction_subtitle">Проанализируйте вашу активность on-chain, чтобы увидеть, какой уровень соответствует вашему профилю</string>
+    <string name="analyzing_on_chain">Анализ активности on-chain\u2026</string>
+    <string name="re_analyze">Повторный анализ</string>
+    <string name="re_run_prediction">Перезапустить прогноз</string>
+    <string name="your_tier_badge">ВАШ УРОВЕНЬ</string>
+    <string name="season_1_badge">СЕЗОН 1</string>
+    <string name="your_prediction_badge">ВАШ ПРОГНОЗ</string>
+    <string name="season_2_badge">СЕЗОН 2</string>
+    <string name="per_wallet">на кошелёк</string>
+    <string name="of_wallets"> кошельков</string>
+    <string name="s1_wallets_label">S1: %1$s%% кошельков</string>
+    <string name="score_label">Счёт: %1$s</string>
+    <string name="score_needed">Необходимый счёт: ~%1$s+</string>
+    <string name="top_percent">Топ %1$s%%</string>
+    <string name="score_format">Баллы: %1$s</string>
+    <string name="score_needed_format">Необходимо баллов: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% кошельков</string>
+    <string name="your_s1_position">Ваша позиция в Season 1</string>
+    <string name="skr_claimed_format">%1$s SKR получено</string>
+    <string name="top_percent_format">Топ %1$s%%</string>
+    <string name="of_all_seekers">из всех Seekers</string>
+    <string name="activity_score">Баллы активности</string>
+    <string name="your_on_chain_activity">Ваша активность on-chain</string>
+    <string name="s1_claim_not_found">Получение Season 1 не найдено в этом кошельке. Это может произойти, если вы получали в другом кошельке или если получение ещё не было обработано.</string>
+    <string name="activity_highlights">Основные показатели активности</string>
+    <string name="season_1_vs_season_2">Season 1 vs Season 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$s-й %%</string>
+    <string name="season_1_distribution">Распределение Season 1</string>
+    <string name="eligible_wallets">~140 000 подходящих кошельков</string>
+    <string name="your_activity_score">Ваши баллы активности</string>
+    <string name="score_breakdown">Разбивка баллов</string>
+    <string name="speculative_notice">Только предположительная оценка. Основана на паттернах Season 1 \u2014 фактические критерии Season 2 могут отличаться. Не является финансовой рекомендацией.</string>
+    <string name="s1_disclaimer">Уровень Season 1 определён из истории получения on-chain. Анализ активности основан на текущих данных кошелька. Это только общая информация и не является финансовой рекомендацией.</string>
+    <string name="s2_disclaimer">Этот прогноз является предположительной оценкой, основанной на паттернах Season 1 и активности on-chain. Фактические критерии Season 2 не были объявлены и могут существенно отличаться. Это не является финансовой рекомендацией. Не принимайте финансовые решения на основе этих прогнозов.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Информация о модели оценки</string>
+    <string name="s1_model_subtitle">Как ваша активность on-chain соотносится с моделью оценки этого приложения. Эта модель является предположительной и может не отражать фактические критерии.</string>
+    <string name="s2_model_subtitle">Как ваша активность соотносится с моделью оценки этого приложения. Эта модель является предположительной и может не отражать фактические критерии Season 2. Не является финансовой рекомендацией.</string>
+    <string name="tx_count_low">Количество транзакций: Низкое</string>
+    <string name="tx_count_low_desc">Эта метрика измеряет транзакции on-chain (обмены, переводы, взаимодействия). Вес 30%% в модели оценки S1.</string>
+    <string name="nft_none">Активы NFT: Не обнаружены</string>
+    <string name="nft_none_desc">Эта метрика проверяет наличие NFT в кошельке. Вес 10%% в модели оценки.</string>
+    <string name="token_diversity_low">Разнообразие токенов: Низкое</string>
+    <string name="token_diversity_low_desc">Эта метрика подсчитывает уникальные токены SPL. Вес 15%% в модели оценки.</string>
+    <string name="dapp_low">Взаимодействия с dApp: Низкие</string>
+    <string name="dapp_low_desc">Эта метрика отслеживает уникальные взаимодействия с программами. Вес 25%% в модели оценки.</string>
+    <string name="wallet_age_recent">Возраст кошелька: Недавний</string>
+    <string name="wallet_age_recent_desc">Эта метрика измеряет возраст кошелька. Вес 20%% в модели оценки. Возраст кошелька увеличивается естественным образом со временем.</string>
+    <string name="strong_activity_profile">Сильный профиль активности</string>
+    <string name="strong_activity_s1_desc">Ваша активность on-chain в Season 1 показывает хорошие результаты по всем измеряемым метрикам.</string>
+    <string name="strong_activity_s2_desc">Ваша активность on-chain показывает хорошие результаты по всем измеряемым метрикам в этой модели.</string>
+    <string name="staking_score_format">Баллы стейкинга SKR: %1$s/100</string>
+    <string name="staking_score_desc">Эта метрика проверяет, застейкан ли SKR. Вес 20%% в модели оценки.</string>
+    <string name="s1_tier_not_detected">Уровень Season 1: Не определён</string>
+    <string name="s1_tier_not_detected_desc">Эта метрика использует ваш уровень аирдропа S1. Вес 15%%. Используйте вкладку Season 1 для определения вашего уровня.</string>
+    <string name="tx_score_format">Баллы транзакций: %1$s/100</string>
+    <string name="tx_score_desc">Эта метрика подсчитывает транзакции on-chain. Вес 15%% в модели оценки.</string>
+    <string name="dapp_score_format">Баллы использования dApp: %1$s/100</string>
+    <string name="dapp_score_desc">Эта метрика отслеживает уникальные взаимодействия с программами. Вес 10%% в модели оценки.</string>
+    <string name="programs_score_format">Баллы программ: %1$s/100</string>
+    <string name="programs_score_desc">Эта метрика подсчитывает различные программы Solana, с которыми было взаимодействие. Вес 12%%.</string>
+    <string name="wallet_age_score_format">Баллы возраста кошелька: %1$s/100</string>
+    <string name="wallet_age_score_desc">Эта метрика измеряет возраст кошелька. Вес 10%%. Увеличивается естественным образом со временем.</string>
+    <string name="skr_domain_not_detected">Домен .skr: Не обнаружен</string>
+    <string name="skr_domain_desc">Эта метрика проверяет наличие домена .skr. Вес 5%% в модели оценки.</string>
+    <string name="token_diversity_score_format">Баллы разнообразия токенов: %1$s/100</string>
+    <string name="token_diversity_score_desc">Эта метрика подсчитывает уникальные токены SPL. Вес 8%% в модели оценки.</string>
+    <string name="nft_score_format">Баллы NFT: %1$s/100</string>
+    <string name="nft_score_desc">Эта метрика проверяет наличие NFT. Вес 5%% в модели оценки.</string>
+
+    <!-- Settings -->
+    <string name="settings">Настройки</string>
+    <string name="wallet_section">Кошелёк</string>
+    <string name="connected_wallet">Подключённый кошелёк</string>
+    <string name="seeker_number">Номер Seeker</string>
+    <string name="network_section">Сеть</string>
+    <string name="use_helius_rpc">Использовать Helius RPC</string>
+    <string name="helius_enabled_desc">Повышенные лимиты запросов</string>
+    <string name="helius_disabled_desc">Публичный RPC (ограниченный)</string>
+    <string name="helius_detail_on">Используется бесплатный тариф Helius (1 млн кредитов/месяц). Быстрее и надёжнее.</string>
+    <string name="helius_detail_off">Используется публичный RPC Solana. Бесплатный, но ограничен ~5 запросами/секунду.</string>
+    <string name="data_section">Данные</string>
+    <string name="sgt_cache">Кэш SGT</string>
+    <string name="sgt_cache_valid">Действителен</string>
+    <string name="sgt_cache_needs_refresh">Требуется обновление</string>
+    <string name="sgt_cache_note">Проверка SGT кэшируется на 24 часа для минимизации вызовов RPC.</string>
+    <string name="anonymous_insights">Анонимная аналитика</string>
+    <string name="anonymous_insights_desc">Делитесь анонимизированными данными прогнозов для повышения точности (скоро)</string>
+    <string name="about_section">О приложении</string>
+    <string name="version_label">Версия</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Ваш компаньон для устройства Seeker. Проверяйте владение SGT, отслеживайте портфель SKR и просматривайте анализ активности on-chain.</string>
+    <string name="about_publisher">От MidMightBit Games (Австралия)</string>
+    <string name="about_architecture">Нулевые серверные расходы. Все данные на устройстве + on-chain.</string>
+    <string name="regulatory_disclaimer">Не связано с Solana Foundation, Solana Mobile Inc. или каким-либо эмитентом токенов. Не лицензировано и не регулируется каким-либо финансовым регулятором. Не предоставляет финансовых рекомендаций.</string>
+    <string name="delete_all_data">Удалить все данные</string>
+    <string name="delete_all_data_desc">Безвозвратно удаляет все кэшированные данные, настройки и историю серий с этого устройства.</string>
+    <string name="delete_all_data_title">Удалить все данные?</string>
+    <string name="delete_all_data_confirm_text">Это безвозвратно удалит все кэшированные данные, настройки, историю серий и отключит ваш кошелёк. Это действие невозможно отменить.</string>
+    <string name="delete_everything">Удалить всё</string>
+    <string name="cancel">Отмена</string>
+    <string name="disconnecting_clears_data">Отключение очистит все кэшированные данные.</string>
+</resources>

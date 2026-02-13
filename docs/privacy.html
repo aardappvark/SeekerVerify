@@ -87,7 +87,7 @@
 
         <h1>Privacy Policy</h1>
         <p class="subtitle"><strong>Seeker Verify</strong><br>
-        <strong>Version 1.0.0 | Effective Date: February 12, 2026</strong></p>
+        <strong>Version 1.2.0 | Effective Date: February 13, 2026</strong></p>
 
         <h2>Overview</h2>
         <p>Seeker Verify ("the App") is published by MidMightBit Games, based in Australia. The App is a companion tool for Solana Seeker device owners. It is built with privacy as a core principle. We collect minimal data, store everything locally on your device, and do not use any analytics, tracking, or advertising services. All blockchain data is read directly from the Solana network.</p>
@@ -136,26 +136,43 @@
             <li>Browsing history</li>
             <li>Contact lists</li>
             <li>Any financial data beyond publicly visible on-chain balances</li>
-            <li>IP addresses</li>
             <li>Cookies or similar tracking technologies</li>
         </ul>
 
+        <h2>IP Address Disclosure</h2>
+        <p>The App does not collect or store your IP address. However, when the App makes network requests to third-party RPC endpoints and APIs, <strong>your IP address is transmitted to those services</strong> as part of standard internet protocol. These services include:</p>
+        <ul>
+            <li><strong>Solana public RPC</strong> (api.mainnet-beta.solana.com) &mdash; operated by Solana Foundation</li>
+            <li><strong>Helius RPC</strong> (mainnet.helius-rpc.com) &mdash; US-based provider, subject to their <a href="https://www.helius.dev/privacy-policy">Privacy Policy</a></li>
+            <li><strong>CoinGecko API</strong> (api.coingecko.com) &mdash; for SOL price data, subject to their <a href="https://www.coingecko.com/en/privacy">Privacy Policy</a></li>
+            <li><strong>Jupiter Price API</strong> (price.jup.ag) &mdash; for SKR price data, subject to their privacy policy</li>
+        </ul>
+        <p>MidMightBit Games has no access to any logs or data collected by these third-party services. We encourage you to review their respective privacy policies.</p>
+
         <h2>Data Storage and Security</h2>
-        <p>All data is stored locally on your device using Android EncryptedSharedPreferences with AES-256-GCM encryption. No data is transmitted to any server owned by MidMightBit Games. The App communicates only with:</p>
+        <p>All data is stored locally on your device using Android EncryptedSharedPreferences with AES-256-GCM encryption (values) and AES-256-SIV encryption (keys), backed by the Android Keystore. No data is transmitted to any server owned by MidMightBit Games. The App communicates only with:</p>
         <ul>
             <li><strong>Solana RPC endpoints:</strong> Public Solana mainnet-beta or Helius free tier (your choice) to read on-chain data</li>
-            <li><strong>CoinGecko API:</strong> To fetch SOL/USD price (no user data sent)</li>
-            <li><strong>Jupiter Price API:</strong> To fetch SKR/USD price (no user data sent)</li>
+            <li><strong>CoinGecko API:</strong> To fetch SOL/USD price (no user data sent beyond IP address)</li>
+            <li><strong>Jupiter Price API:</strong> To fetch SKR/USD price (no user data sent beyond IP address)</li>
         </ul>
+        <p>All network communications use HTTPS/TLS encryption in transit. The App enforces HTTPS for all connections and does not permit cleartext traffic.</p>
 
         <h2>On-Chain Data</h2>
         <p>The App reads publicly available data from the Solana blockchain including token balances, staking positions, transaction history, and token metadata. This data is inherently public on the Solana network. The App does not create any blockchain transactions.</p>
 
         <h2>Data Retention</h2>
-        <p>Your data is retained locally on your device for as long as the App is installed. Data is automatically deleted when you uninstall the App, disconnect your wallet within the App, or clear its data through Android settings.</p>
+        <p>Your data is retained locally on your device for as long as the App is installed. Data is automatically deleted when you:</p>
+        <ul>
+            <li>Disconnect your wallet within the App (Settings &gt; Disconnect Wallet)</li>
+            <li>Use the "Delete All Data" button in Settings</li>
+            <li>Clear the App's data through Android Settings &gt; Apps &gt; Seeker Verify &gt; Clear Data</li>
+            <li>Uninstall the App</li>
+        </ul>
 
         <h2>Cross-Border Data Transfers</h2>
-        <p>The App does not transfer any personal data across borders. RPC calls to Solana contain your public wallet address, which is already publicly visible on the blockchain. No user-specific data is sent to MidMightBit Games servers (we have none).</p>
+        <p>When making RPC calls, your wallet public address and IP address are transmitted to Solana RPC endpoints (including Helius, a US-based provider) to retrieve on-chain data. Your wallet public address is already publicly visible on the Solana blockchain. No user-specific data is sent to MidMightBit Games servers (we have none).</p>
+        <p>We rely on the public nature of blockchain data and your explicit request to use this service as the basis for these transmissions. For EU/UK users, this processing is necessary for the performance of the service at your request (GDPR Article 49(1)(b)).</p>
 
         <h2>Third-Party Services</h2>
         <p>The App uses the following third-party libraries:</p>
@@ -178,6 +195,7 @@
         <p>You can delete all App data at any time by:</p>
         <ol>
             <li>Tapping "Disconnect Wallet" in the App's Settings screen</li>
+            <li>Using the "Delete All Data" button in Settings for complete erasure</li>
             <li>Going to Android Settings &gt; Apps &gt; Seeker Verify &gt; Clear Data</li>
             <li>Or uninstalling the App</li>
         </ol>
@@ -186,30 +204,88 @@
         <h3>Right to Access</h3>
         <p>All data stored by the App is visible within the App itself (Identity, Portfolio, and Settings screens). You may also contact us to request a summary of any data associated with your wallet address.</p>
 
+        <h3>Right to Rectification (GDPR Article 16)</h3>
+        <p>As all data is sourced from the public Solana blockchain, the App displays factual on-chain data. If you believe any cached data is inaccurate, you can force a refresh by disconnecting and reconnecting your wallet, which will re-fetch current on-chain data.</p>
+
+        <h3>Right to Restriction of Processing (GDPR Article 18)</h3>
+        <p>You may restrict the processing of your wallet address at any time by disconnecting your wallet in the Settings screen. This stops all data processing and removes your wallet address from local storage. You may reconnect at any time to resume the service.</p>
+
         <h3>Right to Object</h3>
         <p>You may object to the processing of your wallet address at any time by disconnecting your wallet in the Settings screen, which removes your wallet address from local storage.</p>
 
         <h3>Right to Portability</h3>
-        <p>As all data is stored locally on your device, you have full control over your data at all times.</p>
+        <p>As all data is stored locally on your device, you have full control over your data at all times. Your wallet public address is the only data element and is already in your possession.</p>
 
         <h3>Right to Lodge a Complaint</h3>
         <p>If you believe your data protection rights have been violated, you have the right to lodge a complaint with your local data protection authority:</p>
         <ul>
-            <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) &mdash; oaic.gov.au</li>
+            <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) &mdash; <a href="https://www.oaic.gov.au">oaic.gov.au</a></li>
             <li><strong>EU/EEA:</strong> Your local Data Protection Authority</li>
-            <li><strong>UK:</strong> Information Commissioner's Office (ICO) &mdash; ico.org.uk</li>
+            <li><strong>UK:</strong> Information Commissioner's Office (ICO) &mdash; <a href="https://ico.org.uk">ico.org.uk</a></li>
         </ul>
 
+        <h2>California Residents (CCPA/CPRA)</h2>
+        <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA):</p>
+        <ul>
+            <li><strong>Right to Know:</strong> You have the right to know what personal information we collect. The App collects only your wallet public address, stored locally on your device.</li>
+            <li><strong>Right to Delete:</strong> You can delete all data via the App's Settings screen or by uninstalling the App.</li>
+            <li><strong>Right to Opt-Out of Sale:</strong> We do not sell, share, or disclose personal information to third parties for monetary or other consideration. There is no "sale" of data to opt out of.</li>
+            <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA/CPRA rights.</li>
+            <li><strong>Categories of PI Collected:</strong> Identifiers (wallet public address). No sensitive personal information is collected.</li>
+            <li><strong>Retention:</strong> Data is retained locally on your device until you delete it or uninstall the App.</li>
+        </ul>
+        <p>To exercise your rights, use the in-app controls or contact us at the address below.</p>
+
+        <h2>Brazilian Residents (LGPD)</h2>
+        <p>If you are located in Brazil, the Lei Geral de Prote&ccedil;&atilde;o de Dados (LGPD) provides you with rights to access, correct, delete, and port your data. The legal basis for processing is your consent, given by connecting your wallet. You may withdraw consent at any time by disconnecting your wallet. Contact us to exercise your rights.</p>
+
+        <h2>Canadian Residents (PIPEDA)</h2>
+        <p>If you are located in Canada, the Personal Information Protection and Electronic Documents Act (PIPEDA) provides you with rights regarding your personal information. The App processes only your wallet public address, stored locally on your device. You may withdraw consent at any time by disconnecting your wallet. No personal information is transferred to MidMightBit Games servers. To exercise your rights under PIPEDA, contact us at the address below or use the in-app data deletion controls.</p>
+
+        <h2>South African Residents (POPIA)</h2>
+        <p>If you are located in South Africa, the Protection of Personal Information Act (POPIA) provides you with rights to access, correct, and delete your personal information. Processing is based on the legitimate interest of providing the service you voluntarily opted into. Your wallet public address is stored locally on your device with AES-256 encryption. You may object to processing and request deletion at any time via the App&rsquo;s Settings screen.</p>
+
+        <h2>Japanese Residents (APPI)</h2>
+        <p>If you are located in Japan, the Act on the Protection of Personal Information (APPI) provides you with rights to request disclosure, correction, suspension of use, and deletion of your personal data. The App stores only your wallet public address locally on your device. No data is provided to third parties as defined under APPI. To exercise your rights, use the in-app controls or contact us.</p>
+
+        <h2>Indian Residents (DPDP Act)</h2>
+        <p>If you are located in India, the Digital Personal Data Protection Act, 2023 (DPDP Act) provides you with rights as a Data Principal including the right to access, correct, and erase your personal data. Consent is obtained when you connect your wallet. You may withdraw consent at any time by disconnecting your wallet in Settings. The App does not process data of children (persons under 18). No personal data is transferred to MidMightBit Games servers.</p>
+
+        <h2>Turkish Residents (KVKK)</h2>
+        <p>If you are located in Turkey, the Ki&scedil;isel Verilerin Korunmas&inodot; Kanunu (KVKK, Law No. 6698) provides you with rights to learn whether your data is processed, request information about processing, learn the purpose of processing, request correction, request deletion, and object to processing. Your wallet public address is the sole data element, stored locally with encryption. Contact us to exercise your rights under KVKK.</p>
+
+        <h2>Swiss Residents (FADP/nDSG)</h2>
+        <p>If you are located in Switzerland, the revised Federal Act on Data Protection (FADP/nDSG) provides you with rights to access, rectify, and delete your personal data. Processing is based on legitimate interest (providing the service you requested). Cross-border data transfers to RPC providers comply with FADP requirements as they involve only publicly available blockchain data and your IP address via standard internet protocol. Contact the FDPIC or us to exercise your rights.</p>
+
+        <h2>Singapore Residents (PDPA)</h2>
+        <p>If you are located in Singapore, the Personal Data Protection Act (PDPA) provides you with rights to access and correct your personal data, and to withdraw consent. The App collects only your wallet public address with your consent (given by connecting your wallet). You may withdraw consent at any time via the App&rsquo;s Settings screen. The App does not use your data for marketing purposes.</p>
+
+        <h2>Thai Residents (PDPA)</h2>
+        <p>If you are located in Thailand, the Personal Data Protection Act B.E. 2562 (PDPA) provides you with rights to access, correct, delete, restrict, and port your personal data. Processing is based on your consent, given by connecting your wallet. You may withdraw consent at any time by disconnecting your wallet. The App does not collect sensitive data as defined under the Thai PDPA.</p>
+
+        <h2>Nigerian Residents (NDPR)</h2>
+        <p>If you are located in Nigeria, the Nigeria Data Protection Regulation (NDPR) and the Nigeria Data Protection Act 2023 provide you with rights to access, rectify, and delete your personal data. Consent is obtained when you connect your wallet. The App processes minimal data (wallet public address only), stored locally with AES-256 encryption. No data is shared with third parties beyond RPC endpoints. Contact us to exercise your rights.</p>
+
+        <h2>Indonesian Residents (PDP Law)</h2>
+        <p>If you are located in Indonesia, Law No. 27 of 2022 on Personal Data Protection (PDP Law) provides you with rights to access, correct, delete, and withdraw consent for processing of your personal data. Consent is obtained when you connect your wallet. You may withdraw consent and delete all data at any time through the App&rsquo;s Settings screen.</p>
+
+        <h2>Vietnamese Residents (PDPD)</h2>
+        <p>If you are located in Vietnam, Decree No. 13/2023/ND-CP on Personal Data Protection provides you with rights to be informed of, consent to, access, and delete your personal data. The App stores only your wallet public address locally on your device. No personal data is transferred to MidMightBit Games servers. Contact us to exercise your rights.</p>
+
+        <h2>Korean Residents (PIPA)</h2>
+        <p>If you are located in South Korea, the Personal Information Protection Act (PIPA) provides you with rights to access, correct, suspend processing, and delete your personal information. The App collects only your wallet public address, stored locally with encryption. No data is provided to third parties as defined under PIPA. Processing may be suspended at any time by disconnecting your wallet. Contact us or the Personal Information Protection Commission (PIPC) to exercise your rights.</p>
+
         <h2>Children's Privacy</h2>
-        <p>The App is intended for users 18 years and older who own a Solana Seeker device. We do not knowingly collect data from anyone under 18.</p>
+        <p>The App is intended for users 18 years and older who own a Solana Seeker device. We do not knowingly collect data from anyone under 18. If you believe a child has used this App, please contact us.</p>
 
         <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Changes will be reflected in the version number and effective date above.</p>
+        <p>We may update this Privacy Policy from time to time. Changes will be reflected in the version number and effective date above. We encourage you to review this policy periodically.</p>
 
         <h2>Contact</h2>
         <p>For questions about this Privacy Policy, data protection inquiries, or to exercise your data rights, contact:</p>
         <p><strong>MidMightBit Games</strong><br>
-        Email: <a href="mailto:midmightbit@proton.me">midmightbit@proton.me</a></p>
+        Email: <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></p>
+        <p>We aim to respond to all data protection requests within 30 days.</p>
 
         <div class="footer">
             <p>MidMightBit Games | Australia</p>

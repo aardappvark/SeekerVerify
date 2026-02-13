@@ -335,6 +335,17 @@ fun PortfolioScreen(
             )
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Financial disclaimer
+        Text(
+            text = "Prices sourced from third-party APIs and may not reflect current market values. APY is variable, based on current on-chain data, and not guaranteed. This is not financial advice.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Spacer(modifier = Modifier.height(24.dp))
     }
 }

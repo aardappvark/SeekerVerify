@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Ваш компаньйон для пристрою Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Підключити гаманець</string>
+    <string name="connecting_to_wallet">Підключення до гаманця\u2026</string>
+    <string name="requires_sgt">Потрібен Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">Підключившись, ваша публічна адреса гаманця буде збережена локально на цьому пристрої для відображення даних on-chain. Приватні ключі недоступні. Жодні дані не надсилаються на зовнішні сервери, окрім кінцевих точок Solana RPC.</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="terms_of_service">Умови використання</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Перевірка Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">Seeker Genesis Token не знайдено</string>
+    <string name="no_sgt_message">Цей додаток призначений виключно для власників пристроїв Seeker. Підключіть гаманець, що містить Seeker Genesis Token (SGT), щоб продовжити.</string>
+    <string name="disconnect_try_another">Від\'єднати та спробувати інший гаманець</string>
+    <string name="verification_error">Помилка перевірки</string>
+    <string name="retry_verification">Повторити перевірку</string>
+    <string name="disconnect_wallet">Від\'єднати гаманець</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Ідентичність Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Верифікований Seeker</string>
+    <string name="verified_seeker_cd">Верифікований Seeker</string>
+    <string name="share_identity">Поділитися ідентичністю</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">ГАМАНЕЦЬ</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Верифікований власник Seeker</string>
+    <string name="daily_check_in">Щоденна реєстрація</string>
+    <string name="current_label">Поточна</string>
+    <string name="longest_label">Найдовша</string>
+    <string name="total_label">Загалом</string>
+    <string name="checked_in_today">Зареєстровано сьогодні!</string>
+    <string name="check_in">Зареєструватися</string>
+    <string name="days_suffix">%1$s днів</string>
+    <string name="share_text_prefix">Я Seeker</string>
+    <string name="share_text_verified">Верифікований власник SGT на Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s днів</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Портфоліо</string>
+    <string name="refresh">Оновити</string>
+    <string name="total_value">ЗАГАЛЬНА ВАРТІСТЬ</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Баланс SOL</string>
+    <string name="staked_sol">Застейкані SOL</string>
+    <string name="liquid_balance">Ліквідний баланс</string>
+    <string name="staked_skr">Застейкані SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Виведення зі стейкінгу: </string>
+    <string name="rewards_compound">Винагороди автоматично реінвестуються через зростання ціни частки.</string>
+    <string name="no_stake_found">Активний стейкінг не знайдено. Застейкайте SKR, щоб отримувати винагороди.</string>
+    <string name="financial_disclaimer">Ціни отримані з API третіх сторін і можуть не відображати поточні ринкові значення. APY змінний, базується на поточних даних on-chain і не гарантований. Це не фінансова порада.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Флот Seeker</string>
+    <string name="total_seekers">ЗАГАЛОМ SEEKERS</string>
+    <string name="devices_in_fleet">пристроїв у флоті</string>
+    <string name="your_fleet_position">Ваша позиція у флоті</string>
+    <string name="position_format">#%1$s з %2$s</string>
+    <string name="earlier_than_percent">Раніше за %1$s%% Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Ранній піонер \uD83C\uDF1F</string>
+    <string name="early_adopter">Ранній послідовник \uD83D\uDE80</string>
+    <string name="fleet_member">Учасник флоту \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Активні стейкери</string>
+    <string name="skr_staked_label">Застейкані SKR</string>
+    <string name="fleet_data_note">Дані флоту є наближеними на основі записів on-chain і оновлюються періодично.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Рівні аірдропу</string>
+    <string name="season_1">Сезон 1</string>
+    <string name="season_2">Сезон 2</string>
+    <string name="s1_subtitle">Ваша позиція та активність в аірдропі Сезону 1</string>
+    <string name="s2_subtitle">Проведіть, щоб дослідити прогнозовані рівні Сезону 2</string>
+    <string name="detect_my_s1_tier">Визначити мій рівень Сезону 1</string>
+    <string name="detect_s1_subtitle">Сканувати історію on-chain, щоб знайти рівень та активність аірдропу Сезону 1</string>
+    <string name="scanning_on_chain">Сканування активності on-chain\u2026</string>
+    <string name="run_prediction">Запустити передбачення</string>
+    <string name="run_prediction_subtitle">Проаналізуйте свою активність on-chain, щоб побачити, який рівень відповідає вашому профілю</string>
+    <string name="analyzing_on_chain">Аналіз активності on-chain\u2026</string>
+    <string name="re_analyze">Повторний аналіз</string>
+    <string name="re_run_prediction">Повторити передбачення</string>
+    <string name="your_tier_badge">ВАШ РІВЕНЬ</string>
+    <string name="season_1_badge">СЕЗОН 1</string>
+    <string name="your_prediction_badge">ВАШЕ ПЕРЕДБАЧЕННЯ</string>
+    <string name="season_2_badge">СЕЗОН 2</string>
+    <string name="per_wallet">на гаманець</string>
+    <string name="of_wallets"> гаманців</string>
+    <string name="s1_wallets_label">S1: %1$s%% гаманців</string>
+    <string name="score_label">Бали: %1$s</string>
+    <string name="score_needed">Потрібно балів: ~%1$s+</string>
+    <string name="top_percent">Топ %1$s%%</string>
+    <string name="score_format">Бали: %1$s</string>
+    <string name="score_needed_format">Потрібно балів: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% гаманців</string>
+    <string name="your_s1_position">Ваша позиція в Сезоні 1</string>
+    <string name="skr_claimed_format">Отримано %1$s SKR</string>
+    <string name="top_percent_format">Топ %1$s%%</string>
+    <string name="of_all_seekers">усіх Seekers</string>
+    <string name="activity_score">Бали активності</string>
+    <string name="your_on_chain_activity">Ваша активність on-chain</string>
+    <string name="s1_claim_not_found">Заявку Сезону 1 не знайдено в цьому гаманці. Це може статися, якщо ви подавали заявку з іншого гаманця або якщо заявка ще не оброблена.</string>
+    <string name="activity_highlights">Основні моменти активності</string>
+    <string name="season_1_vs_season_2">Сезон 1 проти Сезону 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">Розподіл Сезону 1</string>
+    <string name="eligible_wallets">~140 000 відповідних гаманців</string>
+    <string name="your_activity_score">Ваші бали активності</string>
+    <string name="score_breakdown">Деталізація балів</string>
+    <string name="speculative_notice">Лише спекулятивна оцінка. На основі патернів Сезону 1 \u2014 фактичні критерії Сезону 2 можуть відрізнятися. Це не фінансова порада.</string>
+    <string name="s1_disclaimer">Рівень Сезону 1 визначено з історії заявок on-chain. Аналіз активності базується на поточних даних гаманця. Це лише загальна інформація і не є фінансовою порадою.</string>
+    <string name="s2_disclaimer">Це передбачення є спекулятивною оцінкою на основі патернів Сезону 1 та активності on-chain. Фактичні критерії Сезону 2 не оголошені і можуть суттєво відрізнятися. Це не фінансова порада. Не приймайте фінансових рішень на основі цих передбачень.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Аналітика моделі оцінки</string>
+    <string name="s1_model_subtitle">Як ваша активність on-chain відображається в моделі оцінки цього додатку. Ця модель є спекулятивною і може не відображати фактичні критерії.</string>
+    <string name="s2_model_subtitle">Як ваша активність відображається в моделі оцінки цього додатку. Ця модель є спекулятивною і може не відображати фактичні критерії Сезону 2. Це не фінансова порада.</string>
+    <string name="tx_count_low">Кількість транзакцій: Низька</string>
+    <string name="tx_count_low_desc">Ця метрика вимірює транзакції on-chain (обміни, перекази, взаємодії). Вага 30%% у моделі оцінки S1.</string>
+    <string name="nft_none">Володіння NFT: Не виявлено</string>
+    <string name="nft_none_desc">Ця метрика перевіряє наявність NFT у гаманці. Вага 10%% у моделі оцінки.</string>
+    <string name="token_diversity_low">Різноманітність токенів: Низька</string>
+    <string name="token_diversity_low_desc">Ця метрика підраховує унікальні токени SPL у володінні. Вага 15%% у моделі оцінки.</string>
+    <string name="dapp_low">Взаємодії з dApp: Низькі</string>
+    <string name="dapp_low_desc">Ця метрика відстежує унікальні взаємодії з програмами. Вага 25%% у моделі оцінки.</string>
+    <string name="wallet_age_recent">Вік гаманця: Нещодавній</string>
+    <string name="wallet_age_recent_desc">Ця метрика вимірює вік гаманця. Вага 20%% у моделі оцінки. Вік гаманця зростає природно з часом.</string>
+    <string name="strong_activity_profile">Сильний профіль активності</string>
+    <string name="strong_activity_s1_desc">Ваша активність on-chain у Сезоні 1 має добрі показники за всіма виміряними метриками.</string>
+    <string name="strong_activity_s2_desc">Ваша активність on-chain має добрі показники за всіма виміряними метриками в цій моделі.</string>
+    <string name="staking_score_format">Бали стейкінгу SKR: %1$s/100</string>
+    <string name="staking_score_desc">Ця метрика перевіряє, чи застейкано SKR. Вага 20%% у моделі оцінки.</string>
+    <string name="s1_tier_not_detected">Рівень Сезону 1: Не виявлено</string>
+    <string name="s1_tier_not_detected_desc">Ця метрика використовує ваш рівень аірдропу S1. Вага 15%%. Використовуйте вкладку Сезон 1, щоб визначити свій рівень.</string>
+    <string name="tx_score_format">Бали транзакцій: %1$s/100</string>
+    <string name="tx_score_desc">Ця метрика підраховує транзакції on-chain. Вага 15%% у моделі оцінки.</string>
+    <string name="dapp_score_format">Бали використання dApp: %1$s/100</string>
+    <string name="dapp_score_desc">Ця метрика відстежує унікальні взаємодії з програмами. Вага 10%% у моделі оцінки.</string>
+    <string name="programs_score_format">Бали програм: %1$s/100</string>
+    <string name="programs_score_desc">Ця метрика підраховує окремі програми Solana, з якими було взаємодію. Вага 12%%.</string>
+    <string name="wallet_age_score_format">Бали віку гаманця: %1$s/100</string>
+    <string name="wallet_age_score_desc">Ця метрика вимірює вік гаманця. Вага 10%%. Зростає природно з часом.</string>
+    <string name="skr_domain_not_detected">Домен .skr: Не виявлено</string>
+    <string name="skr_domain_desc">Ця метрика перевіряє наявність домену .skr. Вага 5%% у моделі оцінки.</string>
+    <string name="token_diversity_score_format">Бали різноманітності токенів: %1$s/100</string>
+    <string name="token_diversity_score_desc">Ця метрика підраховує унікальні токени SPL у володінні. Вага 8%% у моделі оцінки.</string>
+    <string name="nft_score_format">Бали NFT: %1$s/100</string>
+    <string name="nft_score_desc">Ця метрика перевіряє наявність NFT. Вага 5%% у моделі оцінки.</string>
+
+    <!-- Settings -->
+    <string name="settings">Налаштування</string>
+    <string name="wallet_section">Гаманець</string>
+    <string name="connected_wallet">Підключений гаманець</string>
+    <string name="seeker_number">Номер Seeker</string>
+    <string name="network_section">Мережа</string>
+    <string name="use_helius_rpc">Використовувати Helius RPC</string>
+    <string name="helius_enabled_desc">Вищі ліміти запитів</string>
+    <string name="helius_disabled_desc">Публічний RPC (обмежені запити)</string>
+    <string name="helius_detail_on">Використання безкоштовного рівня Helius (1M кредитів/місяць). Швидше та надійніше.</string>
+    <string name="helius_detail_off">Використання публічного Solana RPC. Безкоштовно, але обмежено ~5 запитів/секунду.</string>
+    <string name="data_section">Дані</string>
+    <string name="sgt_cache">Кеш SGT</string>
+    <string name="sgt_cache_valid">Дійсний</string>
+    <string name="sgt_cache_needs_refresh">Потребує оновлення</string>
+    <string name="sgt_cache_note">Перевірка SGT кешується на 24 години для мінімізації викликів RPC.</string>
+    <string name="anonymous_insights">Анонімна аналітика</string>
+    <string name="anonymous_insights_desc">Діліться анонімізованими даними передбачень для покращення точності (незабаром)</string>
+    <string name="about_section">Про додаток</string>
+    <string name="version_label">Версія</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Ваш компаньйон для пристрою Seeker. Перевірте володіння SGT, відстежуйте портфоліо SKR та переглядайте аналіз активності on-chain.</string>
+    <string name="about_publisher">Від MidMightBit Games (Австралія)</string>
+    <string name="about_architecture">Нульова вартість серверу. Усі дані на пристрої + on-chain.</string>
+    <string name="regulatory_disclaimer">Не пов\'язано з Solana Foundation, Solana Mobile Inc. або будь-яким емітентом токенів. Не авторизовано та не регулюється жодним фінансовим регулятором. Не надає фінансових порад.</string>
+    <string name="delete_all_data">Видалити всі дані</string>
+    <string name="delete_all_data_desc">Назавжди видаляє всі кешовані дані, налаштування та історію серій з цього пристрою.</string>
+    <string name="delete_all_data_title">Видалити всі дані?</string>
+    <string name="delete_all_data_confirm_text">Це назавжди видалить усі кешовані дані, налаштування, історію серій та від\'єднає ваш гаманець. Цю дію неможливо скасувати.</string>
+    <string name="delete_everything">Видалити все</string>
+    <string name="cancel">Скасувати</string>
+    <string name="disconnecting_clears_data">Від\'єднання видалить усі кешовані дані.</string>
+</resources>

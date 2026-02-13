@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Response Plan - Seeker Verify</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e1a;
+            color: #c8ccd8;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #0066ff; }
+        h1 { border-bottom: 2px solid #0066ff; padding-bottom: 10px; }
+        h2 { margin-top: 40px; }
+        h3 { color: #e0e0e0; margin-top: 25px; }
+        h4 { color: #9aa0b0; margin-top: 20px; }
+        a { color: #0066ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        nav { margin-bottom: 30px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav a { margin-right: 20px; }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 6px; }
+        ol { padding-left: 25px; }
+        ol li { margin-bottom: 6px; }
+        strong { color: #e0e0e0; }
+        .subtitle { font-size: 1.1em; margin-bottom: 30px; }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.9em; color: #555; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        th {
+            background: rgba(0, 102, 255, 0.15);
+            color: #0066ff;
+            text-align: left;
+            padding: 12px 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+        .priority-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .p1 {
+            background: rgba(255, 107, 107, 0.2);
+            color: #FF6B6B;
+            border: 1px solid rgba(255, 107, 107, 0.4);
+        }
+        .p2 {
+            background: rgba(255, 165, 0, 0.2);
+            color: #FFA500;
+            border: 1px solid rgba(255, 165, 0, 0.4);
+        }
+        .p3 {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+        .p4 {
+            background: rgba(20, 241, 149, 0.15);
+            color: #14F195;
+            border: 1px solid rgba(20, 241, 149, 0.3);
+        }
+        .template-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .info-box {
+            background: rgba(0, 102, 255, 0.08);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .warning-box {
+            background: rgba(255, 107, 107, 0.08);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .procedure-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .procedure-card h3 {
+            margin-top: 0;
+        }
+        @media (max-width: 768px) {
+            table { font-size: 0.8em; }
+            td, th { padding: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="copyright.html">Copyright</a>
+            <a href="legitimate-interest-assessment.html">LIA</a>
+            <a href="data-processing-register.html">Processing Register</a>
+            <a href="risk-register.html">Risk Register</a>
+            <a href="incident-response-plan.html">Incident Response</a>
+        </nav>
+
+        <h1>Incident Response Plan</h1>
+        <p class="subtitle"><strong>Seeker Verify</strong><br>
+        <strong>Version 1.0.0 | February 2026</strong></p>
+
+        <h2>1. Scope and Objectives</h2>
+
+        <h3>1.1 Scope</h3>
+        <p>This Incident Response Plan (IRP) covers all security, privacy, and operational incidents related to the Seeker Verify Android application, its published source code, its third-party dependencies, and its presence on the Google Play Store. It applies to the sole developer and publisher, MidMightBit Games.</p>
+
+        <h3>1.2 Objectives</h3>
+        <ul>
+            <li>Detect, assess, and respond to security and privacy incidents in a timely manner</li>
+            <li>Minimise impact on users and their data</li>
+            <li>Meet regulatory notification requirements (OAIC, GDPR supervisory authorities, US state attorneys general)</li>
+            <li>Preserve evidence for investigation and regulatory compliance</li>
+            <li>Restore normal operations as quickly as possible</li>
+            <li>Learn from incidents to prevent recurrence</li>
+        </ul>
+
+        <h3>1.3 Key Contact</h3>
+        <div class="info-box">
+            <p><strong>Incident Response Lead:</strong> MidMightBit Games (sole developer)</p>
+            <p><strong>Email:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></p>
+            <p><strong>Role:</strong> All incident response functions (detection, analysis, containment, eradication, recovery, notification)</p>
+        </div>
+
+        <h2>2. Incident Classification</h2>
+
+        <p>Incidents are classified by severity to determine response urgency and notification requirements.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Priority</th>
+                    <th>Severity</th>
+                    <th>Description</th>
+                    <th>Response Time</th>
+                    <th>Examples</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="priority-badge p1">P1</span></td>
+                    <td><strong>Critical</strong></td>
+                    <td>Active exploitation affecting user security or data integrity. Requires immediate action.</td>
+                    <td>Within 1 hour of detection</td>
+                    <td>Malicious code in published App build; compromised signing key; active data exfiltration vulnerability</td>
+                </tr>
+                <tr>
+                    <td><span class="priority-badge p2">P2</span></td>
+                    <td><strong>High</strong></td>
+                    <td>Vulnerability or compromise that could affect users but is not yet actively exploited. Requires urgent action.</td>
+                    <td>Within 4 hours of detection</td>
+                    <td>Critical vulnerability in a dependency; compromised RPC endpoint serving malicious data; supply chain compromise detected before release</td>
+                </tr>
+                <tr>
+                    <td><span class="priority-badge p3">P3</span></td>
+                    <td><strong>Medium</strong></td>
+                    <td>Issue that degrades security posture or user trust but does not pose an immediate threat.</td>
+                    <td>Within 24 hours of detection</td>
+                    <td>Third-party API exposing user IPs in an unexpected way; minor vulnerability in a dependency; policy violation discovered</td>
+                </tr>
+                <tr>
+                    <td><span class="priority-badge p4">P4</span></td>
+                    <td><strong>Low</strong></td>
+                    <td>Minor issue with limited security or privacy impact. Addressed in normal development cycle.</td>
+                    <td>Within 7 days</td>
+                    <td>Informational security advisory for a dependency; Play Store policy update requiring minor changes; RPC endpoint deprecation notice</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Response Procedures</h2>
+
+        <!-- Procedure 1: Data Breach -->
+        <div class="procedure-card">
+            <h3>3.1 Data Breach Response</h3>
+            <p><strong>Trigger:</strong> Discovery that user data (wallet addresses, cached SGT data) has been or may have been accessed by an unauthorised party, through a vulnerability in the App, a compromised build, or other means.</p>
+
+            <h4>Phase 1: Detection and Assessment (0-1 hours)</h4>
+            <ol>
+                <li>Confirm the breach: Verify the report, reproduction steps, and scope</li>
+                <li>Assess the data affected: Determine which data elements are exposed (wallet addresses, SGT cache, engagement data)</li>
+                <li>Assess the number of users potentially affected</li>
+                <li>Determine whether the vulnerability is in the App code, a dependency, or the Android platform</li>
+                <li>Document all findings with timestamps</li>
+            </ol>
+
+            <h4>Phase 2: Containment (1-4 hours)</h4>
+            <ol>
+                <li>If the vulnerability is in the App: Prepare a hotfix build immediately</li>
+                <li>If the vulnerability is in a dependency: Assess whether the dependency can be updated or removed</li>
+                <li>If a published build is compromised: Request emergency removal from Google Play Store</li>
+                <li>If a signing key is compromised: Revoke and rotate the key (requires new app listing)</li>
+            </ol>
+
+            <h4>Phase 3: Eradication and Recovery (4-48 hours)</h4>
+            <ol>
+                <li>Develop, test, and publish a patched version of the App</li>
+                <li>If applicable, issue a staged rollout to monitor for regressions</li>
+                <li>Verify the fix resolves the vulnerability</li>
+                <li>Update the App's changelog to describe the security fix (without disclosing exploit details)</li>
+            </ol>
+
+            <h4>Phase 4: Notification (within 72 hours)</h4>
+            <ol>
+                <li>Notify regulatory authorities as required (see Section 4)</li>
+                <li>Notify affected users via Play Store update notes and GitHub advisory</li>
+                <li>Publish a security advisory on the GitHub repository</li>
+            </ol>
+
+            <div class="info-box">
+                <p><strong>Contextual Note:</strong> Because Seeker Verify stores only wallet public addresses (which are already publicly visible on the Solana blockchain) and has no server infrastructure, the practical impact of a data breach is inherently limited. The wallet address cannot be used to access funds or control assets. However, all breaches will be treated seriously and reported in accordance with regulatory requirements.</p>
+            </div>
+        </div>
+
+        <!-- Procedure 2: RPC Endpoint Compromise -->
+        <div class="procedure-card">
+            <h3>3.2 RPC Endpoint Compromise</h3>
+            <p><strong>Trigger:</strong> A third-party RPC endpoint (Solana public RPC, Helius) or price API (CoinGecko, Jupiter) is compromised, returning manipulated data, logging excessive user data, or exhibiting malicious behaviour.</p>
+
+            <h4>Phase 1: Detection and Assessment (0-2 hours)</h4>
+            <ol>
+                <li>Verify the compromise report: Cross-reference data from the suspected endpoint against known-good sources (e.g., Solscan, another RPC provider)</li>
+                <li>Determine the type of compromise: Data manipulation, excessive logging, service injection, DNS hijack</li>
+                <li>Assess user impact: Could users have made decisions based on incorrect data?</li>
+                <li>Determine how many users may be affected (based on RPC provider selection)</li>
+            </ol>
+
+            <h4>Phase 2: Containment (2-8 hours)</h4>
+            <ol>
+                <li>If one RPC provider is compromised: Push an update that defaults to the alternative provider</li>
+                <li>If a price API is compromised: Disable the affected price feed and display a warning to users</li>
+                <li>Notify users via the App (if push update possible) or via GitHub/Play Store notes</li>
+                <li>Contact the affected service provider to report the issue</li>
+            </ol>
+
+            <h4>Phase 3: Recovery (8-72 hours)</h4>
+            <ol>
+                <li>Monitor the affected endpoint for resolution</li>
+                <li>Re-enable the endpoint only after confirming the compromise is resolved</li>
+                <li>If the provider is unreliable, evaluate alternative providers for future use</li>
+                <li>Update the Privacy Policy if the third-party service list changes</li>
+            </ol>
+        </div>
+
+        <!-- Procedure 3: Malicious Dependency -->
+        <div class="procedure-card">
+            <h3>3.3 Malicious Dependency</h3>
+            <p><strong>Trigger:</strong> A dependency used by the App is found to contain malicious code, a critical vulnerability, or has been compromised via a supply chain attack.</p>
+
+            <h4>Phase 1: Detection and Assessment (0-2 hours)</h4>
+            <ol>
+                <li>Identify the affected dependency and version</li>
+                <li>Determine whether the affected version is included in the published App build</li>
+                <li>Assess the potential impact: data exfiltration, code execution, privilege escalation</li>
+                <li>Check security advisories (GitHub Security Advisories, NVD, OSV) for details</li>
+                <li>Determine whether the App's usage of the dependency triggers the vulnerability</li>
+            </ol>
+
+            <h4>Phase 2: Containment (2-12 hours)</h4>
+            <ol>
+                <li>If a patched version of the dependency exists: Update immediately and publish a new build</li>
+                <li>If no patch is available: Assess whether the dependency can be temporarily removed or replaced</li>
+                <li>If the vulnerability is critical and actively exploited: Request emergency App update via Play Store</li>
+                <li>Pin a known-safe version of the dependency in the build configuration</li>
+            </ol>
+
+            <h4>Phase 3: Recovery (12-72 hours)</h4>
+            <ol>
+                <li>Publish the patched App build to the Play Store</li>
+                <li>Conduct a review of all other dependencies for similar issues</li>
+                <li>Update dependency management practices if a process gap is identified</li>
+                <li>Publish a GitHub security advisory if relevant</li>
+            </ol>
+        </div>
+
+        <!-- Procedure 4: App Store Takedown -->
+        <div class="procedure-card">
+            <h3>3.4 App Store Takedown</h3>
+            <p><strong>Trigger:</strong> Google removes or suspends the Seeker Verify listing from the Play Store due to a policy violation, regulatory action, or other reason.</p>
+
+            <h4>Phase 1: Assessment (0-4 hours)</h4>
+            <ol>
+                <li>Review the Google Play Console notification to understand the specific policy violation or reason</li>
+                <li>Determine whether the takedown is related to a security issue, content policy, or regulatory request</li>
+                <li>Assess whether existing users are affected (existing installs typically continue to work)</li>
+                <li>Document the takedown reason with screenshots and timestamps</li>
+            </ol>
+
+            <h4>Phase 2: Response (4-48 hours)</h4>
+            <ol>
+                <li>If a policy violation: Make the required changes to bring the App into compliance</li>
+                <li>If a regulatory request: Consult the relevant regulation and determine obligations</li>
+                <li>If a false positive: Prepare and submit an appeal through the Google Play Console</li>
+                <li>Submit the corrected build or appeal for review</li>
+            </ol>
+
+            <h4>Phase 3: Communication (24-72 hours)</h4>
+            <ol>
+                <li>Notify users via the GitHub repository if the takedown is extended</li>
+                <li>If applicable, provide an alternative distribution channel (direct APK from GitHub Releases)</li>
+                <li>Update governance documents if the takedown reveals a compliance gap</li>
+            </ol>
+        </div>
+
+        <h2>4. Notification Requirements</h2>
+
+        <div class="warning-box">
+            <p><strong>Critical:</strong> Regulatory notification timelines are strict. The 72-hour clock begins at the time of becoming aware of a notifiable breach, not at the time of completing the investigation.</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Jurisdiction</th>
+                    <th>Authority</th>
+                    <th>Timeframe</th>
+                    <th>Threshold</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Australia</strong></td>
+                    <td>Office of the Australian Information Commissioner (OAIC)</td>
+                    <td>Within 72 hours (as soon as practicable after becoming aware)</td>
+                    <td>Eligible data breach likely to result in serious harm (Notifiable Data Breaches scheme, Part IIIC of the Privacy Act 1988)</td>
+                    <td>OAIC Notifiable Data Breach form at <a href="https://www.oaic.gov.au">oaic.gov.au</a></td>
+                </tr>
+                <tr>
+                    <td><strong>EU/EEA</strong></td>
+                    <td>Relevant GDPR Supervisory Authority</td>
+                    <td>Within 72 hours of becoming aware (GDPR Article 33)</td>
+                    <td>Personal data breach unless unlikely to result in a risk to the rights and freedoms of natural persons</td>
+                    <td>Notification to the supervisory authority of the lead establishment, or the authority of the affected data subject's member state</td>
+                </tr>
+                <tr>
+                    <td><strong>United Kingdom</strong></td>
+                    <td>Information Commissioner's Office (ICO)</td>
+                    <td>Within 72 hours of becoming aware (UK GDPR Article 33)</td>
+                    <td>Personal data breach unless unlikely to result in a risk to the rights and freedoms of natural persons</td>
+                    <td>ICO breach reporting tool at <a href="https://ico.org.uk">ico.org.uk</a></td>
+                </tr>
+                <tr>
+                    <td><strong>United States</strong></td>
+                    <td>State Attorneys General (varies by state)</td>
+                    <td>Varies by state (typically 30-60 days; some states require faster notification)</td>
+                    <td>Breach of personal information as defined by each state's breach notification law. Note: wallet public addresses alone may not meet the threshold in most states, as they are not typically classified as personal information under US state laws.</td>
+                    <td>Written notification to the AG of each state where affected residents reside. Some states have online portals.</td>
+                </tr>
+                <tr>
+                    <td><strong>Brazil</strong></td>
+                    <td>Autoridade Nacional de Protecao de Dados (ANPD)</td>
+                    <td>Within a reasonable timeframe (LGPD Article 48)</td>
+                    <td>Security incident that may result in relevant risk or damage to data subjects</td>
+                    <td>Notification to ANPD and affected data subjects</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4.1 User Notification</h3>
+        <p>In addition to regulatory notifications, affected users must be notified when:</p>
+        <ul>
+            <li>The breach is likely to result in a high risk to their rights and freedoms (GDPR Article 34)</li>
+            <li>Required by the OAIC under the Australian Notifiable Data Breaches scheme</li>
+            <li>Required by applicable US state breach notification laws</li>
+        </ul>
+        <p>User notification channels:</p>
+        <ul>
+            <li><strong>Primary:</strong> Play Store app update description and in-app notification in the next release</li>
+            <li><strong>Secondary:</strong> GitHub Security Advisory on the repository</li>
+            <li><strong>Tertiary:</strong> Direct communication via community channels if available</li>
+        </ul>
+
+        <h2>5. Communication Templates</h2>
+
+        <h3>5.1 Regulatory Notification Template</h3>
+        <div class="template-box">Subject: Data Breach Notification - Seeker Verify
+
+Controller: MidMightBit Games (Australia)
+Contact: aardappvark@proton.me
+Application: Seeker Verify (Android)
+Package: com.solclock.app
+
+Date of awareness: [DATE AND TIME]
+Nature of breach: [DESCRIPTION]
+
+Categories of data affected:
+- Wallet public address (pseudonymous identifier, publicly
+  available on Solana blockchain)
+- [OTHER DATA IF APPLICABLE]
+
+Approximate number of data subjects affected: [NUMBER]
+
+Likely consequences:
+[ASSESSMENT OF LIKELY CONSEQUENCES]
+
+Measures taken to address the breach:
+1. [CONTAINMENT ACTIONS]
+2. [REMEDIATION ACTIONS]
+3. [PREVENTIVE MEASURES]
+
+Measures taken to mitigate adverse effects:
+[DESCRIPTION]
+
+Contact for further information:
+MidMightBit Games
+aardappvark@proton.me</div>
+
+        <h3>5.2 User Notification Template (Play Store / GitHub)</h3>
+        <div class="template-box">SECURITY NOTICE - Seeker Verify [VERSION]
+
+We identified a security issue affecting Seeker Verify
+that may have impacted [SCOPE].
+
+What happened:
+[BRIEF, CLEAR DESCRIPTION]
+
+What data was affected:
+[DATA ELEMENTS - e.g., wallet public addresses]
+
+What we have done:
+- [ACTION 1]
+- [ACTION 2]
+
+What you should do:
+- Update to the latest version of Seeker Verify
+- [ADDITIONAL USER ACTIONS IF NEEDED]
+
+We take your privacy seriously. If you have questions,
+contact us at aardappvark@proton.me.
+
+MidMightBit Games</div>
+
+        <h3>5.3 GitHub Security Advisory Template</h3>
+        <div class="template-box">Title: [CVE-YYYY-XXXXX] [Brief description]
+
+Severity: [Critical / High / Medium / Low]
+Affected versions: [VERSION RANGE]
+Patched version: [FIXED VERSION]
+
+Description:
+[DETAILED TECHNICAL DESCRIPTION]
+
+Impact:
+[DESCRIPTION OF IMPACT ON USERS]
+
+Remediation:
+Update to version [FIXED VERSION] or later.
+
+Timeline:
+- [DATE]: Issue discovered
+- [DATE]: Fix developed and tested
+- [DATE]: Patched version published
+- [DATE]: Advisory published
+
+Credit:
+[REPORTER IF APPLICABLE]
+
+Contact: aardappvark@proton.me</div>
+
+        <h2>6. Post-Incident Review</h2>
+
+        <h3>6.1 Review Process</h3>
+        <p>A post-incident review must be conducted within 14 days of resolving any P1 or P2 incident, and within 30 days for P3 incidents. The review must cover:</p>
+        <ol>
+            <li><strong>Timeline reconstruction:</strong> Detailed chronology of the incident from detection to resolution</li>
+            <li><strong>Root cause analysis:</strong> What caused the incident? Was it a code defect, dependency issue, configuration error, or external factor?</li>
+            <li><strong>Detection assessment:</strong> How was the incident detected? Could it have been detected earlier?</li>
+            <li><strong>Response assessment:</strong> Was the response timely and effective? Were there any delays or gaps?</li>
+            <li><strong>Impact assessment:</strong> What was the actual impact on users, data, and the App's reputation?</li>
+            <li><strong>Lessons learned:</strong> What can be improved in the App, its dependencies, or the incident response process?</li>
+            <li><strong>Action items:</strong> Specific, time-bound actions to prevent recurrence</li>
+        </ol>
+
+        <h3>6.2 Documentation</h3>
+        <p>All incidents (P1-P4) must be documented with:</p>
+        <ul>
+            <li>Incident identifier and classification</li>
+            <li>Date and time of detection</li>
+            <li>Date and time of resolution</li>
+            <li>Description of the incident and its root cause</li>
+            <li>Actions taken during response</li>
+            <li>Notifications sent (regulatory, user, advisory)</li>
+            <li>Post-incident review findings and action items</li>
+        </ul>
+
+        <h3>6.3 Governance Updates</h3>
+        <p>After any P1 or P2 incident, review and update the following documents as needed:</p>
+        <ul>
+            <li><a href="risk-register.html">Risk Register</a> &mdash; Update risk assessments, add new risks if identified</li>
+            <li><a href="privacy.html">Privacy Policy</a> &mdash; Update if processing activities or third-party services change</li>
+            <li><a href="data-processing-register.html">Data Processing Register</a> &mdash; Update if data flows or processing activities change</li>
+            <li><a href="legitimate-interest-assessment.html">Legitimate Interest Assessment</a> &mdash; Review if the incident changes the balancing test considerations</li>
+            <li>This Incident Response Plan &mdash; Update procedures based on lessons learned</li>
+        </ul>
+
+        <h2>7. Testing and Maintenance</h2>
+
+        <h3>7.1 Plan Testing</h3>
+        <p>This Incident Response Plan should be reviewed and tested annually through:</p>
+        <ul>
+            <li>A desktop walkthrough of each response procedure</li>
+            <li>Verification that all contact information and notification channels are current</li>
+            <li>Review of regulatory notification requirements for any changes</li>
+            <li>Confirmation that communication templates are appropriate and complete</li>
+        </ul>
+
+        <h3>7.2 Plan Maintenance</h3>
+        <ul>
+            <li><strong>Last updated:</strong> February 2026</li>
+            <li><strong>Next review:</strong> February 2027 or after any P1/P2 incident</li>
+            <li><strong>Reviewer:</strong> MidMightBit Games</li>
+            <li><strong>Contact:</strong> <a href="mailto:aardappvark@proton.me">aardappvark@proton.me</a></li>
+        </ul>
+
+        <div class="footer">
+            <p>MidMightBit Games | Australia</p>
+        </div>
+    </div>
+</body>
+</html>

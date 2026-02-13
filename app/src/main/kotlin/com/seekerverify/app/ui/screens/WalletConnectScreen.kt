@@ -20,8 +20,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.seekerverify.app.AppConfig
 import com.seekerverify.app.ui.theme.SeekerBlue
 import com.seekerverify.app.ui.theme.SolanaGreen
 
@@ -107,5 +109,49 @@ fun WalletConnectScreen(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Pre-connection consent notice
+        Text(
+            text = "By connecting, your public wallet address will be stored locally on this device to display on-chain data. No private keys are accessed. No data is sent to external servers beyond Solana RPC endpoints.",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        val uriHandler = LocalUriHandler.current
+        val baseUrl = AppConfig.Identity.URI
+
+        // Privacy Policy & Terms links
+        androidx.compose.foundation.layout.Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            androidx.compose.foundation.text.ClickableText(
+                text = androidx.compose.ui.text.AnnotatedString("Privacy Policy"),
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = SeekerBlue,
+                    textAlign = TextAlign.Center
+                ),
+                onClick = { uriHandler.openUri("$baseUrl/privacy.html") }
+            )
+            Text(
+                text = "  \u2022  ",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            androidx.compose.foundation.text.ClickableText(
+                text = androidx.compose.ui.text.AnnotatedString("Terms of Service"),
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = SeekerBlue,
+                    textAlign = TextAlign.Center
+                ),
+                onClick = { uriHandler.openUri("$baseUrl/terms.html") }
+            )
+        }
     }
 }

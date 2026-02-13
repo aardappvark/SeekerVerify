@@ -1,6 +1,7 @@
 package com.seekerverify.app.rpc
 
 import android.util.Log
+import com.seekerverify.app.AppConfig
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
@@ -51,15 +52,11 @@ object StakingRpcClient {
 
     private const val TAG = "SeekerVerify"
 
-    // Known addresses for the SKR staking program
-    private const val SKR_STAKING_PROGRAM = "SKRskrmtL83pcL4YqLWt6iPefDqwXQWHSw9S9vz94BZ"
-    private const val STAKE_CONFIG = "4HQy82s9CHTv1GsYKnANHMiHfhcqesYkK6sB3RDSYyqw"
-
-    // Share price precision divisor (shares * share_price / PRECISION = raw token amount)
-    private const val SHARE_PRICE_PRECISION = 1_000_000_000L
-
-    // SKR has 6 decimals
-    private const val SKR_DECIMALS = 1_000_000.0
+    // Use shared constants from AppConfig
+    private val SKR_STAKING_PROGRAM get() = AppConfig.Tokens.SKR_STAKING_PROGRAM
+    private val STAKE_CONFIG get() = AppConfig.Tokens.SKR_STAKE_CONFIG
+    private val SHARE_PRICE_PRECISION get() = AppConfig.Tokens.SHARE_PRICE_PRECISION
+    private val SKR_DECIMALS get() = AppConfig.Tokens.SKR_DECIMALS_DIVISOR
 
     data class StakingInfo(
         val stakedAmount: Long,         // raw lamports (6 decimals)
@@ -273,6 +270,5 @@ object StakingRpcClient {
      */
     fun estimateApy(): Double = 20.7
 
-    // Fallback share price if StakeConfig can't be read (~1.015 as of Feb 2026)
-    private const val FALLBACK_SHARE_PRICE = 1_015_000_000L
+    private val FALLBACK_SHARE_PRICE get() = AppConfig.Tokens.FALLBACK_SHARE_PRICE
 }

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Seeker 기기 도우미</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">지갑 연결</string>
+    <string name="connecting_to_wallet">지갑에 연결 중…</string>
+    <string name="requires_sgt">Seeker Genesis Token (SGT) 필요</string>
+    <string name="wallet_consent_notice">연결하면 온체인 데이터를 표시하기 위해 공개 지갑 주소가 이 기기에 로컬로 저장됩니다. 개인키에는 접근하지 않습니다. Solana RPC 엔드포인트 외의 외부 서버로 데이터가 전송되지 않습니다.</string>
+    <string name="privacy_policy">개인정보 처리방침</string>
+    <string name="terms_of_service">이용 약관</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token 확인 중…</string>
+    <string name="no_sgt_found">Seeker Genesis Token을 찾을 수 없음</string>
+    <string name="no_sgt_message">이 앱은 Seeker 기기 소유자 전용입니다. 계속하려면 Seeker Genesis Token (SGT)을 보유한 지갑을 연결하세요.</string>
+    <string name="disconnect_try_another">연결 해제 후 다른 지갑 시도</string>
+    <string name="verification_error">확인 오류</string>
+    <string name="retry_verification">확인 재시도</string>
+    <string name="disconnect_wallet">지갑 연결 해제</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker 신원</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">인증된 Seeker</string>
+    <string name="verified_seeker_cd">인증된 Seeker</string>
+    <string name="share_identity">신원 공유</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">인증된 Seeker 소유자</string>
+    <string name="daily_check_in">일일 체크인</string>
+    <string name="current_label">현재</string>
+    <string name="longest_label">최장</string>
+    <string name="total_label">총계</string>
+    <string name="checked_in_today">오늘 체크인 완료!</string>
+    <string name="check_in">체크인</string>
+    <string name="days_suffix">%1$s일</string>
+    <string name="share_text_prefix">나는 Seeker</string>
+    <string name="share_text_verified">Solana Seeker의 인증된 SGT 홀더</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s일</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">포트폴리오</string>
+    <string name="refresh">새로고침</string>
+    <string name="total_value">총 가치</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL 잔액</string>
+    <string name="staked_sol">스테이킹된 SOL</string>
+    <string name="liquid_balance">유동 잔액</string>
+    <string name="staked_skr">스테이킹된 SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">스테이킹 해제 중: </string>
+    <string name="rewards_compound">보상은 지분 가격 상승을 통해 자동으로 복리 적용됩니다.</string>
+    <string name="no_stake_found">활성 스테이킹을 찾을 수 없습니다. SKR을 스테이킹하여 보상을 받으세요.</string>
+    <string name="financial_disclaimer">가격은 서드파티 API에서 제공되며 현재 시장 가치를 반영하지 않을 수 있습니다. APY는 변동적이며 현재 온체인 데이터에 기반하고 보장되지 않습니다. 이것은 재정적 조언이 아닙니다.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker 함대</string>
+    <string name="total_seekers">전체 SEEKERS</string>
+    <string name="devices_in_fleet">함대 내 기기</string>
+    <string name="your_fleet_position">나의 함대 순위</string>
+    <string name="position_format">#%1$s / %2$s</string>
+    <string name="earlier_than_percent">Seekers의 %1$s%%보다 앞선 가입</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">얼리 파이오니어 \uD83C\uDF1F</string>
+    <string name="early_adopter">얼리 어답터 \uD83D\uDE80</string>
+    <string name="fleet_member">함대 멤버 \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">활성 스테이커</string>
+    <string name="skr_staked_label">스테이킹된 SKR</string>
+    <string name="fleet_data_note">함대 데이터는 온체인 기록을 기반으로 추정되며 주기적으로 업데이트됩니다.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">에어드롭 티어</string>
+    <string name="season_1">시즌 1</string>
+    <string name="season_2">시즌 2</string>
+    <string name="s1_subtitle">시즌 1 에어드롭 순위 및 활동</string>
+    <string name="s2_subtitle">스와이프하여 예측된 시즌 2 티어 확인</string>
+    <string name="detect_my_s1_tier">시즌 1 티어 감지</string>
+    <string name="detect_s1_subtitle">온체인 기록을 스캔하여 시즌 1 에어드롭 티어 및 활동 확인</string>
+    <string name="scanning_on_chain">온체인 활동 스캔 중…</string>
+    <string name="run_prediction">예측 실행</string>
+    <string name="run_prediction_subtitle">온체인 활동을 분석하여 프로필에 맞는 티어 확인</string>
+    <string name="analyzing_on_chain">온체인 활동 분석 중…</string>
+    <string name="re_analyze">재분석</string>
+    <string name="re_run_prediction">예측 재실행</string>
+    <string name="your_tier_badge">내 등급</string>
+    <string name="season_1_badge">시즌 1</string>
+    <string name="your_prediction_badge">내 예측</string>
+    <string name="season_2_badge">시즌 2</string>
+    <string name="per_wallet">지갑당</string>
+    <string name="of_wallets">의 지갑</string>
+    <string name="s1_wallets_label">S1: 지갑의 %1$s%%</string>
+    <string name="score_label">점수: %1$s</string>
+    <string name="score_needed">필요 점수: ~%1$s+</string>
+    <string name="top_percent">상위 %1$s%%</string>
+    <string name="score_format">점수: %1$s</string>
+    <string name="score_needed_format">필요 점수: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: 지갑의 %1$s%%</string>
+    <string name="your_s1_position">나의 시즌 1 순위</string>
+    <string name="skr_claimed_format">%1$s SKR 수령 완료</string>
+    <string name="top_percent_format">상위 %1$s%%</string>
+    <string name="of_all_seekers">전체 Seekers 중</string>
+    <string name="activity_score">활동 점수</string>
+    <string name="your_on_chain_activity">나의 온체인 활동</string>
+    <string name="s1_claim_not_found">이 지갑에서 시즌 1 수령 기록을 찾을 수 없습니다. 다른 지갑에서 수령했거나 수령이 아직 처리되지 않았을 수 있습니다.</string>
+    <string name="activity_highlights">활동 하이라이트</string>
+    <string name="season_1_vs_season_2">시즌 1 vs 시즌 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">시즌 1 배분</string>
+    <string name="eligible_wallets">대상 지갑 약 140,000개</string>
+    <string name="your_activity_score">나의 활동 점수</string>
+    <string name="score_breakdown">점수 세부 내역</string>
+    <string name="speculative_notice">추측적 추정치일 뿐입니다. 시즌 1 패턴 기반 \u2014 실제 시즌 2 기준은 다를 수 있습니다. 재정적 조언이 아닙니다.</string>
+    <string name="s1_disclaimer">시즌 1 티어는 온체인 수령 기록에서 감지되었습니다. 활동 분석은 현재 지갑 데이터를 기반으로 합니다. 이것은 일반 정보이며 재정적 조언이 아닙니다.</string>
+    <string name="s2_disclaimer">이 예측은 시즌 1 패턴과 온체인 활동을 기반으로 한 추측적 추정치입니다. 실제 시즌 2 기준은 아직 발표되지 않았으며 크게 다를 수 있습니다. 이것은 재정적 조언이 아닙니다. 이 예측을 기반으로 재정적 결정을 내리지 마세요.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">스코어링 모델 분석</string>
+    <string name="s1_model_subtitle">온체인 활동이 이 앱의 스코어링 모델에 어떻게 매핑되는지 보여줍니다. 이 모델은 추측적이며 실제 기준을 반영하지 않을 수 있습니다.</string>
+    <string name="s2_model_subtitle">활동이 이 앱의 스코어링 모델에 어떻게 매핑되는지 보여줍니다. 이 모델은 추측적이며 실제 시즌 2 기준을 반영하지 않을 수 있습니다. 재정적 조언이 아닙니다.</string>
+    <string name="tx_count_low">트랜잭션 수: 낮음</string>
+    <string name="tx_count_low_desc">이 지표는 온체인 트랜잭션(스왑, 전송, 인터랙션)을 측정합니다. S1 스코어링 모델에서 30%% 가중치를 가집니다.</string>
+    <string name="nft_none">NFT 보유: 감지되지 않음</string>
+    <string name="nft_none_desc">이 지표는 지갑 내 NFT 소유를 확인합니다. 스코어링 모델에서 10%% 가중치를 가집니다.</string>
+    <string name="token_diversity_low">토큰 다양성: 낮음</string>
+    <string name="token_diversity_low_desc">이 지표는 보유한 고유 SPL 토큰 수를 집계합니다. 스코어링 모델에서 15%% 가중치를 가집니다.</string>
+    <string name="dapp_low">dApp 인터랙션: 낮음</string>
+    <string name="dapp_low_desc">이 지표는 고유 프로그램 인터랙션을 추적합니다. 스코어링 모델에서 25%% 가중치를 가집니다.</string>
+    <string name="wallet_age_recent">지갑 나이: 최근</string>
+    <string name="wallet_age_recent_desc">이 지표는 지갑 나이를 측정합니다. 스코어링 모델에서 20%% 가중치를 가집니다. 지갑 나이는 시간이 지남에 따라 자연스럽게 증가합니다.</string>
+    <string name="strong_activity_profile">우수한 활동 프로필</string>
+    <string name="strong_activity_s1_desc">시즌 1 온체인 활동이 측정된 모든 지표에서 높은 점수를 받았습니다.</string>
+    <string name="strong_activity_s2_desc">온체인 활동이 이 모델의 측정된 모든 지표에서 높은 점수를 받았습니다.</string>
+    <string name="staking_score_format">SKR 스테이킹 점수: %1$s/100</string>
+    <string name="staking_score_desc">이 지표는 SKR이 스테이킹되어 있는지 확인합니다. 스코어링 모델에서 20%% 가중치를 가집니다.</string>
+    <string name="s1_tier_not_detected">시즌 1 티어: 감지되지 않음</string>
+    <string name="s1_tier_not_detected_desc">이 지표는 S1 에어드롭 티어를 사용합니다. 가중치는 15%%입니다. 시즌 1 탭에서 티어를 감지하세요.</string>
+    <string name="tx_score_format">트랜잭션 점수: %1$s/100</string>
+    <string name="tx_score_desc">이 지표는 온체인 트랜잭션을 집계합니다. 스코어링 모델에서 15%% 가중치를 가집니다.</string>
+    <string name="dapp_score_format">dApp 사용 점수: %1$s/100</string>
+    <string name="dapp_score_desc">이 지표는 고유 프로그램 인터랙션을 추적합니다. 스코어링 모델에서 10%% 가중치를 가집니다.</string>
+    <string name="programs_score_format">프로그램 점수: %1$s/100</string>
+    <string name="programs_score_desc">이 지표는 인터랙션한 고유 Solana 프로그램 수를 집계합니다. 가중치는 12%%입니다.</string>
+    <string name="wallet_age_score_format">지갑 나이 점수: %1$s/100</string>
+    <string name="wallet_age_score_desc">이 지표는 지갑 나이를 측정합니다. 가중치는 10%%입니다. 시간이 지남에 따라 자연스럽게 증가합니다.</string>
+    <string name="skr_domain_not_detected">.skr 도메인: 감지되지 않음</string>
+    <string name="skr_domain_desc">이 지표는 .skr 도메인 소유를 확인합니다. 스코어링 모델에서 5%% 가중치를 가집니다.</string>
+    <string name="token_diversity_score_format">토큰 다양성 점수: %1$s/100</string>
+    <string name="token_diversity_score_desc">이 지표는 보유한 고유 SPL 토큰 수를 집계합니다. 스코어링 모델에서 8%% 가중치를 가집니다.</string>
+    <string name="nft_score_format">NFT 점수: %1$s/100</string>
+    <string name="nft_score_desc">이 지표는 NFT 소유를 확인합니다. 스코어링 모델에서 5%% 가중치를 가집니다.</string>
+
+    <!-- Settings -->
+    <string name="settings">설정</string>
+    <string name="wallet_section">지갑</string>
+    <string name="connected_wallet">연결된 지갑</string>
+    <string name="seeker_number">Seeker 번호</string>
+    <string name="network_section">네트워크</string>
+    <string name="use_helius_rpc">Helius RPC 사용</string>
+    <string name="helius_enabled_desc">더 높은 요청 제한</string>
+    <string name="helius_disabled_desc">공용 RPC (요청 제한 있음)</string>
+    <string name="helius_detail_on">Helius 무료 티어 사용 중 (월 1M 크레딧). 더 빠르고 안정적.</string>
+    <string name="helius_detail_off">공용 Solana RPC 사용 중. 무료이나 약 5 요청/초로 제한.</string>
+    <string name="data_section">데이터</string>
+    <string name="sgt_cache">SGT 캐시</string>
+    <string name="sgt_cache_valid">유효</string>
+    <string name="sgt_cache_needs_refresh">갱신 필요</string>
+    <string name="sgt_cache_note">SGT 확인은 RPC 호출을 최소화하기 위해 24시간 캐시됩니다.</string>
+    <string name="anonymous_insights">익명 통계</string>
+    <string name="anonymous_insights_desc">정확도 향상을 위해 익명화된 예측 데이터 공유 (출시 예정)</string>
+    <string name="about_section">정보</string>
+    <string name="version_label">버전</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Seeker 기기 도우미. SGT 소유 확인, SKR 포트폴리오 추적, 온체인 활동 분석을 제공합니다.</string>
+    <string name="about_publisher">MidMightBit Games (호주) 제작</string>
+    <string name="about_architecture">서버 비용 제로. 모든 데이터는 기기 내 + 온체인.</string>
+    <string name="regulatory_disclaimer">Solana Foundation, Solana Mobile Inc. 또는 어떤 토큰 발행자와도 제휴하지 않았습니다. 어떤 금융 규제 기관의 인가나 규제를 받지 않습니다. 재정적 조언을 제공하지 않습니다.</string>
+    <string name="delete_all_data">모든 데이터 삭제</string>
+    <string name="delete_all_data_desc">이 기기의 모든 캐시 데이터, 환경설정, 연속 기록을 영구적으로 삭제합니다.</string>
+    <string name="delete_all_data_title">모든 데이터를 삭제하시겠습니까?</string>
+    <string name="delete_all_data_confirm_text">모든 캐시 데이터, 환경설정, 연속 기록이 영구적으로 삭제되고 지갑 연결이 해제됩니다. 이 작업은 되돌릴 수 없습니다.</string>
+    <string name="delete_everything">모두 삭제</string>
+    <string name="cancel">취소</string>
+    <string name="disconnecting_clears_data">연결 해제 시 모든 캐시 데이터가 삭제됩니다.</string>
+</resources>
