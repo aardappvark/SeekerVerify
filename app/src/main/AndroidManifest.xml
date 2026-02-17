@@ -27,6 +27,17 @@
             </intent-filter>
         </activity>
 
+        <!-- Remove test activities that leak into release via androidx.test.core -->
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+            tools:node="remove" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+            tools:node="remove" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+            tools:node="remove" />
+
     </application>
 
     <!-- Query for Solana wallet apps -->
