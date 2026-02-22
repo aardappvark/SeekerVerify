@@ -21,8 +21,8 @@ android {
         applicationId = "com.seekerverify.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.0.2"
+        versionCode = 7
+        versionName = "1.3.1"
 
         // Helius RPC API key (injected from local.properties)
         resValue(
@@ -35,9 +35,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../release-keystore.jks")
-            storePassword = "roaringtrades2026"
-            keyAlias = "roaringtrades"
-            keyPassword = "roaringtrades2026"
+            storePassword = localProperties.getProperty("RELEASE_STORE_PASSWORD")
+            keyAlias = localProperties.getProperty("RELEASE_KEY_ALIAS")
+            keyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD")
         }
     }
 
@@ -84,6 +84,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.material3:material3:1.2.0")
     implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.material:material")
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.6")
@@ -99,6 +100,9 @@ dependencies {
 
     // Seeker Verify Library (SGT verification — local project reference)
     implementation(project(":seeker-verify"))
+
+    // WorkManager (for scheduled notifications + widget refresh)
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
