@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">A Seeker eszk\u00f6z\u00f6d kieg\u00e9sz\u00edt\u0151je</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">T\u00e1rca csatlakoztat\u00e1sa</string>
+    <string name="connecting_to_wallet">Csatlakoz\u00e1s a t\u00e1rc\u00e1hoz\u2026</string>
+    <string name="requires_sgt">Seeker Genesis Token (SGT) sz\u00fcks\u00e9ges</string>
+    <string name="wallet_consent_notice">A csatlakoztat\u00e1ssal a nyilv\u00e1nos t\u00e1rcac\u00edmed helyben t\u00e1rol\u00f3dik ezen az eszk\u00f6z\u00f6n az on-chain adatok megjelen\u00edt\u00e9s\u00e9hez. Priv\u00e1t kulcsokhoz nem f\u00e9r\u00fcnk hozz\u00e1. Semmilyen adatot nem k\u00fcld\u00fcnk k\u00fcls\u0151 szerverekre a Solana RPC v\u00e9gpontokon t\u00fal.</string>
+    <string name="privacy_policy">Adatv\u00e9delmi ir\u00e1nyelvek</string>
+    <string name="terms_of_service">Felhaszn\u00e1l\u00e1si felt\u00e9telek</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token ellen\u0151rz\u00e9se\u2026</string>
+    <string name="no_sgt_found">Nem tal\u00e1lhat\u00f3 Seeker Genesis Token</string>
+    <string name="no_sgt_message">Ez az alkalmaz\u00e1s kiz\u00e1r\u00f3lag Seeker eszk\u00f6z tulajdonosok sz\u00e1m\u00e1ra k\u00e9sz\u00fclt. A folytat\u00e1shoz csatlakoztass egy Seeker Genesis Tokent (SGT) tartalmaz\u00f3 t\u00e1rc\u00e1t.</string>
+    <string name="disconnect_try_another">Lecsatlakoztat\u00e1s \u00e9s m\u00e1sik t\u00e1rca pr\u00f3b\u00e1l\u00e1sa</string>
+    <string name="verification_error">Ellen\u0151rz\u00e9si hiba</string>
+    <string name="retry_verification">Ellen\u0151rz\u00e9s \u00fajrapr\u00f3b\u00e1l\u00e1sa</string>
+    <string name="disconnect_wallet">T\u00e1rca lecsatlakoztat\u00e1sa</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker azonoss\u00e1g</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Hiteles\u00edtett Seeker</string>
+    <string name="verified_seeker_cd">Hiteles\u00edtett Seeker</string>
+    <string name="share_identity">Azonoss\u00e1g megoszt\u00e1sa</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Hiteles\u00edtett Seeker tulajdonos</string>
+    <string name="daily_check_in">Napi bejelentkez\u00e9s</string>
+    <string name="current_label">Aktu\u00e1lis</string>
+    <string name="longest_label">Leghosszabb</string>
+    <string name="total_label">\u00d6sszes</string>
+    <string name="checked_in_today">Ma m\u00e1r bejelentkezt\u00e9l!</string>
+    <string name="check_in">Bejelentkez\u00e9s</string>
+    <string name="days_suffix">%1$s nap</string>
+    <string name="share_text_prefix">Seeker vagyok</string>
+    <string name="share_text_verified">Hiteles\u00edtett SGT tulajdonos a Solana Seekeren</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s nap</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portf\u00f3li\u00f3</string>
+    <string name="refresh">Friss\u00edt\u00e9s</string>
+    <string name="total_value">\u00d6SSZEGZ\u00c9S</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL egyenleg</string>
+    <string name="staked_sol">Stakelt SOL</string>
+    <string name="liquid_balance">Likvid egyenleg</string>
+    <string name="staked_skr">Stakelt SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Unstaking: </string>
+    <string name="rewards_compound">A jutalmak automatikusan \u00fajrabefektet\u0151dnek a r\u00e9szv\u00e9ny\u00e1r n\u00f6veked\u00e9s\u00e9n kereszt\u00fcl.</string>
+    <string name="no_stake_found">Nem tal\u00e1lhat\u00f3 akt\u00edv stake. Stakelj SKR-t jutalmak szerz\u00e9s\u00e9hez.</string>
+    <string name="financial_disclaimer">Az \u00e1rak harmadik f\u00e9l API-kb\u00f3l sz\u00e1rmaznak, \u00e9s el\u0151fordulhat, hogy nem t\u00fckr\u00f6zik az aktu\u00e1lis piaci \u00e9rt\u00e9keket. Az APY v\u00e1ltoz\u00f3, aktu\u00e1lis on-chain adatokon alapul, \u00e9s nem garant\u00e1lt. Ez nem p\u00e9nz\u00fcgyi tan\u00e1csad\u00e1s.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker flotta</string>
+    <string name="total_seekers">\u00d6SSZES SEEKER</string>
+    <string name="devices_in_fleet">eszk\u00f6z a flott\u00e1ban</string>
+    <string name="your_fleet_position">Poz\u00edci\u00f3d a flott\u00e1ban</string>
+    <string name="position_format">#%1$s / %2$s</string>
+    <string name="earlier_than_percent">A Seekerek %1$s%%-\u00e1n\u00e1l kor\u00e1bbi</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Korai \u00fatt\u00f6r\u0151 \uD83C\uDF1F</string>
+    <string name="early_adopter">Korai elfogad\u00f3 \uD83D\uDE80</string>
+    <string name="fleet_member">Flottatag \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Akt\u00edv stakerek</string>
+    <string name="skr_staked_label">Stakelt SKR</string>
+    <string name="fleet_data_note">A flottaadatok on-chain rekordokb\u00f3l becs\u00fcltek, \u00e9s id\u0151szakosan friss\u00fclnek.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Airdrop szintek</string>
+    <string name="season_1">1. \u00e9vad</string>
+    <string name="season_2">2. \u00e9vad</string>
+    <string name="s1_subtitle">Az 1. \u00e9vad airdrop poz\u00edci\u00f3d \u00e9s aktivit\u00e1sod</string>
+    <string name="s2_subtitle">H\u00fazzd el a v\u00e1rhat\u00f3 2. \u00e9vad szintek felfedez\u00e9s\u00e9hez</string>
+    <string name="detect_my_s1_tier">1. \u00e9vad szintem felder\u00edt\u00e9se</string>
+    <string name="detect_s1_subtitle">On-chain el\u0151zm\u00e9nyek \u00e1tvizsg\u00e1l\u00e1sa az 1. \u00e9vad airdrop szinted \u00e9s aktivit\u00e1sod megtal\u00e1l\u00e1s\u00e1hoz</string>
+    <string name="scanning_on_chain">On-chain aktivit\u00e1s vizsg\u00e1lata\u2026</string>
+    <string name="run_prediction">El\u0151rejelz\u00e9s futtat\u00e1sa</string>
+    <string name="run_prediction_subtitle">On-chain aktivit\u00e1sod elemz\u00e9se, hogy l\u00e1sd, melyik szint illik a profilodhoz</string>
+    <string name="analyzing_on_chain">On-chain aktivit\u00e1s elemz\u00e9se\u2026</string>
+    <string name="re_analyze">\u00dajraelemz\u00e9s</string>
+    <string name="re_run_prediction">El\u0151rejelz\u00e9s \u00fajrafuttat\u00e1sa</string>
+    <string name="your_tier_badge">SZINTED</string>
+    <string name="season_1_badge">1. \u00c9VAD</string>
+    <string name="your_prediction_badge">EL\u0150REJELZ\u00c9SED</string>
+    <string name="season_2_badge">2. \u00c9VAD</string>
+    <string name="per_wallet">t\u00e1rc\u00e1nk\u00e9nt</string>
+    <string name="of_wallets"> a t\u00e1rc\u00e1kb\u00f3l</string>
+    <string name="s1_wallets_label">S1: a t\u00e1rc\u00e1k %1$s%%-a</string>
+    <string name="score_label">Pontsz\u00e1m: %1$s</string>
+    <string name="score_needed">Sz\u00fcks\u00e9ges pontsz\u00e1m: ~%1$s+</string>
+    <string name="top_percent">Fels\u0151 %1$s%%</string>
+    <string name="score_format">Pontsz\u00e1m: %1$s</string>
+    <string name="score_needed_format">Sz\u00fcks\u00e9ges pontsz\u00e1m: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: a t\u00e1rc\u00e1k %1$s%%-a</string>
+    <string name="your_s1_position">Poz\u00edci\u00f3d az 1. \u00e9vadban</string>
+    <string name="skr_claimed_format">%1$s SKR ig\u00e9nyelve</string>
+    <string name="top_percent_format">Fels\u0151 %1$s%%</string>
+    <string name="of_all_seekers">az \u00f6sszes Seeker k\u00f6z\u00fcl</string>
+    <string name="activity_score">Aktivit\u00e1si pontsz\u00e1m</string>
+    <string name="your_on_chain_activity">On-chain aktivit\u00e1sod</string>
+    <string name="s1_claim_not_found">Nem tal\u00e1lhat\u00f3 1. \u00e9vad ig\u00e9nyl\u00e9s ezen a t\u00e1rc\u00e1n. Ez el\u0151fordulhat, ha m\u00e1sik t\u00e1rc\u00e1n ig\u00e9nyelted, vagy ha az ig\u00e9nyl\u00e9s m\u00e9g nem lett feldolgozva.</string>
+    <string name="activity_highlights">Aktivit\u00e1si kiemelt pontok</string>
+    <string name="season_1_vs_season_2">1. \u00e9vad vs 2. \u00e9vad</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">1. \u00e9vad eloszl\u00e1sa</string>
+    <string name="eligible_wallets">~140 000 jogosult t\u00e1rca</string>
+    <string name="your_activity_score">Aktivit\u00e1si pontsz\u00e1mod</string>
+    <string name="score_breakdown">Pontsz\u00e1m r\u00e9szletez\u00e9se</string>
+    <string name="speculative_notice">Csak becsl\u00e9s. Az 1. \u00e9vad mint\u00e1in alapul \u2014 a t\u00e9nyleges 2. \u00e9vad krit\u00e9riumok elt\u00e9rhetnek. Ez nem p\u00e9nz\u00fcgyi tan\u00e1csad\u00e1s.</string>
+    <string name="s1_disclaimer">Az 1. \u00e9vad szintje az on-chain ig\u00e9nyl\u00e9si el\u0151zm\u00e9nyek alapj\u00e1n ker\u00fclt felder\u00edt\u00e9sre. Az aktivit\u00e1selemz\u00e9s az aktu\u00e1lis t\u00e1rcaadatokon alapul. Ez \u00e1ltal\u00e1nos t\u00e1j\u00e9koztat\u00e1s, \u00e9s nem p\u00e9nz\u00fcgyi tan\u00e1csad\u00e1s.</string>
+    <string name="s2_disclaimer">Ez az el\u0151rejelz\u00e9s az 1. \u00e9vad mint\u00e1in \u00e9s on-chain aktivit\u00e1son alapul\u00f3 becsl\u00e9s. A t\u00e9nyleges 2. \u00e9vad krit\u00e9riumokat m\u00e9g nem jelentett\u00e9k be, \u00e9s jelent\u0151sen elt\u00e9rhetnek. Ez nem p\u00e9nz\u00fcgyi tan\u00e1csad\u00e1s. Ne hozz p\u00e9nz\u00fcgyi d\u00f6nt\u00e9seket ezen el\u0151rejelz\u00e9sek alapj\u00e1n.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Pontsz\u00e1m\u00edz\u00e1si modell betekint\u00e9sek</string>
+    <string name="s1_model_subtitle">Hogyan t\u00fckr\u00f6z\u0151dik az on-chain aktivit\u00e1sod az alkalmaz\u00e1s pontsz\u00e1m\u00edz\u00e1si modellj\u00e9ben. Ez a modell becsl\u00e9s, \u00e9s el\u0151fordulhat, hogy nem t\u00fckr\u00f6zi a val\u00f3s krit\u00e9riumokat.</string>
+    <string name="s2_model_subtitle">Hogyan t\u00fckr\u00f6z\u0151dik az aktivit\u00e1sod az alkalmaz\u00e1s pontsz\u00e1m\u00edz\u00e1si modellj\u00e9ben. Ez a modell becsl\u00e9s, \u00e9s el\u0151fordulhat, hogy nem t\u00fckr\u00f6zi a val\u00f3s 2. \u00e9vad krit\u00e9riumokat. Nem p\u00e9nz\u00fcgyi tan\u00e1csad\u00e1s.</string>
+    <string name="tx_count_low">Tranzakci\u00f3sz\u00e1m: Alacsony</string>
+    <string name="tx_count_low_desc">Ez a metrika az on-chain tranzakci\u00f3kat m\u00e9ri (cser\u00e9k, \u00e1tutal\u00e1sok, interakci\u00f3k). 30%% s\u00falya van az S1 pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="nft_none">NFT \u00e1llom\u00e1ny: Nem \u00e9szlelhet\u0151</string>
+    <string name="nft_none_desc">Ez a metrika az NFT tulajdonl\u00e1st ellen\u0151rzi a t\u00e1rc\u00e1ban. 10%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="token_diversity_low">Token sokf\u00e9les\u00e9g: Alacsony</string>
+    <string name="token_diversity_low_desc">Ez a metrika az egyedi SPL tokenek sz\u00e1m\u00e1t m\u00e9ri. 15%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="dapp_low">dApp interakci\u00f3k: Alacsony</string>
+    <string name="dapp_low_desc">Ez a metrika az egyedi programinterakci\u00f3kat k\u00f6veti. 25%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="wallet_age_recent">T\u00e1rca kora: \u00daj</string>
+    <string name="wallet_age_recent_desc">Ez a metrika a t\u00e1rca kor\u00e1t m\u00e9ri. 20%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben. A t\u00e1rca kora term\u00e9szetesen n\u00f6vekszik az id\u0151vel.</string>
+    <string name="strong_activity_profile">Er\u0151s aktivit\u00e1si profil</string>
+    <string name="strong_activity_s1_desc">Az 1. \u00e9vad on-chain aktivit\u00e1sod j\u00f3l teljes\u00edt minden m\u00e9rt metrik\u00e1ban.</string>
+    <string name="strong_activity_s2_desc">Az on-chain aktivit\u00e1sod j\u00f3l teljes\u00edt a modell minden m\u00e9rt metrik\u00e1j\u00e1ban.</string>
+    <string name="staking_score_format">SKR staking pontsz\u00e1m: %1$s/100</string>
+    <string name="staking_score_desc">Ez a metrika ellen\u0151rzi, hogy az SKR stakelve van-e. 20%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="s1_tier_not_detected">1. \u00e9vad szint: Nem \u00e9szlelhet\u0151</string>
+    <string name="s1_tier_not_detected_desc">Ez a metrika az S1 airdrop szintedet haszn\u00e1lja. 15%% s\u00falya van. Haszn\u00e1ld az 1. \u00e9vad f\u00fclet a szinted felder\u00edt\u00e9s\u00e9hez.</string>
+    <string name="tx_score_format">Tranzakci\u00f3s pontsz\u00e1m: %1$s/100</string>
+    <string name="tx_score_desc">Ez a metrika az on-chain tranzakci\u00f3kat sz\u00e1molja. 15%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="dapp_score_format">dApp haszn\u00e1lati pontsz\u00e1m: %1$s/100</string>
+    <string name="dapp_score_desc">Ez a metrika az egyedi programinterakci\u00f3kat k\u00f6veti. 10%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="programs_score_format">Programok pontsz\u00e1m: %1$s/100</string>
+    <string name="programs_score_desc">Ez a metrika a haszn\u00e1lt k\u00fcl\u00f6nb\u00f6z\u0151 Solana programokat sz\u00e1molja. 12%% s\u00falya van.</string>
+    <string name="wallet_age_score_format">T\u00e1rca kor pontsz\u00e1m: %1$s/100</string>
+    <string name="wallet_age_score_desc">Ez a metrika a t\u00e1rca kor\u00e1t m\u00e9ri. 10%% s\u00falya van. Term\u00e9szetesen n\u00f6vekszik az id\u0151vel.</string>
+    <string name="skr_domain_not_detected">.skr domain: Nem \u00e9szlelhet\u0151</string>
+    <string name="skr_domain_desc">Ez a metrika a .skr domain tulajdonl\u00e1st ellen\u0151rzi. 5%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="token_diversity_score_format">Token sokf\u00e9les\u00e9g pontsz\u00e1m: %1$s/100</string>
+    <string name="token_diversity_score_desc">Ez a metrika az egyedi SPL tokenek sz\u00e1m\u00e1t m\u00e9ri. 8%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="nft_score_format">NFT pontsz\u00e1m: %1$s/100</string>
+    <string name="nft_score_desc">Ez a metrika az NFT tulajdonl\u00e1st ellen\u0151rzi. 5%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+
+    <!-- Settings -->
+    <string name="settings">Be\u00e1ll\u00edt\u00e1sok</string>
+    <string name="wallet_section">T\u00e1rca</string>
+    <string name="connected_wallet">Csatlakoztatott t\u00e1rca</string>
+    <string name="seeker_number">Seeker sz\u00e1m</string>
+    <string name="network_section">H\u00e1l\u00f3zat</string>
+    <string name="use_helius_rpc">Helius RPC haszn\u00e1lata</string>
+    <string name="helius_enabled_desc">Magasabb sebess\u00e9gkorl\u00e1tok</string>
+    <string name="helius_disabled_desc">Nyilv\u00e1nos RPC (sebess\u00e9gkorl\u00e1tozott)</string>
+    <string name="helius_detail_on">Helius ingyenes szint haszn\u00e1lata (1M kredit/h\u00f3nap). Gyorsabb \u00e9s megb\u00edzhat\u00f3bb.</string>
+    <string name="helius_detail_off">Nyilv\u00e1nos Solana RPC haszn\u00e1lata. Ingyenes, de ~5 k\u00e9r\u00e9s/m\u00e1sodpercre korl\u00e1tozva.</string>
+    <string name="data_section">Adatok</string>
+    <string name="sgt_cache">SGT gyors\u00edt\u00f3t\u00e1r</string>
+    <string name="sgt_cache_valid">\u00c9rv\u00e9nyes</string>
+    <string name="sgt_cache_needs_refresh">Friss\u00edt\u00e9s sz\u00fcks\u00e9ges</string>
+    <string name="sgt_cache_note">Az SGT ellen\u0151rz\u00e9s 24 \u00f3r\u00e1ra gyors\u00edt\u00f3t\u00e1razva van az RPC h\u00edv\u00e1sok minimaliz\u00e1l\u00e1sa \u00e9rdek\u00e9ben.</string>
+    <string name="anonymous_insights">Anonim statisztik\u00e1k</string>
+    <string name="anonymous_insights_desc">Anonimiz\u00e1lt el\u0151rejelz\u00e9si adatok megoszt\u00e1sa a pontoss\u00e1g jav\u00edt\u00e1s\u00e1hoz (hamarosan)</string>
+    <string name="about_section">N\u00e9vjegy</string>
+    <string name="version_label">Verzi\u00f3</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">A Seeker eszk\u00f6z\u00f6d kieg\u00e9sz\u00edt\u0151je. Ellen\u0151rizd az SGT tulajdonl\u00e1st, k\u00f6vesd az SKR portf\u00f3li\u00f3t, \u00e9s tekintsd meg az on-chain aktivit\u00e1selemz\u00e9st.</string>
+    <string name="about_publisher">K\u00e9sz\u00edtette: MidMightBit Games (Ausztr\u00e1lia)</string>
+    <string name="about_architecture">Nulla szerverk\u00f6lts\u00e9g. Minden adat az eszk\u00f6z\u00f6n + on-chain.</string>
+    <string name="regulatory_disclaimer">Nem \u00e1ll kapcsolatban a Solana Foundation-nel, a Solana Mobile Inc.-vel vagy b\u00e1rmely tokenkibocs\u00e1t\u00f3val. Semmilyen p\u00e9nz\u00fcgyi hat\u00f3s\u00e1g \u00e1ltal nem enged\u00e9lyezett vagy szab\u00e1lyozott. Nem ny\u00fajt p\u00e9nz\u00fcgyi tan\u00e1csad\u00e1st.</string>
+    <string name="delete_all_data">\u00d6sszes adat t\u00f6rl\u00e9se</string>
+    <string name="delete_all_data_desc">V\u00e9glegesen t\u00f6rli az \u00f6sszes gyors\u00edt\u00f3t\u00e1razott adatot, be\u00e1ll\u00edt\u00e1st \u00e9s sorozatel\u0151zm\u00e9nyt err\u0151l az eszk\u00f6zr\u0151l.</string>
+    <string name="delete_all_data_title">\u00d6sszes adat t\u00f6rl\u00e9se?</string>
+    <string name="delete_all_data_confirm_text">Ez v\u00e9glegesen t\u00f6rli az \u00f6sszes gyors\u00edt\u00f3t\u00e1razott adatot, be\u00e1ll\u00edt\u00e1st, sorozatel\u0151zm\u00e9nyt, \u00e9s lecsatlakoztatja a t\u00e1rc\u00e1dat. Ez a m\u0171velet nem vonhat\u00f3 vissza.</string>
+    <string name="delete_everything">Mindent t\u00f6r\u00f6l</string>
+    <string name="cancel">M\u00e9gsem</string>
+    <string name="disconnecting_clears_data">A lecsatlakoztat\u00e1s t\u00f6rli az \u00f6sszes gyors\u00edt\u00f3t\u00e1razott adatot.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Megjelen\u00edti a v\u00e1rhat\u00f3 szintedet, SOL \u00e9s SKR egyenlegeidet</string>
+</resources>

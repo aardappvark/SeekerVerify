@@ -190,4 +190,7 @@
     <string name="delete_everything">Alles löschen</string>
     <string name="cancel">Abbrechen</string>
     <string name="disconnecting_clears_data">Das Trennen löscht alle zwischengespeicherten Daten.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Zeigt deine vorhergesagte Stufe, SOL- und SKR-Guthaben</string>
 </resources>

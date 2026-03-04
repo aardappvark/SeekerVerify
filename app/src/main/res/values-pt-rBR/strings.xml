@@ -190,4 +190,7 @@
     <string name="delete_everything">Excluir tudo</string>
     <string name="cancel">Cancelar</string>
     <string name="disconnecting_clears_data">Desconectar apagará todos os dados em cache.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Mostra seu nível previsto, saldos de SOL e SKR</string>
 </resources>

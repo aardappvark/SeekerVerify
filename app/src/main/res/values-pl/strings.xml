@@ -190,4 +190,7 @@
     <string name="delete_everything">Usuń wszystko</string>
     <string name="cancel">Anuluj</string>
     <string name="disconnecting_clears_data">Rozłączenie spowoduje wyczyszczenie wszystkich danych z pamięci podręcznej.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Wyświetla przewidywany poziom, salda SOL i SKR</string>
 </resources>

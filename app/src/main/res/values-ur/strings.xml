@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">آپ کا Seeker ڈیوائس ساتھی</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">والٹ جوڑیں</string>
+    <string name="connecting_to_wallet">والٹ سے جوڑ رہے ہیں\u2026</string>
+    <string name="requires_sgt">Seeker Genesis Token (SGT) درکار ہے</string>
+    <string name="wallet_consent_notice">جوڑنے پر، آپ کا عوامی والٹ ایڈریس اس ڈیوائس پر مقامی طور پر محفوظ کیا جائے گا تاکہ آن چین ڈیٹا دکھایا جا سکے۔ کسی بھی نجی کلید تک رسائی نہیں کی جاتی۔ Solana RPC اینڈ پوائنٹس کے علاوہ کوئی ڈیٹا بیرونی سرورز کو نہیں بھیجا جاتا۔</string>
+    <string name="privacy_policy">رازداری کی پالیسی</string>
+    <string name="terms_of_service">سروس کی شرائط</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Seeker Genesis Token کی تصدیق ہو رہی ہے\u2026</string>
+    <string name="no_sgt_found">Seeker Genesis Token نہیں ملا</string>
+    <string name="no_sgt_message">یہ ایپ صرف Seeker ڈیوائس کے مالکان کے لیے ہے۔ جاری رکھنے کے لیے ایسا والٹ جوڑیں جس میں Seeker Genesis Token (SGT) ہو۔</string>
+    <string name="disconnect_try_another">منقطع کریں اور دوسرا والٹ آزمائیں</string>
+    <string name="verification_error">تصدیق میں خرابی</string>
+    <string name="retry_verification">تصدیق دوبارہ کریں</string>
+    <string name="disconnect_wallet">والٹ منقطع کریں</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Seeker شناخت</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">تصدیق شدہ Seeker</string>
+    <string name="verified_seeker_cd">تصدیق شدہ Seeker</string>
+    <string name="share_identity">شناخت شیئر کریں</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">تصدیق شدہ Seeker مالک</string>
+    <string name="daily_check_in">روزانہ حاضری</string>
+    <string name="current_label">موجودہ</string>
+    <string name="longest_label">طویل ترین</string>
+    <string name="total_label">کل</string>
+    <string name="checked_in_today">آج حاضری لگ گئی!</string>
+    <string name="check_in">حاضری لگائیں</string>
+    <string name="days_suffix">%1$s دن</string>
+    <string name="share_text_prefix">میں Seeker ہوں</string>
+    <string name="share_text_verified">Solana Seeker پر تصدیق شدہ SGT ہولڈر</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s دن</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">پورٹ فولیو</string>
+    <string name="refresh">ریفریش</string>
+    <string name="total_value">کل قیمت</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">SOL بیلنس</string>
+    <string name="staked_sol">سٹیک شدہ SOL</string>
+    <string name="liquid_balance">لیکوئڈ بیلنس</string>
+    <string name="staked_skr">سٹیک شدہ SKR</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">ان سٹیکنگ: </string>
+    <string name="rewards_compound">شیئر قیمت کی تعریف کے ذریعے انعامات خود بخود دوبارہ لگائے جاتے ہیں۔</string>
+    <string name="no_stake_found">کوئی فعال سٹیک نہیں ملا۔ انعامات حاصل کرنے کے لیے SKR سٹیک کریں۔</string>
+    <string name="financial_disclaimer">قیمتیں فریق ثالث APIs سے حاصل کی جاتی ہیں اور ہو سکتا ہے کہ وہ مارکیٹ کی موجودہ قیمتوں کی عکاسی نہ کریں۔ APY متغیر ہے، موجودہ آن چین ڈیٹا پر مبنی ہے، اور اس کی ضمانت نہیں ہے۔ یہ مالی مشورہ نہیں ہے۔</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Seeker بیڑا</string>
+    <string name="total_seekers">کل SEEKERS</string>
+    <string name="devices_in_fleet">بیڑے میں ڈیوائسز</string>
+    <string name="your_fleet_position">بیڑے میں آپ کی پوزیشن</string>
+    <string name="position_format">#%1$s از %2$s</string>
+    <string name="earlier_than_percent">%1$s%% Seekers سے پہلے</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">ابتدائی پیش رو \uD83C\uDF1F</string>
+    <string name="early_adopter">ابتدائی اپنانے والا \uD83D\uDE80</string>
+    <string name="fleet_member">بیڑے کا رکن \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">فعال سٹیکرز</string>
+    <string name="skr_staked_label">سٹیک شدہ SKR</string>
+    <string name="fleet_data_note">بیڑے کا ڈیٹا آن چین ریکارڈز سے تخمینی ہے اور وقتاً فوقتاً اپ ڈیٹ ہوتا ہے۔</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">ایئرڈراپ درجات</string>
+    <string name="season_1">سیزن 1</string>
+    <string name="season_2">سیزن 2</string>
+    <string name="s1_subtitle">آپ کی سیزن 1 ایئرڈراپ پوزیشن اور سرگرمی</string>
+    <string name="s2_subtitle">سیزن 2 کے متوقع درجات دیکھنے کے لیے سوائپ کریں</string>
+    <string name="detect_my_s1_tier">میرا سیزن 1 درجہ معلوم کریں</string>
+    <string name="detect_s1_subtitle">آن چین تاریخ اسکین کریں تاکہ آپ کا سیزن 1 ایئرڈراپ درجہ اور سرگرمی معلوم ہو</string>
+    <string name="scanning_on_chain">آن چین سرگرمی اسکین ہو رہی ہے\u2026</string>
+    <string name="run_prediction">پیشگوئی چلائیں</string>
+    <string name="run_prediction_subtitle">اپنی آن چین سرگرمی کا تجزیہ کریں تاکہ دیکھیں کون سا درجہ آپ کے پروفائل سے ملتا ہے</string>
+    <string name="analyzing_on_chain">آن چین سرگرمی کا تجزیہ ہو رہا ہے\u2026</string>
+    <string name="re_analyze">دوبارہ تجزیہ</string>
+    <string name="re_run_prediction">پیشگوئی دوبارہ چلائیں</string>
+    <string name="your_tier_badge">آپ کا درجہ</string>
+    <string name="season_1_badge">سیزن 1</string>
+    <string name="your_prediction_badge">آپ کی پیشگوئی</string>
+    <string name="season_2_badge">سیزن 2</string>
+    <string name="per_wallet">فی والٹ</string>
+    <string name="of_wallets"> والٹس میں سے</string>
+    <string name="s1_wallets_label">S1: %1$s%% والٹس</string>
+    <string name="score_label">سکور: %1$s</string>
+    <string name="score_needed">درکار سکور: ~%1$s+</string>
+    <string name="top_percent">ٹاپ %1$s%%</string>
+    <string name="score_format">سکور: %1$s</string>
+    <string name="score_needed_format">درکار سکور: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% والٹس</string>
+    <string name="your_s1_position">سیزن 1 میں آپ کی پوزیشن</string>
+    <string name="skr_claimed_format">%1$s SKR وصول کیے</string>
+    <string name="top_percent_format">ٹاپ %1$s%%</string>
+    <string name="of_all_seekers">تمام Seekers میں سے</string>
+    <string name="activity_score">سرگرمی سکور</string>
+    <string name="your_on_chain_activity">آپ کی آن چین سرگرمی</string>
+    <string name="s1_claim_not_found">اس والٹ پر سیزن 1 کا دعویٰ نہیں ملا۔ یہ اس صورت میں ہو سکتا ہے اگر آپ نے کسی اور والٹ سے وصول کیا ہو، یا ابھی تک دعویٰ پراسیس نہیں ہوا۔</string>
+    <string name="activity_highlights">سرگرمی کی جھلکیاں</string>
+    <string name="season_1_vs_season_2">سیزن 1 بمقابلہ سیزن 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">سیزن 1 کی تقسیم</string>
+    <string name="eligible_wallets">~140,000 اہل والٹس</string>
+    <string name="your_activity_score">آپ کا سرگرمی سکور</string>
+    <string name="score_breakdown">سکور کی تفصیل</string>
+    <string name="speculative_notice">صرف قیاسی تخمینہ۔ سیزن 1 کے نمونوں پر مبنی \u2014 سیزن 2 کے اصل معیارات مختلف ہو سکتے ہیں۔ یہ مالی مشورہ نہیں ہے۔</string>
+    <string name="s1_disclaimer">سیزن 1 کا درجہ آن چین دعووں کی تاریخ سے معلوم کیا گیا۔ سرگرمی کا تجزیہ والٹ کے موجودہ ڈیٹا پر مبنی ہے۔ یہ صرف عمومی معلومات ہیں اور مالی مشورہ نہیں ہے۔</string>
+    <string name="s2_disclaimer">یہ پیشگوئی سیزن 1 کے نمونوں اور آن چین سرگرمی پر مبنی ایک قیاسی تخمینہ ہے۔ سیزن 2 کے اصل معیارات کا اعلان نہیں ہوا ہے اور وہ نمایاں طور پر مختلف ہو سکتے ہیں۔ یہ مالی مشورہ نہیں ہے۔ ان پیشگوئیوں کی بنیاد پر مالی فیصلے نہ کریں۔</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">سکورنگ ماڈل کی بصیرتیں</string>
+    <string name="s1_model_subtitle">آپ کی آن چین سرگرمی اس ایپ کے سکورنگ ماڈل سے کیسے ملتی ہے۔ یہ ماڈل قیاسی ہے اور اصل معیارات کی عکاسی نہیں کر سکتا۔</string>
+    <string name="s2_model_subtitle">آپ کی سرگرمی اس ایپ کے سکورنگ ماڈل سے کیسے ملتی ہے۔ یہ ماڈل قیاسی ہے اور سیزن 2 کے اصل معیارات کی عکاسی نہیں کر سکتا۔ یہ مالی مشورہ نہیں ہے۔</string>
+    <string name="tx_count_low">لین دین کی تعداد: کم</string>
+    <string name="tx_count_low_desc">یہ میٹرک آن چین لین دین (تبادلے، منتقلی، تعاملات) کی پیمائش کرتا ہے۔ S1 سکورنگ ماڈل میں اس کا وزن 30%% ہے۔</string>
+    <string name="nft_none">NFT ہولڈنگز: کچھ نہیں ملا</string>
+    <string name="nft_none_desc">یہ میٹرک والٹ میں NFT کی ملکیت کی جانچ کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 10%% ہے۔</string>
+    <string name="token_diversity_low">ٹوکن تنوع: کم</string>
+    <string name="token_diversity_low_desc">یہ میٹرک منفرد SPL ٹوکنز کی گنتی کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 15%% ہے۔</string>
+    <string name="dapp_low">dApp تعاملات: کم</string>
+    <string name="dapp_low_desc">یہ میٹرک منفرد پروگرام تعاملات کو ٹریک کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 25%% ہے۔</string>
+    <string name="wallet_age_recent">والٹ کی عمر: حالیہ</string>
+    <string name="wallet_age_recent_desc">یہ میٹرک والٹ کی عمر کی پیمائش کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 20%% ہے۔ والٹ کی عمر وقت کے ساتھ قدرتی طور پر بڑھتی ہے۔</string>
+    <string name="strong_activity_profile">مضبوط سرگرمی پروفائل</string>
+    <string name="strong_activity_s1_desc">آپ کی سیزن 1 آن چین سرگرمی تمام ماپی گئی میٹرکس میں اچھا سکور کرتی ہے۔</string>
+    <string name="strong_activity_s2_desc">آپ کی آن چین سرگرمی اس ماڈل میں تمام ماپی گئی میٹرکس میں اچھا سکور کرتی ہے۔</string>
+    <string name="staking_score_format">SKR سٹیکنگ سکور: %1$s/100</string>
+    <string name="staking_score_desc">یہ میٹرک جانچتا ہے کہ آیا SKR سٹیک ہے۔ سکورنگ ماڈل میں اس کا وزن 20%% ہے۔</string>
+    <string name="s1_tier_not_detected">سیزن 1 درجہ: معلوم نہیں ہوا</string>
+    <string name="s1_tier_not_detected_desc">یہ میٹرک آپ کا S1 ایئرڈراپ درجہ استعمال کرتا ہے۔ اس کا وزن 15%% ہے۔ اپنا درجہ معلوم کرنے کے لیے سیزن 1 ٹیب استعمال کریں۔</string>
+    <string name="tx_score_format">لین دین سکور: %1$s/100</string>
+    <string name="tx_score_desc">یہ میٹرک آن چین لین دین کی گنتی کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 15%% ہے۔</string>
+    <string name="dapp_score_format">dApp استعمال سکور: %1$s/100</string>
+    <string name="dapp_score_desc">یہ میٹرک منفرد پروگرام تعاملات کو ٹریک کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 10%% ہے۔</string>
+    <string name="programs_score_format">پروگرامز سکور: %1$s/100</string>
+    <string name="programs_score_desc">یہ میٹرک Solana کے مختلف پروگرامز کی گنتی کرتا ہے جن سے تعامل ہوا۔ اس کا وزن 12%% ہے۔</string>
+    <string name="wallet_age_score_format">والٹ عمر سکور: %1$s/100</string>
+    <string name="wallet_age_score_desc">یہ میٹرک والٹ کی عمر کی پیمائش کرتا ہے۔ اس کا وزن 10%% ہے۔ یہ وقت کے ساتھ قدرتی طور پر بڑھتا ہے۔</string>
+    <string name="skr_domain_not_detected">.skr ڈومین: معلوم نہیں ہوا</string>
+    <string name="skr_domain_desc">یہ میٹرک .skr ڈومین کی ملکیت کی جانچ کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 5%% ہے۔</string>
+    <string name="token_diversity_score_format">ٹوکن تنوع سکور: %1$s/100</string>
+    <string name="token_diversity_score_desc">یہ میٹرک منفرد SPL ٹوکنز کی گنتی کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 8%% ہے۔</string>
+    <string name="nft_score_format">NFT سکور: %1$s/100</string>
+    <string name="nft_score_desc">یہ میٹرک NFT کی ملکیت کی جانچ کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 5%% ہے۔</string>
+
+    <!-- Settings -->
+    <string name="settings">ترتیبات</string>
+    <string name="wallet_section">والٹ</string>
+    <string name="connected_wallet">جڑا ہوا والٹ</string>
+    <string name="seeker_number">Seeker نمبر</string>
+    <string name="network_section">نیٹ ورک</string>
+    <string name="use_helius_rpc">Helius RPC استعمال کریں</string>
+    <string name="helius_enabled_desc">زیادہ ریٹ لمٹس</string>
+    <string name="helius_disabled_desc">عوامی RPC (ریٹ محدود)</string>
+    <string name="helius_detail_on">Helius مفت ٹیئر استعمال ہو رہا ہے (10 لاکھ کریڈٹس/ماہ)۔ تیز تر اور زیادہ قابل اعتماد۔</string>
+    <string name="helius_detail_off">عوامی Solana RPC استعمال ہو رہا ہے۔ مفت لیکن ~5 درخواستیں/سیکنڈ تک محدود۔</string>
+    <string name="data_section">ڈیٹا</string>
+    <string name="sgt_cache">SGT کیش</string>
+    <string name="sgt_cache_valid">درست</string>
+    <string name="sgt_cache_needs_refresh">ریفریش درکار ہے</string>
+    <string name="sgt_cache_note">RPC کالز کو کم کرنے کے لیے SGT تصدیق 24 گھنٹے کے لیے کیش کی جاتی ہے۔</string>
+    <string name="anonymous_insights">گمنام بصیرتیں</string>
+    <string name="anonymous_insights_desc">درستگی بہتر بنانے کے لیے گمنام پیشگوئی ڈیٹا شیئر کریں (جلد آ رہا ہے)</string>
+    <string name="about_section">ایپ کے بارے میں</string>
+    <string name="version_label">ورژن</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">آپ کا Seeker ڈیوائس ساتھی۔ SGT کی ملکیت کی تصدیق کریں، SKR پورٹ فولیو ٹریک کریں، اور آن چین سرگرمی کا تجزیہ دیکھیں۔</string>
+    <string name="about_publisher">MidMightBit Games (آسٹریلیا) کی جانب سے</string>
+    <string name="about_architecture">سرور لاگت صفر۔ تمام ڈیٹا ڈیوائس پر + آن چین۔</string>
+    <string name="regulatory_disclaimer">Solana Foundation، Solana Mobile Inc.، یا کسی بھی ٹوکن جاری کنندہ سے وابستہ نہیں۔ کسی بھی مالیاتی ریگولیٹر کی جانب سے مجاز یا ریگولیٹڈ نہیں۔ مالی مشورہ فراہم نہیں کرتا۔</string>
+    <string name="delete_all_data">تمام ڈیٹا حذف کریں</string>
+    <string name="delete_all_data_desc">اس ڈیوائس سے تمام کیش شدہ ڈیٹا، ترجیحات، اور سلسلے کی تاریخ مستقل طور پر مٹا دیتا ہے۔</string>
+    <string name="delete_all_data_title">تمام ڈیٹا حذف کریں؟</string>
+    <string name="delete_all_data_confirm_text">یہ تمام کیش شدہ ڈیٹا، ترجیحات، سلسلے کی تاریخ کو مستقل طور پر مٹا دے گا اور آپ کا والٹ منقطع کر دے گا۔ یہ عمل واپس نہیں ہو سکتا۔</string>
+    <string name="delete_everything">سب کچھ حذف کریں</string>
+    <string name="cancel">منسوخ</string>
+    <string name="disconnecting_clears_data">منقطع کرنے سے تمام کیش شدہ ڈیٹا صاف ہو جائے گا۔</string>
+
+    <!-- Widget -->
+    <string name="widget_description">آپ کا متوقع درجہ، SOL اور SKR بیلنس دکھاتا ہے</string>
+</resources>

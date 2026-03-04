@@ -47,7 +47,7 @@ Published by **MidMightBit Games** (Australia).
 - **Identity sharing** -- share your fleet position and .skr domain
 
 ### Accessibility & Customization
-- **20 languages** -- full localization support
+- **28 languages** -- full localization support
 - **Light/dark/system theme** -- Material 3 dynamic theming
 - **Onboarding flow** -- guided first-time experience
 - **Guest mode** -- explore the app without connecting a wallet
@@ -169,6 +169,23 @@ Seeker Verify uses multiple Solana Mobile Stack components:
 | SGT Token-2022 | Verify Seeker Genesis Token ownership |
 | SKR Staking Program | Read staking positions, share price, rewards |
 | dApp Store | Published on Solana dApp Store for Seeker |
+
+## Monolith Hackathon
+
+Seeker Verify is submitted to the [Monolith Hackathon](https://align.nexus) (March 2026) in the **Seeker dApp** category.
+
+### Why Seeker Verify
+
+- **Stickiness**: Daily on-chain check-ins via Seed Vault create a habit loop with streak tracking, 14 achievements, push notifications, and a home screen widget — users return every day
+- **UX**: Cinematic tier reveal animation, What-If Simulator with draggable sliders, pull-to-refresh across all tabs, Fleet Mode loading animation, and 28 fully localized languages
+- **Innovation**: Custom Token-2022 TLV binary parser for SGT verification, reverse-engineered SKR staking program (shares model), anonymous geo-analytics via Cloudflare Worker edge network, HMAC-SHA256 achievement backup that survives app uninstall
+- **Seed Vault integration**: On-chain check-in memos signed via Seed Vault's MWA transaction flow — private keys never leave hardware
+
+### Seed Vault Usage
+
+The daily check-in feature records an on-chain memo transaction using the Solana Mobile Stack's Seed Vault signing flow. The `SolanaTransactionBuilder` constructs a Memo Program instruction, which is signed through MWA (Mobile Wallet Adapter) — the Seed Vault handles key material in hardware. This is a real, verifiable on-chain interaction (not just a wallet connect).
+
+See: `wallet/SolanaTransactionBuilder.kt`, `ui/screens/IdentityScreen.kt` (check-in flow)
 
 ## Legal
 

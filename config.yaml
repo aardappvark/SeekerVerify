@@ -170,6 +170,14 @@ release:
       - pl
       - uk
       - ms
+      - fil
+      - ur
+      - bn
+      - ro
+      - cs
+      - el
+      - sv
+      - hu
 
 solana_mobile_dapp_publisher_portal:
   google_store_package: ''

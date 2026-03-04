@@ -190,4 +190,7 @@
     <string name="delete_everything">ลบทุกอย่าง</string>
     <string name="cancel">ยกเลิก</string>
     <string name="disconnecting_clears_data">การยกเลิกการเชื่อมต่อจะล้างข้อมูลแคชทั้งหมด</string>
+
+    <!-- Widget -->
+    <string name="widget_description">แสดงระดับที่คาดการณ์ ยอดคงเหลือ SOL และ SKR</string>
 </resources>

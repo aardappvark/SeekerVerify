@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Seeker Verify</string>
+    <string name="app_subtitle">Companionul tău pentru dispozitivul Seeker</string>
+
+    <!-- Wallet Connect -->
+    <string name="connect_wallet">Conectează portofelul</string>
+    <string name="connecting_to_wallet">Se conectează la portofel\u2026</string>
+    <string name="requires_sgt">Necesită un Seeker Genesis Token (SGT)</string>
+    <string name="wallet_consent_notice">Prin conectare, adresa publică a portofelului tău va fi stocată local pe acest dispozitiv pentru a afișa date on-chain. Nu se accesează chei private. Nu se trimit date către servere externe, cu excepția endpoint-urilor Solana RPC.</string>
+    <string name="privacy_policy">Politica de confidențialitate</string>
+    <string name="terms_of_service">Termeni și condiții</string>
+
+    <!-- SGT Gate -->
+    <string name="verifying_sgt">Se verifică Seeker Genesis Token\u2026</string>
+    <string name="no_sgt_found">Nu s-a găsit Seeker Genesis Token</string>
+    <string name="no_sgt_message">Această aplicație este exclusiv pentru posesorii de dispozitive Seeker. Conectează un portofel care deține un Seeker Genesis Token (SGT) pentru a continua.</string>
+    <string name="disconnect_try_another">Deconectează și încearcă alt portofel</string>
+    <string name="verification_error">Eroare de verificare</string>
+    <string name="retry_verification">Reîncearcă verificarea</string>
+    <string name="disconnect_wallet">Deconectează portofelul</string>
+
+    <!-- Identity -->
+    <string name="seeker_identity">Identitate Seeker</string>
+    <string name="seeker_genesis_token">Seeker Genesis Token</string>
+    <string name="verified_seeker">Seeker verificat</string>
+    <string name="verified_seeker_cd">Seeker verificat</string>
+    <string name="share_identity">Distribuie identitatea</string>
+    <string name="seeker_label">SEEKER</string>
+    <string name="wallet_label">WALLET</string>
+    <string name="sgt_mint_label">SGT MINT</string>
+    <string name="verified_seeker_owner">Posesor Seeker verificat</string>
+    <string name="daily_check_in">Înregistrare zilnică</string>
+    <string name="current_label">Curentă</string>
+    <string name="longest_label">Cea mai lungă</string>
+    <string name="total_label">Total</string>
+    <string name="checked_in_today">Înregistrat azi!</string>
+    <string name="check_in">Înregistrează-te</string>
+    <string name="days_suffix">%1$s zile</string>
+    <string name="share_text_prefix">Sunt Seeker</string>
+    <string name="share_text_verified">Deținător verificat de SGT pe Solana Seeker</string>
+    <string name="share_text_hashtags">#SeekerVerify #SolanaSeeker</string>
+    <string name="days_format">%1$s zile</string>
+
+    <!-- Portfolio -->
+    <string name="portfolio">Portofoliu</string>
+    <string name="refresh">Actualizează</string>
+    <string name="total_value">VALOARE TOTALĂ</string>
+    <string name="sol_section">SOL</string>
+    <string name="skr_section">SKR</string>
+    <string name="sol_balance">Sold SOL</string>
+    <string name="staked_sol">SOL în staking</string>
+    <string name="liquid_balance">Sold lichid</string>
+    <string name="staked_skr">SKR în staking</string>
+    <string name="apy_format">%1$s%% APY</string>
+    <string name="unstaking_label">Se retrage din staking: </string>
+    <string name="rewards_compound">Recompensele se reinvestesc automat prin aprecierea prețului participației.</string>
+    <string name="no_stake_found">Nu s-a găsit staking activ. Pune SKR în staking pentru a câștiga recompense.</string>
+    <string name="financial_disclaimer">Prețurile provin de la API-uri terțe și este posibil să nu reflecte valorile actuale de piață. APY este variabil, bazat pe date on-chain curente, și nu este garantat. Aceasta nu constituie sfat financiar.</string>
+
+    <!-- Community -->
+    <string name="seeker_fleet">Flota Seeker</string>
+    <string name="total_seekers">TOTAL SEEKERS</string>
+    <string name="devices_in_fleet">dispozitive în flotă</string>
+    <string name="your_fleet_position">Poziția ta în flotă</string>
+    <string name="position_format">#%1$s din %2$s</string>
+    <string name="earlier_than_percent">Mai devreme decât %1$s%% dintre Seekers</string>
+    <string name="og_seeker">OG Seeker \uD83D\uDC51</string>
+    <string name="early_pioneer">Pionier timpuriu \uD83C\uDF1F</string>
+    <string name="early_adopter">Adoptator timpuriu \uD83D\uDE80</string>
+    <string name="fleet_member">Membru al flotei \u2693</string>
+    <string name="seeker_tier">Seeker \uD83D\uDEF0\uFE0F</string>
+    <string name="active_stakers">Stakeri activi</string>
+    <string name="skr_staked_label">SKR în staking</string>
+    <string name="fleet_data_note">Datele flotei sunt aproximate din înregistrări on-chain și sunt actualizate periodic.</string>
+
+    <!-- Predictor -->
+    <string name="airdrop_tiers">Niveluri airdrop</string>
+    <string name="season_1">Sezonul 1</string>
+    <string name="season_2">Sezonul 2</string>
+    <string name="s1_subtitle">Poziția și activitatea ta din airdrop-ul Sezonului 1</string>
+    <string name="s2_subtitle">Glisează pentru a explora nivelurile prezise ale Sezonului 2</string>
+    <string name="detect_my_s1_tier">Detectează nivelul meu din Sezonul 1</string>
+    <string name="detect_s1_subtitle">Scanează istoricul on-chain pentru a găsi nivelul și activitatea ta din airdrop-ul Sezonului 1</string>
+    <string name="scanning_on_chain">Se scanează activitatea on-chain\u2026</string>
+    <string name="run_prediction">Rulează predicția</string>
+    <string name="run_prediction_subtitle">Analizează activitatea ta on-chain pentru a vedea ce nivel corespunde profilului tău</string>
+    <string name="analyzing_on_chain">Se analizează activitatea on-chain\u2026</string>
+    <string name="re_analyze">Reanalizează</string>
+    <string name="re_run_prediction">Rulează predicția din nou</string>
+    <string name="your_tier_badge">NIVELUL TĂU</string>
+    <string name="season_1_badge">SEZONUL 1</string>
+    <string name="your_prediction_badge">PREDICȚIA TA</string>
+    <string name="season_2_badge">SEZONUL 2</string>
+    <string name="per_wallet">per portofel</string>
+    <string name="of_wallets"> din portofele</string>
+    <string name="s1_wallets_label">S1: %1$s%% din portofele</string>
+    <string name="score_label">Scor: %1$s</string>
+    <string name="score_needed">Scor necesar: ~%1$s+</string>
+    <string name="top_percent">Top %1$s%%</string>
+    <string name="score_format">Scor: %1$s</string>
+    <string name="score_needed_format">Scor necesar: ~%1$s+</string>
+    <string name="s1_wallets_format">S1: %1$s%% din portofele</string>
+    <string name="your_s1_position">Poziția ta în Sezonul 1</string>
+    <string name="skr_claimed_format">%1$s SKR revendicate</string>
+    <string name="top_percent_format">Top %1$s%%</string>
+    <string name="of_all_seekers">din toți Seekers</string>
+    <string name="activity_score">Scor de activitate</string>
+    <string name="your_on_chain_activity">Activitatea ta on-chain</string>
+    <string name="s1_claim_not_found">Revendicarea din Sezonul 1 nu a fost găsită pe acest portofel. Acest lucru se poate întâmpla dacă ai revendicat pe un alt portofel sau dacă revendicarea nu a fost încă procesată.</string>
+    <string name="activity_highlights">Puncte importante ale activității</string>
+    <string name="season_1_vs_season_2">Sezonul 1 vs Sezonul 2</string>
+    <string name="s1_label">S1</string>
+    <string name="s2_label">S2</string>
+    <string name="percentile_format">%1$sth %%</string>
+    <string name="season_1_distribution">Distribuția Sezonului 1</string>
+    <string name="eligible_wallets">~140.000 portofele eligibile</string>
+    <string name="your_activity_score">Scorul tău de activitate</string>
+    <string name="score_breakdown">Defalcarea scorului</string>
+    <string name="speculative_notice">Doar o estimare speculativă. Bazată pe tiparele Sezonului 1 \u2014 criteriile reale ale Sezonului 2 pot diferi. Nu constituie sfat financiar.</string>
+    <string name="s1_disclaimer">Nivelul Sezonului 1 detectat din istoricul revendicărilor on-chain. Analiza activității se bazează pe datele curente ale portofelului. Aceasta este doar informație generală și nu constituie sfat financiar.</string>
+    <string name="s2_disclaimer">Această predicție este o estimare speculativă bazată pe tiparele Sezonului 1 și activitatea on-chain. Criteriile reale ale Sezonului 2 nu au fost anunțate și pot diferi semnificativ. Aceasta nu constituie sfat financiar. Nu lua decizii financiare bazându-te pe aceste predicții.</string>
+
+    <!-- Predictor - Activity Planner -->
+    <string name="scoring_model_insights">Informații despre modelul de punctaj</string>
+    <string name="s1_model_subtitle">Cum se mapează activitatea ta on-chain în modelul de punctaj al acestei aplicații. Acest model este speculativ și este posibil să nu reflecte criteriile reale.</string>
+    <string name="s2_model_subtitle">Cum se mapează activitatea ta în modelul de punctaj al acestei aplicații. Acest model este speculativ și este posibil să nu reflecte criteriile reale ale Sezonului 2. Nu constituie sfat financiar.</string>
+    <string name="tx_count_low">Număr de tranzacții: Scăzut</string>
+    <string name="tx_count_low_desc">Această metrică măsoară tranzacțiile on-chain (schimburi, transferuri, interacțiuni). Are o pondere de 30%% în modelul de punctaj S1.</string>
+    <string name="nft_none">Dețineri NFT: Nedetectate</string>
+    <string name="nft_none_desc">Această metrică verifică deținerea de NFT în portofel. Are o pondere de 10%% în modelul de punctaj.</string>
+    <string name="token_diversity_low">Diversitate de tokeni: Scăzută</string>
+    <string name="token_diversity_low_desc">Această metrică numără tokenii SPL unici deținuți. Are o pondere de 15%% în modelul de punctaj.</string>
+    <string name="dapp_low">Interacțiuni cu dApps: Scăzute</string>
+    <string name="dapp_low_desc">Această metrică urmărește interacțiunile unice cu programele. Are o pondere de 25%% în modelul de punctaj.</string>
+    <string name="wallet_age_recent">Vechimea portofelului: Recentă</string>
+    <string name="wallet_age_recent_desc">Această metrică măsoară vechimea portofelului. Are o pondere de 20%% în modelul de punctaj. Vechimea portofelului crește natural în timp.</string>
+    <string name="strong_activity_profile">Profil de activitate solid</string>
+    <string name="strong_activity_s1_desc">Activitatea ta on-chain din Sezonul 1 obține un scor bun la toate metricile măsurate.</string>
+    <string name="strong_activity_s2_desc">Activitatea ta on-chain obține un scor bun la toate metricile măsurate în acest model.</string>
+    <string name="staking_score_format">Scor staking SKR: %1$s/100</string>
+    <string name="staking_score_desc">Această metrică verifică dacă SKR este în staking. Are o pondere de 20%% în modelul de punctaj.</string>
+    <string name="s1_tier_not_detected">Nivel Sezonul 1: Nedetectat</string>
+    <string name="s1_tier_not_detected_desc">Această metrică folosește nivelul tău de airdrop S1. Are o pondere de 15%%. Folosește fila Sezonul 1 pentru a-ți detecta nivelul.</string>
+    <string name="tx_score_format">Scor tranzacții: %1$s/100</string>
+    <string name="tx_score_desc">Această metrică numără tranzacțiile on-chain. Are o pondere de 15%% în modelul de punctaj.</string>
+    <string name="dapp_score_format">Scor utilizare dApps: %1$s/100</string>
+    <string name="dapp_score_desc">Această metrică urmărește interacțiunile unice cu programele. Are o pondere de 10%% în modelul de punctaj.</string>
+    <string name="programs_score_format">Scor programe: %1$s/100</string>
+    <string name="programs_score_desc">Această metrică numără programele distincte Solana cu care s-a interacționat. Are o pondere de 12%%.</string>
+    <string name="wallet_age_score_format">Scor vechime portofel: %1$s/100</string>
+    <string name="wallet_age_score_desc">Această metrică măsoară vechimea portofelului. Are o pondere de 10%%. Crește natural în timp.</string>
+    <string name="skr_domain_not_detected">Domeniu .skr: Nedetectat</string>
+    <string name="skr_domain_desc">Această metrică verifică deținerea unui domeniu .skr. Are o pondere de 5%% în modelul de punctaj.</string>
+    <string name="token_diversity_score_format">Scor diversitate tokeni: %1$s/100</string>
+    <string name="token_diversity_score_desc">Această metrică numără tokenii SPL unici deținuți. Are o pondere de 8%% în modelul de punctaj.</string>
+    <string name="nft_score_format">Scor NFT: %1$s/100</string>
+    <string name="nft_score_desc">Această metrică verifică deținerea de NFT. Are o pondere de 5%% în modelul de punctaj.</string>
+
+    <!-- Settings -->
+    <string name="settings">Setări</string>
+    <string name="wallet_section">Portofel</string>
+    <string name="connected_wallet">Portofel conectat</string>
+    <string name="seeker_number">Număr Seeker</string>
+    <string name="network_section">Rețea</string>
+    <string name="use_helius_rpc">Folosește Helius RPC</string>
+    <string name="helius_enabled_desc">Limite de rată mai mari</string>
+    <string name="helius_disabled_desc">RPC public (cu limită de rată)</string>
+    <string name="helius_detail_on">Se folosește nivelul gratuit Helius (1M credite/lună). Mai rapid și mai fiabil.</string>
+    <string name="helius_detail_off">Se folosește RPC-ul public Solana. Gratuit, dar limitat la ~5 cereri/secundă.</string>
+    <string name="data_section">Date</string>
+    <string name="sgt_cache">Cache SGT</string>
+    <string name="sgt_cache_valid">Valid</string>
+    <string name="sgt_cache_needs_refresh">Necesită actualizare</string>
+    <string name="sgt_cache_note">Verificarea SGT este stocată în cache timp de 24 de ore pentru a minimiza apelurile RPC.</string>
+    <string name="anonymous_insights">Statistici anonime</string>
+    <string name="anonymous_insights_desc">Distribuie date anonimizate de predicție pentru a îmbunătăți acuratețea (în curând)</string>
+    <string name="about_section">Despre</string>
+    <string name="version_label">Versiune</string>
+    <string name="about_app_name">Seeker Verify</string>
+    <string name="about_app_desc">Companionul tău pentru dispozitivul Seeker. Verifică deținerea de SGT, urmărește portofoliul SKR și consultă analiza activității on-chain.</string>
+    <string name="about_publisher">De la MidMightBit Games (Australia)</string>
+    <string name="about_architecture">Fără costuri de server. Toate datele pe dispozitiv + on-chain.</string>
+    <string name="regulatory_disclaimer">Nu este afiliat cu Solana Foundation, Solana Mobile Inc. sau vreun emitent de tokeni. Nu este autorizat sau reglementat de vreo autoritate financiară. Nu oferă sfaturi financiare.</string>
+    <string name="delete_all_data">Șterge toate datele</string>
+    <string name="delete_all_data_desc">Șterge permanent toate datele din cache, preferințele și istoricul seriilor de pe acest dispozitiv.</string>
+    <string name="delete_all_data_title">Ștergi toate datele?</string>
+    <string name="delete_all_data_confirm_text">Aceasta va șterge permanent toate datele din cache, preferințele, istoricul seriilor și va deconecta portofelul. Această acțiune nu poate fi anulată.</string>
+    <string name="delete_everything">Șterge tot</string>
+    <string name="cancel">Anulează</string>
+    <string name="disconnecting_clears_data">Deconectarea va șterge toate datele din cache.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Afișează nivelul tău prezis, soldurile SOL și SKR</string>
+</resources>

@@ -190,4 +190,7 @@
     <string name="delete_everything">Alles verwijderen</string>
     <string name="cancel">Annuleren</string>
     <string name="disconnecting_clears_data">Ontkoppelen wist alle in de cache opgeslagen gegevens.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Toont je voorspelde niveau, SOL- en SKR-saldi</string>
 </resources>

@@ -190,4 +190,7 @@
     <string name="delete_everything">모두 삭제</string>
     <string name="cancel">취소</string>
     <string name="disconnecting_clears_data">연결 해제 시 모든 캐시 데이터가 삭제됩니다.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">예측 티어, SOL 및 SKR 잔액 표시</string>
 </resources>

@@ -190,4 +190,7 @@
     <string name="delete_everything">Xóa tất cả</string>
     <string name="cancel">Hủy</string>
     <string name="disconnecting_clears_data">Ngắt kết nối sẽ xóa tất cả dữ liệu đệm.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Hiển thị cấp bậc dự đoán, số dư SOL và SKR</string>
 </resources>

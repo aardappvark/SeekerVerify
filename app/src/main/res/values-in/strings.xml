@@ -190,4 +190,7 @@
     <string name="delete_everything">Hapus Semuanya</string>
     <string name="cancel">Batal</string>
     <string name="disconnecting_clears_data">Memutuskan koneksi akan menghapus semua data cache.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Menampilkan tier prediksi, saldo SOL dan SKR Anda</string>
 </resources>

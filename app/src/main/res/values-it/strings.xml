@@ -190,4 +190,7 @@
     <string name="delete_everything">Elimina tutto</string>
     <string name="cancel">Annulla</string>
     <string name="disconnecting_clears_data">La disconnessione cancellerà tutti i dati memorizzati in cache.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Mostra il tuo livello previsto, saldi SOL e SKR</string>
 </resources>

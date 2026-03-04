@@ -190,4 +190,7 @@
     <string name="delete_everything">सब कुछ हटाएँ</string>
     <string name="cancel">रद्द करें</string>
     <string name="disconnecting_clears_data">डिस्कनेक्ट करने से सभी कैश डेटा साफ़ हो जाएगा।</string>
+
+    <!-- Widget -->
+    <string name="widget_description">आपकी अनुमानित श्रेणी, SOL और SKR शेष दिखाता है</string>
 </resources>

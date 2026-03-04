@@ -190,4 +190,7 @@
     <string name="delete_everything">حذف الكل</string>
     <string name="cancel">إلغاء</string>
     <string name="disconnecting_clears_data">سيؤدي قطع الاتصال إلى مسح جميع البيانات المخزنة مؤقتاً.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">يعرض مستواك المتوقع وأرصدة SOL و SKR</string>
 </resources>
