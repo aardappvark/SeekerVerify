@@ -5,6 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.seekerverify.app.data.AppPreferences
+import com.seekerverify.app.data.CheckInBackupManager
+import com.seekerverify.app.model.CachedHighlight
+import com.seekerverify.app.model.PredictionCache
+import com.seekerverify.app.model.PredictionHistoryEntry
+import com.seekerverify.app.model.Season1AnalysisCache
+import com.seekerverify.app.service.GeoAnalyticsService
 import com.seekerverify.app.engine.PredictorEngine
 import com.seekerverify.app.engine.ProjectionEngine
 import com.seekerverify.app.engine.Season1Engine
@@ -17,6 +23,7 @@ import com.seekerverify.app.rpc.ActivityRpcClient
 import com.seekerverify.app.rpc.DomainRpcClient
 import com.seekerverify.app.rpc.Season1RpcClient
 import com.seekerverify.app.rpc.StakingRpcClient
+import com.seekerverify.app.widget.SeekerWidgetProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -67,6 +74,22 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
     private val _projectionAssumptions = MutableStateFlow<List<String>>(emptyList())
     val projectionAssumptions: StateFlow<List<String>> = _projectionAssumptions.asStateFlow()
 
+    // Prediction history (must be before init block — Kotlin initializes in declaration order)
+    private val _predictionHistory = MutableStateFlow<List<PredictionHistoryEntry>>(emptyList())
+    val predictionHistory: StateFlow<List<PredictionHistoryEntry>> = _predictionHistory.asStateFlow()
+
+    private val _isFreshPrediction = MutableStateFlow(false)
+    val isFreshPrediction: StateFlow<Boolean> = _isFreshPrediction.asStateFlow()
+
+    // Community ranking from real leaderboard data
+    data class CommunityRank(
+        val totalPredictors: Long,
+        val topPercentile: Double, // e.g., 15.2 means "top 15.2%"
+        val sameOrHigherCount: Long
+    )
+    private val _communityRank = MutableStateFlow<CommunityRank?>(null)
+    val communityRank: StateFlow<CommunityRank?> = _communityRank.asStateFlow()
+
     init {
         // Calculate season progress immediately (no RPC needed)
         _seasonProgress.value = SeasonProgress.calculate()
@@ -81,6 +104,39 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                 rawAmount = cached.rawClaimAmount
             )
         }
+
+        // Load cached Season 1 analysis (immutable — S1 data never changes)
+        prefs.getSeason1AnalysisCache()?.let { cached ->
+            val tier = cached.detectedTierName?.let { AirdropTier.fromName(it) }
+            _season1Analysis.value = Season1Engine.Season1Analysis(
+                detectedTier = tier,
+                tierPercentile = cached.tierPercentile,
+                overallActivityScore = cached.overallActivityScore,
+                activityHighlights = cached.highlights.map {
+                    Season1Engine.ActivityHighlight(it.label, it.description, it.isStrength)
+                }
+            )
+        }
+
+        // Load cached S2 prediction for instant display
+        // If no cached data, try restoring from device backup (survives app uninstall)
+        if (prefs.getPredictionCache() == null) {
+            val walletAddr = prefs.getWalletAddress()
+            if (walletAddr != null) {
+                try {
+                    val restored = CheckInBackupManager.restorePredictionData(
+                        application, walletAddr
+                    )
+                    if (restored) {
+                        Log.d(TAG, "Prediction data restored from device backup")
+                    }
+                } catch (_: Exception) { }
+            }
+        }
+        loadCachedPrediction()
+
+        // Load prediction history for trajectory chart
+        loadPredictionHistory()
     }
 
     /**
@@ -120,14 +176,16 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                     onFailure = { partialWarnings.add("Domain data unavailable") }
                 )
 
-                // Lite activity scan (3 batches = 3K sigs — enough for S1 highlights)
+                // Lite activity scan (3 batches = 3K sigs — S1 era only, before S2 launch)
+                // periodEndEpoch = May 15 2025 (approx S2/SKR token launch) → 1747353600
                 val activityDeferred = async {
                     ActivityRpcClient.getActivityMetrics(
                         walletAddress = walletAddress,
                         rpcUrl = rpcUrl,
                         isStaked = isStaked,
                         hasSkrDomain = hasSkrDomain,
-                        maxBatches = 3
+                        maxBatches = 3,
+                        periodEndEpoch = 1747353600L // S2 start (May 15, 2025 00:00 UTC)
                     )
                 }
 
@@ -141,11 +199,22 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                             _warnings.value = partialWarnings
                         }
 
-                        val activityMetrics = activityDeferred.await()
+                        val activityResult = activityDeferred.await()
+                        val activityMetrics = activityResult.metrics
 
                         // Analyze in S1 context
                         val analysis = Season1Engine.analyze(activityMetrics, claim.tier)
                         _season1Analysis.value = analysis
+
+                        // Cache full analysis (immutable)
+                        saveSeason1AnalysisCache(analysis)
+
+                        // Save device backup with S1 data
+                        try {
+                            CheckInBackupManager.savePredictionBackup(
+                                getApplication(), walletAddress
+                            )
+                        } catch (_: Exception) { }
 
                         // Cache result
                         prefs.saveSeason1Result(Season1Result(
@@ -262,12 +331,18 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                     _warnings.value = partialWarnings
                 }
 
-                val activityMetrics = ActivityRpcClient.getActivityMetrics(
+                val activityResult = ActivityRpcClient.getActivityMetrics(
                     walletAddress = walletAddress,
                     rpcUrl = rpcUrl,
                     isStaked = isStaked,
                     hasSkrDomain = hasSkrDomain
                 )
+                val activityMetrics = activityResult.metrics
+
+                // Save parsed transaction records for Portfolio "Recent Activity" card
+                if (activityResult.recentTransactions.isNotEmpty()) {
+                    try { prefs.saveTransactionHistory(activityResult.recentTransactions) } catch (_: Exception) { }
+                }
 
                 // Inject cached Season 1 tier and real staking duration
                 val s1Tier = _season1Claim.value?.tier
@@ -297,8 +372,56 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
 
                 // Keep backward compat: _result holds the projected result (end-of-season prediction)
                 _result.value = projectedPrediction.projected
+                _isFreshPrediction.value = true
+
+                // Update widget with predicted tier
+                try {
+                    val widgetPrefs = getApplication<Application>()
+                        .getSharedPreferences("widget_data", android.content.Context.MODE_PRIVATE)
+                    val existingSol = widgetPrefs.getString("widget_sol", "--") ?: "--"
+                    val existingSkr = widgetPrefs.getString("widget_skr", "--") ?: "--"
+                    SeekerWidgetProvider.writeWidgetData(
+                        getApplication(),
+                        tier = projectedPrediction.projected.predictedTier.displayName,
+                        solBalance = existingSol,
+                        skrBalance = existingSkr
+                    )
+                } catch (_: Exception) { }
+
+                // Mark prediction activity flag
+                prefs.setHasPrediction(true)
+
+                // Track prediction tier result
+                GeoAnalyticsService.track(GeoAnalyticsService.Events.PREDICTION_TIER_RESULT)
+
+                // Submit to leaderboard if opted in
+                if (prefs.isLeaderboardOptedIn()) {
+                    GeoAnalyticsService.submitLeaderboard(
+                        compositeScore = projectedPrediction.projected.compositeScore,
+                        tierName = projectedPrediction.projected.predictedTier.displayName
+                    )
+                }
+
+                // Fetch community ranking from real leaderboard data
+                fetchCommunityRank(projectedPrediction.projected.predictedTier)
 
                 updateComparison()
+
+                // Save prediction cache for instant reload
+                savePredictionCache()
+
+                // Save device backup (survives app uninstall)
+                try {
+                    CheckInBackupManager.savePredictionBackup(
+                        getApplication(), walletAddress
+                    )
+                } catch (_: Exception) { }
+
+                // Save prediction history entry for trajectory chart
+                savePredictionHistoryEntry(projectedPrediction.projected)
+
+                // Track tier upgrade achievement
+                trackTierUpgrade(projectedPrediction.projected.predictedTier)
 
                 Log.d(TAG, "Prediction complete: current=${projectedPrediction.current.predictedTier.displayName}, " +
                     "projected=${projectedPrediction.projected.predictedTier.displayName}, " +
@@ -309,6 +432,158 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
             }
 
             _isLoading.value = false
+        }
+    }
+
+    private fun loadCachedPrediction() {
+        val cache = prefs.getPredictionCache() ?: return
+
+        val predictedTier = AirdropTier.fromName(cache.predictedTierName) ?: return
+        val mainResult = PredictorEngine.PredictorResult(
+            compositeScore = cache.compositeScore,
+            percentile = cache.percentile,
+            predictedTier = predictedTier,
+            confidence = cache.confidence,
+            breakdown = cache.breakdown
+        )
+        _result.value = mainResult
+
+        // Restore projected result if available
+        if (cache.currentTierName != null && cache.projectedTierName != null) {
+            val currentTier = AirdropTier.fromName(cache.currentTierName)
+            val projectedTier = AirdropTier.fromName(cache.projectedTierName)
+            if (currentTier != null && projectedTier != null) {
+                val currentResult = PredictorEngine.PredictorResult(
+                    compositeScore = cache.currentScore ?: cache.compositeScore,
+                    percentile = cache.currentPercentile ?: cache.percentile,
+                    predictedTier = currentTier,
+                    confidence = cache.currentConfidence ?: cache.confidence,
+                    breakdown = cache.currentBreakdown ?: cache.breakdown
+                )
+                val projResult = PredictorEngine.PredictorResult(
+                    compositeScore = cache.projectedScore ?: cache.compositeScore,
+                    percentile = cache.projectedPercentile ?: cache.percentile,
+                    predictedTier = projectedTier,
+                    confidence = cache.projectedConfidence ?: cache.confidence,
+                    breakdown = cache.projectedBreakdown ?: cache.breakdown
+                )
+                val paceStatus = cache.paceStatus?.let {
+                    try { PredictorEngine.PaceStatus.valueOf(it) } catch (_: Exception) { null }
+                } ?: PredictorEngine.PaceStatus.TOO_EARLY
+
+                _projectedResult.value = PredictorEngine.ProjectedPredictorResult(
+                    current = currentResult,
+                    projected = projResult,
+                    paceStatus = paceStatus,
+                    targetTierProgress = cache.targetTierProgress ?: 0.0
+                )
+            }
+        }
+
+        updateComparison()
+        Log.w(TAG, "Prediction loaded from cache (age ${(System.currentTimeMillis() - cache.cachedAt) / 1000}s)")
+    }
+
+    private fun savePredictionCache() {
+        try {
+            val mainResult = _result.value ?: return
+            val projected = _projectedResult.value
+            val cache = PredictionCache(
+                predictedTierName = mainResult.predictedTier.displayName,
+                compositeScore = mainResult.compositeScore,
+                percentile = mainResult.percentile,
+                confidence = mainResult.confidence,
+                breakdown = mainResult.breakdown,
+                projectedTierName = projected?.projected?.predictedTier?.displayName,
+                projectedScore = projected?.projected?.compositeScore,
+                projectedPercentile = projected?.projected?.percentile,
+                projectedConfidence = projected?.projected?.confidence,
+                projectedBreakdown = projected?.projected?.breakdown,
+                currentTierName = projected?.current?.predictedTier?.displayName,
+                currentScore = projected?.current?.compositeScore,
+                currentPercentile = projected?.current?.percentile,
+                currentConfidence = projected?.current?.confidence,
+                currentBreakdown = projected?.current?.breakdown,
+                paceStatus = projected?.paceStatus?.name,
+                targetTierProgress = projected?.targetTierProgress,
+                cachedAt = System.currentTimeMillis()
+            )
+            prefs.savePredictionCache(cache)
+        } catch (_: Exception) { }
+    }
+
+    private fun saveSeason1AnalysisCache(analysis: Season1Engine.Season1Analysis) {
+        try {
+            val cache = Season1AnalysisCache(
+                detectedTierName = analysis.detectedTier?.displayName,
+                tierPercentile = analysis.tierPercentile,
+                overallActivityScore = analysis.overallActivityScore,
+                highlights = analysis.activityHighlights.map {
+                    CachedHighlight(it.label, it.description, it.isStrength)
+                },
+                cachedAt = System.currentTimeMillis()
+            )
+            prefs.saveSeason1AnalysisCache(cache)
+        } catch (_: Exception) { }
+    }
+
+    fun clearFreshPrediction() {
+        _isFreshPrediction.value = false
+    }
+
+    fun loadPredictionHistory() {
+        _predictionHistory.value = prefs.getPredictionHistory()
+    }
+
+    private fun savePredictionHistoryEntry(result: PredictorEngine.PredictorResult) {
+        try {
+            val entry = PredictionHistoryEntry(
+                timestamp = System.currentTimeMillis(),
+                compositeScore = result.compositeScore,
+                percentile = result.percentile,
+                tierName = result.predictedTier.displayName
+            )
+            prefs.savePredictionHistoryEntry(entry)
+            _predictionHistory.value = prefs.getPredictionHistory()
+        } catch (_: Exception) { }
+    }
+
+    private fun trackTierUpgrade(newTier: AirdropTier) {
+        val previousTierName = prefs.getPreviousTierName()
+        prefs.setPreviousTierName(newTier.displayName)
+        if (previousTierName != null && previousTierName != newTier.displayName) {
+            val previousTier = AirdropTier.fromName(previousTierName) ?: return
+            val prevIdx = DISPLAY_TIERS.indexOf(previousTier)
+            val newIdx = DISPLAY_TIERS.indexOf(newTier)
+            if (newIdx > prevIdx) {
+                prefs.setHasTierUpgrade(true)
+            }
+        }
+    }
+
+    private fun fetchCommunityRank(userTier: AirdropTier) {
+        viewModelScope.launch {
+            try {
+                val lb = GeoAnalyticsService.fetchLeaderboard(7) ?: return@launch
+                if (lb.totalParticipants == 0L) return@launch
+
+                val tierOrder = listOf("Sovereign", "Luminary", "Vanguard", "Prospector", "Scout")
+                val userTierIdx = tierOrder.indexOf(userTier.displayName)
+                if (userTierIdx < 0) return@launch
+
+                // Count users in the same tier or higher (lower index = higher tier)
+                val sameOrHigher = lb.tierDistribution
+                    .filter { tierOrder.indexOf(it.tier) <= userTierIdx }
+                    .sumOf { it.count }
+
+                val topPct = (sameOrHigher.toDouble() / lb.totalParticipants) * 100.0
+
+                _communityRank.value = CommunityRank(
+                    totalPredictors = lb.totalParticipants,
+                    topPercentile = topPct.coerceIn(0.1, 100.0),
+                    sameOrHigherCount = sameOrHigher
+                )
+            } catch (_: Exception) { }
         }
     }
 

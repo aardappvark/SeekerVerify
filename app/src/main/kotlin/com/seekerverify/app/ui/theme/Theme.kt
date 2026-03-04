@@ -56,19 +56,46 @@ private val LightColorScheme = lightColorScheme(
     outline = Color(0xFFCBD5E0)
 )
 
+private val AmoledColorScheme = darkColorScheme(
+    primary = SeekerBlue,
+    onPrimary = Color.White,
+    primaryContainer = SeekerDarkBlue,
+    onPrimaryContainer = SeekerLightBlue,
+    secondary = SolanaGreen,
+    onSecondary = AmoledBlack,
+    secondaryContainer = Color(0xFF0A3D2A),
+    onSecondaryContainer = SolanaGreen,
+    tertiary = SolanaPurple,
+    onTertiary = Color.White,
+    background = AmoledBlack,
+    onBackground = SeekerWhite,
+    surface = AmoledSurface,
+    onSurface = SeekerWhite,
+    surfaceVariant = AmoledSurfaceVariant,
+    onSurfaceVariant = SubtleText,
+    error = SeekerRed,
+    onError = Color.White,
+    outline = Color(0xFF1E1E1E)
+)
+
 @Composable
 fun SeekerVerifyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    isAmoled: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val colorScheme = when {
+        isAmoled -> AmoledColorScheme
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
 
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.background.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme && !isAmoled
         }
     }
 

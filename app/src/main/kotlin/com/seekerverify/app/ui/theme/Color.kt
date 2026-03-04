@@ -29,3 +29,19 @@ val TierSovereign = Color(0xFFFF4500)    // Legendary red-orange
 val CardBackground = Color(0xFF1A2332)
 val CardBorder = Color(0xFF2A3A4D)
 val SubtleText = Color(0xFF8899AA)
+
+// AMOLED pure black
+val AmoledBlack = Color(0xFF000000)
+val AmoledSurface = Color(0xFF0A0A0A)
+val AmoledSurfaceVariant = Color(0xFF121212)
+
+// Liquid glass colors (dark mode)
+val GlassWhite = Color(0x1AFFFFFF)        // 10% white overlay
+val GlassBorder = Color(0x33FFFFFF)       // 20% white border
+val GlassHighlight = Color(0x0DFFFFFF)    // 5% white — top edge shine
+val GlassSurface = Color(0xFF121826)      // dark glass base
+
+// Liquid glass colors (light mode)
+val GlassBlack = Color(0x0D000000)        // 5% black overlay
+val GlassBorderLight = Color(0x1A000000)  // 10% black border
+val GlassSurfaceLight = Color(0xFFF0F2F5) // light glass base

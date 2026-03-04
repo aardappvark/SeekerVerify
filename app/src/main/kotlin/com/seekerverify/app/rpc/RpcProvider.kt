@@ -9,6 +9,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
@@ -169,6 +170,74 @@ object RpcProvider {
                 windowStart.set(System.currentTimeMillis())
                 requestCount.set(1)
             }
+        }
+    }
+
+    /**
+     * Make multiple JSON-RPC 2.0 calls in a single HTTP request (batch mode).
+     * More efficient than individual calls for bulk fetching (e.g. getTransaction × N).
+     * Returns results in the same order as the input requests.
+     */
+    suspend fun callBatch(
+        rpcUrl: String,
+        requests: List<Pair<String, JsonElement>>
+    ): List<Result<JsonElement>> = withContext(Dispatchers.IO) {
+        if (requests.isEmpty()) return@withContext emptyList()
+
+        try {
+            enforceRateLimit(rpcUrl) // counts as 1 HTTP request
+
+            val batchBody = buildJsonArray {
+                requests.forEachIndexed { index, (method, params) ->
+                    add(buildJsonObject {
+                        put("jsonrpc", "2.0")
+                        put("id", index)
+                        put("method", method)
+                        put("params", params)
+                    })
+                }
+            }.toString()
+
+            Log.d(TAG, "RPC batch → ${requests.size} requests")
+
+            val request = Request.Builder()
+                .url(rpcUrl)
+                .post(batchBody.toRequestBody(JSON_MEDIA))
+                .build()
+
+            val response = client.newCall(request).execute()
+            val responseBody = response.body?.string()
+                ?: return@withContext requests.map { Result.failure(Exception("Empty batch response")) }
+
+            if (!response.isSuccessful) {
+                return@withContext requests.map {
+                    Result.failure(Exception("RPC batch HTTP ${response.code}"))
+                }
+            }
+
+            val jsonResponse = json.parseToJsonElement(responseBody).jsonArray
+
+            // Map by ID to preserve order
+            val resultById = mutableMapOf<Int, Result<JsonElement>>()
+            for (item in jsonResponse) {
+                val obj = item.jsonObject
+                val id = obj["id"]?.jsonPrimitive?.content?.toIntOrNull() ?: continue
+                val error = obj["error"]
+                val result = obj["result"]
+                resultById[id] = when {
+                    error != null && error.toString() != "null" ->
+                        Result.failure(Exception(error.jsonObject["message"]?.jsonPrimitive?.content ?: "RPC error"))
+                    result != null -> Result.success(result)
+                    else -> Result.failure(Exception("No result for id $id"))
+                }
+            }
+
+            requests.indices.map { i ->
+                resultById[i] ?: Result.failure(Exception("Missing response for request $i"))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Batch RPC failed: ${e.message}", e)
+            requests.map { Result.failure(e) }
         }
     }
 

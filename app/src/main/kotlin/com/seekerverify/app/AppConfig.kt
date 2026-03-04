@@ -31,6 +31,10 @@ object AppConfig {
         const val SKR_STAKE_CONFIG = "4HQy82s9CHTv1GsYKnANHMiHfhcqesYkK6sB3RDSYyqw"
         const val SHARE_PRICE_PRECISION = 1_000_000_000L
         const val FALLBACK_SHARE_PRICE = 1_015_000_000L  // ~1.015 as of Feb 2026
+
+        // Guardian delegation — currently only Solana Mobile guardian at launch
+        const val GUARDIAN_SOLANA_MOBILE = "SKRGdBwzb1AtFW2chhBnZpGFnFLj6Mi7HM7iwjXALvw"
+        const val GUARDIAN_POOL_SOLANA_MOBILE = "DPJ58trLsF9yPrBa2pk6UaRkvqW8hWUYjawe788WBuqr"
     }
 
     object Domains {

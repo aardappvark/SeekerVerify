@@ -21,14 +21,21 @@ android {
         applicationId = "com.seekerverify.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 7
-        versionName = "1.3.1"
+        versionCode = 9
+        versionName = "2.1.0"
 
         // Helius RPC API key (injected from local.properties)
         resValue(
             "string",
             "helius_api_key",
             localProperties.getProperty("HELIUS_API_KEY", "")
+        )
+
+        // Analytics Worker API key (injected from local.properties)
+        resValue(
+            "string",
+            "analytics_api_key",
+            localProperties.getProperty("ANALYTICS_API_KEY", "")
         )
     }
 

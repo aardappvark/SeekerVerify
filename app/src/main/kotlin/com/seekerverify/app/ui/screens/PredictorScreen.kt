@@ -2,6 +2,10 @@ package com.seekerverify.app.ui.screens
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,12 +34,14 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -46,21 +52,36 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import com.seekerverify.app.data.AppPreferences
+import com.seekerverify.app.service.GeoAnalyticsService
+import com.seekerverify.app.ui.util.hapticLongPress
+import com.seekerverify.app.ui.util.hapticTap
+import com.seekerverify.app.service.ShareCardGenerator
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.seekerverify.app.engine.InsightsEngine
 import com.seekerverify.app.engine.PredictorEngine
 import com.seekerverify.app.engine.Season1Engine
 import com.seekerverify.app.engine.SeasonProgress
 import com.seekerverify.app.model.AirdropTier
 import com.seekerverify.app.model.SeasonComparison
 import com.seekerverify.app.model.Trend
+import com.seekerverify.app.ui.components.GlassCard
+import com.seekerverify.app.ui.components.GuestModeBanner
+import com.seekerverify.app.ui.components.RadarChart
+import com.seekerverify.app.ui.components.ScoreTrajectoryChart
+import com.seekerverify.app.ui.components.WhatIfSimulator
 import com.seekerverify.app.ui.theme.SeekerBlue
 import com.seekerverify.app.ui.theme.SeekerGold
 import com.seekerverify.app.ui.theme.SolanaGreen
@@ -71,6 +92,9 @@ import com.seekerverify.app.ui.theme.TierScout
 import com.seekerverify.app.ui.theme.TierSovereign
 import com.seekerverify.app.ui.theme.TierVanguard
 import com.seekerverify.app.ui.viewmodel.PredictorViewModel
+import com.seekerverify.app.wallet.WalletManager
+import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -111,13 +135,20 @@ private val TIER_SCORE_THRESHOLDS = mapOf(
 
 private enum class SeasonTab { SEASON_1, SEASON_2 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun PredictorScreen(
     walletAddress: String,
     rpcUrl: String,
+    isGuestMode: Boolean = false,
+    onConnectWallet: () -> Unit = {},
+    activityResultSender: ActivityResultSender? = null,
     viewModel: PredictorViewModel = viewModel()
 ) {
+    val shareContext = LocalContext.current
+    val view = LocalView.current
+    val prefs = remember { AppPreferences(shareContext) }
+
     val result by viewModel.result.collectAsState()
     val s2Metrics by viewModel.metrics.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -134,13 +165,41 @@ fun PredictorScreen(
     val s1Loading by viewModel.season1Loading.collectAsState()
     val seasonComparison by viewModel.comparison.collectAsState()
 
+    // New: prediction history + fresh prediction flag
+    val predictionHistory by viewModel.predictionHistory.collectAsState()
+    val isFreshPrediction by viewModel.isFreshPrediction.collectAsState()
+    val communityRank by viewModel.communityRank.collectAsState()
+
+    val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+
+    // On-chain hash state
+    var isHashingS1 by remember { mutableStateOf(false) }
+    var isHashingS2 by remember { mutableStateOf(false) }
+    var hashError by remember { mutableStateOf<String?>(null) }
+    var s1HashSignature by remember { mutableStateOf<String?>(null) }
+    var s2HashSignature by remember { mutableStateOf<String?>(null) }
+
     var selectedTab by remember { mutableStateOf(SeasonTab.SEASON_2) }
 
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = isLoading || s1Loading,
+        onRefresh = {
+            view.hapticTap(prefs)
+            if (selectedTab == SeasonTab.SEASON_2) {
+                viewModel.runPrediction(walletAddress, rpcUrl)
+            } else {
+                viewModel.runSeason1Analysis(walletAddress, rpcUrl)
+            }
+        }
+    )
+
+    Box(modifier = Modifier.fillMaxSize().pullRefresh(pullRefreshState)) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(vertical = 16.dp)
     ) {
         // Header
@@ -150,6 +209,16 @@ fun PredictorScreen(
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
+
+        if (isGuestMode) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+                GuestModeBanner(
+                    onConnectWallet = onConnectWallet,
+                    message = "Connect wallet to run predictions"
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -165,13 +234,19 @@ fun PredictorScreen(
             SeasonTabButton(
                 text = "Season 1",
                 isSelected = selectedTab == SeasonTab.SEASON_1,
-                onClick = { selectedTab = SeasonTab.SEASON_1 },
+                onClick = {
+                    view.hapticTap(prefs)
+                    selectedTab = SeasonTab.SEASON_1
+                },
                 modifier = Modifier.weight(1f)
             )
             SeasonTabButton(
                 text = "Season 2",
                 isSelected = selectedTab == SeasonTab.SEASON_2,
-                onClick = { selectedTab = SeasonTab.SEASON_2 },
+                onClick = {
+                    view.hapticTap(prefs)
+                    selectedTab = SeasonTab.SEASON_2
+                },
                 modifier = Modifier.weight(1f)
             )
         }
@@ -292,10 +367,15 @@ fun PredictorScreen(
                 if (!hasAnalysis && !s1Loading) {
                     // "Detect My Tier" button — initial state
                     Button(
-                        onClick = { viewModel.runSeason1Analysis(walletAddress, rpcUrl) },
+                        onClick = {
+                            view.hapticLongPress(prefs)
+                            GeoAnalyticsService.track(GeoAnalyticsService.Events.SEASON1_ANALYZED)
+                            viewModel.runSeason1Analysis(walletAddress, rpcUrl)
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(12.dp),
+                        enabled = !isGuestMode
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Search,
@@ -346,6 +426,71 @@ fun PredictorScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     Season1HighlightsCard(highlights = analysis.activityHighlights)
 
+                    // Hash S1 Tier On-Chain
+                    if (detectedTier != null && activityResultSender != null) {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        if (s1HashSignature != null) {
+                            // Already hashed — show signature
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(SolanaGreen.copy(alpha = 0.1f))
+                                    .padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "S1 Tier Hashed On-Chain",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                                    color = SolanaGreen
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = s1HashSignature!!.take(8) + "...",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = SolanaGreen.copy(alpha = 0.7f)
+                                )
+                            }
+                        } else {
+                            OutlinedButton(
+                                onClick = {
+                                    val sender = activityResultSender
+                                    hashError = null
+                                    isHashingS1 = true
+                                    val memo = "SV:S1:${detectedTier.displayName}:${"%.1f".format(analysis.overallActivityScore)}"
+                                    scope.launch {
+                                        WalletManager.signAndSendMemo(sender, rpcUrl, memo).fold(
+                                            onSuccess = { sig ->
+                                                s1HashSignature = sig
+                                                isHashingS1 = false
+                                            },
+                                            onFailure = { e ->
+                                                hashError = "S1 hash failed: ${e.message}"
+                                                isHashingS1 = false
+                                            }
+                                        )
+                                    }
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(12.dp),
+                                enabled = !isHashingS1
+                            ) {
+                                if (isHashingS1) {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(16.dp),
+                                        strokeWidth = 2.dp,
+                                        color = SolanaGreen
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text("Signing via Seed Vault...", color = SolanaGreen)
+                                } else {
+                                    Text("Hash S1 Tier On-Chain", color = SolanaGreen)
+                                }
+                            }
+                        }
+                    }
+
                     // Activity Planner — S1 context (general on-chain activity tips)
                     Spacer(modifier = Modifier.height(16.dp))
                     Season1ActivityPlannerCard(analysis = analysis)
@@ -360,7 +505,10 @@ fun PredictorScreen(
 
                     // Re-run button
                     Button(
-                        onClick = { viewModel.runSeason1Analysis(walletAddress, rpcUrl) },
+                        onClick = {
+                            view.hapticTap(prefs)
+                            viewModel.runSeason1Analysis(walletAddress, rpcUrl)
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
                         shape = RoundedCornerShape(12.dp)
@@ -387,10 +535,15 @@ fun PredictorScreen(
 
                 if (prediction == null && !isLoading) {
                     Button(
-                        onClick = { viewModel.runPrediction(walletAddress, rpcUrl) },
+                        onClick = {
+                            view.hapticLongPress(prefs)
+                            GeoAnalyticsService.track(GeoAnalyticsService.Events.PREDICTION_RUN)
+                            viewModel.runPrediction(walletAddress, rpcUrl)
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(12.dp),
+                        enabled = !isGuestMode
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.TrendingUp,
@@ -453,6 +606,18 @@ fun PredictorScreen(
                     }
                     Spacer(modifier = Modifier.height(12.dp))
 
+                    // Haptic + auto-scroll to predicted tier on fresh prediction
+                    if (isFreshPrediction) {
+                        LaunchedEffect(Unit) {
+                            view.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+                            val targetIdx = DISPLAY_TIERS.indexOf(pred.predictedTier).coerceAtLeast(0)
+                            kotlinx.coroutines.delay(200)
+                            pagerState.animateScrollToPage(targetIdx)
+                            kotlinx.coroutines.delay(400)
+                            viewModel.clearFreshPrediction()
+                        }
+                    }
+
                     // Dual Activity Score Card (current + projected)
                     DualScoreCard(
                         currentResult = projected?.current ?: pred,
@@ -461,16 +626,54 @@ fun PredictorScreen(
                         hasProjection = projected != null
                     )
 
+                    // Community ranking from real leaderboard data
+                    communityRank?.let { rank ->
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Top ${String.format("%.0f", rank.topPercentile)}% of ${
+                                java.text.NumberFormat.getNumberInstance(java.util.Locale.US).format(rank.totalPredictors)
+                            } SeekerVerify predictors this week",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = SolanaGreen,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Radar Chart — visual metric breakdown
+                    GlassCard {
+                        Column(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp, start = 16.dp, end = 16.dp)) {
+                            Text(
+                                text = "Activity Profile",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            RadarChart(
+                                breakdown = projected?.current?.breakdown ?: pred.breakdown,
+                                projectedBreakdown = projected?.projected?.breakdown
+                            )
+                        }
+                    }
+
+                    // Prediction Trajectory Chart
+                    if (predictionHistory.size >= 2) {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        GlassCard {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                ScoreTrajectoryChart(history = predictionHistory)
+                            }
+                        }
+                        LaunchedEffect(Unit) {
+                            prefs.setHasViewedHistory(true)
+                        }
+                    }
+
                     Spacer(modifier = Modifier.height(16.dp))
 
                     // Score Breakdown Card (with projected values for time-dependent metrics)
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant
-                        ),
-                        shape = RoundedCornerShape(16.dp)
-                    ) {
+                    GlassCard {
                         Column(modifier = Modifier.padding(20.dp)) {
                             Text(
                                 text = "Score Breakdown",
@@ -482,7 +685,7 @@ fun PredictorScreen(
                             val projectedBreakdown = projected?.projected?.breakdown
                             val currentBreakdown = projected?.current?.breakdown ?: pred.breakdown
                             val TIME_DEPENDENT_METRICS = setOf(
-                                "Transactions", "dApp Usage", "SKR Staking", "Wallet Age", "Programs Used"
+                                "Transactions", "dApp Frequency", "SKR Staking", "Wallet Age", "Unique dApps", "Consistency"
                             )
 
                             currentBreakdown.entries.sortedByDescending { it.value }.forEach { (metric, score) ->
@@ -492,7 +695,9 @@ fun PredictorScreen(
                                 MetricRow(
                                     name = metric,
                                     score = score,
-                                    projectedScore = projectedScore
+                                    projectedScore = projectedScore,
+                                    rawValue = getMetricRawValue(metric, s2Metrics),
+                                    benchmarks = METRIC_BENCHMARKS[metric]
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                             }
@@ -505,15 +710,47 @@ fun PredictorScreen(
                         AssumptionsCard(assumptions = projectionAssumptions)
                     }
 
+                    // AI Insights
+                    Spacer(modifier = Modifier.height(16.dp))
+                    val insights = InsightsEngine.generate(
+                        breakdown = pred.breakdown,
+                        compositeScore = pred.compositeScore,
+                        predictedTierName = pred.predictedTier.displayName,
+                        isStaking = (pred.breakdown["SKR Staking"] ?: 0.0) > 0,
+                        skrBalance = 0.0,
+                        hasDomain = (pred.breakdown[".skr Domain"] ?: 0.0) > 0,
+                        currentMetrics = s2Metrics
+                    )
+                    if (insights.isNotEmpty()) {
+                        InsightsCard(insights = insights)
+                    }
+
                     // Activity Planner — S2 context (metric-specific improvements)
                     Spacer(modifier = Modifier.height(16.dp))
                     Season2ActivityPlannerCard(prediction = pred, metrics = s2Metrics)
+
+                    // What-If Simulator
+                    s2Metrics?.let { metrics ->
+                        Spacer(modifier = Modifier.height(16.dp))
+                        WhatIfSimulator(
+                            currentMetrics = metrics,
+                            currentResult = pred,
+                            onSimulatorUsed = {
+                                prefs.setHasUsedSimulator(true)
+                                GeoAnalyticsService.track(GeoAnalyticsService.Events.SIMULATOR_USED)
+                            }
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
                     // Re-run button
                     Button(
-                        onClick = { viewModel.runPrediction(walletAddress, rpcUrl) },
+                        onClick = {
+                            view.hapticLongPress(prefs)
+                            viewModel.runPrediction(walletAddress, rpcUrl)
+                            scope.launch { scrollState.animateScrollTo(0) }
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
                         shape = RoundedCornerShape(12.dp)
@@ -521,6 +758,106 @@ fun PredictorScreen(
                         Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(8.dp))
                         Text("Re-run Prediction")
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // Share Prediction Card
+                    OutlinedButton(
+                        onClick = {
+                            view.hapticTap(prefs)
+                            ShareCardGenerator.generateAndShare(
+                                context = shareContext,
+                                tierName = pred.predictedTier.displayName,
+                                compositeScore = pred.compositeScore,
+                                percentile = pred.percentile,
+                                confidence = pred.confidence
+                            )
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Icon(Icons.Filled.Share, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Share My Prediction")
+                    }
+
+                    // Hash S2 Prediction On-Chain (always allow re-hashing)
+                    if (activityResultSender != null) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        if (s2HashSignature != null) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(SolanaGreen.copy(alpha = 0.1f))
+                                    .padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "On-Chain",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
+                                    color = SolanaGreen
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = s2HashSignature!!.take(12) + "...",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = SolanaGreen.copy(alpha = 0.7f)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+                        OutlinedButton(
+                            onClick = {
+                                val sender = activityResultSender
+                                hashError = null
+                                isHashingS2 = true
+                                val today = java.time.LocalDate.now().toString()
+                                val memo = "SV:S2:${pred.predictedTier.displayName}:${"%.1f".format(pred.compositeScore)}:$today"
+                                scope.launch {
+                                    WalletManager.signAndSendMemo(sender, rpcUrl, memo).fold(
+                                        onSuccess = { sig ->
+                                            s2HashSignature = sig
+                                            isHashingS2 = false
+                                        },
+                                        onFailure = { e ->
+                                            hashError = "S2 hash failed: ${e.message}"
+                                            isHashingS2 = false
+                                        }
+                                    )
+                                }
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp),
+                            enabled = !isHashingS2
+                        ) {
+                            if (isHashingS2) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(16.dp),
+                                    strokeWidth = 2.dp,
+                                    color = SolanaGreen
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("Signing via Seed Vault...", color = SolanaGreen)
+                            } else {
+                                Text(
+                                    text = if (s2HashSignature != null) "Re-hash Prediction On-Chain" else "Hash S2 Prediction On-Chain",
+                                    color = SolanaGreen
+                                )
+                            }
+                        }
+                    }
+
+                    // Hash error display
+                    hashError?.let { err ->
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = err,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.error
+                        )
                     }
                 }
             }
@@ -567,6 +904,14 @@ fun PredictorScreen(
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
+
+    PullRefreshIndicator(
+        refreshing = isLoading || s1Loading,
+        state = pullRefreshState,
+        modifier = Modifier.align(Alignment.TopCenter),
+        contentColor = SeekerBlue
+    )
+    } // Box
 }
 
 // --- Season Toggle Button ---
@@ -838,13 +1183,7 @@ private fun Season1UserPositionCard(tier: AirdropTier, analysis: Season1Engine.S
     val nf = NumberFormat.getNumberInstance(Locale.US)
     val data = SEASON1_DATA[tier]
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Your Season 1 Position",
@@ -933,13 +1272,7 @@ private fun Season1UserPositionCard(tier: AirdropTier, analysis: Season1Engine.S
 
 @Composable
 private fun Season1ActivityOnlyCard(analysis: Season1Engine.Season1Analysis) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Your On-Chain Activity",
@@ -999,13 +1332,7 @@ private fun Season1ActivityOnlyCard(analysis: Season1Engine.Season1Analysis) {
 private fun Season1HighlightsCard(highlights: List<Season1Engine.ActivityHighlight>) {
     if (highlights.isEmpty()) return
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Activity Highlights",
@@ -1068,13 +1395,7 @@ private fun SeasonComparisonCard(comparison: SeasonComparison) {
         else -> Icons.AutoMirrored.Filled.TrendingUp
     }
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Season 1 vs Season 2",
@@ -1158,13 +1479,7 @@ private fun SeasonComparisonCard(comparison: SeasonComparison) {
 
 @Composable
 private fun Season1SummaryCard(userTier: AirdropTier? = null) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Season 1 Distribution",
@@ -1256,8 +1571,47 @@ private fun Season1SummaryCard(userTier: AirdropTier? = null) {
 
 // --- Shared Components ---
 
+// Benchmarks (Avg, Good, Elite) raw values per metric, for fleet comparison display.
+private val METRIC_BENCHMARKS = mapOf(
+    "Transactions"    to Triple(1000,  2500,  4500),  // txs
+    "Unique dApps"   to Triple(6,     15,    27),
+    "dApp Frequency"      to Triple(100,   250,   450),   // interactions
+    "Consistency"     to Triple(20,    40,    55),    // unique active days / 90d
+    "Token Diversity" to Triple(4,     10,    18),    // unique tokens
+    "NFTs"            to Triple(10,    25,    45),
+    "Wallet Age"      to Triple(365,   548,   657),   // days
+    "SKR Staking"     to Triple(90,    180,   330),   // days
+)
+
+/** Get the user's raw on-chain value as a display string for the given metric. */
+private fun getMetricRawValue(
+    metric: String,
+    metrics: PredictorEngine.ActivityMetrics?
+): String? {
+    if (metrics == null) return null
+    return when (metric) {
+        "Transactions"    -> "${NumberFormat.getNumberInstance(Locale.US).format(metrics.totalTransactions)} txs"
+        "Unique dApps"   -> "${metrics.uniquePrograms} dApps"
+        "dApp Frequency"      -> "${NumberFormat.getNumberInstance(Locale.US).format(metrics.dappInteractions)} dApp txs"
+        "Consistency"         -> "${metrics.uniqueActiveDays} days / 90d"
+        "Token Diversity" -> "${metrics.tokenDiversity} tokens"
+        "NFTs"            -> "${metrics.nftCount} NFTs"
+        "Wallet Age"      -> String.format("%.1f yrs", metrics.walletAgeDays / 365.0)
+        "SKR Staking"     -> if (metrics.skrStaked) "${metrics.stakingDurationDays}d staked" else null
+        "Season 1 Tier"   -> metrics.season1Tier?.displayName
+        ".skr Domain"     -> if (metrics.hasSkrDomain) "Owned" else "None"
+        else              -> null
+    }
+}
+
 @Composable
-private fun MetricRow(name: String, score: Double, projectedScore: Double? = null) {
+private fun MetricRow(
+    name: String,
+    score: Double,
+    projectedScore: Double? = null,
+    rawValue: String? = null,
+    benchmarks: Triple<Int, Int, Int>? = null  // Avg, Good, Elite (raw ints)
+) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -1325,7 +1679,44 @@ private fun MetricRow(name: String, score: Double, projectedScore: Double? = nul
             },
             trackColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.1f)
         )
+
+        // Raw value + fleet benchmark row (only when we have real on-chain data)
+        if (rawValue != null) {
+            Spacer(modifier = Modifier.height(3.dp))
+
+            // Determine benchmark tier color based on score
+            val benchmarkColor = when {
+                score >= 70 -> SolanaGreen
+                score >= 40 -> SeekerGold
+                else -> MaterialTheme.colorScheme.onSurfaceVariant
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = rawValue,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = benchmarkColor,
+                    fontWeight = FontWeight.SemiBold
+                )
+                if (benchmarks != null) {
+                    Text(
+                        text = "Avg ${formatBenchmark(benchmarks.first)} · Good ${formatBenchmark(benchmarks.second)} · Elite ${formatBenchmark(benchmarks.third)}",
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                    )
+                }
+            }
+        }
     }
+}
+
+private fun formatBenchmark(v: Int): String = when {
+    v >= 1000 -> "${v / 1000}K"
+    else -> v.toString()
 }
 
 // --- Season 1 Scoring Model Insights ---
@@ -1394,13 +1785,7 @@ private fun Season1ActivityPlannerCard(analysis: Season1Engine.Season1Analysis) 
 
     if (observations.isEmpty()) return
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Scoring Model Insights",
@@ -1493,22 +1878,22 @@ private fun Season2ActivityPlannerCard(
         ))
     }
 
-    // dApp Usage (weight 10%)
-    val dappScore = breakdown["dApp Usage"] ?: 0.0
+    // dApp Frequency (weight 11%) — how many transactions involved a dApp
+    val dappScore = breakdown["dApp Frequency"] ?: 0.0
     if (dappScore < 40) {
         observations.add(Triple(
-            "dApp Usage Score: ${String.format("%.0f", dappScore)}/100",
-            "This metric tracks unique program interactions. It has a 10% weight in the scoring model.",
+            "dApp Frequency: ${String.format("%.0f", dappScore)}/100",
+            "How many of your transactions used a dApp (not just transfers). 11% weight.",
             true
         ))
     }
 
-    // Programs Used (weight 12%)
-    val progScore = breakdown["Programs Used"] ?: 0.0
+    // Unique dApps (weight 12%) — how many different dApps you've used
+    val progScore = breakdown["Unique dApps"] ?: 0.0
     if (progScore < 40) {
         observations.add(Triple(
-            "Programs Score: ${String.format("%.0f", progScore)}/100",
-            "This metric counts distinct Solana programs interacted with. It has a 12% weight.",
+            "Unique dApps: ${String.format("%.0f", progScore)}/100",
+            "How many different Solana dApps you've interacted with (breadth). 12% weight.",
             true
         ))
     }
@@ -1568,13 +1953,7 @@ private fun Season2ActivityPlannerCard(
     // Show max 5 most impactful observations
     val topObservations = observations.take(5)
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Scoring Model Insights",
@@ -1628,13 +2007,7 @@ private fun Season2ActivityPlannerCard(
 
 @Composable
 private fun SeasonProgressCard(progress: SeasonProgress.Progress) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(12.dp)
-    ) {
+    GlassCard(cornerRadius = 12.dp) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -1720,13 +2093,7 @@ private fun DualScoreCard(
     paceStatus: PredictorEngine.PaceStatus?,
     hasProjection: Boolean
 ) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -1885,13 +2252,7 @@ private fun DualScoreCard(
 private fun AssumptionsCard(assumptions: List<String>) {
     var isExpanded by remember { mutableStateOf(false) }
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-        shape = RoundedCornerShape(16.dp)
-    ) {
+    GlassCard {
         Column(modifier = Modifier.padding(20.dp)) {
             Row(
                 modifier = Modifier
@@ -1936,6 +2297,100 @@ private fun AssumptionsCard(assumptions: List<String>) {
                         )
                     }
                 }
+            }
+        }
+    }
+}
+
+// --- AI Insights Card ---
+
+@Composable
+private fun InsightsCard(insights: List<InsightsEngine.InsightCard>) {
+    GlassCard {
+        Column(modifier = Modifier.padding(20.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = "AI Insights",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(SeekerBlue.copy(alpha = 0.15f))
+                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                ) {
+                    Text(
+                        text = "On-device",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = SeekerBlue
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(12.dp))
+
+            insights.take(5).forEach { insight ->
+                val impactColor = when (insight.impact) {
+                    InsightsEngine.Impact.HIGH -> SeekerGold
+                    InsightsEngine.Impact.MEDIUM -> SeekerBlue
+                    InsightsEngine.Impact.LOW -> MaterialTheme.colorScheme.onSurfaceVariant
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    // Impact badge
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(4.dp))
+                            .background(impactColor.copy(alpha = 0.15f))
+                            .padding(horizontal = 6.dp, vertical = 2.dp)
+                    ) {
+                        Text(
+                            text = insight.impact.name,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = impactColor,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    // Estimated gain badge
+                    if (insight.estimatedGain > 0) {
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(4.dp))
+                                .background(SolanaGreen.copy(alpha = 0.15f))
+                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                        ) {
+                            Text(
+                                text = "+${"%.0f".format(insight.estimatedGain)} pts",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = SolanaGreen,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = insight.title,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            text = insight.description,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
     }

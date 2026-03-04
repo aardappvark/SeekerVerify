@@ -18,4 +18,4 @@ dependencyResolutionManagement {
 rootProject.name = "SeekerVerify"
 include(":app")
 include(":seeker-verify")
-project(":seeker-verify").projectDir = file("../seeker-verify/seeker-verify")
+project(":seeker-verify").projectDir = file("seeker-verify/seeker-verify")

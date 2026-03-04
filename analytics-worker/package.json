@@ -1,0 +1,12 @@
+{
+  "name": "aardappvark-analytics",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create aardappvark-analytics",
+    "db:migrate": "wrangler d1 execute aardappvark-analytics --file=schema.sql",
+    "db:stats": "wrangler d1 execute aardappvark-analytics --command \"SELECT event_type, country, SUM(count) as total FROM events GROUP BY event_type, country ORDER BY total DESC LIMIT 50\""
+  }
+}

@@ -1,6 +1,8 @@
 package com.seekerverify.app.rpc
 
 import android.util.Log
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
@@ -12,6 +14,9 @@ import kotlinx.serialization.json.put
 
 /**
  * Fetches SOL balance and native stake info for a wallet.
+ *
+ * Queries both staker (offset 12) and withdrawer (offset 44) authorities
+ * to catch all stake accounts owned by the wallet, then deduplicates by pubkey.
  */
 object SolRpcClient {
 
@@ -53,8 +58,7 @@ object SolRpcClient {
                 }
             )
 
-            // Step 2: Get staked SOL via getStakeAccountsByOwner (if available)
-            // Fall back to getProgramAccounts with stake program
+            // Step 2: Get staked SOL via dual-query (staker + withdrawer authorities)
             val stakedLamports = fetchStakedSol(walletAddress, rpcUrl)
 
             Log.d(TAG, "SOL: ${solLamports / LAMPORTS_PER_SOL} liquid, " +
@@ -76,8 +80,14 @@ object SolRpcClient {
     }
 
     /**
-     * Fetch staked SOL by querying getProgramAccounts on the native Stake program
-     * filtered by the authorized staker (offset 12 for staker pubkey in Stake account).
+     * Fetch staked SOL by querying getProgramAccounts on the native Stake program.
+     *
+     * Runs two parallel queries:
+     *   1. memcmp at offset 12 — matches accounts where wallet is the staker
+     *   2. memcmp at offset 44 — matches accounts where wallet is the withdrawer
+     *
+     * Many wallets set the same address for both, but some (e.g. multisig, custodial)
+     * differ. Deduplicates by account pubkey to avoid double-counting.
      *
      * Stake account layout:
      * [0-3]   state (u32 LE)
@@ -93,15 +103,62 @@ object SolRpcClient {
         rpcUrl: String
     ): Pair<Long, Int> {
         return try {
+            coroutineScope {
+                // Query 1: staker authority at offset 12
+                val stakerDeferred = async {
+                    queryStakeAccounts(walletAddress, rpcUrl, offset = 12, label = "staker")
+                }
+
+                // Query 2: withdrawer authority at offset 44
+                val withdrawerDeferred = async {
+                    queryStakeAccounts(walletAddress, rpcUrl, offset = 44, label = "withdrawer")
+                }
+
+                val stakerAccounts = stakerDeferred.await()
+                val withdrawerAccounts = withdrawerDeferred.await()
+
+                // Merge and deduplicate by account pubkey
+                val merged = mutableMapOf<String, Long>()
+                for ((pubkey, lamports) in stakerAccounts) {
+                    merged[pubkey] = lamports
+                }
+                for ((pubkey, lamports) in withdrawerAccounts) {
+                    merged.putIfAbsent(pubkey, lamports)
+                }
+
+                val totalLamports = merged.values.sum()
+                val uniqueCount = merged.size
+
+                Log.d(TAG, "SOL staking: ${stakerAccounts.size} staker, " +
+                    "${withdrawerAccounts.size} withdrawer, $uniqueCount unique accounts")
+
+                Pair(totalLamports, uniqueCount)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Staked SOL error: ${e.message}", e)
+            Pair(0L, 0)
+        }
+    }
+
+    /**
+     * Query getProgramAccounts for stake accounts matching wallet at the given offset.
+     * Returns a list of (pubkey, lamports) pairs.
+     */
+    private suspend fun queryStakeAccounts(
+        walletAddress: String,
+        rpcUrl: String,
+        offset: Int,
+        label: String
+    ): List<Pair<String, Long>> {
+        return try {
             val params = buildJsonArray {
                 add(JsonPrimitive(STAKE_PROGRAM_ID))
                 add(buildJsonObject {
                     put("encoding", "base64")
                     put("filters", buildJsonArray {
-                        // Filter by staker authority at offset 12
                         add(buildJsonObject {
                             put("memcmp", buildJsonObject {
-                                put("offset", 12)
+                                put("offset", offset)
                                 put("bytes", walletAddress)
                             })
                         })
@@ -114,25 +171,22 @@ object SolRpcClient {
             result.fold(
                 onSuccess = { response ->
                     val accounts = response.jsonArray
-                    var totalLamports = 0L
-
-                    for (accountEntry in accounts) {
-                        val accountObj = accountEntry.jsonObject
-                        val lamports = accountObj["account"]?.jsonObject
+                    accounts.map { entry ->
+                        val obj = entry.jsonObject
+                        val pubkey = obj["pubkey"]?.jsonPrimitive?.content ?: ""
+                        val lamports = obj["account"]?.jsonObject
                             ?.get("lamports")?.jsonPrimitive?.long ?: 0L
-                        totalLamports += lamports
+                        Pair(pubkey, lamports)
                     }
-
-                    Pair(totalLamports, accounts.size)
                 },
                 onFailure = { e ->
-                    Log.e(TAG, "Staked SOL fetch failed: ${e.message}")
-                    Pair(0L, 0)
+                    Log.e(TAG, "Stake query ($label, offset $offset) failed: ${e.message}")
+                    emptyList()
                 }
             )
         } catch (e: Exception) {
-            Log.e(TAG, "Staked SOL error: ${e.message}", e)
-            Pair(0L, 0)
+            Log.e(TAG, "Stake query ($label) error: ${e.message}", e)
+            emptyList()
         }
     }
 }

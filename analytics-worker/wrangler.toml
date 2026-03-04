@@ -1,0 +1,9 @@
+name = "aardappvark-analytics"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "aardappvark-analytics"
+# After running `wrangler d1 create aardappvark-analytics`, paste the database_id here:
+database_id = "70c29e3a-8e90-401f-b8b9-c9292f11a8a5"

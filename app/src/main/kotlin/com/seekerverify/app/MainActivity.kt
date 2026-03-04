@@ -28,6 +28,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,41 +42,89 @@ import androidx.compose.ui.unit.dp
 import com.midmightbit.sgt.SgtChecker
 import com.midmightbit.sgt.SgtConstants
 import com.seekerverify.app.data.AppPreferences
+import com.seekerverify.app.service.GeoAnalyticsService
+import com.seekerverify.app.service.NotificationService
+import com.seekerverify.app.worker.DailyCheckInWorker
+import com.seekerverify.app.worker.TierChangeWorker
+import com.seekerverify.app.worker.WidgetRefreshWorker
 import com.seekerverify.app.ui.navigation.AppNavigation
+import com.seekerverify.app.ui.screens.OnboardingScreen
 import com.seekerverify.app.ui.screens.WalletConnectScreen
 import com.seekerverify.app.ui.theme.SeekerBlue
 import com.seekerverify.app.ui.theme.SeekerRed
 import com.seekerverify.app.ui.theme.SeekerVerifyTheme
+import androidx.compose.foundation.isSystemInDarkTheme
 import com.seekerverify.app.wallet.WalletManager
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var activityResultSender: ActivityResultSender
+    private var activityResultSender: ActivityResultSender? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityResultSender = ActivityResultSender(this)
+        try {
+            activityResultSender = ActivityResultSender(this)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to create ActivityResultSender: ${e.message}")
+        }
+
+        try {
+            NotificationService.createChannel(this)
+        } catch (_: Exception) { }
+
+        // Initialize analytics with API key from local.properties (via resValue)
+        try {
+            val initPrefs = AppPreferences(this)
+            GeoAnalyticsService.init(getString(R.string.analytics_api_key))
+            GeoAnalyticsService.setEnabled(initPrefs.isAnalyticsEnabled())
+        } catch (_: Exception) { }
 
         setContent {
-            SeekerVerifyTheme {
-                SeekerVerifyApp(activityResultSender)
+            val themePrefs = remember { AppPreferences(this) }
+            var themeMode by remember { mutableStateOf(themePrefs.getThemeMode()) }
+            val systemDark = isSystemInDarkTheme()
+            val isAmoled = themeMode == "amoled"
+            val isDark = when (themeMode) {
+                "light" -> false
+                "system" -> systemDark
+                "amoled" -> true
+                else -> true // "dark" is default
+            }
+            SeekerVerifyTheme(darkTheme = isDark, isAmoled = isAmoled) {
+                SeekerVerifyApp(
+                    activityResultSender = activityResultSender,
+                    onThemeChanged = { mode ->
+                        themePrefs.setThemeMode(mode)
+                        themeMode = mode
+                    },
+                    currentThemeMode = themeMode
+                )
             }
         }
     }
 }
 
 @Composable
-fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
+fun SeekerVerifyApp(
+    activityResultSender: ActivityResultSender?,
+    onThemeChanged: (String) -> Unit = {},
+    currentThemeMode: String = "dark"
+) {
     val context = LocalContext.current
     val prefs = remember { AppPreferences(context) }
     val scope = rememberCoroutineScope()
 
     var isWalletConnected by remember { mutableStateOf(prefs.isWalletConnected()) }
     var walletAddress by remember { mutableStateOf(prefs.getWalletAddress() ?: "") }
-    var isConnecting by remember { mutableStateOf(false) }
+    val isConnecting by WalletManager.isConnecting.collectAsState()
     var connectError by remember { mutableStateOf<String?>(null) }
+    var hasCompletedOnboarding by remember { mutableStateOf(prefs.hasCompletedOnboarding()) }
 
     // SGT Gate state
     var sgtCheckState by remember { mutableStateOf<SgtCheckState>(SgtCheckState.Idle) }
@@ -88,17 +137,30 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
         else -> AppConfig.Rpc.PUBLIC_MAINNET
     }
 
-    if (!isWalletConnected) {
+    if (!hasCompletedOnboarding) {
+        OnboardingScreen(
+            onComplete = {
+                prefs.setHasCompletedOnboarding(true)
+                hasCompletedOnboarding = true
+                GeoAnalyticsService.track(GeoAnalyticsService.Events.ONBOARDING_COMPLETED)
+            }
+        )
+    } else if (!isWalletConnected && sgtCheckState !is SgtCheckState.GuestMode) {
         // Show wallet connect screen
         WalletConnectScreen(
             onConnect = {
-                isConnecting = true
+                val currentSender = activityResultSender
+                if (currentSender == null) {
+                    connectError = "Wallet adapter not available"
+                    return@WalletConnectScreen
+                }
                 connectError = null
                 scope.launch {
-                    val result = WalletManager.signIn(activityResultSender)
+                    val result = WalletManager.signIn(currentSender)
                     result.fold(
                         onSuccess = { connectResult ->
                             Log.d(TAG, "Wallet signed in: ${connectResult.publicKeyBase58.take(8)}...")
+                            GeoAnalyticsService.track(GeoAnalyticsService.Events.WALLET_CONNECTED)
                             prefs.saveWalletConnection(
                                 connectResult.publicKeyBase58,
                                 connectResult.walletName
@@ -112,11 +174,31 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
                             connectError = e.message ?: "Failed to sign in with wallet"
                         }
                     )
-                    isConnecting = false
                 }
+            },
+            onExploreAsGuest = {
+                Log.d(TAG, "Entering guest mode")
+                GeoAnalyticsService.track(GeoAnalyticsService.Events.GUEST_MODE_ENTERED)
+                sgtCheckState = SgtCheckState.GuestMode
             },
             isConnecting = isConnecting,
             errorMessage = connectError
+        )
+    } else if (sgtCheckState is SgtCheckState.GuestMode) {
+        // Guest mode: show app with reduced functionality
+        AppNavigation(
+            walletAddress = "",
+            rpcUrl = rpcUrl,
+            isGuestMode = true,
+            onDisconnect = {
+                sgtCheckState = SgtCheckState.Idle
+            },
+            onConnectWallet = {
+                sgtCheckState = SgtCheckState.Idle
+            },
+            onThemeChanged = onThemeChanged,
+            currentThemeMode = currentThemeMode,
+            activityResultSender = activityResultSender
         )
     } else {
         // SGT Gate: handle Idle state transition via LaunchedEffect
@@ -140,6 +222,10 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
                 // Handled above
             }
 
+            SgtCheckState.GuestMode -> {
+                // Handled in outer else-if branch
+            }
+
             SgtCheckState.Checking -> {
                 SgtCheckingScreen()
                 LaunchedEffect(walletAddress) {
@@ -150,10 +236,12 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
                             onSuccess = { info ->
                                 if (info.hasSgt) {
                                     Log.d(TAG, "SGT verified: Seeker #${info.memberNumber}")
+                                    GeoAnalyticsService.track(GeoAnalyticsService.Events.SGT_VERIFIED)
                                     prefs.setSgtStatus(true, info.memberNumber, info.sgtMintAddress)
                                     sgtCheckState = SgtCheckState.Verified
                                 } else {
                                     Log.w(TAG, "No SGT found")
+                                    GeoAnalyticsService.track(GeoAnalyticsService.Events.SGT_NOT_FOUND)
                                     sgtCheckState = SgtCheckState.NoSgt
                                 }
                             },
@@ -178,15 +266,56 @@ fun SeekerVerifyApp(activityResultSender: ActivityResultSender) {
             }
 
             SgtCheckState.Verified -> {
+                LaunchedEffect(Unit) {
+                    GeoAnalyticsService.track(GeoAnalyticsService.Events.APP_OPEN)
+                    // Schedule daily check-in reminder worker
+                    try {
+                        val workRequest = PeriodicWorkRequestBuilder<DailyCheckInWorker>(
+                            24, TimeUnit.HOURS
+                        ).build()
+                        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                            "daily_check_in_reminder",
+                            ExistingPeriodicWorkPolicy.KEEP,
+                            workRequest
+                        )
+                    } catch (_: Exception) { }
+                    // Schedule widget refresh worker
+                    try {
+                        val widgetWork = PeriodicWorkRequestBuilder<WidgetRefreshWorker>(
+                            30, TimeUnit.MINUTES
+                        ).build()
+                        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                            "widget_refresh",
+                            ExistingPeriodicWorkPolicy.KEEP,
+                            widgetWork
+                        )
+                    } catch (_: Exception) { }
+                    // Schedule tier change notification worker
+                    try {
+                        val tierWork = PeriodicWorkRequestBuilder<TierChangeWorker>(
+                            6, TimeUnit.HOURS
+                        ).build()
+                        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+                            "tier_change_check",
+                            ExistingPeriodicWorkPolicy.KEEP,
+                            tierWork
+                        )
+                    } catch (_: Exception) { }
+                }
                 AppNavigation(
                     walletAddress = walletAddress,
                     rpcUrl = rpcUrl,
+                    isGuestMode = false,
                     onDisconnect = {
+                        GeoAnalyticsService.track(GeoAnalyticsService.Events.WALLET_DISCONNECTED)
                         prefs.disconnectWallet()
                         isWalletConnected = false
                         walletAddress = ""
                         sgtCheckState = SgtCheckState.Idle
-                    }
+                    },
+                    onThemeChanged = onThemeChanged,
+                    currentThemeMode = currentThemeMode,
+                    activityResultSender = activityResultSender
                 )
             }
 
@@ -221,6 +350,7 @@ sealed class SgtCheckState {
     object Idle : SgtCheckState()
     object Checking : SgtCheckState()
     object Verified : SgtCheckState()
+    object GuestMode : SgtCheckState()
     object NoSgt : SgtCheckState()
     data class Error(val message: String) : SgtCheckState()
 }
@@ -238,7 +368,7 @@ private fun SgtCheckingScreen() {
         CircularProgressIndicator(color = SeekerBlue, modifier = Modifier.size(48.dp))
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = "Verifying Seeker Genesis Token...",
+            text = "Verifying Genesis Token via Seed Vault...",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center

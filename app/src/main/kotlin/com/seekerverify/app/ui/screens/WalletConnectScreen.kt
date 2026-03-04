@@ -3,13 +3,18 @@ package com.seekerverify.app.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -18,9 +23,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
+import com.seekerverify.app.data.AppPreferences
+import com.seekerverify.app.ui.util.hapticTap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.seekerverify.app.AppConfig
@@ -30,9 +42,14 @@ import com.seekerverify.app.ui.theme.SolanaGreen
 @Composable
 fun WalletConnectScreen(
     onConnect: () -> Unit,
+    onExploreAsGuest: () -> Unit = {},
     isConnecting: Boolean = false,
     errorMessage: String? = null
 ) {
+    val view = LocalView.current
+    val context = LocalContext.current
+    val prefs = remember { AppPreferences(context) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,10 +59,10 @@ fun WalletConnectScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
-            imageVector = Icons.Filled.Verified,
-            contentDescription = "Seeker Verify",
+            imageVector = Icons.Filled.Security,
+            contentDescription = "Seed Vault",
             modifier = Modifier.size(80.dp),
-            tint = SeekerBlue
+            tint = SolanaGreen
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -59,12 +76,40 @@ fun WalletConnectScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Your Seeker device companion",
+            text = "Seed Vault Secured Companion",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Feature pills
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            FeaturePill(
+                icon = Icons.Filled.Security,
+                text = "Hardware-secured signing via Seed Vault",
+                tint = SolanaGreen
+            )
+            FeaturePill(
+                icon = Icons.Filled.Lock,
+                text = "Zero data leaves your device",
+                tint = SeekerBlue
+            )
+            FeaturePill(
+                icon = Icons.Filled.Verified,
+                text = "Genesis Token on-chain verification",
+                tint = SeekerBlue
+            )
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
 
         if (isConnecting) {
             CircularProgressIndicator(color = SeekerBlue)
@@ -76,7 +121,10 @@ fun WalletConnectScreen(
             )
         } else {
             Button(
-                onClick = onConnect,
+                onClick = {
+                    view.hapticTap(prefs)
+                    onConnect()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
@@ -91,6 +139,26 @@ fun WalletConnectScreen(
             }
         }
 
+        Spacer(modifier = Modifier.height(12.dp))
+
+        androidx.compose.material3.OutlinedButton(
+            onClick = {
+                view.hapticTap(prefs)
+                onExploreAsGuest()
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        ) {
+            Text(
+                text = "Explore as Guest",
+                style = MaterialTheme.typography.titleSmall
+            )
+        }
+
         errorMessage?.let {
             Spacer(modifier = Modifier.height(16.dp))
             Text(
@@ -102,6 +170,15 @@ fun WalletConnectScreen(
         }
 
         Spacer(modifier = Modifier.height(32.dp))
+
+        Text(
+            text = "Connects via Seed Vault's Mobile Wallet Adapter",
+            style = MaterialTheme.typography.labelSmall,
+            color = SolanaGreen.copy(alpha = 0.7f),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = "Requires a Seeker Genesis Token (SGT)",
@@ -153,5 +230,27 @@ fun WalletConnectScreen(
                 onClick = { uriHandler.openUri("$baseUrl/terms.html") }
             )
         }
+    }
+}
+
+@Composable
+private fun FeaturePill(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    text: String,
+    tint: androidx.compose.ui.graphics.Color
+) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(18.dp),
+            tint = tint
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface
+        )
     }
 }

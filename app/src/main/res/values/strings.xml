@@ -184,6 +184,9 @@
     <string name="cancel">Cancel</string>
     <string name="disconnecting_clears_data">Disconnecting will clear all cached data.</string>
 
+    <!-- Widget -->
+    <string name="widget_description">Shows your predicted tier, SOL and SKR balances</string>
+
     <!-- Aliases for translation key consistency -->
     <string name="about_app_name">Seeker Verify</string>
     <string name="days_format">%1$s days</string>

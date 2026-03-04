@@ -30,6 +30,7 @@ object PredictorEngine {
         val nftCount: Int = 0,
         val walletAgeDays: Int = 0,
         val dappInteractions: Int = 0,
+        val uniqueActiveDays: Int = 0,     // unique days with ≥1 transaction (last 90 days)
         val season1Tier: AirdropTier? = null
     )
 
@@ -66,14 +67,15 @@ object PredictorEngine {
     // .skr domain reduced from 5% to 2% — all Seeker Genesis NFTs include one,
     // so it's not a differentiator. Redistributed to TX, staking, dApp.
     private object Weights {
-        const val TRANSACTIONS = 0.16
-        const val PROGRAMS = 0.12
+        const val TRANSACTIONS = 0.14
+        const val PROGRAMS = 0.11
         const val TOKEN_DIVERSITY = 0.08
         const val STAKING = 0.21
         const val DOMAIN = 0.02
         const val NFTS = 0.05
-        const val WALLET_AGE = 0.10
-        const val DAPP_INTERACTIONS = 0.11
+        const val WALLET_AGE = 0.09
+        const val DAPP_INTERACTIONS = 0.10
+        const val CONSISTENCY = 0.05
         const val SEASON1 = 0.15
     }
 
@@ -86,6 +88,7 @@ object PredictorEngine {
         const val MAX_NFTS = 50          // 50+ NFTs
         const val MAX_WALLET_DAYS = 730  // 2 years
         const val MAX_DAPP = 500         // 500+ dApp interactions
+        const val MAX_ACTIVE_DAYS = 60   // 60+ unique active days in last 90
     }
 
     /**
@@ -99,7 +102,7 @@ object PredictorEngine {
         breakdown["Transactions"] = txScore
 
         val progScore = linearNormalize(metrics.uniquePrograms.toDouble(), Thresholds.MAX_PROGRAMS.toDouble())
-        breakdown["Programs Used"] = progScore
+        breakdown["Unique dApps"] = progScore
 
         val tokenScore = linearNormalize(metrics.tokenDiversity.toDouble(), Thresholds.MAX_TOKENS.toDouble())
         breakdown["Token Diversity"] = tokenScore
@@ -122,7 +125,10 @@ object PredictorEngine {
         breakdown["Wallet Age"] = ageScore
 
         val dappScore = logNormalize(metrics.dappInteractions.toDouble(), Thresholds.MAX_DAPP.toDouble())
-        breakdown["dApp Usage"] = dappScore
+        breakdown["dApp Frequency"] = dappScore
+
+        val consistencyScore = linearNormalize(metrics.uniqueActiveDays.toDouble(), Thresholds.MAX_ACTIVE_DAYS.toDouble())
+        breakdown["Consistency"] = consistencyScore
 
         val season1Score = when (metrics.season1Tier) {
             AirdropTier.SOVEREIGN -> 100.0
@@ -145,6 +151,7 @@ object PredictorEngine {
             nftScore * Weights.NFTS +
             ageScore * Weights.WALLET_AGE +
             dappScore * Weights.DAPP_INTERACTIONS +
+            consistencyScore * Weights.CONSISTENCY +
             season1Score * Weights.SEASON1
         ).coerceIn(0.0, 100.0)
 
