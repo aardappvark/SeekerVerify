@@ -6,6 +6,13 @@ Seeker Verify lets you verify your Seeker Genesis Token (SGT), predict your Seas
 
 Published by **MidMightBit Games** (Australia).
 
+## Quick Links
+
+| Resource | Link |
+|---|---|
+| APK Download | [v2.2.0 Release](https://github.com/aardappvark/SeekerVerify/releases/tag/v2.2.0) |
+| Source Code | [GitHub Repository](https://github.com/aardappvark/SeekerVerify) |
+
 ## Features
 
 ### Identity & Verification
@@ -68,11 +75,16 @@ Analytics are handled by a Cloudflare Worker that derives country/city from the 
 
 This architecture is compliant with GDPR (Recital 26 -- anonymous data), CCPA, LGPD, APPI, and PIPA without requiring consent.
 
-### Data Backup
+### Data Persistence
 
-Critical data survives app uninstall via MediaStore backup to the Downloads folder:
-- Check-in streaks and prediction history
+Check-in streaks survive app uninstall/reinstall via a two-layer approach:
+
+1. **On-chain restoration (primary)** -- `CheckInRpcClient` scans the wallet's Solana transaction history for `SV:CI` memo entries written by Seed Vault check-ins. Streak, longest streak, and total check-ins are reconstructed from on-chain dates. Uses Helius RPC when available for sub-5-second scans.
+2. **Device backup (fallback)** -- MediaStore backup to the Downloads folder with multi-strategy cascade (overwrite, delete+insert, direct file write, app-private external dir).
+
+Additional persisted data:
 - Achievement progress (HMAC-SHA256 integrity verification tied to wallet address)
+- Prediction history
 - Analytics opt-in preference
 
 ## Tech Stack
@@ -100,7 +112,7 @@ SeekerVerify/
       data/                     # AppPreferences, CheckInBackupManager
       engine/                   # PredictorEngine, AchievementEngine, InsightsEngine, HealthScoreEngine
       model/                    # Data classes (Achievement, caches, records)
-      rpc/                      # Solana RPC clients (Community, Staking, Activity, Sol, RpcProvider)
+      rpc/                      # Solana RPC clients (Community, Staking, Activity, Sol, CheckIn, RpcProvider)
       service/                  # GeoAnalyticsService, NotificationService, ShareCardGenerator
       ui/
         components/             # GlassCard, RadarChart, ScoreTrajectoryChart, WhatIfSimulator, TierRevealAnimation
@@ -174,11 +186,12 @@ Seeker Verify uses multiple Solana Mobile Stack components:
 
 Seeker Verify is submitted to the [Monolith Hackathon](https://align.nexus) (March 2026) in the **Seeker dApp** category.
 
-### Why Seeker Verify
+### Why Seeker Verify (v2.2.0)
 
 - **Stickiness**: Daily on-chain check-ins via Seed Vault create a habit loop with streak tracking, 14 achievements, push notifications, and a home screen widget — users return every day
 - **UX**: Cinematic tier reveal animation, What-If Simulator with draggable sliders, pull-to-refresh across all tabs, Fleet Mode loading animation, and 28 fully localized languages
 - **Innovation**: Custom Token-2022 TLV binary parser for SGT verification, reverse-engineered SKR staking program (shares model), anonymous geo-analytics via Cloudflare Worker edge network, HMAC-SHA256 achievement backup that survives app uninstall
+- **On-chain data persistence**: Check-in streaks are restored from Solana memo history after reinstall — no centralized backend needed. `CheckInRpcClient` scans `getSignaturesForAddress` memo fields for sub-5-second recovery via Helius RPC.
 - **Seed Vault integration**: On-chain check-in memos signed via Seed Vault's MWA transaction flow — private keys never leave hardware
 
 ### Seed Vault Usage
