@@ -138,6 +138,43 @@ fun IdentityScreen(
     val today = LocalDate.now().toString()
     val isVerifiedOnChainToday = onChainDate == today
 
+    // On-chain check-in restoration: scan Solana for SV:CI memos after wallet connects.
+    // Uses Helius RPC if available (higher rate limits) to avoid 429 contention with other callers.
+    var hasAttemptedOnChainRestore by remember { mutableStateOf(false) }
+    LaunchedEffect(walletAddress) {
+        if (!hasAttemptedOnChainRestore && walletAddress.isNotEmpty()) {
+            hasAttemptedOnChainRestore = true
+            // Use Helius if API key available (avoids 429 contention with public RPC)
+            val heliusKey = try { context.getString(com.seekerverify.app.R.string.helius_api_key) } catch (_: Exception) { "" }
+            val scanRpcUrl = if (heliusKey.isNotEmpty()) {
+                com.seekerverify.app.AppConfig.Rpc.heliusUrl(heliusKey)
+            } else {
+                rpcUrl
+            }
+            // Short delay if using Helius (dedicated endpoint), longer if sharing public RPC
+            val delayMs = if (heliusKey.isNotEmpty()) 5_000L else 45_000L
+            kotlinx.coroutines.delay(delayMs)
+            val result = com.seekerverify.app.rpc.CheckInRpcClient.restoreFromChain(walletAddress, scanRpcUrl)
+            if (result != null && result.streak.totalCheckIns > 0) {
+                // Compare with current state — on-chain may have more history than today's single check-in
+                val currentStreak = prefs.getCheckInStreak()
+                if (result.streak.totalCheckIns > currentStreak.totalCheckIns) {
+                    prefs.saveCheckInStreak(result.streak)
+                    prefs.setLastOnChainCheckIn(result.lastSignature, result.lastDate)
+                    streak = result.streak
+                    checkedInToday = result.streak.lastCheckInDate == LocalDate.now().toString()
+                    onChainSignature = result.lastSignature
+                    onChainDate = result.lastDate
+                    // Re-save to device backup so future restores are faster
+                    CheckInBackupManager.saveBackup(
+                        context, walletAddress, result.streak,
+                        result.lastSignature, result.lastDate
+                    )
+                }
+            }
+        }
+    }
+
     // Data is pre-loaded from AppNavigation
 
     val pullRefreshState = rememberPullRefreshState(

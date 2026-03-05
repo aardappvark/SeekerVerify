@@ -259,13 +259,16 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
             // Save portfolio cache for instant reload
             savePortfolioCache()
 
-            // Update widget data
+            // Update widget data (preserve existing tier from PredictorViewModel)
             try {
+                val widgetPrefs = getApplication<Application>()
+                    .getSharedPreferences("widget_data", android.content.Context.MODE_PRIVATE)
+                val existingTier = widgetPrefs.getString("widget_tier", "--") ?: "--"
                 val solTotal = _solBalance.value + _stakedSol.value
                 val skrTotal = _skrBalance.value + _stakedSkr.value + _cooldownSkr.value
                 SeekerWidgetProvider.writeWidgetData(
                     getApplication(),
-                    tier = "--", // tier is set by PredictorViewModel
+                    tier = existingTier,
                     solBalance = String.format("%.2f", solTotal),
                     skrBalance = String.format("%.0f", skrTotal)
                 )

@@ -66,7 +66,7 @@ private val slides = listOf(
         bullets = listOf(
             "Track your airdrop tier across Season 1 and Season 2",
             "Monitor on-chain activity, staking, and wallet health",
-            "All data stays on your device — nothing leaves your Seeker"
+            "All data stays on your device — nothing leaves your Seeker without your permission"
         )
     ),
     OnboardingSlide(

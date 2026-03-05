@@ -36,6 +36,7 @@ import com.seekerverify.app.ui.screens.SettingsScreen
 import com.seekerverify.app.ui.viewmodel.CommunityViewModel
 import com.seekerverify.app.ui.viewmodel.IdentityViewModel
 import com.seekerverify.app.ui.viewmodel.PortfolioViewModel
+import com.seekerverify.app.ui.viewmodel.PredictorViewModel
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 
 @Composable
@@ -66,6 +67,7 @@ fun AppNavigation(
     val identityVm: IdentityViewModel = viewModel()
     val portfolioVm: PortfolioViewModel = viewModel()
     val communityVm: CommunityViewModel = viewModel()
+    val predictorVm: PredictorViewModel = viewModel()
 
     // Auto-load all data on app open
     LaunchedEffect(walletAddress) {
@@ -75,6 +77,7 @@ fun AppNavigation(
             identityVm.loadIdentity(walletAddress, rpcUrl)
             portfolioVm.loadPortfolio(walletAddress, rpcUrl)
             communityVm.loadCommunity(walletAddress, rpcUrl)
+            predictorVm.runPrediction(walletAddress, rpcUrl) // populates widget tier
         }
     }
 
@@ -146,7 +149,8 @@ fun AppNavigation(
                     rpcUrl = rpcUrl,
                     isGuestMode = isGuestMode,
                     onConnectWallet = onConnectWallet,
-                    activityResultSender = activityResultSender
+                    activityResultSender = activityResultSender,
+                    viewModel = predictorVm
                 )
             }
             composable(Screen.Community.route) {

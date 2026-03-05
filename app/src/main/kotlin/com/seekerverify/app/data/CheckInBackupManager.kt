@@ -81,25 +81,92 @@ object CheckInBackupManager {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 // API 29+: Use MediaStore (no permission needed)
                 val resolver = context.contentResolver
+                val backupBytes = backupJson.toByteArray(Charsets.UTF_8)
+                var saved = false
 
-                // Delete existing backup first
-                deleteExistingBackup(context)
-
-                val contentValues = ContentValues().apply {
-                    put(MediaStore.Downloads.DISPLAY_NAME, BACKUP_FILENAME)
-                    put(MediaStore.Downloads.MIME_TYPE, "application/json")
-                    put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                // Strategy 1: Try to overwrite existing file we own
+                try {
+                    val projection = arrayOf(MediaStore.Downloads._ID)
+                    val selection = "${MediaStore.Downloads.DISPLAY_NAME} = ?"
+                    val selectionArgs = arrayOf(BACKUP_FILENAME)
+                    resolver.query(
+                        MediaStore.Downloads.EXTERNAL_CONTENT_URI,
+                        projection, selection, selectionArgs, null
+                    )?.use { cursor ->
+                        if (cursor.moveToFirst()) {
+                            val id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Downloads._ID))
+                            val existingUri = android.content.ContentUris.withAppendedId(
+                                MediaStore.Downloads.EXTERNAL_CONTENT_URI, id
+                            )
+                            resolver.openOutputStream(existingUri, "wt")?.use { os ->
+                                os.write(backupBytes)
+                            }
+                            saved = true
+                            Log.d(TAG, "Backup saved via strategy 1 (overwrite existing)")
+                        } else {
+                            Log.d(TAG, "Strategy 1: no existing file found in MediaStore")
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.w(TAG, "Strategy 1 failed: ${e.message}")
                 }
 
-                val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
-                uri?.let {
-                    resolver.openOutputStream(it)?.use { os ->
-                        os.write(backupJson.toByteArray(Charsets.UTF_8))
+                // Strategy 2: Delete + insert fresh
+                if (!saved) {
+                    try {
+                        deleteExistingBackup(context)
+                        val contentValues = ContentValues().apply {
+                            put(MediaStore.Downloads.DISPLAY_NAME, BACKUP_FILENAME)
+                            put(MediaStore.Downloads.MIME_TYPE, "application/json")
+                            put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                        }
+                        val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+                        uri?.let {
+                            resolver.openOutputStream(it)?.use { os ->
+                                os.write(backupBytes)
+                            }
+                            saved = true
+                            Log.d(TAG, "Backup saved via strategy 2 (delete + insert)")
+                        }
+                        if (!saved) Log.w(TAG, "Strategy 2: insert returned null URI")
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Strategy 2 failed: ${e.message}")
                     }
                 }
-                Log.d(TAG, "Check-in backup saved to Downloads/")
+
+                // Strategy 3: Direct file write to Downloads (works pre-API 30)
+                if (!saved) {
+                    try {
+                        @Suppress("DEPRECATION")
+                        val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                        val file = java.io.File(downloadsDir, BACKUP_FILENAME)
+                        file.writeText(backupJson, Charsets.UTF_8)
+                        saved = true
+                        Log.d(TAG, "Backup saved via strategy 3 (direct file)")
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Strategy 3 failed: ${e.message}")
+                    }
+                }
+
+                // Strategy 4: App-private external dir (always works, lost on uninstall)
+                if (!saved) {
+                    try {
+                        val dir = context.getExternalFilesDir(null)
+                        if (dir != null) {
+                            val file = java.io.File(dir, BACKUP_FILENAME)
+                            file.writeText(backupJson, Charsets.UTF_8)
+                            saved = true
+                            Log.d(TAG, "Backup saved via strategy 4 (app-private external)")
+                        }
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Strategy 4 failed: ${e.message}")
+                    }
+                }
+
+                if (saved) Log.d(TAG, "Check-in backup saved to device")
+                else Log.w(TAG, "Check-in backup: all save strategies failed")
             } else {
-                // Fallback: write to app external files dir (deleted on uninstall, but better than nothing)
+                // Pre-API 29: write to app external files dir
                 val dir = context.getExternalFilesDir(null) ?: return
                 val file = java.io.File(dir, BACKUP_FILENAME)
                 file.writeText(backupJson, Charsets.UTF_8)
@@ -114,6 +181,7 @@ object CheckInBackupManager {
      * Returns null if no backup found or wallet doesn't match.
      */
     fun restoreBackup(context: Context, walletAddress: String): CheckInBackup? {
+        // Try MediaStore first (works when app still owns the file)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val resolver = context.contentResolver
@@ -134,7 +202,7 @@ object CheckInBackupManager {
                             val backupJson = input.bufferedReader().readText()
                             val backup = json.decodeFromString<CheckInBackup>(backupJson)
                             if (backup.walletAddress == walletAddress) {
-                                Log.d(TAG, "Check-in backup restored from Downloads/")
+                                Log.d(TAG, "Check-in backup restored from MediaStore")
                                 return backup
                             } else {
                                 Log.d(TAG, "Backup wallet mismatch: ${backup.walletAddress.take(8)} != ${walletAddress.take(8)}")
@@ -142,21 +210,87 @@ object CheckInBackupManager {
                         }
                     }
                 }
-            } else {
-                val dir = context.getExternalFilesDir(null) ?: return null
-                val file = java.io.File(dir, BACKUP_FILENAME)
-                if (file.exists()) {
-                    val backupJson = file.readText(Charsets.UTF_8)
-                    val backup = json.decodeFromString<CheckInBackup>(backupJson)
-                    if (backup.walletAddress == walletAddress) {
-                        return backup
-                    }
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "MediaStore restore failed: ${e.message}")
+        }
+
+        // Fallback: direct file path (handles orphaned files after clear data / reinstall)
+        try {
+            @Suppress("DEPRECATION")
+            val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val file = java.io.File(downloadsDir, BACKUP_FILENAME)
+            if (file.exists() && file.canRead()) {
+                val backupJson = file.readText(Charsets.UTF_8)
+                val backup = json.decodeFromString<CheckInBackup>(backupJson)
+                if (backup.walletAddress == walletAddress) {
+                    Log.d(TAG, "Check-in backup restored from direct file path")
+                    // Re-claim ownership by re-saving through MediaStore
+                    try {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            deleteExistingBackup(context)
+                            file.delete()
+                            saveBackup(context, walletAddress, backup.streak,
+                                backup.lastOnChainSignature, backup.lastOnChainDate)
+                            Log.d(TAG, "Re-claimed MediaStore ownership of backup file")
+                        }
+                    } catch (_: Exception) { }
+                    return backup
+                } else {
+                    Log.d(TAG, "Direct file backup wallet mismatch")
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to restore check-in backup: ${e.message}")
+            Log.w(TAG, "Direct file restore failed: ${e.message}")
         }
+
+        // Legacy fallback for pre-API 29
+        try {
+            val dir = context.getExternalFilesDir(null) ?: return null
+            val file = java.io.File(dir, BACKUP_FILENAME)
+            if (file.exists()) {
+                val backupJson = file.readText(Charsets.UTF_8)
+                val backup = json.decodeFromString<CheckInBackup>(backupJson)
+                if (backup.walletAddress == walletAddress) {
+                    return backup
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Legacy restore failed: ${e.message}")
+        }
+
         return null
+    }
+
+    /**
+     * Restore check-in data from a SAF (Storage Access Framework) URI.
+     * Used after reinstall on Android 11+ where MediaStore ownership is lost.
+     * The user picks the backup file via ACTION_OPEN_DOCUMENT.
+     */
+    fun restoreFromUri(context: Context, uri: android.net.Uri, walletAddress: String): CheckInBackup? {
+        return try {
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                val backupJson = input.bufferedReader().readText()
+                val backup = json.decodeFromString<CheckInBackup>(backupJson)
+                if (backup.walletAddress == walletAddress) {
+                    Log.d(TAG, "Check-in backup restored from SAF URI")
+                    // Re-claim ownership by re-saving through MediaStore
+                    try {
+                        deleteExistingBackup(context)
+                        saveBackup(context, walletAddress, backup.streak,
+                            backup.lastOnChainSignature, backup.lastOnChainDate)
+                        Log.d(TAG, "Re-claimed MediaStore ownership of backup file")
+                    } catch (_: Exception) { }
+                    backup
+                } else {
+                    Log.d(TAG, "SAF backup wallet mismatch: ${backup.walletAddress.take(8)} != ${walletAddress.take(8)}")
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "SAF restore failed: ${e.message}")
+            null
+        }
     }
 
     /**

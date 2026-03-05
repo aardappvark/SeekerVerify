@@ -481,6 +481,23 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
         }
 
         updateComparison()
+
+        // Write cached tier to widget immediately so it's populated on app launch
+        try {
+            val tierName = (_projectedResult.value?.projected?.predictedTier
+                ?: predictedTier).displayName
+            val widgetPrefs = getApplication<Application>()
+                .getSharedPreferences("widget_data", android.content.Context.MODE_PRIVATE)
+            val existingSol = widgetPrefs.getString("widget_sol", "--") ?: "--"
+            val existingSkr = widgetPrefs.getString("widget_skr", "--") ?: "--"
+            SeekerWidgetProvider.writeWidgetData(
+                getApplication(),
+                tier = tierName,
+                solBalance = existingSol,
+                skrBalance = existingSkr
+            )
+        } catch (_: Exception) { }
+
         Log.w(TAG, "Prediction loaded from cache (age ${(System.currentTimeMillis() - cache.cachedAt) / 1000}s)")
     }
 

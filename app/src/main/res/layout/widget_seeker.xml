@@ -1,92 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:background="@drawable/widget_background"
-    android:gravity="center">
+    android:padding="14dp"
+    android:background="@drawable/widget_background">
 
-    <!-- Title -->
+    <!-- Title pinned to top -->
     <TextView
         android:id="@+id/widget_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:text="Seeker Verify"
         android:textColor="#E0E0E0"
-        android:textSize="13sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
-    <!-- Predicted Tier -->
-    <TextView
-        android:id="@+id/widget_tier"
+    <!-- Prediction block centered vertically -->
+    <LinearLayout
+        android:id="@+id/widget_prediction_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="--"
-        android:textColor="#14F195"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="4dp" />
-
-    <!-- SOL Balance -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="6dp">
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
+            android:id="@+id/widget_tier_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SOL "
+            android:text="Current Prediction"
             android:textColor="#808080"
             android:textSize="11sp" />
 
         <TextView
-            android:id="@+id/widget_sol_balance"
+            android:id="@+id/widget_tier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="--"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textColor="#14F195"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="2dp" />
     </LinearLayout>
 
-    <!-- SKR Balance -->
+    <!-- Bottom section pinned to bottom -->
     <LinearLayout
+        android:id="@+id/widget_bottom_block"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="2dp">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-        <TextView
+        <!-- SOL Balance -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SKR "
-            android:textColor="#808080"
-            android:textSize="11sp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/widget_skr_balance"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SOL "
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/widget_sol_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- SKR Balance -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="--"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SKR "
+                android:textColor="#808080"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/widget_skr_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Updated timestamp -->
+        <TextView
+            android:id="@+id/widget_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap to open"
+            android:textColor="#606060"
+            android:textSize="9sp"
+            android:layout_marginTop="4dp" />
     </LinearLayout>
 
-    <!-- Last Updated -->
-    <TextView
-        android:id="@+id/widget_updated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tap to open"
-        android:textColor="#606060"
-        android:textSize="9sp"
-        android:layout_marginTop="6dp" />
-
-</LinearLayout>
+</RelativeLayout>
