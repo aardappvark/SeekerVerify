@@ -10,8 +10,8 @@ Published by **MidMightBit Games** (Australia).
 
 | Resource | Link |
 |---|---|
-| APK Download | [v2.2.0 Release](https://github.com/aardappvark/SeekerVerify/releases/tag/v2.2.0) |
-| Source Code | [GitHub Repository](https://github.com/aardappvark/SeekerVerify) |
+| APK Download | [v2.2.0 Release](https://gitlab.com/aardappvark-group/SeekerVerify/-/tree/main/assets) |
+| Source Code | [GitLab Repository](https://gitlab.com/aardappvark-group/SeekerVerify) |
 
 ## Features
 
