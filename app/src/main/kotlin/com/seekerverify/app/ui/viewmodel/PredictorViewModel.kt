@@ -165,8 +165,19 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
 
                 // Resolve staking + domain (fast)
                 var isStaked = false
+                var stakeDurationDays = 0
                 stakingDeferred.await().fold(
-                    onSuccess = { info -> isStaked = info.isStaked },
+                    onSuccess = { info ->
+                        isStaked = info.isStaked
+                        if (info.isStaked && info.sharePrice > 1_000_000_000L) {
+                            val priceGrowth = info.sharePrice.toDouble() / 1_000_000_000.0
+                            val dailyRate = kotlin.math.ln(1.0 + 0.207 / 365.0)
+                            stakeDurationDays = (kotlin.math.ln(priceGrowth) / dailyRate).toInt()
+                                .coerceIn(1, 365)
+                        } else if (info.isStaked) {
+                            stakeDurationDays = 30
+                        }
+                    },
                     onFailure = { partialWarnings.add("Staking data unavailable") }
                 )
 
@@ -204,7 +215,9 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                         }
 
                         val activityResult = activityDeferred.await()
-                        val activityMetrics = activityResult.metrics
+                        val activityMetrics = activityResult.metrics.copy(
+                            stakingDurationDays = stakeDurationDays
+                        )
 
                         // Analyze in S1 context
                         val analysis = Season1Engine.analyze(activityMetrics, claim.tier)

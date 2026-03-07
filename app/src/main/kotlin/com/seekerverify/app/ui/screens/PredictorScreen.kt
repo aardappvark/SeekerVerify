@@ -1848,12 +1848,12 @@ private fun Season2ActivityPlannerCard(
     val breakdown = prediction.breakdown
 
     // Check each metric score and describe the model's assessment
-    // Staking (weight 20%)
+    // Staking (weight 21%)
     val stakingScore = breakdown["SKR Staking"] ?: 0.0
     if (stakingScore < 50) {
         observations.add(Triple(
             "SKR Staking Score: ${String.format("%.0f", stakingScore)}/100",
-            "This metric checks whether SKR is staked. It has a 20% weight in the scoring model.",
+            "This metric checks whether SKR is staked. It has a 21% weight in the scoring model.",
             true
         ))
     }
@@ -1868,42 +1868,42 @@ private fun Season2ActivityPlannerCard(
         ))
     }
 
-    // Transactions (weight 15%)
+    // Transactions (weight 14%)
     val txScore = breakdown["Transactions"] ?: 0.0
     if (txScore < 40) {
         observations.add(Triple(
             "Transaction Score: ${String.format("%.0f", txScore)}/100",
-            "This metric counts on-chain transactions. It has a 15% weight in the scoring model.",
+            "This metric counts on-chain transactions. It has a 14% weight in the scoring model.",
             true
         ))
     }
 
-    // dApp Frequency (weight 11%) — how many transactions involved a dApp
+    // dApp Frequency (weight 10%) — how many transactions involved a dApp
     val dappScore = breakdown["dApp Frequency"] ?: 0.0
     if (dappScore < 40) {
         observations.add(Triple(
             "dApp Frequency: ${String.format("%.0f", dappScore)}/100",
-            "How many of your transactions used a dApp (not just transfers). 11% weight.",
+            "How many of your transactions used a dApp (not just transfers). 10% weight.",
             true
         ))
     }
 
-    // Unique dApps (weight 12%) — how many different dApps you've used
+    // Unique dApps (weight 11%) — how many different dApps you've used
     val progScore = breakdown["Unique dApps"] ?: 0.0
     if (progScore < 40) {
         observations.add(Triple(
             "Unique dApps: ${String.format("%.0f", progScore)}/100",
-            "How many different Solana dApps you've interacted with (breadth). 12% weight.",
+            "How many different Solana dApps you've interacted with (breadth). 11% weight.",
             true
         ))
     }
 
-    // Wallet Age (weight 10%)
+    // Wallet Age (weight 9%)
     val ageScore = breakdown["Wallet Age"] ?: 0.0
     if (ageScore < 30) {
         observations.add(Triple(
             "Wallet Age Score: ${String.format("%.0f", ageScore)}/100",
-            "This metric measures wallet age. It has a 10% weight. This increases naturally over time.",
+            "This metric measures wallet age. It has a 9% weight. This increases naturally over time.",
             true
         ))
     }
@@ -1914,6 +1914,16 @@ private fun Season2ActivityPlannerCard(
         observations.add(Triple(
             ".skr Domain: Not detected",
             "This metric checks for .skr domain ownership. It has a 2% weight in the scoring model.",
+            true
+        ))
+    }
+
+    // Consistency (weight 5%)
+    val consistencyScore = breakdown["Consistency"] ?: 0.0
+    if (consistencyScore < 40) {
+        observations.add(Triple(
+            "Consistency Score: ${String.format("%.0f", consistencyScore)}/100",
+            "This metric tracks unique active days in the last 90 days. It has a 5% weight.",
             true
         ))
     }

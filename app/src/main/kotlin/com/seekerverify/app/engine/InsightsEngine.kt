@@ -69,7 +69,7 @@ object InsightsEngine {
             } ?: 0.0
             insights.add(InsightCard(
                 title = "Increase Transaction Volume",
-                description = "Your transaction score is ${txScore.toInt()}/100. Aim for $target+ transactions to improve this metric (16% weight).",
+                description = "Your transaction score is ${txScore.toInt()}/100. Aim for $target+ transactions to improve this metric (14% weight).",
                 category = Category.ACTIVITY,
                 impact = if (txScore < 30) Impact.HIGH else Impact.MEDIUM,
                 actionable = true,
@@ -116,7 +116,7 @@ object InsightsEngine {
             } ?: 0.0
             insights.add(InsightCard(
                 title = "Explore More dApps",
-                description = "Interacting with diverse Solana programs improves your dApp score (${dappScore.toInt()}/100, 11% weight).",
+                description = "Interacting with diverse Solana programs improves your dApp score (${dappScore.toInt()}/100, 10% weight).",
                 category = Category.ACTIVITY,
                 impact = Impact.MEDIUM,
                 actionable = true,
@@ -132,7 +132,23 @@ object InsightsEngine {
             } ?: 0.0
             insights.add(InsightCard(
                 title = "Use More Programs",
-                description = "Your programs score is ${progScore.toInt()}/100 (12% weight). Try DeFi, NFT marketplaces, or governance programs.",
+                description = "Your programs score is ${progScore.toInt()}/100 (11% weight). Try DeFi, NFT marketplaces, or governance programs.",
+                category = Category.ACTIVITY,
+                impact = Impact.MEDIUM,
+                actionable = true,
+                estimatedGain = gain
+            ))
+        }
+
+        // Consistency (5% weight)
+        val consistencyScore = breakdown["Consistency"] ?: 0.0
+        if (consistencyScore < 50) {
+            val gain = currentMetrics?.let { m ->
+                simulateGain(m, m.copy(uniqueActiveDays = m.uniqueActiveDays + 15))
+            } ?: 0.0
+            insights.add(InsightCard(
+                title = "Improve Consistency",
+                description = "Your consistency score is ${consistencyScore.toInt()}/100 (5% weight). Use your wallet on more unique days to boost this metric.",
                 category = Category.ACTIVITY,
                 impact = Impact.MEDIUM,
                 actionable = true,
@@ -142,7 +158,7 @@ object InsightsEngine {
 
         // Close to next tier
         val tierThresholds = mapOf(
-            "Scout" to 13.0, "Prospector" to 53.0, "Vanguard" to 71.0, "Luminary" to 79.0
+            "Prospector" to 13.0, "Vanguard" to 53.0, "Luminary" to 71.0, "Sovereign" to 79.0
         )
         for ((tier, threshold) in tierThresholds) {
             if (compositeScore < threshold && compositeScore >= threshold - 15) {
