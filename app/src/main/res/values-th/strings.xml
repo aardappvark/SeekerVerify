@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">คะแนนอายุกระเป๋าเงิน: %1$s/100</string>
     <string name="wallet_age_score_desc">ตัวชี้วัดนี้วัดอายุกระเป๋าเงิน มีน้ำหนัก 10%% เพิ่มขึ้นตามธรรมชาติเมื่อเวลาผ่านไป</string>
     <string name="skr_domain_not_detected">โดเมน .skr: ไม่พบ</string>
-    <string name="skr_domain_desc">ตัวชี้วัดนี้ตรวจสอบการเป็นเจ้าของโดเมน .skr มีน้ำหนัก 5%% ในโมเดลการให้คะแนน</string>
+    <string name="skr_domain_desc">ตัวชี้วัดนี้ตรวจสอบการเป็นเจ้าของโดเมน .skr มีน้ำหนัก 2%% ในโมเดลการให้คะแนน</string>
     <string name="token_diversity_score_format">คะแนนความหลากหลายของ Token: %1$s/100</string>
     <string name="token_diversity_score_desc">ตัวชี้วัดนี้นับ token SPL ที่ไม่ซ้ำกันที่ถืออยู่ มีน้ำหนัก 8%% ในโมเดลการให้คะแนน</string>
     <string name="nft_score_format">คะแนน NFT: %1$s/100</string>

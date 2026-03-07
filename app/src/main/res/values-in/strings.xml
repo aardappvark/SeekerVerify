@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Skor Usia Dompet: %1$s/100</string>
     <string name="wallet_age_score_desc">Metrik ini mengukur usia dompet. Bobotnya 10%%. Ini bertambah secara alami seiring waktu.</string>
     <string name="skr_domain_not_detected">Domain .skr: Tidak terdeteksi</string>
-    <string name="skr_domain_desc">Metrik ini memeriksa kepemilikan domain .skr. Bobotnya 5%% dalam model penilaian.</string>
+    <string name="skr_domain_desc">Metrik ini memeriksa kepemilikan domain .skr. Bobotnya 2%% dalam model penilaian.</string>
     <string name="token_diversity_score_format">Skor Keragaman Token: %1$s/100</string>
     <string name="token_diversity_score_desc">Metrik ini menghitung token SPL unik yang dimiliki. Bobotnya 8%% dalam model penilaian.</string>
     <string name="nft_score_format">Skor NFT: %1$s/100</string>

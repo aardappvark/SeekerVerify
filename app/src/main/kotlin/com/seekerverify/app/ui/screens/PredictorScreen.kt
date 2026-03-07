@@ -1908,12 +1908,12 @@ private fun Season2ActivityPlannerCard(
         ))
     }
 
-    // .skr Domain (weight 5%)
+    // .skr Domain (weight 2%)
     val domainScore = breakdown[".skr Domain"] ?: 0.0
     if (domainScore == 0.0) {
         observations.add(Triple(
             ".skr Domain: Not detected",
-            "This metric checks for .skr domain ownership. It has a 5% weight in the scoring model.",
+            "This metric checks for .skr domain ownership. It has a 2% weight in the scoring model.",
             true
         ))
     }

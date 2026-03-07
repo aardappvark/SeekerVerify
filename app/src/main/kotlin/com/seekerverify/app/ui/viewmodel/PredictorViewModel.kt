@@ -175,6 +175,10 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                     onSuccess = { domains -> hasSkrDomain = domains.any { !it.isExpired } },
                     onFailure = { partialWarnings.add("Domain data unavailable") }
                 )
+                // SGT holders always have at least one .skr domain (assigned during Seeker setup)
+                if (!hasSkrDomain && prefs.hasSgt()) {
+                    hasSkrDomain = true
+                }
 
                 // Lite activity scan (3 batches = 3K sigs — S1 era only, before S2 launch)
                 // periodEndEpoch = May 15 2025 (approx S2/SKR token launch) → 1747353600
@@ -326,6 +330,10 @@ class PredictorViewModel(application: Application) : AndroidViewModel(applicatio
                     onSuccess = { domains -> hasSkrDomain = domains.any { !it.isExpired } },
                     onFailure = { partialWarnings.add("Domain data unavailable") }
                 )
+                // SGT holders always have at least one .skr domain (assigned during Seeker setup)
+                if (!hasSkrDomain && prefs.hasSgt()) {
+                    hasSkrDomain = true
+                }
 
                 if (partialWarnings.isNotEmpty()) {
                     _warnings.value = partialWarnings

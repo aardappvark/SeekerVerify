@@ -146,7 +146,7 @@
     <string name="wallet_age_score_format">Wallet Age Score: %1$s/100</string>
     <string name="wallet_age_score_desc">This metric measures wallet age. It has a 10%% weight. This increases naturally over time.</string>
     <string name="skr_domain_not_detected">.skr Domain: Not detected</string>
-    <string name="skr_domain_desc">This metric checks for .skr domain ownership. It has a 5%% weight in the scoring model.</string>
+    <string name="skr_domain_desc">This metric checks for .skr domain ownership. It has a 2%% weight in the scoring model.</string>
     <string name="token_diversity_score_format">Token Diversity Score: %1$s/100</string>
     <string name="token_diversity_score_desc">This metric counts unique SPL tokens held. It has an 8%% weight in the scoring model.</string>
     <string name="nft_score_format">NFT Score: %1$s/100</string>

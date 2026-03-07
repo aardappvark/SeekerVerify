@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">वॉलेट आयु स्कोर: %1$s/100</string>
     <string name="wallet_age_score_desc">यह मेट्रिक वॉलेट की आयु मापता है। इसका 10%% भार है। यह समय के साथ स्वाभाविक रूप से बढ़ता है।</string>
     <string name="skr_domain_not_detected">.skr डोमेन: पता नहीं चला</string>
-    <string name="skr_domain_desc">यह मेट्रिक .skr डोमेन स्वामित्व की जाँच करता है। स्कोरिंग मॉडल में इसका 5%% भार है।</string>
+    <string name="skr_domain_desc">यह मेट्रिक .skr डोमेन स्वामित्व की जाँच करता है। स्कोरिंग मॉडल में इसका 2%% भार है।</string>
     <string name="token_diversity_score_format">टोकन विविधता स्कोर: %1$s/100</string>
     <string name="token_diversity_score_desc">यह मेट्रिक रखे गए अद्वितीय SPL टोकन की गणना करता है। स्कोरिंग मॉडल में इसका 8%% भार है।</string>
     <string name="nft_score_format">NFT स्कोर: %1$s/100</string>

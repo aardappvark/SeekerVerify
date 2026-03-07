@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">ウォレット年齢スコア：%1$s/100</string>
     <string name="wallet_age_score_desc">この指標はウォレットの年齢を測定します。重みは 10%% です。時間の経過とともに自然に増加します。</string>
     <string name="skr_domain_not_detected">.skr ドメイン：未検出</string>
-    <string name="skr_domain_desc">この指標は .skr ドメインの所有を確認します。スコアリングモデルで 5%% の重みがあります。</string>
+    <string name="skr_domain_desc">この指標は .skr ドメインの所有を確認します。スコアリングモデルで 2%% の重みがあります。</string>
     <string name="token_diversity_score_format">トークン多様性スコア：%1$s/100</string>
     <string name="token_diversity_score_desc">この指標は保有するユニークな SPL トークン数をカウントします。スコアリングモデルで 8%% の重みがあります。</string>
     <string name="nft_score_format">NFT スコア：%1$s/100</string>

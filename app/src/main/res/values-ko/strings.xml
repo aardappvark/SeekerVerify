@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">지갑 나이 점수: %1$s/100</string>
     <string name="wallet_age_score_desc">이 지표는 지갑 나이를 측정합니다. 가중치는 10%%입니다. 시간이 지남에 따라 자연스럽게 증가합니다.</string>
     <string name="skr_domain_not_detected">.skr 도메인: 감지되지 않음</string>
-    <string name="skr_domain_desc">이 지표는 .skr 도메인 소유를 확인합니다. 스코어링 모델에서 5%% 가중치를 가집니다.</string>
+    <string name="skr_domain_desc">이 지표는 .skr 도메인 소유를 확인합니다. 스코어링 모델에서 2%% 가중치를 가집니다.</string>
     <string name="token_diversity_score_format">토큰 다양성 점수: %1$s/100</string>
     <string name="token_diversity_score_desc">이 지표는 보유한 고유 SPL 토큰 수를 집계합니다. 스코어링 모델에서 8%% 가중치를 가집니다.</string>
     <string name="nft_score_format">NFT 점수: %1$s/100</string>

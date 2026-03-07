@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">T\u00e1rca kor pontsz\u00e1m: %1$s/100</string>
     <string name="wallet_age_score_desc">Ez a metrika a t\u00e1rca kor\u00e1t m\u00e9ri. 10%% s\u00falya van. Term\u00e9szetesen n\u00f6vekszik az id\u0151vel.</string>
     <string name="skr_domain_not_detected">.skr domain: Nem \u00e9szlelhet\u0151</string>
-    <string name="skr_domain_desc">Ez a metrika a .skr domain tulajdonl\u00e1st ellen\u0151rzi. 5%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
+    <string name="skr_domain_desc">Ez a metrika a .skr domain tulajdonl\u00e1st ellen\u0151rzi. 2%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
     <string name="token_diversity_score_format">Token sokf\u00e9les\u00e9g pontsz\u00e1m: %1$s/100</string>
     <string name="token_diversity_score_desc">Ez a metrika az egyedi SPL tokenek sz\u00e1m\u00e1t m\u00e9ri. 8%% s\u00falya van a pontsz\u00e1m\u00edz\u00e1si modellben.</string>
     <string name="nft_score_format">NFT pontsz\u00e1m: %1$s/100</string>

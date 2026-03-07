@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Puntuación de antigüedad de billetera: %1$s/100</string>
     <string name="wallet_age_score_desc">Esta métrica mide la antigüedad de la billetera. Tiene un peso del 10%%. Aumenta naturalmente con el tiempo.</string>
     <string name="skr_domain_not_detected">Dominio .skr: No detectado</string>
-    <string name="skr_domain_desc">Esta métrica verifica la propiedad de un dominio .skr. Tiene un peso del 5%% en el modelo de puntuación.</string>
+    <string name="skr_domain_desc">Esta métrica verifica la propiedad de un dominio .skr. Tiene un peso del 2%% en el modelo de puntuación.</string>
     <string name="token_diversity_score_format">Puntuación de diversidad de tokens: %1$s/100</string>
     <string name="token_diversity_score_desc">Esta métrica cuenta los tokens SPL únicos en posesión. Tiene un peso del 8%% en el modelo de puntuación.</string>
     <string name="nft_score_format">Puntuación de NFT: %1$s/100</string>

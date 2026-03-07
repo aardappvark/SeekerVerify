@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Wynik wieku portfela: %1$s/100</string>
     <string name="wallet_age_score_desc">Ta metryka mierzy wiek portfela. Ma wagę 10%%. Rośnie naturalnie z czasem.</string>
     <string name="skr_domain_not_detected">Domena .skr: Nie wykryto</string>
-    <string name="skr_domain_desc">Ta metryka sprawdza posiadanie domeny .skr. Ma wagę 5%% w modelu oceny.</string>
+    <string name="skr_domain_desc">Ta metryka sprawdza posiadanie domeny .skr. Ma wagę 2%% w modelu oceny.</string>
     <string name="token_diversity_score_format">Wynik różnorodności tokenów: %1$s/100</string>
     <string name="token_diversity_score_desc">Ta metryka liczy unikalne tokeny SPL w posiadaniu. Ma wagę 8%% w modelu oceny.</string>
     <string name="nft_score_format">Wynik NFT: %1$s/100</string>

@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Wallet-Alterspunktzahl: %1$s/100</string>
     <string name="wallet_age_score_desc">Diese Metrik misst das Wallet-Alter. Sie hat eine Gewichtung von 10%%. Es nimmt natürlich mit der Zeit zu.</string>
     <string name="skr_domain_not_detected">.skr-Domain: Nicht erkannt</string>
-    <string name="skr_domain_desc">Diese Metrik prüft den Besitz einer .skr-Domain. Sie hat eine Gewichtung von 5%% im Bewertungsmodell.</string>
+    <string name="skr_domain_desc">Diese Metrik prüft den Besitz einer .skr-Domain. Sie hat eine Gewichtung von 2%% im Bewertungsmodell.</string>
     <string name="token_diversity_score_format">Token-Vielfaltspunktzahl: %1$s/100</string>
     <string name="token_diversity_score_desc">Diese Metrik zählt die gehaltenen einzigartigen SPL-Token. Sie hat eine Gewichtung von 8%% im Bewertungsmodell.</string>
     <string name="nft_score_format">NFT-Punktzahl: %1$s/100</string>

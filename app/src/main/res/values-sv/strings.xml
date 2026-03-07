@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Plånboksålderspoäng: %1$s/100</string>
     <string name="wallet_age_score_desc">Detta mått mäter plånbokens ålder. Det har en vikt på 10%%. Det ökar naturligt över tid.</string>
     <string name="skr_domain_not_detected">.skr-domän: Ej upptäckt</string>
-    <string name="skr_domain_desc">Detta mått kontrollerar ägande av .skr-domän. Det har en vikt på 5%% i poängmodellen.</string>
+    <string name="skr_domain_desc">Detta mått kontrollerar ägande av .skr-domän. Det har en vikt på 2%% i poängmodellen.</string>
     <string name="token_diversity_score_format">Tokenmångfaldspoäng: %1$s/100</string>
     <string name="token_diversity_score_desc">Detta mått räknar unika SPL-tokens som innehas. Det har en vikt på 8%% i poängmodellen.</string>
     <string name="nft_score_format">NFT-poäng: %1$s/100</string>

@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Portemonnee-leeftijdsscore: %1$s/100</string>
     <string name="wallet_age_score_desc">Deze metriek meet de leeftijd van de portemonnee. Het heeft een gewicht van 10%%. Dit neemt natuurlijk toe met de tijd.</string>
     <string name="skr_domain_not_detected">.skr Domein: Niet gedetecteerd</string>
-    <string name="skr_domain_desc">Deze metriek controleert .skr domein-eigendom. Het heeft een gewicht van 5%% in het scoremodel.</string>
+    <string name="skr_domain_desc">Deze metriek controleert .skr domein-eigendom. Het heeft een gewicht van 2%% in het scoremodel.</string>
     <string name="token_diversity_score_format">Token-diversiteitsscore: %1$s/100</string>
     <string name="token_diversity_score_desc">Deze metriek telt unieke SPL-tokens in bezit. Het heeft een gewicht van 8%% in het scoremodel.</string>
     <string name="nft_score_format">NFT-score: %1$s/100</string>

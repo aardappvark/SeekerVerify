@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">والٹ عمر سکور: %1$s/100</string>
     <string name="wallet_age_score_desc">یہ میٹرک والٹ کی عمر کی پیمائش کرتا ہے۔ اس کا وزن 10%% ہے۔ یہ وقت کے ساتھ قدرتی طور پر بڑھتا ہے۔</string>
     <string name="skr_domain_not_detected">.skr ڈومین: معلوم نہیں ہوا</string>
-    <string name="skr_domain_desc">یہ میٹرک .skr ڈومین کی ملکیت کی جانچ کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 5%% ہے۔</string>
+    <string name="skr_domain_desc">یہ میٹرک .skr ڈومین کی ملکیت کی جانچ کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 2%% ہے۔</string>
     <string name="token_diversity_score_format">ٹوکن تنوع سکور: %1$s/100</string>
     <string name="token_diversity_score_desc">یہ میٹرک منفرد SPL ٹوکنز کی گنتی کرتا ہے۔ سکورنگ ماڈل میں اس کا وزن 8%% ہے۔</string>
     <string name="nft_score_format">NFT سکور: %1$s/100</string>

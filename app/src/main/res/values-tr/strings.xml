@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Cüzdan Yaşı Puanı: %1$s/100</string>
     <string name="wallet_age_score_desc">Bu metrik cüzdan yaşını ölçer. 10%% ağırlığa sahiptir. Zamanla doğal olarak artar.</string>
     <string name="skr_domain_not_detected">.skr Alan Adı: Tespit edilmedi</string>
-    <string name="skr_domain_desc">Bu metrik .skr alan adı sahipliğini kontrol eder. Puanlama modelinde 5%% ağırlığa sahiptir.</string>
+    <string name="skr_domain_desc">Bu metrik .skr alan adı sahipliğini kontrol eder. Puanlama modelinde 2%% ağırlığa sahiptir.</string>
     <string name="token_diversity_score_format">Token Çeşitliliği Puanı: %1$s/100</string>
     <string name="token_diversity_score_desc">Bu metrik sahip olunan benzersiz SPL token sayısını sayar. Puanlama modelinde 8%% ağırlığa sahiptir.</string>
     <string name="nft_score_format">NFT Puanı: %1$s/100</string>

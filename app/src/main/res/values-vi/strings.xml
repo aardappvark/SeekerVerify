@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Điểm tuổi ví: %1$s/100</string>
     <string name="wallet_age_score_desc">Chỉ số này đo tuổi ví. Trọng số 10%%. Tăng tự nhiên theo thời gian.</string>
     <string name="skr_domain_not_detected">Tên miền .skr: Không phát hiện</string>
-    <string name="skr_domain_desc">Chỉ số này kiểm tra quyền sở hữu tên miền .skr. Trọng số 5%% trong mô hình chấm điểm.</string>
+    <string name="skr_domain_desc">Chỉ số này kiểm tra quyền sở hữu tên miền .skr. Trọng số 2%% trong mô hình chấm điểm.</string>
     <string name="token_diversity_score_format">Điểm đa dạng token: %1$s/100</string>
     <string name="token_diversity_score_desc">Chỉ số này đếm số token SPL duy nhất đang nắm giữ. Trọng số 8%% trong mô hình chấm điểm.</string>
     <string name="nft_score_format">Điểm NFT: %1$s/100</string>

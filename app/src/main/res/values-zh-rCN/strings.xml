@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">钱包年龄分数：%1$s/100</string>
     <string name="wallet_age_score_desc">此指标衡量钱包年龄。权重为 10%%。会随时间自然增长。</string>
     <string name="skr_domain_not_detected">.skr 域名：未检测到</string>
-    <string name="skr_domain_desc">此指标检查 .skr 域名所有权。在评分模型中权重为 5%%。</string>
+    <string name="skr_domain_desc">此指标检查 .skr 域名所有权。在评分模型中权重为 2%%。</string>
     <string name="token_diversity_score_format">代币多样性分数：%1$s/100</string>
     <string name="token_diversity_score_desc">此指标统计持有的唯一 SPL 代币数量。在评分模型中权重为 8%%。</string>
     <string name="nft_score_format">NFT 分数：%1$s/100</string>

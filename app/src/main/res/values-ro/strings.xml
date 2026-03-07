@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Scor vechime portofel: %1$s/100</string>
     <string name="wallet_age_score_desc">Această metrică măsoară vechimea portofelului. Are o pondere de 10%%. Crește natural în timp.</string>
     <string name="skr_domain_not_detected">Domeniu .skr: Nedetectat</string>
-    <string name="skr_domain_desc">Această metrică verifică deținerea unui domeniu .skr. Are o pondere de 5%% în modelul de punctaj.</string>
+    <string name="skr_domain_desc">Această metrică verifică deținerea unui domeniu .skr. Are o pondere de 2%% în modelul de punctaj.</string>
     <string name="token_diversity_score_format">Scor diversitate tokeni: %1$s/100</string>
     <string name="token_diversity_score_desc">Această metrică numără tokenii SPL unici deținuți. Are o pondere de 8%% în modelul de punctaj.</string>
     <string name="nft_score_format">Scor NFT: %1$s/100</string>

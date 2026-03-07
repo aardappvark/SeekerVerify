@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">نقاط عمر المحفظة: %1$s/100</string>
     <string name="wallet_age_score_desc">يقيس هذا المقياس عمر المحفظة. له وزن 10%%. يزداد طبيعياً مع الوقت.</string>
     <string name="skr_domain_not_detected">نطاق .skr: لم يتم اكتشافه</string>
-    <string name="skr_domain_desc">يتحقق هذا المقياس من ملكية نطاق .skr. له وزن 5%% في نموذج التقييم.</string>
+    <string name="skr_domain_desc">يتحقق هذا المقياس من ملكية نطاق .skr. له وزن 2%% في نموذج التقييم.</string>
     <string name="token_diversity_score_format">نقاط تنوع التوكنات: %1$s/100</string>
     <string name="token_diversity_score_desc">يحصي هذا المقياس توكنات SPL الفريدة المملوكة. له وزن 8%% في نموذج التقييم.</string>
     <string name="nft_score_format">نقاط NFT: %1$s/100</string>

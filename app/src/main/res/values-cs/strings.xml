@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Skóre stáří peněženky: %1$s/100</string>
     <string name="wallet_age_score_desc">Tato metrika měří stáří peněženky. Má váhu 10%%. Přirozeně roste s časem.</string>
     <string name="skr_domain_not_detected">Doména .skr: Nezjištěna</string>
-    <string name="skr_domain_desc">Tato metrika kontroluje vlastnictví domény .skr. Má váhu 5%% v modelu hodnocení.</string>
+    <string name="skr_domain_desc">Tato metrika kontroluje vlastnictví domény .skr. Má váhu 2%% v modelu hodnocení.</string>
     <string name="token_diversity_score_format">Skóre diverzity tokenů: %1$s/100</string>
     <string name="token_diversity_score_desc">Tato metrika počítá unikátní držené SPL tokeny. Má váhu 8%% v modelu hodnocení.</string>
     <string name="nft_score_format">Skóre NFT: %1$s/100</string>

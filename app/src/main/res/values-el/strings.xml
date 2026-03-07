@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Βαθμολογία ηλικίας πορτοφολιού: %1$s/100</string>
     <string name="wallet_age_score_desc">Αυτή η μετρική μετράει την ηλικία του πορτοφολιού. Έχει βαρύτητα 10%%. Αυξάνεται φυσικά με τον χρόνο.</string>
     <string name="skr_domain_not_detected">Τομέας .skr: Δεν ανιχνεύτηκε</string>
-    <string name="skr_domain_desc">Αυτή η μετρική ελέγχει την κατοχή τομέα .skr. Έχει βαρύτητα 5%% στο μοντέλο βαθμολόγησης.</string>
+    <string name="skr_domain_desc">Αυτή η μετρική ελέγχει την κατοχή τομέα .skr. Έχει βαρύτητα 2%% στο μοντέλο βαθμολόγησης.</string>
     <string name="token_diversity_score_format">Βαθμολογία ποικιλίας token: %1$s/100</string>
     <string name="token_diversity_score_desc">Αυτή η μετρική μετράει τα μοναδικά SPL tokens που κατέχονται. Έχει βαρύτητα 8%% στο μοντέλο βαθμολόγησης.</string>
     <string name="nft_score_format">Βαθμολογία NFT: %1$s/100</string>

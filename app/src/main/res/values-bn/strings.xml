@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">ওয়ালেটের বয়স স্কোর: %1$s/100</string>
     <string name="wallet_age_score_desc">এই মেট্রিক ওয়ালেটের বয়স পরিমাপ করে। এর ওজন ১০%%। সময়ের সাথে স্বাভাবিকভাবে বাড়ে।</string>
     <string name="skr_domain_not_detected">.skr ডোমেইন: সনাক্ত হয়নি</string>
-    <string name="skr_domain_desc">এই মেট্রিক .skr ডোমেইন মালিকানা যাচাই করে। স্কোরিং মডেলে এর ওজন ৫%%।</string>
+    <string name="skr_domain_desc">এই মেট্রিক .skr ডোমেইন মালিকানা যাচাই করে। স্কোরিং মডেলে এর ওজন ২%%।</string>
     <string name="token_diversity_score_format">টোকেন বৈচিত্র্য স্কোর: %1$s/100</string>
     <string name="token_diversity_score_desc">এই মেট্রিক ধারণকৃত অনন্য SPL টোকেন গণনা করে। স্কোরিং মডেলে এর ওজন ৮%%।</string>
     <string name="nft_score_format">NFT স্কোর: %1$s/100</string>

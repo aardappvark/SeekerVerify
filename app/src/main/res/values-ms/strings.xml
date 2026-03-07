@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Skor umur dompet: %1$s/100</string>
     <string name="wallet_age_score_desc">Metrik ini mengukur umur dompet. Ia mempunyai wajaran 10%%. Ini meningkat secara semula jadi dari semasa ke semasa.</string>
     <string name="skr_domain_not_detected">Domain .skr: Tidak dikesan</string>
-    <string name="skr_domain_desc">Metrik ini menyemak pemilikan domain .skr. Ia mempunyai wajaran 5%% dalam model pemarkahan.</string>
+    <string name="skr_domain_desc">Metrik ini menyemak pemilikan domain .skr. Ia mempunyai wajaran 2%% dalam model pemarkahan.</string>
     <string name="token_diversity_score_format">Skor kepelbagaian token: %1$s/100</string>
     <string name="token_diversity_score_desc">Metrik ini mengira token SPL unik yang dimiliki. Ia mempunyai wajaran 8%% dalam model pemarkahan.</string>
     <string name="nft_score_format">Skor NFT: %1$s/100</string>

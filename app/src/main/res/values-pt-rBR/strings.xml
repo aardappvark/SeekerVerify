@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Pontuação de idade da carteira: %1$s/100</string>
     <string name="wallet_age_score_desc">Esta métrica mede a idade da carteira. Tem um peso de 10%%. Aumenta naturalmente com o tempo.</string>
     <string name="skr_domain_not_detected">Domínio .skr: Não detectado</string>
-    <string name="skr_domain_desc">Esta métrica verifica a posse de domínio .skr. Tem um peso de 5%% no modelo de pontuação.</string>
+    <string name="skr_domain_desc">Esta métrica verifica a posse de domínio .skr. Tem um peso de 2%% no modelo de pontuação.</string>
     <string name="token_diversity_score_format">Pontuação de diversidade de tokens: %1$s/100</string>
     <string name="token_diversity_score_desc">Esta métrica conta os tokens SPL únicos em posse. Tem um peso de 8%% no modelo de pontuação.</string>
     <string name="nft_score_format">Pontuação de NFT: %1$s/100</string>

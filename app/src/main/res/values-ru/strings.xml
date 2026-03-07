@@ -152,7 +152,7 @@
     <string name="wallet_age_score_format">Баллы возраста кошелька: %1$s/100</string>
     <string name="wallet_age_score_desc">Эта метрика измеряет возраст кошелька. Вес 10%%. Увеличивается естественным образом со временем.</string>
     <string name="skr_domain_not_detected">Домен .skr: Не обнаружен</string>
-    <string name="skr_domain_desc">Эта метрика проверяет наличие домена .skr. Вес 5%% в модели оценки.</string>
+    <string name="skr_domain_desc">Эта метрика проверяет наличие домена .skr. Вес 2%% в модели оценки.</string>
     <string name="token_diversity_score_format">Баллы разнообразия токенов: %1$s/100</string>
     <string name="token_diversity_score_desc">Эта метрика подсчитывает уникальные токены SPL. Вес 8%% в модели оценки.</string>
     <string name="nft_score_format">Баллы NFT: %1$s/100</string>
