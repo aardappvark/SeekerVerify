@@ -158,7 +158,7 @@ object InsightsEngine {
 
         // Close to next tier
         val tierThresholds = mapOf(
-            "Prospector" to 13.0, "Vanguard" to 53.0, "Luminary" to 71.0, "Sovereign" to 79.0
+            "Scout" to 13.0, "Prospector" to 53.0, "Vanguard" to 71.0, "Luminary" to 79.0
         )
         for ((tier, threshold) in tierThresholds) {
             if (compositeScore < threshold && compositeScore >= threshold - 15) {
