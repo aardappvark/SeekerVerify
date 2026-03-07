@@ -141,138 +141,142 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun loadPortfolio(walletAddress: String, rpcUrl: String) {
+        if (_isLoading.value) return
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
 
-            Log.d(TAG, "Loading portfolio for ${walletAddress.take(8)}...")
-
-            // Fetch SOL, SKR balance, staking, and prices in parallel
-            val solJob = launch {
-                SolRpcClient.getSolBalance(walletAddress, rpcUrl).fold(
-                    onSuccess = { info ->
-                        _solBalance.value = info.solBalance
-                        _stakedSol.value = info.stakedSol
-                        _stakeAccountCount.value = info.stakeAccounts
-                    },
-                    onFailure = { e ->
-                        Log.e(TAG, "SOL balance fetch failed: ${e.message}")
-                    }
-                )
-            }
-
-            val balanceJob = launch {
-                SkrRpcClient.getSkrBalance(walletAddress, rpcUrl).fold(
-                    onSuccess = { result ->
-                        _skrBalance.value = result.displayAmount
-                        _skrRawBalance.value = result.rawAmount
-                    },
-                    onFailure = { e ->
-                        Log.e(TAG, "SKR balance fetch failed: ${e.message}")
-                    }
-                )
-            }
-
-            val stakingJob = launch {
-                StakingRpcClient.getStakingInfo(walletAddress, rpcUrl).fold(
-                    onSuccess = { info ->
-                        _stakedSkr.value = info.stakedDisplay
-                        _cooldownSkr.value = info.cooldownDisplay
-                        _isStaked.value = info.isStaked
-
-                        // P&L from on-chain cost_basis (share_price at stake time)
-                        _originalDeposit.value = info.originalDepositDisplay
-                        _stakingRewards.value = info.rewardsDisplay
-                        if (info.originalDepositDisplay > 0) {
-                            _stakingPnlPercent.value =
-                                (info.rewardsDisplay / info.originalDepositDisplay * 100)
-                        }
-
-                        // Track first-staked date
-                        if (info.isStaked) {
-                            prefs.setFirstStakedAt(System.currentTimeMillis())
-                        }
-
-                        // Save share price snapshot for dynamic APY tracking (once per day)
-                        if (info.sharePrice > 0) {
-                            prefs.saveSharePriceSnapshot(
-                                System.currentTimeMillis(),
-                                info.sharePrice
-                            )
-                        }
-
-                        // Calculate dynamic APY from price history
-                        val history = prefs.getSharePriceHistory()
-                        val historyPairs = history.map { it.timestamp to it.sharePrice }
-                        _estimatedApy.value = StakingRpcClient.estimateApy(historyPairs)
-                        _sharePriceHistory.value = history
-
-                        // Calculate yield projections
-                        if (info.isStaked && info.stakedDisplay > 0) {
-                            calculateYieldProjections(info.stakedDisplay, _estimatedApy.value)
-                        }
-                    },
-                    onFailure = { e ->
-                        Log.e(TAG, "SKR staking fetch failed: ${e.message}")
-                    }
-                )
-            }
-
-            val priceJob = launch {
-                try {
-                    val prices = PriceClient.getPrices()
-                    _skrPriceUsd.value = prices.skrUsd
-                    _solPriceUsd.value = prices.solUsd
-                } catch (e: Exception) {
-                    Log.e(TAG, "Price fetch failed: ${e.message}")
-                }
-            }
-
-            // Wait for all
-            solJob.join()
-            balanceJob.join()
-            stakingJob.join()
-            priceJob.join()
-
-            // Calculate total USD value
-            var totalUsd = 0.0
-            _solPriceUsd.value?.let { solPrice ->
-                totalUsd += (_solBalance.value + _stakedSol.value) * solPrice
-            }
-            _skrPriceUsd.value?.let { skrPrice ->
-                totalUsd += (_skrBalance.value + _stakedSkr.value + _cooldownSkr.value) * skrPrice
-            }
-            if (totalUsd > 0) {
-                _totalValueUsd.value = totalUsd
-            }
-
-            // Refresh tx history in case prediction ran while portfolio was loading
-            val freshTx = prefs.getTransactionHistory()
-            if (freshTx.isNotEmpty()) _transactionHistory.value = freshTx
-
-            _isLoading.value = false
-            _isCachedData.value = false
-            Log.d(TAG, "Portfolio loaded: ${_solBalance.value} SOL, ${_stakedSol.value} staked SOL, " +
-                "${_skrBalance.value} SKR liquid, ${_stakedSkr.value} SKR staked, " +
-                "$$${_totalValueUsd.value} total")
-
-            // Save portfolio cache for instant reload
-            savePortfolioCache()
-
-            // Update widget data (preserve existing tier from PredictorViewModel)
             try {
-                val widgetPrefs = getApplication<Application>()
-                    .getSharedPreferences("widget_data", android.content.Context.MODE_PRIVATE)
-                val existingTier = widgetPrefs.getString("widget_tier", "--") ?: "--"
-                val solTotal = _solBalance.value + _stakedSol.value
-                val skrTotal = _skrBalance.value + _stakedSkr.value + _cooldownSkr.value
-                SeekerWidgetProvider.writeWidgetData(
-                    getApplication(),
-                    tier = existingTier,
-                    solBalance = String.format("%.2f", solTotal),
-                    skrBalance = String.format("%.0f", skrTotal)
-                )
-            } catch (_: Exception) { }
+                Log.d(TAG, "Loading portfolio for ${walletAddress.take(8)}...")
+
+                // Fetch SOL, SKR balance, staking, and prices in parallel
+                val solJob = launch {
+                    SolRpcClient.getSolBalance(walletAddress, rpcUrl).fold(
+                        onSuccess = { info ->
+                            _solBalance.value = info.solBalance
+                            _stakedSol.value = info.stakedSol
+                            _stakeAccountCount.value = info.stakeAccounts
+                        },
+                        onFailure = { e ->
+                            Log.e(TAG, "SOL balance fetch failed: ${e.message}")
+                        }
+                    )
+                }
+
+                val balanceJob = launch {
+                    SkrRpcClient.getSkrBalance(walletAddress, rpcUrl).fold(
+                        onSuccess = { result ->
+                            _skrBalance.value = result.displayAmount
+                            _skrRawBalance.value = result.rawAmount
+                        },
+                        onFailure = { e ->
+                            Log.e(TAG, "SKR balance fetch failed: ${e.message}")
+                        }
+                    )
+                }
+
+                val stakingJob = launch {
+                    StakingRpcClient.getStakingInfo(walletAddress, rpcUrl).fold(
+                        onSuccess = { info ->
+                            _stakedSkr.value = info.stakedDisplay
+                            _cooldownSkr.value = info.cooldownDisplay
+                            _isStaked.value = info.isStaked
+
+                            // P&L from on-chain cost_basis (share_price at stake time)
+                            _originalDeposit.value = info.originalDepositDisplay
+                            _stakingRewards.value = info.rewardsDisplay
+                            if (info.originalDepositDisplay > 0) {
+                                _stakingPnlPercent.value =
+                                    (info.rewardsDisplay / info.originalDepositDisplay * 100)
+                            }
+
+                            // Track first-staked date
+                            if (info.isStaked) {
+                                prefs.setFirstStakedAt(System.currentTimeMillis())
+                            }
+
+                            // Save share price snapshot for dynamic APY tracking (once per day)
+                            if (info.sharePrice > 0) {
+                                prefs.saveSharePriceSnapshot(
+                                    System.currentTimeMillis(),
+                                    info.sharePrice
+                                )
+                            }
+
+                            // Calculate dynamic APY from price history
+                            val history = prefs.getSharePriceHistory()
+                            val historyPairs = history.map { it.timestamp to it.sharePrice }
+                            _estimatedApy.value = StakingRpcClient.estimateApy(historyPairs)
+                            _sharePriceHistory.value = history
+
+                            // Calculate yield projections
+                            if (info.isStaked && info.stakedDisplay > 0) {
+                                calculateYieldProjections(info.stakedDisplay, _estimatedApy.value)
+                            }
+                        },
+                        onFailure = { e ->
+                            Log.e(TAG, "SKR staking fetch failed: ${e.message}")
+                        }
+                    )
+                }
+
+                val priceJob = launch {
+                    try {
+                        val prices = PriceClient.getPrices()
+                        _skrPriceUsd.value = prices.skrUsd
+                        _solPriceUsd.value = prices.solUsd
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Price fetch failed: ${e.message}")
+                    }
+                }
+
+                // Wait for all
+                solJob.join()
+                balanceJob.join()
+                stakingJob.join()
+                priceJob.join()
+
+                // Calculate total USD value
+                var totalUsd = 0.0
+                _solPriceUsd.value?.let { solPrice ->
+                    totalUsd += (_solBalance.value + _stakedSol.value) * solPrice
+                }
+                _skrPriceUsd.value?.let { skrPrice ->
+                    totalUsd += (_skrBalance.value + _stakedSkr.value + _cooldownSkr.value) * skrPrice
+                }
+                if (totalUsd > 0) {
+                    _totalValueUsd.value = totalUsd
+                }
+
+                // Refresh tx history in case prediction ran while portfolio was loading
+                val freshTx = prefs.getTransactionHistory()
+                if (freshTx.isNotEmpty()) _transactionHistory.value = freshTx
+
+                _isCachedData.value = false
+                Log.d(TAG, "Portfolio loaded: ${_solBalance.value} SOL, ${_stakedSol.value} staked SOL, " +
+                    "${_skrBalance.value} SKR liquid, ${_stakedSkr.value} SKR staked, " +
+                    "$$${_totalValueUsd.value} total")
+
+                // Save portfolio cache for instant reload
+                savePortfolioCache()
+
+                // Update widget data (preserve existing tier from PredictorViewModel)
+                try {
+                    val widgetPrefs = getApplication<Application>()
+                        .getSharedPreferences("widget_data", android.content.Context.MODE_PRIVATE)
+                    val existingTier = widgetPrefs.getString("widget_tier", "--") ?: "--"
+                    val solTotal = _solBalance.value + _stakedSol.value
+                    val skrTotal = _skrBalance.value + _stakedSkr.value + _cooldownSkr.value
+                    SeekerWidgetProvider.writeWidgetData(
+                        getApplication(),
+                        tier = existingTier,
+                        solBalance = String.format("%.2f", solTotal),
+                        skrBalance = String.format("%.0f", skrTotal)
+                    )
+                } catch (_: Exception) { }
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 

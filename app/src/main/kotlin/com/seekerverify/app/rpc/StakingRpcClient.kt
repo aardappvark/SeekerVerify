@@ -430,6 +430,7 @@ object StakingRpcClient {
         val daysBetween = (newest.first - oldest.first) / 86_400_000.0
         if (daysBetween < 1) return FALLBACK_APY
 
+        if (oldest.second <= 0 || newest.second <= 0) return FALLBACK_APY
         val priceRatio = newest.second.toDouble() / oldest.second.toDouble()
         if (priceRatio <= 0) return FALLBACK_APY
 
