@@ -84,6 +84,7 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun loadCommunity(walletAddress: String, rpcUrl: String) {
+        if (_isLoading.value) return
         viewModelScope.launch {
             _isLoading.value = true
 

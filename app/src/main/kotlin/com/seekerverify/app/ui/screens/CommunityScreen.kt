@@ -61,7 +61,9 @@ import com.seekerverify.app.ui.components.GlassCard
 import com.seekerverify.app.ui.components.GuestModeBanner
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import com.seekerverify.app.data.AppPreferences
@@ -320,29 +322,33 @@ fun CommunityScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             val stakersText = activeStakers?.let { count ->
-                if (count == 0) "\u2014" // show dash if 0 (likely 429 failure)
+                if (count == 0) null // likely 429 failure — show refresh
                 else when {
                     count >= 1000 -> "${numberFormat.format(count / 1000)}K"
                     else -> numberFormat.format(count)
                 }
-            } ?: "\u2014"
+            }
             StatCard(
                 modifier = Modifier.weight(1f),
                 icon = Icons.Filled.Groups,
                 label = "Active Stakers",
                 value = stakersText,
-                color = SeekerBlue
+                color = SeekerBlue,
+                isLoading = isLoading && activeStakers == null,
+                onRefresh = { viewModel.loadCommunity(walletAddress, rpcUrl) }
             )
 
             val stakedText = stakingParticipation?.let { pct ->
                 "${String.format("%.1f", pct)}%"
-            } ?: "..."
+            }
             StatCard(
                 modifier = Modifier.weight(1f),
                 icon = Icons.Filled.Rocket,
                 label = "SKR Staked",
                 value = stakedText,
-                color = SolanaPurple
+                color = SolanaPurple,
+                isLoading = isLoading && stakingParticipation == null,
+                onRefresh = { viewModel.loadCommunity(walletAddress, rpcUrl) }
             )
         }
 
@@ -925,8 +931,10 @@ private fun StatCard(
     modifier: Modifier = Modifier,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     label: String,
-    value: String,
-    color: androidx.compose.ui.graphics.Color
+    value: String?,
+    color: androidx.compose.ui.graphics.Color,
+    isLoading: Boolean = false,
+    onRefresh: (() -> Unit)? = null
 ) {
     GlassCard(modifier = modifier, cornerRadius = 12.dp) {
         Column(
@@ -940,13 +948,44 @@ private fun StatCard(
                 tint = color
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = value,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold
-                ),
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            if (value != null) {
+                Text(
+                    text = value,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            } else if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(24.dp),
+                    color = color,
+                    strokeWidth = 2.dp
+                )
+            } else {
+                // No data and not loading — show dash with refresh hint
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = if (onRefresh != null) Modifier.clickable { onRefresh() } else Modifier
+                ) {
+                    Text(
+                        text = "\u2014",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    if (onRefresh != null) {
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.Filled.Refresh,
+                            contentDescription = "Refresh",
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelSmall,
