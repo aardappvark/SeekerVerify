@@ -164,7 +164,7 @@ fun PortfolioScreen(
             GuestModeBanner(onConnectWallet = onConnectWallet)
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Guest placeholder
+            // --- Total Value Header (placeholder) ---
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = SeekerBlue.copy(alpha = 0.6f)),
@@ -188,6 +188,64 @@ fun PortfolioScreen(
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
+
+            // --- SOL Section (placeholder) ---
+            Text(
+                text = "SOL",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
+            )
+            BalanceCard(icon = Icons.Filled.CurrencyExchange, iconTint = SolanaPurple, label = "SOL Balance", amount = "--- SOL", usdValue = null)
+            Spacer(modifier = Modifier.height(10.dp))
+            BalanceCard(icon = Icons.Filled.Lock, iconTint = SolanaPurple, label = "Staked SOL", amount = "--- SOL", usdValue = null)
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // --- SKR Section (placeholder) ---
+            Text(
+                text = "SKR",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(start = 4.dp, bottom = 8.dp)
+            )
+            BalanceCard(icon = Icons.Filled.AccountBalance, iconTint = SeekerBlue, label = "Liquid Balance", amount = "--- SKR", usdValue = null)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Staked SKR placeholder
+            GlassCard(cornerRadius = 12.dp) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(SeekerGold.copy(alpha = 0.15f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(Icons.Filled.Savings, null, Modifier.size(24.dp), SeekerGold.copy(alpha = 0.4f))
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text("Staked SKR", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("--- SKR", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
+                    }
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(SolanaGreen.copy(alpha = 0.08f))
+                            .padding(horizontal = 10.dp, vertical = 4.dp)
+                    ) {
+                        Text("---% APY", style = MaterialTheme.typography.labelMedium, color = SolanaGreen.copy(alpha = 0.3f), fontWeight = FontWeight.Bold)
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "Connect your wallet to view SOL and SKR balances, staking positions, and portfolio value.",
                 style = MaterialTheme.typography.bodyMedium,
@@ -196,8 +254,7 @@ fun PortfolioScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(24.dp))
-            return@Column
-        }
+        } else {
 
         // Total Value Header Card
         Card(
@@ -712,6 +769,8 @@ fun PortfolioScreen(
                 }
             }
         }
+
+        } // end else (non-guest content)
 
         // Error display
         error?.let {

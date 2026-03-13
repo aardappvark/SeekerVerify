@@ -48,7 +48,8 @@ fun AppNavigation(
     onConnectWallet: () -> Unit = onDisconnect,
     onThemeChanged: (String) -> Unit = {},
     currentThemeMode: String = "dark",
-    activityResultSender: ActivityResultSender? = null
+    activityResultSender: ActivityResultSender? = null,
+    onShowOnboarding: () -> Unit = {}
 ) {
     val view = LocalView.current
     val context = LocalContext.current
@@ -121,7 +122,7 @@ fun AppNavigation(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Identity.route,
+            startDestination = if (isGuestMode) Screen.Predictor.route else Screen.Identity.route,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Identity.route) {
@@ -169,7 +170,8 @@ fun AppNavigation(
                     onDisconnect = onDisconnect,
                     onConnectWallet = onConnectWallet,
                     onThemeChanged = onThemeChanged,
-                    currentThemeMode = currentThemeMode
+                    currentThemeMode = currentThemeMode,
+                    onShowOnboarding = onShowOnboarding
                 )
             }
         }

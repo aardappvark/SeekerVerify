@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.DeleteForever
+import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Leaderboard
 import androidx.compose.material.icons.filled.LinkOff
@@ -74,7 +75,8 @@ fun SettingsScreen(
     onDisconnect: () -> Unit,
     onConnectWallet: () -> Unit = onDisconnect,
     onThemeChanged: (String) -> Unit = {},
-    currentThemeMode: String = "dark"
+    currentThemeMode: String = "dark",
+    onShowOnboarding: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val view = LocalView.current
@@ -553,6 +555,37 @@ fun SettingsScreen(
                     modifier = Modifier.padding(vertical = 12.dp),
                     color = MaterialTheme.colorScheme.outlineVariant
                 )
+
+                // How to Use — re-shows onboarding carousel
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .clickable {
+                            view.hapticTap(prefs)
+                            onShowOnboarding()
+                        }
+                        .padding(vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.HelpOutline,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = SeekerBlue
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "How to Use",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = SeekerBlue
+                    )
+                }
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 12.dp),
+                    color = MaterialTheme.colorScheme.outlineVariant
+                )
+
                 Text(
                     text = "Seeker Verify",
                     style = MaterialTheme.typography.titleMedium,

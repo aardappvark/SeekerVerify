@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.LinkOff
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -59,6 +60,7 @@ import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
@@ -129,12 +131,21 @@ fun SeekerVerifyApp(
     // SGT Gate state
     var sgtCheckState by remember { mutableStateOf<SgtCheckState>(SgtCheckState.Idle) }
 
+    // "How to Use" overlay — re-shows onboarding carousel without resetting the pref
+    var showOnboarding by remember { mutableStateOf(false) }
+
     // Determine RPC URL based on user preference
     val heliusApiKey = context.getString(R.string.helius_api_key)
     val rpcProvider = prefs.getRpcProvider()
     val rpcUrl = when {
         rpcProvider == "helius" && heliusApiKey.isNotEmpty() -> AppConfig.Rpc.heliusUrl(heliusApiKey)
         else -> AppConfig.Rpc.PUBLIC_MAINNET
+    }
+
+    // "How to Use" overlay — takes priority over everything else when active
+    if (showOnboarding) {
+        OnboardingScreen(onComplete = { showOnboarding = false })
+        return
     }
 
     if (!hasCompletedOnboarding) {
@@ -198,7 +209,8 @@ fun SeekerVerifyApp(
             },
             onThemeChanged = onThemeChanged,
             currentThemeMode = currentThemeMode,
-            activityResultSender = activityResultSender
+            activityResultSender = activityResultSender,
+            onShowOnboarding = { showOnboarding = true }
         )
     } else {
         // SGT Gate: handle Idle state transition via LaunchedEffect
@@ -214,7 +226,13 @@ fun SeekerVerifyApp(
                 }
             }
             // Show checking screen while we decide
-            SgtCheckingScreen()
+            SgtCheckingScreen(
+                onContinueAsGuest = {
+                    GeoAnalyticsService.track(GeoAnalyticsService.Events.GUEST_MODE_ENTERED)
+                    sgtCheckState = SgtCheckState.GuestMode
+                },
+                onTimeout = { sgtCheckState = SgtCheckState.Error("Verification timed out. The RPC server may be unavailable.") }
+            )
         }
 
         when (sgtCheckState) {
@@ -227,7 +245,13 @@ fun SeekerVerifyApp(
             }
 
             SgtCheckState.Checking -> {
-                SgtCheckingScreen()
+                SgtCheckingScreen(
+                    onContinueAsGuest = {
+                        GeoAnalyticsService.track(GeoAnalyticsService.Events.GUEST_MODE_ENTERED)
+                        sgtCheckState = SgtCheckState.GuestMode
+                    },
+                    onTimeout = { sgtCheckState = SgtCheckState.Error("Verification timed out. The RPC server may be unavailable.") }
+                )
                 LaunchedEffect(walletAddress) {
                     Log.d(TAG, "SGT gate check for ${walletAddress.take(8)}...")
                     try {
@@ -315,7 +339,8 @@ fun SeekerVerifyApp(
                     },
                     onThemeChanged = onThemeChanged,
                     currentThemeMode = currentThemeMode,
-                    activityResultSender = activityResultSender
+                    activityResultSender = activityResultSender,
+                    onShowOnboarding = { showOnboarding = true }
                 )
             }
 
@@ -326,6 +351,11 @@ fun SeekerVerifyApp(
                         isWalletConnected = false
                         walletAddress = ""
                         sgtCheckState = SgtCheckState.Idle
+                    },
+                    onContinueAsGuest = {
+                        Log.d(TAG, "Guest mode from NoSgt screen")
+                        GeoAnalyticsService.track(GeoAnalyticsService.Events.GUEST_MODE_ENTERED)
+                        sgtCheckState = SgtCheckState.GuestMode
                     }
                 )
             }
@@ -339,6 +369,11 @@ fun SeekerVerifyApp(
                         isWalletConnected = false
                         walletAddress = ""
                         sgtCheckState = SgtCheckState.Idle
+                    },
+                    onContinueAsGuest = {
+                        Log.d(TAG, "Guest mode from error screen")
+                        GeoAnalyticsService.track(GeoAnalyticsService.Events.GUEST_MODE_ENTERED)
+                        sgtCheckState = SgtCheckState.GuestMode
                     }
                 )
             }
@@ -356,7 +391,16 @@ sealed class SgtCheckState {
 }
 
 @Composable
-private fun SgtCheckingScreen() {
+private fun SgtCheckingScreen(
+    onContinueAsGuest: () -> Unit,
+    onTimeout: () -> Unit
+) {
+    // Auto-timeout after 10 seconds
+    LaunchedEffect(Unit) {
+        delay(10_000L)
+        onTimeout()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -373,11 +417,18 @@ private fun SgtCheckingScreen() {
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(32.dp))
+        OutlinedButton(
+            onClick = onContinueAsGuest,
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text("Continue as Guest", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
     }
 }
 
 @Composable
-private fun NoSgtScreen(onDisconnect: () -> Unit) {
+private fun NoSgtScreen(onDisconnect: () -> Unit, onContinueAsGuest: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -417,6 +468,17 @@ private fun NoSgtScreen(onDisconnect: () -> Unit) {
             Spacer(modifier = Modifier.width(8.dp))
             Text("Disconnect & Try Another Wallet")
         }
+        Spacer(modifier = Modifier.height(12.dp))
+        Button(
+            onClick = onContinueAsGuest,
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Icon(Icons.Filled.Visibility, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Continue as Guest")
+        }
     }
 }
 
@@ -424,7 +486,8 @@ private fun NoSgtScreen(onDisconnect: () -> Unit) {
 private fun SgtErrorScreen(
     message: String,
     onRetry: () -> Unit,
-    onDisconnect: () -> Unit
+    onDisconnect: () -> Unit,
+    onContinueAsGuest: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -474,6 +537,17 @@ private fun SgtErrorScreen(
             Icon(Icons.Filled.LinkOff, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(modifier = Modifier.width(8.dp))
             Text("Disconnect Wallet")
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        Button(
+            onClick = onContinueAsGuest,
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Icon(Icons.Filled.Visibility, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Continue as Guest")
         }
     }
 }

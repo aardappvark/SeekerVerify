@@ -205,36 +205,162 @@ fun IdentityScreen(
             GuestModeBanner(onConnectWallet = onConnectWallet)
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Guest mode: show placeholder identity card
+            // --- Skeleton Identity Card ---
             GlassCard(cornerRadius = 20.dp) {
-                Column(
-                    modifier = Modifier.padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Verified,
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp),
-                        tint = SeekerBlue.copy(alpha = 0.4f)
+                Column(modifier = Modifier.padding(24.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Verified,
+                            contentDescription = null,
+                            modifier = Modifier.size(28.dp),
+                            tint = SeekerBlue.copy(alpha = 0.3f)
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "Seeker Genesis Token",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        text = "SEEKER",
+                        style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 3.sp),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                     )
+                    Text(
+                        text = "#---",
+                        style = MaterialTheme.typography.displaySmall.copy(
+                            fontWeight = FontWeight.Bold, letterSpacing = 1.sp
+                        ),
+                        color = SeekerGold.copy(alpha = 0.3f)
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    InfoRow(label = "WALLET", value = "------...------")
                     Spacer(modifier = Modifier.height(12.dp))
-                    Text(
-                        text = "Guest Mode",
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Connect your wallet to see your Seeker identity, SGT number, and check-in streak.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                    )
+                    InfoRow(label = "SGT MINT", value = "------...------")
+                    Spacer(modifier = Modifier.height(20.dp))
+                    // Greyed badges
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(SolanaGreen.copy(alpha = 0.06f))
+                                .padding(horizontal = 14.dp, vertical = 8.dp)
+                        ) {
+                            Icon(Icons.Filled.Security, null, Modifier.size(18.dp), SolanaGreen.copy(alpha = 0.3f))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Seed Vault Verified", style = MaterialTheme.typography.labelMedium, color = SolanaGreen.copy(alpha = 0.3f))
+                        }
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(SeekerBlue.copy(alpha = 0.06f))
+                                .padding(horizontal = 14.dp, vertical = 8.dp)
+                        ) {
+                            Icon(Icons.Filled.Verified, null, Modifier.size(18.dp), SeekerBlue.copy(alpha = 0.3f))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Genesis Token", style = MaterialTheme.typography.labelMedium, color = SeekerBlue.copy(alpha = 0.3f))
+                        }
+                    }
+                }
+            }
+
+            // --- Skeleton Check-In Card ---
+            Spacer(modifier = Modifier.height(20.dp))
+            GlassCard {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("Daily Check-In", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(SeekerGold.copy(alpha = 0.08f))
+                                .padding(horizontal = 10.dp, vertical = 4.dp)
+                        ) {
+                            Text("\uD83D\uDD25", fontSize = 16.sp)
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text("0", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = SeekerGold.copy(alpha = 0.3f))
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                        StreakStat(label = "Current", value = "--- days")
+                        StreakStat(label = "Longest", value = "--- days")
+                        StreakStat(label = "Total", value = "---")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(
+                        onClick = {},
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = false,
+                        colors = ButtonDefaults.buttonColors(containerColor = SeekerBlue.copy(alpha = 0.3f)),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Check In", fontWeight = FontWeight.Bold)
+                    }
+                }
+            }
+
+            // --- Skeleton Health Score ---
+            Spacer(modifier = Modifier.height(20.dp))
+            GlassCard {
+                Column(modifier = Modifier.padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Seeker Health Score", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Box(contentAlignment = Alignment.Center, modifier = Modifier.size(140.dp)) {
+                        Canvas(modifier = Modifier.size(140.dp)) {
+                            val strokeWidth = 12.dp.toPx()
+                            drawArc(
+                                color = SeekerBlue.copy(alpha = 0.1f),
+                                startAngle = -90f,
+                                sweepAngle = 360f,
+                                useCenter = false,
+                                style = androidx.compose.ui.graphics.drawscope.Stroke(width = strokeWidth, cap = androidx.compose.ui.graphics.StrokeCap.Round)
+                            )
+                        }
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text("--", style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold), color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f))
+                            Text("/100", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f))
+                        }
+                    }
+                }
+            }
+
+            // --- Skeleton Achievements ---
+            Spacer(modifier = Modifier.height(20.dp))
+            GlassCard {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Text("Achievements", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text("0 / ${Achievement.entries.size} unlocked", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f))
+                    Spacer(modifier = Modifier.height(12.dp))
+                    val achievements = Achievement.entries.toList()
+                    for (i in achievements.indices step 2) {
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            AchievementBadge(achievement = achievements[i], isUnlocked = false, modifier = Modifier.weight(1f))
+                            if (i + 1 < achievements.size) {
+                                AchievementBadge(achievement = achievements[i + 1], isUnlocked = false, modifier = Modifier.weight(1f))
+                            } else {
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
+                        }
+                        if (i + 2 < achievements.size) Spacer(modifier = Modifier.height(8.dp))
+                    }
                 }
             }
             Spacer(modifier = Modifier.height(24.dp))
-            return@Column
-        }
+        } else {
 
         // --- Identity Card with gradient border ---
         GlassCard(cornerRadius = 20.dp) {
@@ -733,6 +859,8 @@ fun IdentityScreen(
                 }
             }
         }
+
+        } // end else (non-guest content)
 
         // Error display
         error?.let {

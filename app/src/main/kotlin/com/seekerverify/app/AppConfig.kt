@@ -4,7 +4,7 @@ object AppConfig {
 
     object Identity {
         const val NAME = "Seeker Verify"
-        const val URI = "https://aardappvark.github.io/SeekerVerify"
+        const val URI = "https://aardappvark-group.gitlab.io/SeekerVerify"
         const val ICON_URI = "favicon.png"
     }
 
