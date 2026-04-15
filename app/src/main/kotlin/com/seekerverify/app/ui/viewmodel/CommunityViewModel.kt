@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.seekerverify.app.data.AppPreferences
 import com.seekerverify.app.model.CommunityCache
 import com.seekerverify.app.rpc.CommunityRpcClient
-import com.seekerverify.app.service.AnalyticsStats
 import com.seekerverify.app.service.GeoAnalyticsService
 import com.seekerverify.app.service.LeaderboardData
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,10 +43,6 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
     // Leaderboard
     private val _leaderboard = MutableStateFlow<LeaderboardData?>(null)
     val leaderboard: StateFlow<LeaderboardData?> = _leaderboard.asStateFlow()
-
-    // Analytics stats (real dApp usage)
-    private val _analyticsStats = MutableStateFlow<AnalyticsStats?>(null)
-    val analyticsStats: StateFlow<AnalyticsStats?> = _analyticsStats.asStateFlow()
 
     // Fleet Mode — statistical mode (most common staked SKR amount)
     private val _fleetModeSkr = MutableStateFlow<Double?>(null)
@@ -129,12 +124,13 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
                 Log.e(TAG, "Leaderboard fetch failed: ${e.message}")
             }
 
-            // Fetch real dApp analytics stats
-            try {
-                _analyticsStats.value = GeoAnalyticsService.fetchStats(30)
-            } catch (e: Exception) {
-                Log.e(TAG, "Analytics stats fetch failed: ${e.message}")
-            }
+            // Note: previously also called GeoAnalyticsService.fetchStats(30)
+            // to populate an in-app "dApp Activity" card, but that card was
+            // removed on 2026-04-15 to keep the Community screen focused on
+            // fleet position and to preserve the app's privacy-first messaging.
+            // Tracking itself still fires everywhere — GeoAnalyticsService.track()
+            // calls are unchanged — so the /public-stats endpoint continues to
+            // serve fresh numbers to the Builder Grant deck.
 
             _userStakedSkr.value = (prefs.getWalletAddress()?.let { prefs.getPortfolioCache(it) }?.stakedSkr ?: 0.0)
 

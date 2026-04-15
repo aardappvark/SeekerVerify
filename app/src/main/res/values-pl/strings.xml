@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">Dystrybucja Sezonu 1</string>
-    <string name="eligible_wallets">~140 000 kwalifikujących się portfeli</string>
+    <string name="eligible_wallets">~150 000 kwalifikujących się portfeli</string>
     <string name="your_activity_score">Twój wynik aktywności</string>
     <string name="score_breakdown">Rozkład wyniku</string>
     <string name="speculative_notice">Tylko szacunek spekulacyjny. Na podstawie wzorców Sezonu 1 \u2014 rzeczywiste kryteria Sezonu 2 mogą się różnić. To nie jest porada finansowa.</string>

@@ -101,9 +101,6 @@ fun CommunityScreen(
     // Leaderboard
     val leaderboard by viewModel.leaderboard.collectAsState()
 
-    // Analytics stats (real dApp usage)
-    val analyticsStats by viewModel.analyticsStats.collectAsState()
-
     // Fleet Mode (statistical mode — most common staked SKR amount)
     val fleetModeSkr by viewModel.fleetModeSkr.collectAsState()
 
@@ -483,69 +480,11 @@ fun CommunityScreen(
             }
         }
 
-        // dApp Activity Card — real analytics data
-        analyticsStats?.let { stats ->
-            if (stats.totalEvents > 0) {
-                Spacer(modifier = Modifier.height(16.dp))
-                GlassCard {
-                    Column(modifier = Modifier.padding(20.dp)) {
-                        Text(
-                            text = "dApp Activity",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            text = "Last 30 days",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = numberFormat.format(stats.totalAppOpens),
-                                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                                    color = SeekerBlue
-                                )
-                                Text(
-                                    text = "App Opens",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = numberFormat.format(stats.totalCountries),
-                                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                                    color = SolanaPurple
-                                )
-                                Text(
-                                    text = "Countries",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = numberFormat.format(stats.totalWalletConnects),
-                                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                                    color = SolanaGreen
-                                )
-                                Text(
-                                    text = "Wallets",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // Note: dApp Activity card removed (2026-04-15) to keep the Community
+        // screen focused on "where do I stand in the fleet?" and to stay
+        // consistent with the app's privacy-first positioning. Analytics events
+        // are still tracked via GeoAnalyticsService for the public verification
+        // endpoint, but the results are no longer reflected back at users.
 
         Spacer(modifier = Modifier.height(24.dp))
 

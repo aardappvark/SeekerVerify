@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">Distribución de la Temporada 1</string>
-    <string name="eligible_wallets">~140,000 billeteras elegibles</string>
+    <string name="eligible_wallets">~150,000 billeteras elegibles</string>
     <string name="your_activity_score">Tu puntuación de actividad</string>
     <string name="score_breakdown">Desglose de puntuación</string>
     <string name="speculative_notice">Solo una estimación especulativa. Basada en patrones de la Temporada 1 \u2014 los criterios reales de la Temporada 2 pueden diferir. No es asesoramiento financiero.</string>

@@ -57,6 +57,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
+import com.seekerverify.app.R
 import com.seekerverify.app.data.AppPreferences
 import com.seekerverify.app.service.GeoAnalyticsService
 import com.seekerverify.app.ui.util.hapticLongPress
@@ -1488,7 +1490,10 @@ private fun Season1SummaryCard(userTier: AirdropTier? = null) {
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "~140,000 eligible wallets",
+                // Reads the locale-specific eligible_wallets string from resources
+                // (all 28 supported locales have this key). Previously hardcoded
+                // as an English literal which bypassed all translations.
+                text = stringResource(R.string.eligible_wallets),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

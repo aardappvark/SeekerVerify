@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">시즌 1 배분</string>
-    <string name="eligible_wallets">대상 지갑 약 140,000개</string>
+    <string name="eligible_wallets">대상 지갑 약 150,000개</string>
     <string name="your_activity_score">나의 활동 점수</string>
     <string name="score_breakdown">점수 세부 내역</string>
     <string name="speculative_notice">추측적 추정치일 뿐입니다. 시즌 1 패턴 기반 \u2014 실제 시즌 2 기준은 다를 수 있습니다. 재정적 조언이 아닙니다.</string>

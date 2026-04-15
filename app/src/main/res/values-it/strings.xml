@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">Distribuzione Stagione 1</string>
-    <string name="eligible_wallets">~140.000 portafogli idonei</string>
+    <string name="eligible_wallets">~150.000 portafogli idonei</string>
     <string name="your_activity_score">Il tuo punteggio attività</string>
     <string name="score_breakdown">Dettaglio punteggio</string>
     <string name="speculative_notice">Solo una stima speculativa. Basata sui modelli della Stagione 1 \u2014 i criteri effettivi della Stagione 2 potrebbero differire. Non è un consiglio finanziario.</string>

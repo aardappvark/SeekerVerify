@@ -360,7 +360,11 @@ object CommunityRpcClient {
         return low
     }
 
-    private const val KNOWN_APPROXIMATE_SEEKERS = 140_000L
+    // Seeker devices sold — updated 2026-04-15 to match the Solana Compass
+    // Breakpoint 2025 ecosystem figure (150,000+). Note: percentile math in
+    // CommunityViewModel is already a pure function of (memberNumber, totalSeekers)
+    // so every user's displayed percentile recomputes automatically on next refresh.
+    private const val KNOWN_APPROXIMATE_SEEKERS = 150_000L
     private const val FALLBACK_TOTAL_SUPPLY = 1_400_000_000.0
 
     private val FALLBACK_CONFIG = StakeConfigData(

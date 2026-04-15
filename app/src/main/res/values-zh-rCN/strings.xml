@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">第 1 赛季分配</string>
-    <string name="eligible_wallets">约 140,000 个符合条件的钱包</string>
+    <string name="eligible_wallets">约 150,000 个符合条件的钱包</string>
     <string name="your_activity_score">您的活动分数</string>
     <string name="score_breakdown">分数明细</string>
     <string name="speculative_notice">仅为推测性估算。基于第 1 赛季模式 \u2014 实际第 2 赛季标准可能不同。不构成财务建议。</string>

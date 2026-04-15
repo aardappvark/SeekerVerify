@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">Säsong 1-distribution</string>
-    <string name="eligible_wallets">~140 000 berättigade plånböcker</string>
+    <string name="eligible_wallets">~150 000 berättigade plånböcker</string>
     <string name="your_activity_score">Din aktivitetspoäng</string>
     <string name="score_breakdown">Poänguppdelning</string>
     <string name="speculative_notice">Endast en spekulativ uppskattning. Baserad på mönster från Säsong 1 \u2014 faktiska kriterier för Säsong 2 kan skilja sig. Inte finansiell rådgivning.</string>

@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">Distribuição da Temporada 1</string>
-    <string name="eligible_wallets">~140.000 carteiras elegíveis</string>
+    <string name="eligible_wallets">~150.000 carteiras elegíveis</string>
     <string name="your_activity_score">Sua pontuação de atividade</string>
     <string name="score_breakdown">Detalhamento da pontuação</string>
     <string name="speculative_notice">Apenas uma estimativa especulativa. Baseada em padrões da Temporada 1 \u2014 os critérios reais da Temporada 2 podem diferir. Não é aconselhamento financeiro.</string>

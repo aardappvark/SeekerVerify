@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$se %%</string>
     <string name="season_1_distribution">Distribution Season 1</string>
-    <string name="eligible_wallets">~140 000 portefeuilles éligibles</string>
+    <string name="eligible_wallets">~150 000 portefeuilles éligibles</string>
     <string name="your_activity_score">Votre score d\u2019activité</string>
     <string name="score_breakdown">Détail du score</string>
     <string name="speculative_notice">Estimation spéculative uniquement. Basée sur les modèles de la Season 1 \u2014 les critères réels de la Season 2 peuvent différer. Ceci ne constitue pas un conseil financier.</string>

@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$s-й %%</string>
     <string name="season_1_distribution">Распределение Season 1</string>
-    <string name="eligible_wallets">~140 000 подходящих кошельков</string>
+    <string name="eligible_wallets">~150 000 подходящих кошельков</string>
     <string name="your_activity_score">Ваши баллы активности</string>
     <string name="score_breakdown">Разбивка баллов</string>
     <string name="speculative_notice">Только предположительная оценка. Основана на паттернах Season 1 \u2014 фактические критерии Season 2 могут отличаться. Не является финансовой рекомендацией.</string>

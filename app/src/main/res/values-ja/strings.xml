@@ -115,7 +115,7 @@
     <string name="s2_label">S2</string>
     <string name="percentile_format">%1$sth %%</string>
     <string name="season_1_distribution">シーズン 1 の分配</string>
-    <string name="eligible_wallets">対象ウォレット約 140,000</string>
+    <string name="eligible_wallets">対象ウォレット約 150,000</string>
     <string name="your_activity_score">あなたのアクティビティスコア</string>
     <string name="score_breakdown">スコア内訳</string>
     <string name="speculative_notice">推測的な見積もりです。シーズン 1 のパターンに基づいています \u2014 実際のシーズン 2 の基準は異なる場合があります。投資助言ではありません。</string>
