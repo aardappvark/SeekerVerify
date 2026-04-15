@@ -21,8 +21,8 @@ android {
         applicationId = "com.seekerverify.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 16
-        versionName = "2.6.2"
+        versionCode = 18
+        versionName = "2.6.4"
 
         // Helius RPC API key (injected from local.properties)
         resValue(
