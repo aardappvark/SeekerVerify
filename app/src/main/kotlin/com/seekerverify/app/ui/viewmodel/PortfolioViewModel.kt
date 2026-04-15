@@ -107,11 +107,30 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
     val isCachedData: StateFlow<Boolean> = _isCachedData.asStateFlow()
 
     /**
-     * Load cached portfolio data instantly from device storage.
-     * Called before the network fetch to show data immediately.
+     * Tracks the wallet whose values are currently held in the StateFlow fields.
+     * Used to reset fields to zero when switching wallets so stale numbers from
+     * the previous wallet never bleed into the new wallet's display while the
+     * network fetch is still running.
      */
-    fun loadCachedPortfolio() {
-        val cache = prefs.getPortfolioCache() ?: return
+    private var currentWallet: String = ""
+
+    /**
+     * Load cached portfolio data instantly from device storage for a specific
+     * wallet. Called before the network fetch to show data immediately.
+     *
+     * If no cache exists for this wallet, resets all fields to zero — this
+     * prevents stale values from a previously-loaded wallet from being shown
+     * during the network fetch.
+     */
+    fun loadCachedPortfolio(walletAddress: String) {
+        val walletChanged = walletAddress != currentWallet
+        currentWallet = walletAddress
+
+        val cache = prefs.getPortfolioCache(walletAddress)
+        if (cache == null) {
+            if (walletChanged) resetFields()
+            return
+        }
 
         _solBalance.value = cache.solBalance
         _stakedSol.value = cache.stakedSol
@@ -137,11 +156,52 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
         _sharePriceHistory.value = prefs.getSharePriceHistory()
         _transactionHistory.value = prefs.getTransactionHistory()
         _isCachedData.value = true
-        Log.w(TAG, "Portfolio loaded from cache (age ${(System.currentTimeMillis() - cache.cachedAt) / 1000}s)")
+        Log.w(TAG, "Portfolio loaded from cache for ${walletAddress.take(8)}… " +
+            "(age ${(System.currentTimeMillis() - cache.cachedAt) / 1000}s)")
+    }
+
+    /**
+     * Clear all portfolio StateFlow fields to their initial zero state.
+     * Used when switching to a wallet with no cache entry so the UI doesn't
+     * momentarily show the previous wallet's values.
+     */
+    private fun resetFields() {
+        _solBalance.value = 0.0
+        _stakedSol.value = 0.0
+        _stakeAccountCount.value = 0
+        _skrBalance.value = 0.0
+        _skrRawBalance.value = 0L
+        _stakedSkr.value = 0.0
+        _cooldownSkr.value = 0.0
+        _isStaked.value = false
+        _originalDeposit.value = 0.0
+        _stakingRewards.value = 0.0
+        _stakingPnlPercent.value = 0.0
+        _estDailyYield.value = 0.0
+        _estMonthlyYield.value = 0.0
+        _estAnnualYield.value = 0.0
+        _estYtdYield.value = 0.0
+        _skrPriceUsd.value = null
+        _solPriceUsd.value = null
+        _totalValueUsd.value = null
+        _sharePriceHistory.value = emptyList()
+        _transactionHistory.value = emptyList()
+        _isCachedData.value = false
     }
 
     fun loadPortfolio(walletAddress: String, rpcUrl: String) {
         if (_isLoading.value) return
+
+        // If the wallet changed since the last refresh AND we have no cache for
+        // the new wallet, reset the StateFlow fields so the UI doesn't keep
+        // showing the previous wallet's numbers while the fetch is in flight.
+        if (walletAddress != currentWallet) {
+            currentWallet = walletAddress
+            if (prefs.getPortfolioCache(walletAddress) == null) {
+                resetFields()
+            }
+        }
+
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
@@ -257,8 +317,8 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
                     "${_skrBalance.value} SKR liquid, ${_stakedSkr.value} SKR staked, " +
                     "$$${_totalValueUsd.value} total")
 
-                // Save portfolio cache for instant reload
-                savePortfolioCache()
+                // Save portfolio cache for instant reload, keyed by this wallet
+                savePortfolioCache(walletAddress)
 
                 // Update widget data (preserve existing tier from PredictorViewModel)
                 try {
@@ -301,7 +361,7 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
         _estYtdYield.value = stakedAmount * rate * daysSinceJan1 / 365.0
     }
 
-    private fun savePortfolioCache() {
+    private fun savePortfolioCache(walletAddress: String) {
         try {
             val cache = PortfolioCache(
                 solBalance = _solBalance.value,
@@ -319,7 +379,7 @@ class PortfolioViewModel(application: Application) : AndroidViewModel(applicatio
                 sharePrice = 0L, // not strictly needed for cache display
                 cachedAt = System.currentTimeMillis()
             )
-            prefs.savePortfolioCache(cache)
+            prefs.savePortfolioCache(walletAddress, cache)
         } catch (_: Exception) { }
     }
 

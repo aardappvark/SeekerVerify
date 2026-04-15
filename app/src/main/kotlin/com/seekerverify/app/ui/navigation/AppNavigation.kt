@@ -73,7 +73,9 @@ fun AppNavigation(
     // Auto-load all data on app open
     LaunchedEffect(walletAddress) {
         if (!isGuestMode && walletAddress.isNotEmpty()) {
-            portfolioVm.loadCachedPortfolio() // instant from device storage
+            // Cache read is now keyed by wallet so switching wallets doesn't
+            // surface the previous wallet's numbers during the fresh fetch.
+            portfolioVm.loadCachedPortfolio(walletAddress)
             communityVm.loadCachedCommunity() // instant from device storage
             identityVm.loadIdentity(walletAddress, rpcUrl)
             portfolioVm.loadPortfolio(walletAddress, rpcUrl)

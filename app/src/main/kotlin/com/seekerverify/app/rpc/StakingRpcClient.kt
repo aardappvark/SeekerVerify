@@ -157,16 +157,19 @@ object StakingRpcClient {
             val result = RpcProvider.call(rpcUrl, "getAccountInfo", params)
 
             result.fold(
-                onSuccess = { response ->
+                onSuccess = onSuccess@ { response ->
                     val value = response.jsonObject["value"]
                     if (value == null || value.toString() == "null") {
-                        Log.d(TAG, "SKR Staking: UserStake PDA does not exist (no stake with Solana Mobile guardian)")
-                        return StakingInfo(0L, 0.0, 0L, 0.0, 0L, 0.0, 0L, 0.0, null, false, 0L, sharePrice, 0L)
+                        // PDA for the Solana Mobile guardian pool does not exist for this wallet.
+                        // Return null (NOT a zeroed StakingInfo) so the getProgramAccounts
+                        // fallback runs and finds stakes in other guardian pools / layouts.
+                        Log.d(TAG, "SKR Staking: UserStake PDA for default guardian does not exist — falling through to fallback")
+                        return@onSuccess null
                     }
 
                     val dataArray = value.jsonObject["data"]?.jsonArray
                     val dataBase64 = dataArray?.firstOrNull()?.jsonPrimitive?.content
-                        ?: return null
+                        ?: return@onSuccess null
 
                     val data = android.util.Base64.decode(dataBase64, android.util.Base64.DEFAULT)
                     Log.d(TAG, "SKR Staking: PDA account data received, size=${data.size} bytes")

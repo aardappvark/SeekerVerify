@@ -68,7 +68,7 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
         _activeStakers.value = cache.activeStakers
         _totalStakedDisplay.value = cache.totalStakedDisplay
         _stakingParticipation.value = cache.stakingParticipation
-        _userStakedSkr.value = prefs.getPortfolioCache()?.stakedSkr ?: 0.0
+        _userStakedSkr.value = (prefs.getWalletAddress()?.let { prefs.getPortfolioCache(it) }?.stakedSkr ?: 0.0)
 
         // Recalculate percentile from cached data
         val memberNumber = prefs.getMemberNumber()
@@ -136,7 +136,7 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
                 Log.e(TAG, "Analytics stats fetch failed: ${e.message}")
             }
 
-            _userStakedSkr.value = prefs.getPortfolioCache()?.stakedSkr ?: 0.0
+            _userStakedSkr.value = (prefs.getWalletAddress()?.let { prefs.getPortfolioCache(it) }?.stakedSkr ?: 0.0)
 
             _isLoading.value = false
 

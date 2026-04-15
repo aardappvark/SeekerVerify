@@ -159,7 +159,11 @@ class AppPreferences(context: Context) {
 
     // --- Settings ---
 
-    fun getRpcProvider(): String = prefs.getString(KEY_RPC_PROVIDER, "public") ?: "public"
+    // Default to Helius for new installs. Users who have explicitly set "public" in
+    // Settings will keep their choice (KEY_RPC_PROVIDER will already exist). This
+    // avoids the public RPC's aggressive rate limit on getProgramAccounts, which was
+    // causing stake queries to fail with HTTP 429 on fresh installs.
+    fun getRpcProvider(): String = prefs.getString(KEY_RPC_PROVIDER, "helius") ?: "helius"
 
     fun setRpcProvider(provider: String) {
         prefs.edit().putString(KEY_RPC_PROVIDER, provider).apply()
@@ -295,9 +299,18 @@ class AppPreferences(context: Context) {
     fun hasSeason1Analysis(): Boolean = prefs.getBoolean(KEY_HAS_SEASON1_ANALYSIS, false)
 
     // --- Portfolio Cache ---
+    //
+    // Cache is keyed per wallet address so switching wallets does not display
+    // another wallet's balances. The legacy unkeyed entry (KEY_PORTFOLIO_CACHE)
+    // is ignored on read and cleared on first per-wallet save, so upgraded
+    // installs don't leak the previous session's numbers.
 
-    fun getPortfolioCache(): PortfolioCache? {
-        val cacheJson = prefs.getString(KEY_PORTFOLIO_CACHE, null) ?: return null
+    private fun portfolioCacheKey(walletAddress: String) =
+        "$KEY_PORTFOLIO_CACHE:$walletAddress"
+
+    fun getPortfolioCache(walletAddress: String): PortfolioCache? {
+        if (walletAddress.isEmpty()) return null
+        val cacheJson = prefs.getString(portfolioCacheKey(walletAddress), null) ?: return null
         return try {
             json.decodeFromString<PortfolioCache>(cacheJson)
         } catch (e: Exception) {
@@ -305,9 +318,12 @@ class AppPreferences(context: Context) {
         }
     }
 
-    fun savePortfolioCache(cache: PortfolioCache) {
+    fun savePortfolioCache(walletAddress: String, cache: PortfolioCache) {
+        if (walletAddress.isEmpty()) return
         prefs.edit()
-            .putString(KEY_PORTFOLIO_CACHE, json.encodeToString(cache))
+            .putString(portfolioCacheKey(walletAddress), json.encodeToString(cache))
+            // One-shot cleanup of the legacy unkeyed cache from pre-fix installs.
+            .remove(KEY_PORTFOLIO_CACHE)
             .apply()
     }
 
