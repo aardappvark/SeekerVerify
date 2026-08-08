@@ -11,3 +11,9 @@
 local.properties
 release-keystore.jks
 .wrangler/
+
+# Secrets — never commit. analytics-worker/.env holds a live CLOUDFLARE_API_TOKEN
+# and this repository is public, so a stray `git add -A` would publish it.
+.env
+.env.*
+!.env.example
