@@ -12,7 +12,7 @@ app:
   address: ''
   android_package: com.seekerverify.app
   urls:
-    license_url: https://aardappvark.github.io/SeekerVerify/terms.html
+    license_url: https://aardappvark.github.io/SeekerVerify/license.html
     copyright_url: https://aardappvark.github.io/SeekerVerify/copyright.html
     privacy_policy_url: https://aardappvark.github.io/SeekerVerify/privacy.html
     website: https://aardappvark.github.io/SeekerVerify
