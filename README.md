@@ -208,7 +208,13 @@ See: `wallet/SolanaTransactionBuilder.kt`, `ui/screens/IdentityScreen.kt` (check
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+Seeker Verify is proprietary software. See [LICENSE](LICENSE) for the terms that
+apply to this repository and to use of the application.
+
+This repository holds the published legal documents only — it does not contain
+the application source code. Third-party open-source components bundled in the
+app, and their licences, are listed on the
+[licence page](https://aardappvark.github.io/SeekerVerify/license.html).
 
 ## Contact
 
