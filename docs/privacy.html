@@ -91,7 +91,7 @@
         <strong>Version 1.2.0 | Effective Date: February 13, 2026</strong></p>
 
         <h2>Overview</h2>
-        <p>Seeker Verify ("the App") is published by MidMightBit Games, based in Australia. The App is a companion tool for Solana Seeker device owners. It is built with privacy as a core principle. We collect minimal data, store everything locally on your device, and do not use any analytics, tracking, or advertising services. All blockchain data is read directly from the Solana network.</p>
+        <p>Seeker Verify ("the App") is published by MidMightBit Games, based in Australia. The App is a companion tool for Solana Seeker device owners. It is built with privacy as a core principle. We collect minimal data, store everything locally on your device, and use no third-party analytics, tracking or advertising services. The App does report anonymous, aggregate usage events to an endpoint we operate ourselves, and you can switch that off in Settings &mdash; see &ldquo;Anonymous Usage Analytics&rdquo; below. All blockchain data is read directly from the Solana network.</p>
 
         <h2>Legal Basis for Data Processing</h2>
         <p>Under the EU General Data Protection Regulation (GDPR) and UK GDPR, the legal basis for processing your wallet public address is <strong>legitimate interest</strong> (Article 6(1)(f)) &mdash; specifically, the legitimate interest in providing SGT verification and on-chain data display that you voluntarily opt into by connecting your wallet. This processing is minimal, expected by the user, and proportionate.</p>
@@ -131,7 +131,7 @@
             <li>Personal information (name, email, phone number)</li>
             <li>Location data</li>
             <li>Device identifiers</li>
-            <li>Usage analytics</li>
+            <li>Personally-identifiable usage analytics &mdash; the App sends only anonymous, aggregate event counts, which you can disable (see &ldquo;Anonymous Usage Analytics&rdquo;)</li>
             <li>Crash reports</li>
             <li>Advertising identifiers</li>
             <li>Browsing history</li>
@@ -183,12 +183,28 @@
         </ul>
         <p>The App does NOT include any:</p>
         <ul>
-            <li>Analytics SDKs</li>
+            <li>Third-party analytics SDKs (Google Analytics, Firebase, Amplitude or similar)</li>
             <li>Advertising SDKs</li>
             <li>Crash reporting SDKs</li>
             <li>Social media SDKs</li>
             <li>Push notification services</li>
         </ul>
+
+        <h2>Anonymous Usage Analytics</h2>
+        <p>Seeker Verify reports anonymous, aggregate usage events to an endpoint we operate at
+        <code>aardappvark-analytics.aardappvark.workers.dev</code>. This is first-party: no third
+        party receives the data and no analytics SDK is embedded in the App.</p>
+        <p>Each report contains a single event name &mdash; for example <code>app_open</code> &mdash;
+        and nothing else. It carries <strong>no</strong> wallet address, no device identifier, no
+        balance or staking figure, and nothing that identifies you or your device. An approximate
+        country is derived at the network edge from the request; the raw IP address is never logged
+        or stored.</p>
+        <p>The App also <em>reads</em> aggregate totals back from the same service to display the
+        community leaderboard and usage statistics. That read is a public, aggregate query and sends
+        none of your data.</p>
+        <p><strong>To turn it off:</strong> Settings &rsaquo; &ldquo;Anonymous analytics&rdquo;. When
+        it is off the App sends no analytics event at all. No feature depends on it, and a failed
+        analytics request never affects the App.</p>
 
         <h2>Your Rights</h2>
 
